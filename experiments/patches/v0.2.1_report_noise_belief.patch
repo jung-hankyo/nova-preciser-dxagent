@@ -1,0 +1,54 @@
+--- a/dxagent/reasoning/belief.py
++++ b/dxagent/reasoning/belief.py
+@@ -2,8 +2,13 @@
+ 
+ For every hypothesis d and every observation:
+ 
+-    binary finding f (present / absent):   LLR = log P(obs | d) - log P(obs | background)
+-    test t with outcome o:                  LLR = log P(o | d)  - log P(o | background)
++    binary finding f (present / absent):   LLR = log P(report | d) - log P(report | background)
++    test t with outcome o:                  LLR = log P(o | d)      - log P(o | background)
++
++where P(report | d) = r * P(f | d) + (1 - r) * (1 - P(f | d)) with the channel reliability r (a history
++answer is misreported more often than a lab), and a test outcome is replaced by a background draw with
++probability 1 - r. This is the same observation model the planner uses (v0.2.1 fix: v0.2 applied it in
++the planner only, so the belief overweighted noisy reports by about 1.5x).
+ 
+ P(. | d) comes from the disease card (or a contrast card), shrunk toward the background by
+ the entry's confidence; diseases with no entry for f use the background, i.e. LLR = 0.
+@@ -21,7 +26,7 @@
+ import math
+ from typing import Any
+ 
+-from dxagent.config import Settings
++from dxagent.config import CHANNEL_RELIABILITY, Settings
+ from dxagent.knowledge.cards import CardStore, norm_key
+ 
+ 
+@@ -80,8 +85,11 @@
+         code = f["code"]
+         if store.finding_p(disease_id, code) is None:
+             continue
+-        bg = store.background(code)
+-        p = store.finding_p_eff(disease_id, code)
++        # Likelihood of the REPORT, not of the finding: the channel misreports with probability 1 - r
++        # (the same observation model the planner uses). Extraction confidence tempers on top.
++        r = CHANNEL_RELIABILITY.get(f.get("source", "history"), 0.85)
++        bg = r * store.background(code) + (1 - r) * (1 - store.background(code))
++        p = r * store.finding_p_eff(disease_id, code) + (1 - r) * (1 - store.finding_p_eff(disease_id, code))
+         llr = math.log(p / bg) if f["present"] else math.log((1 - p) / (1 - bg))
+         llr *= float(f["confidence"])
+         cl = store.cluster(code)
+@@ -94,8 +102,10 @@
+         td = store.test_def(t["test_id"])
+         if td is None or t["outcome"] not in td.outcomes or store.test_dist(disease_id, t["test_id"]) is None:
+             continue
+-        p = store.test_dist_eff(disease_id, t["test_id"])[t["outcome"]]
+-        llr = math.log(p / td.background[t["outcome"]]) * float(t["confidence"])
++        r = CHANNEL_RELIABILITY[td.type]
++        bg_o = td.background[t["outcome"]]
++        p = r * store.test_dist_eff(disease_id, t["test_id"])[t["outcome"]] + (1 - r) * bg_o
++        llr = math.log(p / bg_o) * float(t["confidence"])
+         cl = f"test:{t['test_id']}"
+         if llr >= 0:
+             pos[cl] = max(pos.get(cl, 0.0), llr)

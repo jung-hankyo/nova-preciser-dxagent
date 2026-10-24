@@ -1,0 +1,56 @@
+id: aortic_dissection
+name: Aortic dissection
+aliases:
+- acute aortic dissection
+- dissecting aortic aneurysm
+prevalence: rare  # v0.3 (C3): pretest bucket in adult acute chest pain / dyspnea
+prevalence_by_complaint: {chest_pain: rare, dyspnea: rare}  # v0.3.1 (P1): keyed by canonical complaint
+harm:
+  untreated_course: lethal
+  urgency: hours
+  treatments:
+  - blood_pressure_control
+  - surgery
+  treatment_risk: high
+findings:
+- code: chest_pain_tearing_back
+  p: 0.4
+  conf: 0.9
+- code: sudden_onset
+  p: 0.85
+  conf: 0.9
+- code: pulse_deficit
+  p: 0.3
+  conf: 0.9
+- code: hypertension_history
+  p: 0.7
+  conf: 0.9
+tests:
+  lab_d_dimer:
+    dist:
+      normal: 0.03
+      elevated: 0.97
+    conf: 0.9
+  lab_troponin:
+    dist:
+      normal: 0.8
+      elevated: 0.2
+    conf: 0.9
+  img_chest_xray:
+    dist:
+      normal: 0.4
+      widened_mediastinum: 0.6
+    conf: 0.9
+  img_ct_aortic_angiography:
+    dist:
+      normal: 0.03
+      intimal_flap: 0.97
+    conf: 0.9
+mimics:
+- acute_coronary_syndrome
+- pulmonary_embolism
+provenance:
+  status: fixture
+  source: Illustrative frequencies approximated from textbook and JAMA Rational Clinical
+    Examination data; not individually sourced.
+  version: '0.2'

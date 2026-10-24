@@ -1,0 +1,89 @@
+id: pulmonary_embolism
+name: Pulmonary embolism
+aliases:
+- PE
+- pulmonary thromboembolism
+prevalence: uncommon  # v0.3 (C3): pretest bucket in adult acute chest pain / dyspnea
+prevalence_by_complaint: {chest_pain: uncommon, dyspnea: uncommon}  # v0.3.1 (P1): keyed by canonical complaint
+harm:
+  untreated_course: lethal
+  urgency: hours
+  treatments:
+  - anticoagulation
+  treatment_risk: moderate
+findings:
+- code: chest_pain_pleuritic
+  p: 0.5
+  conf: 0.9
+- code: sudden_onset
+  p: 0.6
+  conf: 0.9
+- code: unilateral_leg_swelling
+  p: 0.25
+  conf: 0.9
+- code: recent_immobilization_or_surgery
+  p: 0.35
+  conf: 0.9
+- code: prior_vte
+  p: 0.2
+  conf: 0.9
+- code: hemoptysis
+  p: 0.1
+  conf: 0.9
+- code: tachycardia
+  p: 0.45
+  conf: 0.9
+tests:
+  test_ecg:
+    dist:
+      normal: 0.4
+      st_depression_or_t_inversion: 0.2
+      sinus_tachycardia_only: 0.38
+      regional_st_elevation: 0.01
+      diffuse_st_elevation_pr_depression: 0.01
+    conf: 0.9
+  test_pulse_oximetry:
+    dist:
+      normal: 0.45
+      hypoxia: 0.55
+    conf: 0.9
+  lab_troponin:
+    dist:
+      normal: 0.7
+      elevated: 0.3
+    conf: 0.9
+  lab_d_dimer:
+    dist:
+      normal: 0.04
+      elevated: 0.96
+    conf: 0.9
+  lab_bnp:
+    dist:
+      normal: 0.55
+      elevated: 0.45
+    conf: 0.9
+  img_chest_xray:
+    dist:
+      normal: 0.75
+      pleural_effusion: 0.15
+      consolidation: 0.1
+    conf: 0.9
+  img_echocardiography:
+    dist:
+      normal: 0.6
+      rv_strain: 0.4
+    conf: 0.9
+  img_ctpa:
+    dist:
+      no_embolus: 0.05
+      filling_defect: 0.95
+    conf: 0.9
+mimics:
+- pneumonia
+- acute_coronary_syndrome
+- pneumothorax
+provenance:
+  status: fixture
+  source: Illustrative frequencies approximated from textbook and JAMA Rational Clinical
+    Examination data; not individually sourced.
+  version: '0.2'

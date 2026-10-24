@@ -1,0 +1,58 @@
+{"code": "bilateral_leg_edema", "text": "my shoes don't fit anymore because my feet are so swollen"}
+{"code": "bilateral_leg_edema", "text": "2+ edema of both lower extremities"}
+{"code": "chest_pain_exertional", "text": "I get chest tightness when I mow the lawn"}
+{"code": "chest_pain_exertional", "text": "angina brought on by effort, relieved by rest"}
+{"code": "chest_pain_pleuritic", "text": "it catches me every time I breathe deeply"}
+{"code": "chest_pain_pleuritic", "text": "pain worse with inspiration and coughing"}
+{"code": "chest_pain_positional_relief", "text": "lying back makes it worse, sitting forward makes it better"}
+{"code": "chest_pain_positional_relief", "text": "relieved by leaning forward"}
+{"code": "chest_pain_radiating_arm", "text": "the ache moves into my left shoulder"}
+{"code": "chest_pain_radiating_arm", "text": "radiation to the arm and jaw"}
+{"code": "chest_pain_tearing_back", "text": "a ripping pain that shot straight through to my back"}
+{"code": "chest_pain_tearing_back", "text": "severe pain radiating to the back, described as tearing"}
+{"code": "copd_history", "text": "my lungs are damaged from emphysema"}
+{"code": "copd_history", "text": "known chronic obstructive pulmonary disease on home oxygen"}
+{"code": "crackles", "text": "coarse crackles in the left lower zone"}
+{"code": "crackles", "text": "bibasal crepitations"}
+{"code": "diaphoresis", "text": "I was sweating buckets"}
+{"code": "diaphoresis", "text": "diaphoretic on arrival"}
+{"code": "fever", "text": "I've had a high temperature on and off"}
+{"code": "fever", "text": "shaking chills and fevers since Tuesday"}
+{"code": "hemoptysis", "text": "there was blood when I coughed"}
+{"code": "hemoptysis", "text": "small volume hemoptysis"}
+{"code": "hypertension_history", "text": "I'm on amlodipine for my blood pressure"}
+{"code": "hypertension_history", "text": "long-standing hypertension"}
+{"code": "jvd", "text": "the veins in my neck stick out"}
+{"code": "jvd", "text": "elevated jugular venous pressure"}
+{"code": "orthopnea", "text": "I sleep in a recliner because I get short of breath flat on my back"}
+{"code": "orthopnea", "text": "orthopnoea, two pillows"}
+{"code": "paroxysmal_nocturnal_dyspnea", "text": "I have to get up and open the window at night to catch my breath"}
+{"code": "paroxysmal_nocturnal_dyspnea", "text": "episodes of PND"}
+{"code": "pericardial_friction_rub", "text": "a three-component rub is heard"}
+{"code": "pericardial_friction_rub", "text": "there's a scratching sound over the heart"}
+{"code": "prior_vte", "text": "I was on blood thinners for a clot last year"}
+{"code": "prior_vte", "text": "previous pulmonary embolism"}
+{"code": "productive_cough", "text": "I keep bringing up thick green phlegm"}
+{"code": "productive_cough", "text": "productive cough with purulent sputum"}
+{"code": "pulse_deficit", "text": "the right arm pressure is much higher than the left"}
+{"code": "pulse_deficit", "text": "diminished left radial pulse"}
+{"code": "recent_immobilization_or_surgery", "text": "I was in a cast for six weeks"}
+{"code": "recent_immobilization_or_surgery", "text": "returned from a 14-hour flight three days ago"}
+{"code": "recent_viral_illness", "text": "I had a bad cold about ten days ago"}
+{"code": "recent_viral_illness", "text": "preceding flu-like illness"}
+{"code": "s3_gallop", "text": "an extra heart sound after S2"}
+{"code": "s3_gallop", "text": "S3 gallop present"}
+{"code": "smoking_history", "text": "I quit smoking five years ago"}
+{"code": "smoking_history", "text": "current smoker"}
+{"code": "sudden_onset", "text": "it hit me out of nowhere"}
+{"code": "sudden_onset", "text": "abrupt onset while lifting"}
+{"code": "tachycardia", "text": "my heart is going 130"}
+{"code": "tachycardia", "text": "HR 115 bpm"}
+{"code": "temp_gt_38", "text": "temperature measured at 38.4"}
+{"code": "temp_gt_38", "text": "fever of 39 C in triage"}
+{"code": "unilateral_leg_swelling", "text": "only my left leg is swollen"}
+{"code": "unilateral_leg_swelling", "text": "right calf swollen and tender"}
+{"code": "unilateral_reduced_breath_sounds", "text": "no breath sounds on the right"}
+{"code": "unilateral_reduced_breath_sounds", "text": "diminished breath sounds at the left apex"}
+{"code": "wheeze", "text": "diffuse expiratory wheezes"}
+{"code": "wheeze", "text": "I wheeze a lot at night"}

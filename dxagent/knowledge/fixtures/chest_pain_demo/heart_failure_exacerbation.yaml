@@ -1,0 +1,79 @@
+id: heart_failure_exacerbation
+name: Acute decompensated heart failure
+aliases:
+- heart failure exacerbation
+- congestive heart failure
+- acute heart failure
+prevalence: common  # v0.3 (C3): pretest bucket in adult acute chest pain / dyspnea
+prevalence_by_complaint: {chest_pain: common, dyspnea: common}  # v0.3.1 (P1): keyed by canonical complaint
+harm:
+  untreated_course: serious
+  urgency: hours
+  treatments:
+  - diuretics
+  - vasodilators
+  treatment_risk: low
+findings:
+- code: orthopnea
+  p: 0.55
+  conf: 0.9
+- code: paroxysmal_nocturnal_dyspnea
+  p: 0.45
+  conf: 0.9
+- code: jvd
+  p: 0.5
+  conf: 0.9
+- code: s3_gallop
+  p: 0.3
+  conf: 0.9
+- code: crackles
+  p: 0.65
+  conf: 0.9
+- code: bilateral_leg_edema
+  p: 0.55
+  conf: 0.9
+- code: hypertension_history
+  p: 0.7
+  conf: 0.9
+tests:
+  test_pulse_oximetry:
+    dist:
+      normal: 0.5
+      hypoxia: 0.5
+    conf: 0.9
+  lab_bnp:
+    dist:
+      normal: 0.07
+      elevated: 0.93
+    conf: 0.9
+  lab_troponin:
+    dist:
+      normal: 0.65
+      elevated: 0.35
+    conf: 0.9
+  lab_d_dimer:
+    dist:
+      normal: 0.4
+      elevated: 0.6
+    conf: 0.9
+  img_chest_xray:
+    dist:
+      normal: 0.1
+      pulmonary_edema: 0.7
+      pleural_effusion: 0.2
+    conf: 0.9
+  img_echocardiography:
+    dist:
+      normal: 0.25
+      reduced_ef_or_wall_motion: 0.7
+      pericardial_effusion: 0.05
+    conf: 0.9
+mimics:
+- pneumonia
+- copd_exacerbation
+- acute_coronary_syndrome
+provenance:
+  status: fixture
+  source: Illustrative frequencies approximated from textbook and JAMA Rational Clinical
+    Examination data; not individually sourced.
+  version: '0.2'

@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.env
+/data/
+runs/
+.DS_Store
+
+# v0.4 knowledge layer
+# downloaded ontologies and source documents (licensed material stays out of the repository)
+sources/
+# rebuilt by `dxagent kb fetch`
+kb/ontology/
+kb/.extract_cache/
+kb/.passage_cache/
+# run-time contrast cards, on-demand and provisional cards, learned aliases
+cache/
+# pre-v0.4 drafted cards
+cards_drafted/
+# benchmark runs and summaries
+runs/
+dxagent_live_summary.json

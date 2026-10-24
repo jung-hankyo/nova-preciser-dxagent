@@ -1,0 +1,87 @@
+{
+  "marginal": {
+    "C2": {
+      "top1": {
+        "diff": 0.0,
+        "lo": -0.006666666666666667,
+        "hi": 0.006666666666666667,
+        "better": false,
+        "worse": false
+      },
+      "in_list": {
+        "diff": 0.0,
+        "lo": -0.004666666666666667,
+        "hi": 0.005333333333333333,
+        "better": false,
+        "worse": false
+      },
+      "brier": {
+        "diff": -0.0019981417352966575,
+        "lo": -0.007128862178373062,
+        "hi": 0.0030192978274939833,
+        "better": false,
+        "worse": false
+      },
+      "logloss": {
+        "diff": -0.0013898455294466788,
+        "lo": -0.03533879979095623,
+        "hi": 0.03086102933096387,
+        "better": false,
+        "worse": false
+      },
+      "turns": {
+        "diff": 0.004666666666666667,
+        "lo": -0.13733333333333334,
+        "hi": 0.118,
+        "better": false,
+        "worse": false
+      },
+      "cost": {
+        "diff": 13.116666666666667,
+        "lo": 1.72,
+        "hi": 24.91,
+        "better": false,
+        "worse": true
+      },
+      "llm": {
+        "diff": 0.1,
+        "lo": -0.20866666666666667,
+        "hi": 0.368,
+        "better": false,
+        "worse": false
+      },
+      "ece": {
+        "diff": -0.006440103532087377,
+        "lo": -0.013415107012227201,
+        "hi": 0.0027714745760877534,
+        "better": false,
+        "worse": false
+      },
+      "mcnemar_p": 1.0,
+      "verdict": "fail: cost"
+    }
+  },
+  "v0.3": {
+    "n": 1500,
+    "top1": 0.916,
+    "in_list": 0.9686666666666667,
+    "brier": 0.07436917000212913,
+    "ece": 0.018070578574380294,
+    "logloss": 0.4595690860552372,
+    "turns": 4.962666666666666,
+    "cost": 210.18,
+    "cm_missed": 0.1366906474820144,
+    "llm_calls": 14.752,
+    "calls": {
+      "extract": 5.96,
+      "generator": 4.42,
+      "card": 0.08,
+      "code_match": 0.04,
+      "background": 0.05,
+      "critic": 1.53,
+      "gap": 2.27,
+      "discovery": 0.08,
+      "ood": 0.32
+    }
+  }
+}

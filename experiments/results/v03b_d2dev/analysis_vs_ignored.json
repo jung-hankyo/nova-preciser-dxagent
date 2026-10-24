@@ -1,0 +1,2654 @@
+{
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|no-D2": {
+  "top1": {
+   "diff": 0.004,
+   "lo": 0.0013333333333333333,
+   "hi": 0.007333333333333333,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0017663322720183235,
+   "lo": -0.004234188517065524,
+   "hi": 0.0002482545241402014,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.0100229865038001,
+   "lo": -0.020232527551738343,
+   "hi": -0.0012695279248687258,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22933333333333333,
+   "lo": 0.196,
+   "hi": 0.2653333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 7.4,
+   "lo": 3.3433333333333333,
+   "hi": 11.933333333333334,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.5913333333333334,
+   "lo": 0.5053333333333333,
+   "hi": 0.6806666666666666,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0029806870479471663,
+   "lo": -0.0011009820006225926,
+   "hi": 0.00717055119173296,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.03125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.006666666666666667,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0021321372670115007,
+   "lo": -0.004831049132390402,
+   "hi": 0.0004960529848099581,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.01760064930171148,
+   "lo": -0.030093540465701684,
+   "hi": -0.006041813950233238,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.236,
+   "lo": 0.20133333333333334,
+   "hi": 0.2733333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 18.673333333333332,
+   "lo": 11.88,
+   "hi": 26.22,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.6,
+   "lo": 0.5113333333333333,
+   "hi": 0.6906666666666667,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0020373771045059524,
+   "lo": -0.0019007057559850236,
+   "hi": 0.007114351454069794,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.006666666666666667,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.002345655817925007,
+   "lo": -0.004965212616272686,
+   "hi": 0.00024000500697713093,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.018216689293580144,
+   "lo": -0.0305979969225323,
+   "hi": -0.006823392604943562,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.23733333333333334,
+   "lo": 0.204,
+   "hi": 0.274,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 18.043333333333333,
+   "lo": 12.176666666666666,
+   "hi": 24.30666666666667,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.604,
+   "lo": 0.5173333333333333,
+   "hi": 0.6953333333333334,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0016353318516693707,
+   "lo": -0.0021369725306117707,
+   "hi": 0.006744811130689539,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_no_repeat=0": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.006666666666666667,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0021439424976383696,
+   "lo": -0.004843586842236161,
+   "hi": 0.00047812177470279814,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.0177000815322656,
+   "lo": -0.03016972499694699,
+   "hi": -0.006127468006970399,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.238,
+   "lo": 0.204,
+   "hi": 0.276,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 18.703333333333333,
+   "lo": 11.906666666666666,
+   "hi": 26.24,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.606,
+   "lo": 0.5166666666666667,
+   "hi": 0.698,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0019443217348042892,
+   "lo": -0.001993761125686725,
+   "hi": 0.006963782305465259,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_no_repeat=0+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.0026666666666666666,
+   "lo": -0.0013333333333333333,
+   "hi": 0.006666666666666667,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0032079734831642545,
+   "lo": -0.006123548191269056,
+   "hi": -0.0002648573594603486,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.0190264404093138,
+   "lo": -0.03155314845275537,
+   "hi": -0.007496260584872658,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.24,
+   "lo": 0.20466666666666666,
+   "hi": 0.2793333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 19.10333333333333,
+   "lo": 11.613333333333333,
+   "hi": 27.423333333333332,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.612,
+   "lo": 0.5193333333333333,
+   "hi": 0.7073333333333334,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.00021294451537596376,
+   "lo": -0.003978245930347169,
+   "hi": 0.005585740682287451,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.34375,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=1+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.0026666666666666666,
+   "lo": 0.0,
+   "hi": 0.006,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0024248711433826663,
+   "lo": -0.005002269578670068,
+   "hi": -0.00017693882991672746,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.012242840596261299,
+   "lo": -0.02377522038218765,
+   "hi": -0.001910107061023582,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.19066666666666668,
+   "lo": 0.15866666666666668,
+   "hi": 0.226,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 6.763333333333334,
+   "lo": 1.16,
+   "hi": 13.123333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.4766666666666667,
+   "lo": 0.406,
+   "hi": 0.55,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0014881864448587356,
+   "lo": -0.0022065937185692455,
+   "hi": 0.005769572934132359,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.21875,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=1+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.007333333333333333,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.003445029791435406,
+   "lo": -0.006331455129233351,
+   "hi": -0.0007971612396473734,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.01585990900392431,
+   "lo": -0.029387109591211092,
+   "hi": -0.00341189273078969,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22866666666666666,
+   "lo": 0.194,
+   "hi": 0.26866666666666666,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 11.896666666666667,
+   "lo": 5.89,
+   "hi": 18.833333333333332,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.572,
+   "lo": 0.486,
+   "hi": 0.6626666666666666,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0012871762790743237,
+   "lo": -0.0031561154082279472,
+   "hi": 0.005893750914376578,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.1796875,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=1+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.007333333333333333,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0030564266471662157,
+   "lo": -0.005958568888169831,
+   "hi": -0.00047299482728132056,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.014203801728230476,
+   "lo": -0.02742876998846661,
+   "hi": -0.0020618197034181886,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.24,
+   "lo": 0.20533333333333334,
+   "hi": 0.2786666666666667,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 12.106666666666667,
+   "lo": 6.743333333333333,
+   "hi": 18.113333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.6,
+   "lo": 0.51,
+   "hi": 0.69,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0014301900902885176,
+   "lo": -0.003060488301560251,
+   "hi": 0.006190408743231235,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.1796875,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=5+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.002,
+   "lo": -0.0006666666666666666,
+   "hi": 0.005333333333333333,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0013998007588716284,
+   "lo": -0.0036056355954935675,
+   "hi": 0.0007195963728509609,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.013874645431706592,
+   "lo": -0.023604812526574898,
+   "hi": -0.004839925484256872,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.19733333333333333,
+   "lo": 0.16866666666666666,
+   "hi": 0.228,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 14.423333333333334,
+   "lo": 9.566666666666666,
+   "hi": 19.933333333333334,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.494,
+   "lo": 0.4266666666666667,
+   "hi": 0.564,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0006214138707433051,
+   "lo": -0.0026948254641843,
+   "hi": 0.004834475330141339,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.375,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=5+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.0033333333333333335,
+   "lo": 0.0,
+   "hi": 0.006666666666666667,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0025801367364122964,
+   "lo": -0.005247560017471264,
+   "hi": 0.000124848335992481,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.018283908058032254,
+   "lo": -0.03023166518192212,
+   "hi": -0.006877690063304976,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22533333333333333,
+   "lo": 0.19133333333333333,
+   "hi": 0.262,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 17.84,
+   "lo": 11.3,
+   "hi": 25.01,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.5746666666666667,
+   "lo": 0.49266666666666664,
+   "hi": 0.6633333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0014346653725225526,
+   "lo": -0.0023058061122273148,
+   "hi": 0.006409549742229289,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=10+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.002,
+   "lo": -0.002,
+   "hi": 0.006,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0023263999440132476,
+   "lo": -0.005168288810452686,
+   "hi": 0.000360018436719264,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.015733022704991356,
+   "lo": -0.025832041221210075,
+   "hi": -0.005418242127967447,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.19866666666666666,
+   "lo": 0.16866666666666666,
+   "hi": 0.23066666666666666,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 26.80666666666667,
+   "lo": 19.003333333333334,
+   "hi": 35.263333333333335,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.49733333333333335,
+   "lo": 0.426,
+   "hi": 0.57,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": -0.0002647484923816376,
+   "lo": -0.0041808315743950795,
+   "hi": 0.00472320101458382,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.5078125,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=10+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.004,
+   "lo": -0.0006666666666666666,
+   "hi": 0.008666666666666666,
+   "better": false,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0043206967831802496,
+   "lo": -0.007495591592237417,
+   "hi": -0.0010381887205322764,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.022683168251549944,
+   "lo": -0.03558070790408234,
+   "hi": -0.010473827471526505,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22533333333333333,
+   "lo": 0.19,
+   "hi": 0.2613333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 31.35333333333333,
+   "lo": 22.42,
+   "hi": 40.626666666666665,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.5766666666666667,
+   "lo": 0.4866666666666667,
+   "hi": 0.6666666666666666,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0009665437360962259,
+   "lo": -0.0036113188525516045,
+   "hi": 0.007037950154063357,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.14599609375,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2|v0.3+veto_boost=10+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.004666666666666667,
+   "lo": 0.0006666666666666666,
+   "hi": 0.009333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": 0.0,
+   "hi": 0.0033333333333333335,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004248728025328397,
+   "lo": -0.007342559166513012,
+   "hi": -0.0010945082704730464,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.023620123055323176,
+   "lo": -0.03750836409189121,
+   "hi": -0.010782817265644477,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22333333333333333,
+   "lo": 0.18733333333333332,
+   "hi": 0.262,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 28.723333333333333,
+   "lo": 19.766666666666666,
+   "hi": 38.026666666666664,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.582,
+   "lo": 0.49,
+   "hi": 0.6753333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0021831582170244376,
+   "lo": -0.0026215553147984037,
+   "hi": 0.00819507835589088,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.0654296875,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|no-D2": {
+  "top1": {
+   "diff": 0.012666666666666666,
+   "lo": 0.007333333333333333,
+   "hi": 0.018666666666666668,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": -0.0006666666666666666,
+   "lo": -0.002,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.008696805230885094,
+   "lo": -0.013071002698584909,
+   "hi": -0.00504178551549817,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.04228908739782892,
+   "lo": -0.059983261488265605,
+   "hi": -0.026515033771750567,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 1.1166666666666667,
+   "lo": 0.9786666666666667,
+   "hi": 1.2646666666666666,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 82.49333333333334,
+   "lo": 67.0,
+   "hi": 98.85333333333334,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 3.9546666666666668,
+   "lo": 3.4553333333333334,
+   "hi": 4.482666666666667,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.009305399572804986,
+   "lo": 0.0027162111517380176,
+   "hi": 0.015516283904771357,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 3.814697265625e-06,
+  "cm_missed": {
+   "diff": -0.02877697841726619,
+   "lo": -0.05755395683453238,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3": {
+  "top1": {
+   "diff": 0.009333333333333334,
+   "lo": 0.004,
+   "hi": 0.014666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.006214012666563807,
+   "lo": -0.010112537698441148,
+   "hi": -0.0026823247917343853,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.027487721932452882,
+   "lo": -0.04342535627699678,
+   "hi": -0.013483769205597226,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.57,
+   "lo": 0.5033333333333333,
+   "hi": 0.6433333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 31.743333333333332,
+   "lo": 23.17,
+   "hi": 41.36,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.9326666666666668,
+   "lo": 1.7013333333333334,
+   "hi": 2.1733333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.004737760545054953,
+   "lo": -0.001173758286896854,
+   "hi": 0.010007026056531917,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.000518798828125,
+  "cm_missed": {
+   "diff": -0.02877697841726619,
+   "lo": -0.05755395683453238,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.008666666666666666,
+   "lo": 0.0033333333333333335,
+   "hi": 0.014,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": -0.0006666666666666666,
+   "lo": -0.002,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005851675873982915,
+   "lo": -0.009833091586499434,
+   "hi": -0.0021392050226227287,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02628068458364788,
+   "lo": -0.04215476351537688,
+   "hi": -0.011790817065409883,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.744,
+   "lo": 0.648,
+   "hi": 0.8466666666666667,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 33.44,
+   "lo": 24.16,
+   "hi": 43.56333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 2.5673333333333335,
+   "lo": 2.2413333333333334,
+   "hi": 2.92,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.004155287612843679,
+   "lo": -0.001750253349918244,
+   "hi": 0.010407768793777927,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.004425048828125,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_no_repeat=0": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.002,
+   "hi": 0.014,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": -0.0006666666666666666,
+   "lo": -0.002,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.006760691340652913,
+   "lo": -0.010995648617373404,
+   "hi": -0.002998655821080368,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02729202597318085,
+   "lo": -0.04342025314857713,
+   "hi": -0.012117547453179191,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.6326666666666667,
+   "lo": 0.5613333333333334,
+   "hi": 0.71,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 34.68333333333333,
+   "lo": 25.69,
+   "hi": 44.53333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 2.148,
+   "lo": 1.898,
+   "hi": 2.4046666666666665,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.002719011745653286,
+   "lo": -0.0029219710416893696,
+   "hi": 0.009027066190465383,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.01181793212890625,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_no_repeat=0+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.002,
+   "hi": 0.014,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": -0.0013333333333333333,
+   "lo": -0.0033333333333333335,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.006657775429714392,
+   "lo": -0.01092663565679204,
+   "hi": -0.0028345127747767466,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02701142595244121,
+   "lo": -0.0436125076780637,
+   "hi": -0.011216602586095512,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.902,
+   "lo": 0.7893333333333333,
+   "hi": 1.0173333333333334,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 39.89333333333333,
+   "lo": 30.07,
+   "hi": 50.36,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 3.136,
+   "lo": 2.738,
+   "hi": 3.546,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.002827207408055206,
+   "lo": -0.0030619956972880794,
+   "hi": 0.008829920617851358,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.01181793212890625,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=1+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.006,
+   "lo": 0.0026666666666666666,
+   "hi": 0.01,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0006666666666666666,
+   "lo": 0.0,
+   "hi": 0.002,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0036284411904955196,
+   "lo": -0.006685254884444295,
+   "hi": -0.0010304373319265916,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.019188632058036188,
+   "lo": -0.03108163449543595,
+   "hi": -0.008972840422499628,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.21533333333333332,
+   "lo": 0.182,
+   "hi": 0.24866666666666667,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 9.896666666666667,
+   "lo": 3.9966666666666666,
+   "hi": 16.886666666666667,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.6726666666666666,
+   "lo": 0.5893333333333334,
+   "hi": 0.76,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0037377990695583105,
+   "lo": -0.0007476105272877509,
+   "hi": 0.008131517409701389,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.00390625,
+  "cm_missed": {
+   "diff": -0.02158273381294964,
+   "lo": -0.050359712230215826,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=1+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.006666666666666667,
+   "lo": 0.002,
+   "hi": 0.012,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004475870860562655,
+   "lo": -0.008018282050697122,
+   "hi": -0.0013946024779520878,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.022589638611809917,
+   "lo": -0.03545200746682131,
+   "hi": -0.011727983973347214,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.37533333333333335,
+   "lo": 0.3293333333333333,
+   "hi": 0.4226666666666667,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 16.173333333333332,
+   "lo": 9.323333333333334,
+   "hi": 23.626666666666665,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.234,
+   "lo": 1.094,
+   "hi": 1.3773333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.00371594345618545,
+   "lo": -0.0019184968978625053,
+   "hi": 0.008793957263538012,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.012939453125,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=1+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.008666666666666666,
+   "lo": 0.004,
+   "hi": 0.013333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004488624417891033,
+   "lo": -0.008027788575448256,
+   "hi": -0.0015985496210013397,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.021590737591450682,
+   "lo": -0.03477069906099744,
+   "hi": -0.01029203655814424,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.5433333333333333,
+   "lo": 0.476,
+   "hi": 0.614,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 17.876666666666665,
+   "lo": 11.116666666666667,
+   "hi": 25.51,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.8353333333333333,
+   "lo": 1.614,
+   "hi": 2.064,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.005765014786850677,
+   "lo": -0.0004161590992262827,
+   "hi": 0.01075943529199716,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.000244140625,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=5+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.005333333333333333,
+   "lo": 0.002,
+   "hi": 0.009333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0006666666666666666,
+   "lo": 0.0,
+   "hi": 0.002,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.002747080239226861,
+   "lo": -0.0055480964890856094,
+   "hi": -0.00034000461706714904,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.016247222586794532,
+   "lo": -0.02729414708833311,
+   "hi": -0.007082758010583882,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.21666666666666667,
+   "lo": 0.18733333333333332,
+   "hi": 0.24933333333333332,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 18.48,
+   "lo": 11.643333333333333,
+   "hi": 26.196666666666665,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.68,
+   "lo": 0.6033333333333334,
+   "hi": 0.764,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0026238464557233714,
+   "lo": -0.0013616527648680696,
+   "hi": 0.006709982259296435,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.0078125,
+  "cm_missed": {
+   "diff": -0.014388489208633094,
+   "lo": -0.03597122302158273,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=5+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.0033333333333333335,
+   "hi": 0.013333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005354043757854229,
+   "lo": -0.008934196096760385,
+   "hi": -0.0021122675805557317,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.024214175258498644,
+   "lo": -0.03828516656747313,
+   "hi": -0.011901440388583739,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.37533333333333335,
+   "lo": 0.328,
+   "hi": 0.426,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 26.53,
+   "lo": 18.426666666666666,
+   "hi": 35.626666666666665,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.2506666666666666,
+   "lo": 1.11,
+   "hi": 1.4013333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.004231170573866825,
+   "lo": -0.0012488777594815564,
+   "hi": 0.009386887890679166,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.0018310546875,
+  "cm_missed": {
+   "diff": -0.02877697841726619,
+   "lo": -0.05755395683453238,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=10+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.005333333333333333,
+   "lo": 0.0006666666666666666,
+   "hi": 0.01,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0006666666666666666,
+   "lo": 0.0,
+   "hi": 0.002,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0037689669754311216,
+   "lo": -0.006960989162787167,
+   "hi": -0.000758023061822325,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.018392008330205448,
+   "lo": -0.03004487629899126,
+   "hi": -0.008193408318258013,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.22066666666666668,
+   "lo": 0.19066666666666668,
+   "hi": 0.25533333333333336,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 33.9,
+   "lo": 25.05,
+   "hi": 43.27,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.6906666666666667,
+   "lo": 0.6086666666666667,
+   "hi": 0.774,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0011673036138474847,
+   "lo": -0.0035049854796452146,
+   "hi": 0.005804810250366409,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.03857421875,
+  "cm_missed": {
+   "diff": -0.02877697841726619,
+   "lo": -0.05755395683453238,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=10+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.007333333333333333,
+   "lo": 0.002,
+   "hi": 0.013333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005965963478356807,
+   "lo": -0.009944695805389264,
+   "hi": -0.002521794324734333,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02537782276880193,
+   "lo": -0.040452847256105345,
+   "hi": -0.012113656053051118,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.38066666666666665,
+   "lo": 0.3333333333333333,
+   "hi": 0.43133333333333335,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 47.2,
+   "lo": 36.42666666666667,
+   "hi": 58.21666666666667,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.2606666666666666,
+   "lo": 1.1166666666666667,
+   "hi": 1.4086666666666667,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0019820907654357,
+   "lo": -0.0037004057881010084,
+   "hi": 0.008436163856294338,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.012725830078125,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.3_VETO_WRONG=0.2_VETO_FP=0.2_STUBBORN=1|v0.3+veto_boost=10+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.009333333333333334,
+   "lo": 0.004,
+   "hi": 0.015333333333333332,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": -0.0006666666666666666,
+   "lo": -0.002,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.006771716175346687,
+   "lo": -0.011211775775054746,
+   "hi": -0.0030658692180043417,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.026709961075791377,
+   "lo": -0.04502248210159311,
+   "hi": -0.010649230403806711,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.584,
+   "lo": 0.5153333333333333,
+   "hi": 0.6573333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 54.26,
+   "lo": 43.21333333333333,
+   "hi": 66.36666666666666,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 1.9826666666666666,
+   "lo": 1.7513333333333334,
+   "hi": 2.227333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.003837455956659755,
+   "lo": -0.0021989268691436914,
+   "hi": 0.010451084763026735,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.0025768280029296875,
+  "cm_missed": {
+   "diff": -0.03597122302158273,
+   "lo": -0.07194244604316546,
+   "hi": -0.007194244604316547,
+   "better": true,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|no-D2": {
+  "top1": {
+   "diff": 0.006666666666666667,
+   "lo": 0.0026666666666666666,
+   "hi": 0.011333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0023652479732990533,
+   "lo": -0.005518009033419981,
+   "hi": 0.0004795717134851728,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.015000223804756206,
+   "lo": -0.027178074649736372,
+   "hi": -0.004418269120377899,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.118,
+   "lo": 0.08866666666666667,
+   "hi": 0.14933333333333335,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 5.93,
+   "lo": 1.3833333333333333,
+   "hi": 10.416666666666666,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.2946666666666667,
+   "lo": 0.224,
+   "hi": 0.37266666666666665,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.007033526160482462,
+   "lo": 0.002234945688010165,
+   "hi": 0.012495056030638815,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.00634765625,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.03597122302158273,
+   "hi": 0.014388489208633094,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3": {
+  "top1": {
+   "diff": 0.007333333333333333,
+   "lo": 0.0033333333333333335,
+   "hi": 0.011333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005537574803983231,
+   "lo": -0.008719956660323545,
+   "hi": -0.00241308743361309,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.030993103443060836,
+   "lo": -0.04888259742375098,
+   "hi": -0.01441073769018808,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.12266666666666666,
+   "lo": 0.09066666666666667,
+   "hi": 0.15866666666666668,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 14.306666666666667,
+   "lo": 7.55,
+   "hi": 22.076666666666668,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.2926666666666667,
+   "lo": 0.21733333333333332,
+   "hi": 0.376,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.006608329071409718,
+   "lo": 0.002326944800403647,
+   "hi": 0.012738030191251637,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0009765625,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.0033333333333333335,
+   "hi": 0.012666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0044548254476784776,
+   "lo": -0.008017636352398775,
+   "hi": -0.0010487814184303355,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.029624616735340066,
+   "lo": -0.04790161965429586,
+   "hi": -0.01278302258151498,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.12266666666666666,
+   "lo": 0.09133333333333334,
+   "hi": 0.15866666666666668,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 14.536666666666667,
+   "lo": 7.71,
+   "hi": 22.41,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.2906666666666667,
+   "lo": 0.21466666666666667,
+   "hi": 0.37466666666666665,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.00836616821872831,
+   "lo": 0.0036511224014177633,
+   "hi": 0.014508382191511602,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0018310546875,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": -0.02158273381294964,
+   "hi": 0.02158273381294964,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_no_repeat=0": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.0033333333333333335,
+   "hi": 0.012666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004664483880630941,
+   "lo": -0.008183731101864707,
+   "hi": -0.001284729242302847,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.030211112371006023,
+   "lo": -0.04850460078829126,
+   "hi": -0.013214102094353215,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.124,
+   "lo": 0.092,
+   "hi": 0.16066666666666668,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 13.906666666666666,
+   "lo": 7.04,
+   "hi": 22.296666666666667,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.294,
+   "lo": 0.21666666666666667,
+   "hi": 0.37666666666666665,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.007991660002688857,
+   "lo": 0.0031186882196421947,
+   "hi": 0.014232328666979741,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0018310546875,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": -0.02158273381294964,
+   "hi": 0.02158273381294964,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_no_repeat=0+veto_ceiling=99": {
+  "top1": {
+   "diff": 0.007333333333333333,
+   "lo": 0.0033333333333333335,
+   "hi": 0.011333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005135990146675185,
+   "lo": -0.008333059638963069,
+   "hi": -0.0020773387712601406,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.029954691574788445,
+   "lo": -0.04794569403770687,
+   "hi": -0.013436003795240067,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.12666666666666668,
+   "lo": 0.09666666666666666,
+   "hi": 0.16266666666666665,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 15.72,
+   "lo": 9.396666666666667,
+   "hi": 23.323333333333334,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.298,
+   "lo": 0.22533333333333333,
+   "hi": 0.38066666666666665,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0072031213712548565,
+   "lo": 0.0029244049768544014,
+   "hi": 0.01304275911005428,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0009765625,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=1+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.006666666666666667,
+   "lo": 0.0026666666666666666,
+   "hi": 0.011333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.003019888403797381,
+   "lo": -0.00633654819081605,
+   "hi": 2.4372849055876303e-05,
+   "better": false,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.017389772619353268,
+   "lo": -0.03371024166335469,
+   "hi": -0.0032909677079056097,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.10266666666666667,
+   "lo": 0.07466666666666667,
+   "hi": 0.13266666666666665,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 8.93,
+   "lo": 2.8333333333333335,
+   "hi": 16.063333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.23266666666666666,
+   "lo": 0.17533333333333334,
+   "hi": 0.294,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.007198067483693848,
+   "lo": 0.0026930849769813414,
+   "hi": 0.012433609440820179,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.00634765625,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.03597122302158273,
+   "hi": 0.014388489208633094,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=1+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.0026666666666666666,
+   "hi": 0.013333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005263372140243985,
+   "lo": -0.008968369004712361,
+   "hi": -0.0017804708361290643,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02652423234356693,
+   "lo": -0.04549714672700872,
+   "hi": -0.009047299770693372,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.11066666666666666,
+   "lo": 0.07733333333333334,
+   "hi": 0.15,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 7.9366666666666665,
+   "lo": 0.57,
+   "hi": 16.063333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.2613333333333333,
+   "lo": 0.19,
+   "hi": 0.342,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.007733943520181006,
+   "lo": 0.002423118157733377,
+   "hi": 0.01406276821418893,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.004180908203125,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.03597122302158273,
+   "hi": 0.014388489208633094,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=1+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.004,
+   "hi": 0.012666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.005024120424556126,
+   "lo": -0.008515773563721175,
+   "hi": -0.0020281772902857164,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02516284550859325,
+   "lo": -0.04368363731232965,
+   "hi": -0.008730717533888805,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.12733333333333333,
+   "lo": 0.09533333333333334,
+   "hi": 0.16333333333333333,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 11.813333333333333,
+   "lo": 5.87,
+   "hi": 18.863333333333333,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.29333333333333333,
+   "lo": 0.22133333333333333,
+   "hi": 0.37333333333333335,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.00793704323025846,
+   "lo": 0.0034622882116355294,
+   "hi": 0.013297606120053616,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.00048828125,
+  "cm_missed": {
+   "diff": -0.014388489208633094,
+   "lo": -0.03597122302158273,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=5+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.004,
+   "lo": 0.0013333333333333333,
+   "hi": 0.007333333333333333,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.003443430472402416,
+   "lo": -0.006160359377627179,
+   "hi": -0.001115009275384609,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.018395096669357958,
+   "lo": -0.03288208004379714,
+   "hi": -0.005724181298577902,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.09266666666666666,
+   "lo": 0.06866666666666667,
+   "hi": 0.12266666666666666,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 11.613333333333333,
+   "lo": 5.993333333333333,
+   "hi": 18.66,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.22,
+   "lo": 0.16733333333333333,
+   "hi": 0.2806666666666667,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.0031852768690220842,
+   "lo": -9.195167910695107e-05,
+   "hi": 0.008025798930465523,
+   "better": false,
+   "worse": false
+  },
+  "mcnemar_p": 0.03125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=5+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.0033333333333333335,
+   "hi": 0.012666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004732519100728614,
+   "lo": -0.008300934731945292,
+   "hi": -0.001340307084266063,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.029272531032700697,
+   "lo": -0.04744347584239108,
+   "hi": -0.012102566704861779,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.11733333333333333,
+   "lo": 0.08666666666666667,
+   "hi": 0.15266666666666667,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 13.623333333333333,
+   "lo": 6.833333333333333,
+   "hi": 22.01,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.2773333333333333,
+   "lo": 0.20733333333333334,
+   "hi": 0.35533333333333333,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.008029968003120492,
+   "lo": 0.003159814189040447,
+   "hi": 0.014280603659606195,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0018310546875,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": -0.02158273381294964,
+   "hi": 0.02158273381294964,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=10+veto_ceiling=1": {
+  "top1": {
+   "diff": 0.005333333333333333,
+   "lo": 0.002,
+   "hi": 0.009333333333333334,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.004486433799075477,
+   "lo": -0.0076728407270399875,
+   "hi": -0.0018857720909785534,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.02474204095565832,
+   "lo": -0.03989141568574743,
+   "hi": -0.010700468810100434,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.09933333333333333,
+   "lo": 0.074,
+   "hi": 0.13066666666666665,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 16.86,
+   "lo": 9.96,
+   "hi": 24.98,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.23333333333333334,
+   "lo": 0.17733333333333334,
+   "hi": 0.298,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.004582583805310007,
+   "lo": 0.0007775631684767588,
+   "hi": 0.010276922702716264,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.0078125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=10+veto_ceiling=2": {
+  "top1": {
+   "diff": 0.008,
+   "lo": 0.004,
+   "hi": 0.012666666666666666,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0062441401805365246,
+   "lo": -0.009713358649365393,
+   "hi": -0.0030915340619344237,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.03276229651696461,
+   "lo": -0.05048203760458346,
+   "hi": -0.016077551807507803,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.124,
+   "lo": 0.09466666666666666,
+   "hi": 0.158,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 20.713333333333335,
+   "lo": 13.256666666666666,
+   "hi": 29.29,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.288,
+   "lo": 0.22133333333333333,
+   "hi": 0.36333333333333334,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.007725500153229949,
+   "lo": 0.0030730581636257692,
+   "hi": 0.014582942593565278,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.00048828125,
+  "cm_missed": {
+   "diff": -0.007194244604316547,
+   "lo": -0.02158273381294964,
+   "hi": 0.0,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ },
+ "VETO_TP=0.5_VETO_WRONG=0.1_VETO_FP=0.05|v0.3+veto_boost=10+veto_ceiling=4": {
+  "top1": {
+   "diff": 0.01,
+   "lo": 0.005333333333333333,
+   "hi": 0.015333333333333332,
+   "better": true,
+   "worse": false
+  },
+  "in_list": {
+   "diff": 0.0013333333333333333,
+   "lo": -0.0013333333333333333,
+   "hi": 0.004,
+   "better": false,
+   "worse": false
+  },
+  "brier": {
+   "diff": -0.0065650705337704065,
+   "lo": -0.010383621520316627,
+   "hi": -0.00295612430910563,
+   "better": true,
+   "worse": false
+  },
+  "logloss": {
+   "diff": -0.03663427352045374,
+   "lo": -0.05710815314126113,
+   "hi": -0.017198905852778404,
+   "better": true,
+   "worse": false
+  },
+  "turns": {
+   "diff": 0.12333333333333334,
+   "lo": 0.092,
+   "hi": 0.15866666666666668,
+   "better": false,
+   "worse": true
+  },
+  "cost": {
+   "diff": 21.333333333333332,
+   "lo": 12.53,
+   "hi": 30.676666666666666,
+   "better": false,
+   "worse": true
+  },
+  "llm": {
+   "diff": 0.28933333333333333,
+   "lo": 0.216,
+   "hi": 0.36933333333333335,
+   "better": false,
+   "worse": true
+  },
+  "ece": {
+   "diff": 0.010242745884772485,
+   "lo": 0.004573657156198854,
+   "hi": 0.01666430731904293,
+   "better": false,
+   "worse": true
+  },
+  "mcnemar_p": 0.000274658203125,
+  "cm_missed": {
+   "diff": 0.0,
+   "lo": -0.02158273381294964,
+   "hi": 0.02158273381294964,
+   "better": false,
+   "worse": false,
+   "n": 139
+  },
+  "verdict": "fail: ece, turns, cost"
+ }
+}

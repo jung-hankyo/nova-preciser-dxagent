@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dxagent"
+version = "0.4.2"
+description = "Knowledge-first multi-turn diagnostic agent built on LangGraph and LangChain"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=1.0",
+    "langchain>=1.0",
+    "langchain-core>=1.0",
+    "langchain-anthropic>=1.0",
+    "langchain-openai>=1.0",  # v0.4.2: OpenAI and DeepSeek (OpenAI-compatible endpoint)
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+openai = ["langchain-openai>=1.0"]  # kept for compatibility; now a core dependency
+pdf = ["pdfplumber>=0.11"]  # v0.4: PDF sources for the knowledge compiler
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+dxagent = "dxagent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["dxagent*"]
+
+[tool.setuptools.package-data]
+"dxagent.knowledge" = ["registry/*.yaml", "registry/_*.yaml", "fixtures/*/*.yaml", "fixtures/*/README.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

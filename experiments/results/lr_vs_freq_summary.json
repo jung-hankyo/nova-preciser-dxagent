@@ -1,0 +1,1892 @@
+{
+ "1.0": {
+  "summary": {
+   "A_v01": {
+    "n": 1000,
+    "top1": 0.903,
+    "top1_ci": [
+     0.8830843992979197,
+     0.9198311204414497
+    ],
+    "top3": 0.978,
+    "turns_mean": 7.984,
+    "cost_mean": 773.105,
+    "brier": 0.09464414752433946,
+    "log_loss_truth": 0.5340875543907985,
+    "ece": 0.11277002981041744,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.19230769230769232,
+    "procedure_rate": 0.026,
+    "adv_imaging_rate": 0.248,
+    "reasons": {
+     "threshold": 0.738,
+     "no_value": 0.163,
+     "stalled": 0.099,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6590909090909091,
+     "aortic_dissection": 0.9111111111111111,
+     "copd_exacerbation": 0.9068627450980392,
+     "heart_failure_exacerbation": 0.9453551912568307,
+     "pericarditis": 0.9241706161137441,
+     "pneumonia": 0.9227272727272727,
+     "pneumothorax": 0.8367346938775511,
+     "pulmonary_embolism": 0.8181818181818182
+    }
+   },
+   "B_v02": {
+    "n": 1000,
+    "top1": 0.911,
+    "top1_ci": [
+     0.891742264575647,
+     0.9271120247863402
+    ],
+    "top3": 0.985,
+    "turns_mean": 7.399,
+    "cost_mean": 573.585,
+    "brier": 0.08554588935081317,
+    "log_loss_truth": 0.4505580135729413,
+    "ece": 0.10395707162822179,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.1978021978021978,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.108,
+    "reasons": {
+     "threshold": 0.777,
+     "no_value": 0.152,
+     "stalled": 0.071,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6363636363636364,
+     "aortic_dissection": 0.9111111111111111,
+     "copd_exacerbation": 0.9264705882352942,
+     "heart_failure_exacerbation": 0.9726775956284153,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.9318181818181818,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.7727272727272727
+    }
+   },
+   "C_v02_old_objective": {
+    "n": 1000,
+    "top1": 0.918,
+    "top1_ci": [
+     0.8993524099554584,
+     0.9334483028263192
+    ],
+    "top3": 0.985,
+    "turns_mean": 7.355,
+    "cost_mean": 681.215,
+    "brier": 0.08103789464125487,
+    "log_loss_truth": 0.4310202286189824,
+    "ece": 0.10252440794364125,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.17032967032967034,
+    "procedure_rate": 0.009,
+    "adv_imaging_rate": 0.176,
+    "reasons": {
+     "threshold": 0.797,
+     "no_value": 0.132,
+     "stalled": 0.071,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6590909090909091,
+     "aortic_dissection": 0.9333333333333333,
+     "copd_exacerbation": 0.9264705882352942,
+     "heart_failure_exacerbation": 0.9726775956284153,
+     "pericarditis": 0.919431279620853,
+     "pneumonia": 0.9363636363636364,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.8409090909090909
+    }
+   },
+   "D_v02_old_representation": {
+    "n": 1000,
+    "top1": 0.9,
+    "top1_ci": [
+     0.8798476375941197,
+     0.9170908435367681
+    ],
+    "top3": 0.98,
+    "turns_mean": 7.958,
+    "cost_mean": 590.05,
+    "brier": 0.09915282386939316,
+    "log_loss_truth": 0.5505017157141476,
+    "ece": 0.12055667633831839,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2032967032967033,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.159,
+    "reasons": {
+     "threshold": 0.736,
+     "no_value": 0.162,
+     "stalled": 0.102,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6590909090909091,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.9166666666666666,
+     "heart_failure_exacerbation": 0.9562841530054644,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.9090909090909091,
+     "pneumothorax": 0.8367346938775511,
+     "pulmonary_embolism": 0.8181818181818182
+    }
+   },
+   "E_v02_cantmiss_rule": {
+    "n": 1000,
+    "top1": 0.913,
+    "top1_ci": [
+     0.8939131380174493,
+     0.9289258437501923
+    ],
+    "top3": 0.985,
+    "turns_mean": 7.552,
+    "cost_mean": 581.64,
+    "brier": 0.08300199748202162,
+    "log_loss_truth": 0.43888188422457775,
+    "ece": 0.10473414998192324,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.18681318681318682,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.109,
+    "reasons": {
+     "threshold": 0.745,
+     "no_value": 0.184,
+     "stalled": 0.071,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6818181818181818,
+     "aortic_dissection": 0.9111111111111111,
+     "copd_exacerbation": 0.9264705882352942,
+     "heart_failure_exacerbation": 0.9726775956284153,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.9318181818181818,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.7727272727272727
+    }
+   },
+   "F_v021_report_noise": {
+    "n": 1000,
+    "top1": 0.911,
+    "top1_ci": [
+     0.891742264575647,
+     0.9271120247863402
+    ],
+    "top3": 0.986,
+    "turns_mean": 8.421,
+    "cost_mean": 622.29,
+    "brier": 0.10622068302363043,
+    "log_loss_truth": 0.5238991763383645,
+    "ece": 0.1736642398291058,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.19230769230769232,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.096,
+    "reasons": {
+     "threshold": 0.632,
+     "no_value": 0.245,
+     "stalled": 0.123,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.7045454545454546,
+     "aortic_dissection": 0.8888888888888888,
+     "copd_exacerbation": 0.9166666666666666,
+     "heart_failure_exacerbation": 0.9781420765027322,
+     "pericarditis": 0.919431279620853,
+     "pneumonia": 0.9272727272727272,
+     "pneumothorax": 0.8367346938775511,
+     "pulmonary_embolism": 0.7954545454545454
+    }
+   },
+   "A_v01_ref0.5": {
+    "n": 1000,
+    "top1": 0.884,
+    "top1_ci": [
+     0.862666307122199,
+     0.9023946347634532
+    ],
+    "top3": 0.974,
+    "turns_mean": 8.121,
+    "cost_mean": 736.695,
+    "brier": 0.09965449071366766,
+    "log_loss_truth": 0.5598807629545409,
+    "ece": 0.08519032067664767,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.17032967032967034,
+    "procedure_rate": 0.034,
+    "adv_imaging_rate": 0.202,
+    "reasons": {
+     "threshold": 0.742,
+     "no_value": 0.159,
+     "stalled": 0.099,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.7045454545454546,
+     "aortic_dissection": 0.9111111111111111,
+     "copd_exacerbation": 0.9068627450980392,
+     "heart_failure_exacerbation": 0.9453551912568307,
+     "pericarditis": 0.919431279620853,
+     "pneumonia": 0.8227272727272728,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.8181818181818182
+    }
+   },
+   "A_v01_ref1.0": {
+    "n": 1000,
+    "top1": 0.836,
+    "top1_ci": [
+     0.8117721376883166,
+     0.8576561864616289
+    ],
+    "top3": 0.954,
+    "turns_mean": 8.23,
+    "cost_mean": 751.59,
+    "brier": 0.12457601073196527,
+    "log_loss_truth": 0.7096435152211302,
+    "ece": 0.05318821659132649,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.25274725274725274,
+    "procedure_rate": 0.037,
+    "adv_imaging_rate": 0.228,
+    "reasons": {
+     "threshold": 0.779,
+     "no_value": 0.145,
+     "stalled": 0.076,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.6590909090909091,
+     "aortic_dissection": 0.7777777777777778,
+     "copd_exacerbation": 0.9166666666666666,
+     "heart_failure_exacerbation": 0.8852459016393442,
+     "pericarditis": 0.9004739336492891,
+     "pneumonia": 0.7318181818181818,
+     "pneumothorax": 0.8571428571428571,
+     "pulmonary_embolism": 0.6818181818181818
+    }
+   }
+  },
+  "paired_vs_A": {
+   "B_v02": {
+    "acc_diff": [
+     0.008,
+     -0.006,
+     0.022
+    ],
+    "b_right_a_wrong": 28,
+    "a_right_b_wrong": 20,
+    "mcnemar_p": 0.31232680747326924,
+    "turns_diff": [
+     -0.585,
+     -0.7170249999999999,
+     -0.455
+    ],
+    "cost_diff": [
+     -199.52,
+     -230.676125,
+     -168.06737499999997
+    ],
+    "logloss_diff": [
+     -0.08352954081785716,
+     -0.11845671264883839,
+     -0.04983047602225289
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     0.015,
+     0.002,
+     0.028
+    ],
+    "b_right_a_wrong": 29,
+    "a_right_b_wrong": 14,
+    "mcnemar_p": 0.03153949735315109,
+    "turns_diff": [
+     -0.629,
+     -0.754025,
+     -0.511
+    ],
+    "cost_diff": [
+     -91.89,
+     -121.237875,
+     -62.36475
+    ],
+    "logloss_diff": [
+     -0.103067325771816,
+     -0.13522128663375382,
+     -0.0718326274315746
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     -0.003,
+     -0.014,
+     0.007
+    ],
+    "b_right_a_wrong": 13,
+    "a_right_b_wrong": 16,
+    "mcnemar_p": 0.711071103811264,
+    "turns_diff": [
+     -0.026,
+     -0.131,
+     0.082
+    ],
+    "cost_diff": [
+     -183.055,
+     -212.19799999999998,
+     -153.529
+    ],
+    "logloss_diff": [
+     0.016414161323349195,
+     -0.010057169600504595,
+     0.042622238317520114
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     0.01,
+     -0.004,
+     0.024
+    ],
+    "b_right_a_wrong": 29,
+    "a_right_b_wrong": 19,
+    "mcnemar_p": 0.19341265286193732,
+    "turns_diff": [
+     -0.432,
+     -0.558025,
+     -0.308
+    ],
+    "cost_diff": [
+     -191.465,
+     -222.42037499999998,
+     -160.27837499999998
+    ],
+    "logloss_diff": [
+     -0.09520567016622065,
+     -0.13053805375634284,
+     -0.06083646511907386
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     0.008,
+     -0.007,
+     0.023
+    ],
+    "b_right_a_wrong": 32,
+    "a_right_b_wrong": 24,
+    "mcnemar_p": 0.3496819529836849,
+    "turns_diff": [
+     0.437,
+     0.296975,
+     0.577
+    ],
+    "cost_diff": [
+     -150.815,
+     -183.245375,
+     -119.2945
+    ],
+    "logloss_diff": [
+     -0.010188378052433998,
+     -0.047550992332102436,
+     0.026005264729207684
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     -0.019,
+     -0.033,
+     -0.005
+    ],
+    "b_right_a_wrong": 18,
+    "a_right_b_wrong": 37,
+    "mcnemar_p": 0.014453833533827731,
+    "turns_diff": [
+     0.137,
+     0.015,
+     0.2610250000000001
+    ],
+    "cost_diff": [
+     -36.41,
+     -66.171125,
+     -6.204124999999997
+    ],
+    "logloss_diff": [
+     0.025793208563742478,
+     -0.006345058360053794,
+     0.06013562502632917
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     -0.067,
+     -0.087,
+     -0.047
+    ],
+    "b_right_a_wrong": 21,
+    "a_right_b_wrong": 88,
+    "mcnemar_p": 6.112691638091427e-11,
+    "turns_diff": [
+     0.246,
+     0.069,
+     0.418
+    ],
+    "cost_diff": [
+     -21.515,
+     -60.820249999999994,
+     17.310875000000003
+    ],
+    "logloss_diff": [
+     0.17555596083033181,
+     0.11574235069127446,
+     0.23875919002983992
+    ]
+   }
+  },
+  "paired_vs_B": {
+   "A_v01": {
+    "acc_diff": [
+     0.008,
+     -0.006,
+     0.022
+    ],
+    "b_right_a_wrong": 28,
+    "a_right_b_wrong": 20,
+    "mcnemar_p": 0.31232680747326924,
+    "turns_diff": [
+     -0.585,
+     -0.7170249999999999,
+     -0.455
+    ],
+    "cost_diff": [
+     -199.52,
+     -230.676125,
+     -168.06737499999997
+    ],
+    "logloss_diff": [
+     -0.08352954081785716,
+     -0.11845671264883839,
+     -0.04983047602225289
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     -0.007,
+     -0.014,
+     0.0
+    ],
+    "b_right_a_wrong": 3,
+    "a_right_b_wrong": 10,
+    "mcnemar_p": 0.09228515625,
+    "turns_diff": [
+     0.044,
+     -0.026,
+     0.113
+    ],
+    "cost_diff": [
+     -107.63,
+     -128.65187500000002,
+     -87.56624999999998
+    ],
+    "logloss_diff": [
+     0.019537784953958862,
+     0.0013243231278823064,
+     0.037236094270257016
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     0.011,
+     -0.001,
+     0.023
+    ],
+    "b_right_a_wrong": 25,
+    "a_right_b_wrong": 14,
+    "mcnemar_p": 0.10812902140605729,
+    "turns_diff": [
+     -0.559,
+     -0.678,
+     -0.4379749999999999
+    ],
+    "cost_diff": [
+     -16.465,
+     -38.24075,
+     5.896250000000004
+    ],
+    "logloss_diff": [
+     -0.09994370214120636,
+     -0.132677766970777,
+     -0.0681432858732142
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     -0.002,
+     -0.005,
+     0.0
+    ],
+    "b_right_a_wrong": 0,
+    "a_right_b_wrong": 2,
+    "mcnemar_p": 0.5,
+    "turns_diff": [
+     -0.153,
+     -0.2,
+     -0.11
+    ],
+    "cost_diff": [
+     -8.055,
+     -11.540624999999999,
+     -5.114749999999999
+    ],
+    "logloss_diff": [
+     0.0116761293483635,
+     0.0037634065999217424,
+     0.021980191567491772
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     0.0,
+     -0.011,
+     0.012
+    ],
+    "b_right_a_wrong": 17,
+    "a_right_b_wrong": 17,
+    "mcnemar_p": 1.0,
+    "turns_diff": [
+     -1.022,
+     -1.138,
+     -0.903
+    ],
+    "cost_diff": [
+     -48.705,
+     -63.856125,
+     -32.684375
+    ],
+    "logloss_diff": [
+     -0.07334116276542314,
+     -0.09785903268639085,
+     -0.048141476680946
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     0.027,
+     0.011,
+     0.043
+    ],
+    "b_right_a_wrong": 47,
+    "a_right_b_wrong": 20,
+    "mcnemar_p": 0.0013071686857636005,
+    "turns_diff": [
+     -0.722,
+     -0.8710249999999999,
+     -0.5779749999999999
+    ],
+    "cost_diff": [
+     -163.11,
+     -195.16025,
+     -132.099125
+    ],
+    "logloss_diff": [
+     -0.10932274938159964,
+     -0.15253854618161805,
+     -0.0682447493938533
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     0.075,
+     0.054,
+     0.096
+    ],
+    "b_right_a_wrong": 99,
+    "a_right_b_wrong": 24,
+    "mcnemar_p": 5.165949931913548e-12,
+    "turns_diff": [
+     -0.831,
+     -1.022,
+     -0.643
+    ],
+    "cost_diff": [
+     -178.005,
+     -213.100625,
+     -142.72175
+    ],
+    "logloss_diff": [
+     -0.25908550164818894,
+     -0.3248012454509128,
+     -0.19359804027291447
+    ]
+   }
+  }
+ },
+ "2.0": {
+  "summary": {
+   "A_v01": {
+    "n": 1000,
+    "top1": 0.861,
+    "top1_ci": [
+     0.8381730246613444,
+     0.8810639545592818
+    ],
+    "top3": 0.968,
+    "turns_mean": 8.009,
+    "cost_mean": 733.46,
+    "brier": 0.107997077115136,
+    "log_loss_truth": 0.6528834604958681,
+    "ece": 0.06873144292950292,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2692307692307692,
+    "procedure_rate": 0.028,
+    "adv_imaging_rate": 0.24,
+    "reasons": {
+     "threshold": 0.736,
+     "no_value": 0.157,
+     "stalled": 0.107,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4318181818181818,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.9264705882352942,
+     "heart_failure_exacerbation": 0.9016393442622951,
+     "pericarditis": 0.909952606635071,
+     "pneumonia": 0.8272727272727273,
+     "pneumothorax": 0.8571428571428571,
+     "pulmonary_embolism": 0.75
+    }
+   },
+   "B_v02": {
+    "n": 1000,
+    "top1": 0.881,
+    "top1_ci": [
+     0.8594587714640507,
+     0.8996251318131199
+    ],
+    "top3": 0.973,
+    "turns_mean": 7.327,
+    "cost_mean": 543.375,
+    "brier": 0.09100829278018736,
+    "log_loss_truth": 0.5306064465229227,
+    "ece": 0.07241267548775161,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2692307692307692,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.098,
+    "reasons": {
+     "threshold": 0.776,
+     "no_value": 0.137,
+     "stalled": 0.087,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.45454545454545453,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.946078431372549,
+     "heart_failure_exacerbation": 0.9398907103825137,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.8636363636363636,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.7045454545454546
+    }
+   },
+   "C_v02_old_objective": {
+    "n": 1000,
+    "top1": 0.882,
+    "top1_ci": [
+     0.8605274931519409,
+     0.9005487563280568
+    ],
+    "top3": 0.974,
+    "turns_mean": 7.283,
+    "cost_mean": 631.4,
+    "brier": 0.08887971198931384,
+    "log_loss_truth": 0.5218723265690527,
+    "ece": 0.06797256814478216,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2692307692307692,
+    "procedure_rate": 0.012,
+    "adv_imaging_rate": 0.15,
+    "reasons": {
+     "threshold": 0.784,
+     "no_value": 0.136,
+     "stalled": 0.08,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4090909090909091,
+     "aortic_dissection": 0.8888888888888888,
+     "copd_exacerbation": 0.946078431372549,
+     "heart_failure_exacerbation": 0.9344262295081968,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.8727272727272727,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.7272727272727273
+    }
+   },
+   "D_v02_old_representation": {
+    "n": 1000,
+    "top1": 0.859,
+    "top1_ci": [
+     0.8360530673212659,
+     0.8791992194937056
+    ],
+    "top3": 0.968,
+    "turns_mean": 7.895,
+    "cost_mean": 550.605,
+    "brier": 0.11194950159290505,
+    "log_loss_truth": 0.6639142986472953,
+    "ece": 0.08021000027599441,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2857142857142857,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.139,
+    "reasons": {
+     "threshold": 0.726,
+     "no_value": 0.161,
+     "stalled": 0.113,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5,
+     "aortic_dissection": 0.8444444444444444,
+     "copd_exacerbation": 0.9313725490196079,
+     "heart_failure_exacerbation": 0.8961748633879781,
+     "pericarditis": 0.909952606635071,
+     "pneumonia": 0.8318181818181818,
+     "pneumothorax": 0.8367346938775511,
+     "pulmonary_embolism": 0.6590909090909091
+    }
+   },
+   "E_v02_cantmiss_rule": {
+    "n": 1000,
+    "top1": 0.881,
+    "top1_ci": [
+     0.8594587714640507,
+     0.8996251318131199
+    ],
+    "top3": 0.974,
+    "turns_mean": 7.507,
+    "cost_mean": 558.235,
+    "brier": 0.08984560346914065,
+    "log_loss_truth": 0.5241085568778255,
+    "ece": 0.0700709372725012,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.26373626373626374,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.103,
+    "reasons": {
+     "threshold": 0.742,
+     "no_value": 0.17,
+     "stalled": 0.088,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.45454545454545453,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.9411764705882353,
+     "heart_failure_exacerbation": 0.9398907103825137,
+     "pericarditis": 0.9146919431279621,
+     "pneumonia": 0.8636363636363636,
+     "pneumothorax": 0.8775510204081632,
+     "pulmonary_embolism": 0.7272727272727273
+    }
+   },
+   "F_v021_report_noise": {
+    "n": 1000,
+    "top1": 0.883,
+    "top1_ci": [
+     0.8615966700317587,
+     0.9014719256510663
+    ],
+    "top3": 0.977,
+    "turns_mean": 8.185,
+    "cost_mean": 591.42,
+    "brier": 0.10113091357016431,
+    "log_loss_truth": 0.5738059564099852,
+    "ece": 0.13970444698405937,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2857142857142857,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.083,
+    "reasons": {
+     "threshold": 0.664,
+     "no_value": 0.201,
+     "stalled": 0.135,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4772727272727273,
+     "aortic_dissection": 0.7777777777777778,
+     "copd_exacerbation": 0.9362745098039216,
+     "heart_failure_exacerbation": 0.9562841530054644,
+     "pericarditis": 0.909952606635071,
+     "pneumonia": 0.8863636363636364,
+     "pneumothorax": 0.8571428571428571,
+     "pulmonary_embolism": 0.7272727272727273
+    }
+   },
+   "A_v01_ref0.5": {
+    "n": 1000,
+    "top1": 0.832,
+    "top1_ci": [
+     0.8075665073343211,
+     0.8538924320043156
+    ],
+    "top3": 0.96,
+    "turns_mean": 7.889,
+    "cost_mean": 660.8,
+    "brier": 0.12613974235683106,
+    "log_loss_truth": 0.7437723214728189,
+    "ece": 0.0545891406128254,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.3076923076923077,
+    "procedure_rate": 0.032,
+    "adv_imaging_rate": 0.17,
+    "reasons": {
+     "threshold": 0.763,
+     "no_value": 0.149,
+     "stalled": 0.088,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4318181818181818,
+     "aortic_dissection": 0.8444444444444444,
+     "copd_exacerbation": 0.9313725490196079,
+     "heart_failure_exacerbation": 0.8469945355191257,
+     "pericarditis": 0.9052132701421801,
+     "pneumonia": 0.7727272727272727,
+     "pneumothorax": 0.8163265306122449,
+     "pulmonary_embolism": 0.6590909090909091
+    }
+   },
+   "A_v01_ref1.0": {
+    "n": 1000,
+    "top1": 0.796,
+    "top1_ci": [
+     0.7699130750438999,
+     0.8198214009929571
+    ],
+    "top3": 0.936,
+    "turns_mean": 7.921,
+    "cost_mean": 670.685,
+    "brier": 0.15564372060412993,
+    "log_loss_truth": 0.9351917301646401,
+    "ece": 0.08198109231894882,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.3516483516483517,
+    "procedure_rate": 0.042,
+    "adv_imaging_rate": 0.172,
+    "reasons": {
+     "threshold": 0.801,
+     "no_value": 0.131,
+     "stalled": 0.068,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.45454545454545453,
+     "aortic_dissection": 0.7777777777777778,
+     "copd_exacerbation": 0.9362745098039216,
+     "heart_failure_exacerbation": 0.8142076502732241,
+     "pericarditis": 0.8862559241706162,
+     "pneumonia": 0.6863636363636364,
+     "pneumothorax": 0.8163265306122449,
+     "pulmonary_embolism": 0.5227272727272727
+    }
+   }
+  },
+  "paired_vs_A": {
+   "B_v02": {
+    "acc_diff": [
+     0.02,
+     0.006,
+     0.034
+    ],
+    "b_right_a_wrong": 37,
+    "a_right_b_wrong": 17,
+    "mcnemar_p": 0.009073340339587177,
+    "turns_diff": [
+     -0.682,
+     -0.821,
+     -0.548
+    ],
+    "cost_diff": [
+     -190.085,
+     -220.515875,
+     -159.804375
+    ],
+    "logloss_diff": [
+     -0.12227701397294541,
+     -0.16330050191297912,
+     -0.08342294405212528
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     0.021,
+     0.007,
+     0.036
+    ],
+    "b_right_a_wrong": 36,
+    "a_right_b_wrong": 15,
+    "mcnemar_p": 0.0046013097117665325,
+    "turns_diff": [
+     -0.726,
+     -0.864,
+     -0.596
+    ],
+    "cost_diff": [
+     -102.06,
+     -132.792,
+     -71.89875
+    ],
+    "logloss_diff": [
+     -0.13101113392681538,
+     -0.171689966789939,
+     -0.09119906826289206
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     -0.002,
+     -0.012,
+     0.007
+    ],
+    "b_right_a_wrong": 10,
+    "a_right_b_wrong": 12,
+    "mcnemar_p": 0.8318119049072266,
+    "turns_diff": [
+     -0.114,
+     -0.20602499999999999,
+     -0.021974999999999908
+    ],
+    "cost_diff": [
+     -182.855,
+     -208.661,
+     -158.23375000000001
+    ],
+    "logloss_diff": [
+     0.011030838151427271,
+     -0.01575020996547121,
+     0.03724941643811922
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     0.02,
+     0.006,
+     0.034
+    ],
+    "b_right_a_wrong": 36,
+    "a_right_b_wrong": 16,
+    "mcnemar_p": 0.0077874363057435225,
+    "turns_diff": [
+     -0.502,
+     -0.635025,
+     -0.373
+    ],
+    "cost_diff": [
+     -175.225,
+     -205.58225000000002,
+     -145.71875
+    ],
+    "logloss_diff": [
+     -0.1287749036180425,
+     -0.16999603081646378,
+     -0.0891392720536295
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     0.022,
+     0.005,
+     0.039
+    ],
+    "b_right_a_wrong": 49,
+    "a_right_b_wrong": 27,
+    "mcnemar_p": 0.015440262020906361,
+    "turns_diff": [
+     0.176,
+     0.02797500000000001,
+     0.32
+    ],
+    "cost_diff": [
+     -142.04,
+     -175.320875,
+     -109.40199999999999
+    ],
+    "logloss_diff": [
+     -0.07907750408588288,
+     -0.12553191278177517,
+     -0.03272138680529012
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     -0.029,
+     -0.045,
+     -0.014
+    ],
+    "b_right_a_wrong": 14,
+    "a_right_b_wrong": 43,
+    "mcnemar_p": 0.00015388902244434233,
+    "turns_diff": [
+     -0.12,
+     -0.247,
+     0.011
+    ],
+    "cost_diff": [
+     -72.66,
+     -100.347875,
+     -44.858999999999995
+    ],
+    "logloss_diff": [
+     0.0908888609769508,
+     0.04928716982961009,
+     0.13674785845957887
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     -0.065,
+     -0.085,
+     -0.046
+    ],
+    "b_right_a_wrong": 18,
+    "a_right_b_wrong": 83,
+    "mcnemar_p": 3.7288032400274995e-11,
+    "turns_diff": [
+     -0.088,
+     -0.258025,
+     0.0830500000000002
+    ],
+    "cost_diff": [
+     -62.775,
+     -99.3065,
+     -27.148999999999994
+    ],
+    "logloss_diff": [
+     0.282308269668772,
+     0.20798738668039546,
+     0.35905241560453016
+    ]
+   }
+  },
+  "paired_vs_B": {
+   "A_v01": {
+    "acc_diff": [
+     0.02,
+     0.006,
+     0.034
+    ],
+    "b_right_a_wrong": 37,
+    "a_right_b_wrong": 17,
+    "mcnemar_p": 0.009073340339587177,
+    "turns_diff": [
+     -0.682,
+     -0.821,
+     -0.548
+    ],
+    "cost_diff": [
+     -190.085,
+     -220.515875,
+     -159.804375
+    ],
+    "logloss_diff": [
+     -0.12227701397294541,
+     -0.16330050191297912,
+     -0.08342294405212528
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     -0.001,
+     -0.008,
+     0.006
+    ],
+    "b_right_a_wrong": 6,
+    "a_right_b_wrong": 7,
+    "mcnemar_p": 1.0,
+    "turns_diff": [
+     0.044,
+     -0.014024999999999992,
+     0.103
+    ],
+    "cost_diff": [
+     -88.025,
+     -107.92675,
+     -68.82912499999999
+    ],
+    "logloss_diff": [
+     0.008734119953869962,
+     -0.009545237489517338,
+     0.0259679423750707
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     0.022,
+     0.009,
+     0.036
+    ],
+    "b_right_a_wrong": 37,
+    "a_right_b_wrong": 15,
+    "mcnemar_p": 0.003185253447776759,
+    "turns_diff": [
+     -0.568,
+     -0.695,
+     -0.449
+    ],
+    "cost_diff": [
+     -7.23,
+     -28.251375,
+     13.641375000000005
+    ],
+    "logloss_diff": [
+     -0.13330785212437268,
+     -0.17487332270656913,
+     -0.09467601196943143
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     0.0,
+     -0.003,
+     0.003
+    ],
+    "b_right_a_wrong": 1,
+    "a_right_b_wrong": 1,
+    "mcnemar_p": 1.0,
+    "turns_diff": [
+     -0.18,
+     -0.232,
+     -0.134
+    ],
+    "cost_diff": [
+     -14.86,
+     -21.52525,
+     -9.139875
+    ],
+    "logloss_diff": [
+     0.006497889645097115,
+     0.0001135611125098693,
+     0.01397546125485755
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     -0.002,
+     -0.015,
+     0.011
+    ],
+    "b_right_a_wrong": 22,
+    "a_right_b_wrong": 24,
+    "mcnemar_p": 0.8829959121223965,
+    "turns_diff": [
+     -0.858,
+     -0.977,
+     -0.737
+    ],
+    "cost_diff": [
+     -48.045,
+     -64.775125,
+     -31.324749999999998
+    ],
+    "logloss_diff": [
+     -0.04319950988706253,
+     -0.07632401376034348,
+     -0.009153752395324913
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     0.049,
+     0.031,
+     0.068
+    ],
+    "b_right_a_wrong": 70,
+    "a_right_b_wrong": 21,
+    "mcnemar_p": 2.50908697624006e-07,
+    "turns_diff": [
+     -0.562,
+     -0.6990249999999999,
+     -0.419
+    ],
+    "cost_diff": [
+     -117.425,
+     -146.480875,
+     -88.0395
+    ],
+    "logloss_diff": [
+     -0.2131658749498962,
+     -0.2689509828087962,
+     -0.15985589484189433
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     0.085,
+     0.063,
+     0.108
+    ],
+    "b_right_a_wrong": 111,
+    "a_right_b_wrong": 26,
+    "mcnemar_p": 1.0497375514568333e-13,
+    "turns_diff": [
+     -0.594,
+     -0.78,
+     -0.41497499999999987
+    ],
+    "cost_diff": [
+     -127.31,
+     -162.78775,
+     -92.074875
+    ],
+    "logloss_diff": [
+     -0.40458528364171736,
+     -0.49053540686596525,
+     -0.32209372447635726
+    ]
+   }
+  }
+ },
+ "3.0": {
+  "summary": {
+   "A_v01": {
+    "n": 1000,
+    "top1": 0.826,
+    "top1_ci": [
+     0.8012668269449458,
+     0.8482380351767277
+    ],
+    "top3": 0.95,
+    "turns_mean": 8.07,
+    "cost_mean": 893.9,
+    "brier": 0.13951499311776586,
+    "log_loss_truth": 0.7953897022224131,
+    "ece": 0.07250747691392737,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.29120879120879123,
+    "procedure_rate": 0.025,
+    "adv_imaging_rate": 0.405,
+    "reasons": {
+     "threshold": 0.775,
+     "no_value": 0.138,
+     "stalled": 0.087,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5909090909090909,
+     "aortic_dissection": 0.8444444444444444,
+     "copd_exacerbation": 0.8382352941176471,
+     "heart_failure_exacerbation": 0.8852459016393442,
+     "pericarditis": 0.8530805687203792,
+     "pneumonia": 0.8363636363636363,
+     "pneumothorax": 0.7346938775510204,
+     "pulmonary_embolism": 0.6590909090909091
+    }
+   },
+   "B_v02": {
+    "n": 1000,
+    "top1": 0.845,
+    "top1_ci": [
+     0.821252700977952,
+     0.8661067389974386
+    ],
+    "top3": 0.956,
+    "turns_mean": 7.452,
+    "cost_mean": 639.845,
+    "brier": 0.12514468887875732,
+    "log_loss_truth": 0.6752496863618229,
+    "ece": 0.051075811985359494,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2857142857142857,
+    "procedure_rate": 0.001,
+    "adv_imaging_rate": 0.19,
+    "reasons": {
+     "threshold": 0.815,
+     "no_value": 0.123,
+     "stalled": 0.062,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5227272727272727,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.8333333333333334,
+     "heart_failure_exacerbation": 0.9289617486338798,
+     "pericarditis": 0.8909952606635071,
+     "pneumonia": 0.85,
+     "pneumothorax": 0.7959183673469388,
+     "pulmonary_embolism": 0.6590909090909091
+    }
+   },
+   "C_v02_old_objective": {
+    "n": 1000,
+    "top1": 0.847,
+    "top1_ci": [
+     0.8233629868076504,
+     0.8679811455733946
+    ],
+    "top3": 0.961,
+    "turns_mean": 7.442,
+    "cost_mean": 781.065,
+    "brier": 0.12739711937431034,
+    "log_loss_truth": 0.6760150461434418,
+    "ece": 0.05667752915469669,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.27472527472527475,
+    "procedure_rate": 0.013,
+    "adv_imaging_rate": 0.301,
+    "reasons": {
+     "threshold": 0.814,
+     "no_value": 0.124,
+     "stalled": 0.062,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5454545454545454,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.8333333333333334,
+     "heart_failure_exacerbation": 0.912568306010929,
+     "pericarditis": 0.8909952606635071,
+     "pneumonia": 0.8636363636363636,
+     "pneumothorax": 0.7346938775510204,
+     "pulmonary_embolism": 0.75
+    }
+   },
+   "D_v02_old_representation": {
+    "n": 1000,
+    "top1": 0.808,
+    "top1_ci": [
+     0.7824270733559523,
+     0.8312155571148313
+    ],
+    "top3": 0.939,
+    "turns_mean": 7.782,
+    "cost_mean": 674.66,
+    "brier": 0.15354584236445049,
+    "log_loss_truth": 0.8718327836783968,
+    "ece": 0.07923398947939278,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.34065934065934067,
+    "procedure_rate": 0.002,
+    "adv_imaging_rate": 0.293,
+    "reasons": {
+     "threshold": 0.788,
+     "no_value": 0.123,
+     "stalled": 0.089,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4772727272727273,
+     "aortic_dissection": 0.8444444444444444,
+     "copd_exacerbation": 0.8235294117647058,
+     "heart_failure_exacerbation": 0.8852459016393442,
+     "pericarditis": 0.8578199052132701,
+     "pneumonia": 0.8045454545454546,
+     "pneumothorax": 0.6938775510204082,
+     "pulmonary_embolism": 0.6136363636363636
+    }
+   },
+   "E_v02_cantmiss_rule": {
+    "n": 1000,
+    "top1": 0.845,
+    "top1_ci": [
+     0.821252700977952,
+     0.8661067389974386
+    ],
+    "top3": 0.955,
+    "turns_mean": 7.822,
+    "cost_mean": 688.445,
+    "brier": 0.1239871547540154,
+    "log_loss_truth": 0.6619874127076235,
+    "ece": 0.06019446094308665,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.2802197802197802,
+    "procedure_rate": 0.001,
+    "adv_imaging_rate": 0.21,
+    "reasons": {
+     "threshold": 0.759,
+     "no_value": 0.178,
+     "stalled": 0.063,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5227272727272727,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.8382352941176471,
+     "heart_failure_exacerbation": 0.9180327868852459,
+     "pericarditis": 0.8862559241706162,
+     "pneumonia": 0.8545454545454545,
+     "pneumothorax": 0.8163265306122449,
+     "pulmonary_embolism": 0.6590909090909091
+    }
+   },
+   "F_v021_report_noise": {
+    "n": 1000,
+    "top1": 0.857,
+    "top1_ci": [
+     0.833934563145855,
+     0.8773330312634622
+    ],
+    "top3": 0.962,
+    "turns_mean": 8.263,
+    "cost_mean": 731.24,
+    "brier": 0.11836785997593549,
+    "log_loss_truth": 0.6377150968830856,
+    "ece": 0.08747398928542147,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.29120879120879123,
+    "procedure_rate": 0.0,
+    "adv_imaging_rate": 0.21,
+    "reasons": {
+     "threshold": 0.713,
+     "no_value": 0.175,
+     "stalled": 0.112,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.5909090909090909,
+     "aortic_dissection": 0.8666666666666667,
+     "copd_exacerbation": 0.8529411764705882,
+     "heart_failure_exacerbation": 0.9508196721311475,
+     "pericarditis": 0.8815165876777251,
+     "pneumonia": 0.8818181818181818,
+     "pneumothorax": 0.7755102040816326,
+     "pulmonary_embolism": 0.5909090909090909
+    }
+   },
+   "A_v01_ref0.5": {
+    "n": 1000,
+    "top1": 0.809,
+    "top1_ci": [
+     0.7834715055777532,
+     0.8321634710958576
+    ],
+    "top3": 0.946,
+    "turns_mean": 8.06,
+    "cost_mean": 850.095,
+    "brier": 0.13713372702660734,
+    "log_loss_truth": 0.7986884659697517,
+    "ece": 0.06196419307313039,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.33516483516483514,
+    "procedure_rate": 0.033,
+    "adv_imaging_rate": 0.346,
+    "reasons": {
+     "threshold": 0.787,
+     "no_value": 0.132,
+     "stalled": 0.081,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4772727272727273,
+     "aortic_dissection": 0.8222222222222222,
+     "copd_exacerbation": 0.8725490196078431,
+     "heart_failure_exacerbation": 0.8852459016393442,
+     "pericarditis": 0.8530805687203792,
+     "pneumonia": 0.7636363636363637,
+     "pneumothorax": 0.7346938775510204,
+     "pulmonary_embolism": 0.6136363636363636
+    }
+   },
+   "A_v01_ref1.0": {
+    "n": 1000,
+    "top1": 0.787,
+    "top1_ci": [
+     0.7605498923280081,
+     0.8112534678834038
+    ],
+    "top3": 0.937,
+    "turns_mean": 7.98,
+    "cost_mean": 814.24,
+    "brier": 0.154972744032375,
+    "log_loss_truth": 0.9014544563724703,
+    "ece": 0.08218093653964817,
+    "cantmiss_n": 182,
+    "cantmiss_missed": 0.34615384615384615,
+    "procedure_rate": 0.034,
+    "adv_imaging_rate": 0.314,
+    "reasons": {
+     "threshold": 0.82,
+     "no_value": 0.12,
+     "stalled": 0.06,
+     "budget": 0.0
+    },
+    "per_disease": {
+     "acute_coronary_syndrome": 0.4318181818181818,
+     "aortic_dissection": 0.7555555555555555,
+     "copd_exacerbation": 0.8578431372549019,
+     "heart_failure_exacerbation": 0.8797814207650273,
+     "pericarditis": 0.8767772511848341,
+     "pneumonia": 0.6681818181818182,
+     "pneumothorax": 0.8367346938775511,
+     "pulmonary_embolism": 0.5681818181818182
+    }
+   }
+  },
+  "paired_vs_A": {
+   "B_v02": {
+    "acc_diff": [
+     0.019,
+     0.003,
+     0.034
+    ],
+    "b_right_a_wrong": 41,
+    "a_right_b_wrong": 22,
+    "mcnemar_p": 0.022574972673257185,
+    "turns_diff": [
+     -0.618,
+     -0.7510249999999999,
+     -0.489
+    ],
+    "cost_diff": [
+     -254.055,
+     -293.657875,
+     -216.13
+    ],
+    "logloss_diff": [
+     -0.1201400158605902,
+     -0.16836740797136118,
+     -0.07172895249779992
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     0.021,
+     0.005,
+     0.036
+    ],
+    "b_right_a_wrong": 41,
+    "a_right_b_wrong": 20,
+    "mcnemar_p": 0.009853448195259264,
+    "turns_diff": [
+     -0.628,
+     -0.756,
+     -0.501975
+    ],
+    "cost_diff": [
+     -112.835,
+     -148.794625,
+     -78.21987499999997
+    ],
+    "logloss_diff": [
+     -0.11937465607897148,
+     -0.1622013274656944,
+     -0.0747286607183745
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     -0.018,
+     -0.031,
+     -0.006
+    ],
+    "b_right_a_wrong": 11,
+    "a_right_b_wrong": 29,
+    "mcnemar_p": 0.006426576095691416,
+    "turns_diff": [
+     -0.288,
+     -0.394,
+     -0.185
+    ],
+    "cost_diff": [
+     -219.24,
+     -251.55100000000002,
+     -188.15937499999998
+    ],
+    "logloss_diff": [
+     0.07644308145598368,
+     0.04307315885226154,
+     0.11049671746124926
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     0.019,
+     0.004,
+     0.034
+    ],
+    "b_right_a_wrong": 40,
+    "a_right_b_wrong": 21,
+    "mcnemar_p": 0.020414713799634897,
+    "turns_diff": [
+     -0.248,
+     -0.384,
+     -0.117
+    ],
+    "cost_diff": [
+     -205.455,
+     -243.37725,
+     -168.308875
+    ],
+    "logloss_diff": [
+     -0.13340228951478958,
+     -0.17937683916729696,
+     -0.08572208274449898
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     0.031,
+     0.013,
+     0.049
+    ],
+    "b_right_a_wrong": 57,
+    "a_right_b_wrong": 26,
+    "mcnemar_p": 0.000877551780002865,
+    "turns_diff": [
+     0.193,
+     0.03795000000000002,
+     0.346
+    ],
+    "cost_diff": [
+     -162.66,
+     -203.036125,
+     -122.68
+    ],
+    "logloss_diff": [
+     -0.1576746053393275,
+     -0.21456318256283444,
+     -0.09954627441568535
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     -0.017,
+     -0.033,
+     -0.001
+    ],
+    "b_right_a_wrong": 25,
+    "a_right_b_wrong": 42,
+    "mcnemar_p": 0.049800114294728665,
+    "turns_diff": [
+     -0.01,
+     -0.135,
+     0.1170250000000001
+    ],
+    "cost_diff": [
+     -43.805,
+     -76.57124999999999,
+     -10.975
+    ],
+    "logloss_diff": [
+     0.003298763747338601,
+     -0.04352829283921706,
+     0.04889995883837438
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     -0.039,
+     -0.061,
+     -0.017
+    ],
+    "b_right_a_wrong": 46,
+    "a_right_b_wrong": 85,
+    "mcnemar_p": 0.0008320420945381638,
+    "turns_diff": [
+     -0.09,
+     -0.264025,
+     0.083
+    ],
+    "cost_diff": [
+     -79.66,
+     -123.752375,
+     -36.474375
+    ],
+    "logloss_diff": [
+     0.10606475415005713,
+     0.0329557800904348,
+     0.17853932892502256
+    ]
+   }
+  },
+  "paired_vs_B": {
+   "A_v01": {
+    "acc_diff": [
+     0.019,
+     0.003,
+     0.034
+    ],
+    "b_right_a_wrong": 41,
+    "a_right_b_wrong": 22,
+    "mcnemar_p": 0.022574972673257185,
+    "turns_diff": [
+     -0.618,
+     -0.7510249999999999,
+     -0.489
+    ],
+    "cost_diff": [
+     -254.055,
+     -293.657875,
+     -216.13
+    ],
+    "logloss_diff": [
+     -0.1201400158605902,
+     -0.16836740797136118,
+     -0.07172895249779992
+    ]
+   },
+   "C_v02_old_objective": {
+    "acc_diff": [
+     -0.002,
+     -0.013,
+     0.008
+    ],
+    "b_right_a_wrong": 13,
+    "a_right_b_wrong": 15,
+    "mcnemar_p": 0.8505540192127228,
+    "turns_diff": [
+     0.01,
+     -0.066,
+     0.081
+    ],
+    "cost_diff": [
+     -141.22,
+     -167.70525,
+     -115.74425000000001
+    ],
+    "logloss_diff": [
+     -0.0007653597816187246,
+     -0.03340552921419094,
+     0.029672491922514543
+    ]
+   },
+   "D_v02_old_representation": {
+    "acc_diff": [
+     0.037,
+     0.021,
+     0.053
+    ],
+    "b_right_a_wrong": 52,
+    "a_right_b_wrong": 15,
+    "mcnemar_p": 6.459072791237881e-06,
+    "turns_diff": [
+     -0.33,
+     -0.453025,
+     -0.21
+    ],
+    "cost_diff": [
+     -34.815,
+     -65.00887499999999,
+     -4.496374999999987
+    ],
+    "logloss_diff": [
+     -0.19658309731657386,
+     -0.24548884465080364,
+     -0.1492103820772491
+    ]
+   },
+   "E_v02_cantmiss_rule": {
+    "acc_diff": [
+     0.0,
+     -0.005,
+     0.006
+    ],
+    "b_right_a_wrong": 4,
+    "a_right_b_wrong": 4,
+    "mcnemar_p": 1.0,
+    "turns_diff": [
+     -0.37,
+     -0.434025,
+     -0.307
+    ],
+    "cost_diff": [
+     -48.6,
+     -61.56525,
+     -36.569875
+    ],
+    "logloss_diff": [
+     0.013262273654199401,
+     -0.0033278028049942105,
+     0.029635510017508204
+    ]
+   },
+   "F_v021_report_noise": {
+    "acc_diff": [
+     -0.012,
+     -0.026,
+     0.003
+    ],
+    "b_right_a_wrong": 22,
+    "a_right_b_wrong": 34,
+    "mcnemar_p": 0.14089542359848076,
+    "turns_diff": [
+     -0.811,
+     -0.926,
+     -0.699
+    ],
+    "cost_diff": [
+     -91.395,
+     -117.685125,
+     -67.038625
+    ],
+    "logloss_diff": [
+     0.0375345894787373,
+     -0.00026518986277008924,
+     0.0784211582890354
+    ]
+   },
+   "A_v01_ref0.5": {
+    "acc_diff": [
+     0.036,
+     0.016,
+     0.055
+    ],
+    "b_right_a_wrong": 67,
+    "a_right_b_wrong": 31,
+    "mcnemar_p": 0.0003545338559868335,
+    "turns_diff": [
+     -0.608,
+     -0.755025,
+     -0.4599749999999999
+    ],
+    "cost_diff": [
+     -210.25,
+     -250.545,
+     -170.56799999999998
+    ],
+    "logloss_diff": [
+     -0.1234387796079288,
+     -0.1809105362024829,
+     -0.06286596858083315
+    ]
+   },
+   "A_v01_ref1.0": {
+    "acc_diff": [
+     0.058,
+     0.035,
+     0.081
+    ],
+    "b_right_a_wrong": 97,
+    "a_right_b_wrong": 39,
+    "mcnemar_p": 7.011310108063989e-07,
+    "turns_diff": [
+     -0.528,
+     -0.7040249999999999,
+     -0.355
+    ],
+    "cost_diff": [
+     -174.395,
+     -216.81674999999998,
+     -130.32850000000002
+    ],
+    "logloss_diff": [
+     -0.22620477001064734,
+     -0.3006812789334299,
+     -0.15104782953415716
+    ]
+   }
+  }
+ }
+}

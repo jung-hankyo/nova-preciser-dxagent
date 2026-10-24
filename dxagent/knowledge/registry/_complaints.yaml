@@ -1,0 +1,11 @@
+# v0.3.1 (P1): canonical presenting complaints. `key` is the slug under which card prevalence and priors are stored.
+# acuity: typical adult triage acuity (KTAS/CTAS 1 most urgent .. 5), a tiebreak only. New complaints seen in cases
+# are added to the drafted directory's copy of this file, with an LLM-assigned acuity.
+- key: chest_pain
+  label: chest pain
+  aliases: [chest discomfort, chest tightness, chest pressure, pain in the chest, thoracic pain]
+  acuity: 2
+- key: dyspnea
+  label: dyspnea
+  aliases: [shortness of breath, breathlessness, difficulty breathing, trouble breathing, short of breath, sob]
+  acuity: 2

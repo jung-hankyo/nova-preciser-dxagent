@@ -1,0 +1,32 @@
+--- a/experiments/v03_sim.py
++++ b/experiments/v03_sim.py
+@@ -117,7 +117,7 @@
+ 
+ P = dict(OMIT_KNOWN=0.0, N_FAM=12, RHO_OW=0.3, VETO_TP=0.0, VETO_WRONG=0.0, VETO_FP=0.0, STUBBORN=0.0,
+          REP_FIX=0.2, REP_ERR=0.05, Q_LEX=0.79, R=0.75, P_OTHER=0.6, CRITIC=0.3, RHO_DISC=0.5, KNOWN=0.75, SD_KNOWN=0.5, SD_DRAFT=0.7,
+-         FRAG=0.3, NONANSWER=0.10, PRIOR_SD=0.5, LEAK=0.0, LEAK_KB=1.0, ASSESS_SHARED_SD=0.4, ASSESS_IND_SD=0.3)
++         FRAG=0.3, BIAS_P=0.0, BIAS_SD=1.5, NONANSWER=0.10, PRIOR_SD=0.5, LEAK=0.0, LEAK_KB=1.0, ASSESS_SHARED_SD=0.4, ASSESS_IND_SD=0.3)
+ CLARITY = [("clear", 0.75, 0.04), ("hedged", 0.20, 0.20), ("inferred", 0.05, 0.35)]
+ FREE_CONF = {"clear": 0.90, "hedged": 0.82, "inferred": 0.78}
+ SYL = ["ka", "lo", "mi", "tu", "re", "po", "na", "vi", "zu", "be", "ga", "fo", "hi", "jo", "ku", "mo", "ni", "pu", "ra",
+@@ -568,6 +568,8 @@
+             code, lab = sc, W.label[sc]
+             if (d, sc) in W.alt:
+                 code, lab, _ = W.alt[(d, sc)]
++            if u(W.seed, "biased", d, c0) < P["BIAS_P"]:  # systematic misconception: the same in every sample
++                v = noisy(v, P["BIAS_SD"], W.seed, "bias", d, c0)
+             fs.append(DraftFinding(code=code, label=lab, source=F.src[c0], cluster=code,
+                                    freq_in_disease=level(noisy(v, P["SD_DRAFT"], W.seed, "draft", d, c0, k)),
+                                    background_freq=level(noisy(F.bg[c0], 0.8, W.seed, "draftbg", d, c0, k))))
+@@ -580,7 +582,10 @@
+             if u(W.seed, "tdrop", d, t, k) < 0.2:
+                 continue
+             ts.append(DraftTest(test_id=t.lower(), name=t.lower(), type=F.ttype[t],
+-                                outcomes=[OutcomeLevel(outcome=o, level=level(noisy(min(max(v, 0.01), 0.99), P["SD_DRAFT"], W.seed, "dt", d, t, o, k)))
++                                outcomes=[OutcomeLevel(outcome=o, level=level(noisy(
++                                    (noisy(min(max(v, 0.01), 0.99), P["BIAS_SD"], W.seed, "tbias", d, t, o)
++                                     if u(W.seed, "tbiased", d, t, o) < P["BIAS_P"] else min(max(v, 0.01), 0.99)),
++                                    P["SD_DRAFT"], W.seed, "dt", d, t, o, k)))
+                                           for o, v in dd.items()]))
+         return CardDraft(name=d, harm=DraftHarm(untreated_course=D.course, urgency=D.urgency, treatments=sorted(D.treatments),
+                                                 treatment_risk=D.treat_risk),

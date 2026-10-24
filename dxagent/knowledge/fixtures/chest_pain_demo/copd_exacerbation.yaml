@@ -1,0 +1,58 @@
+id: copd_exacerbation
+name: COPD exacerbation
+aliases:
+- acute exacerbation of COPD
+- AECOPD
+prevalence: common  # v0.3 (C3): pretest bucket in adult acute chest pain / dyspnea
+prevalence_by_complaint: {chest_pain: common, dyspnea: common}  # v0.3.1 (P1): keyed by canonical complaint
+harm:
+  untreated_course: serious
+  urgency: days
+  treatments:
+  - bronchodilators
+  - steroids
+  - antibiotics
+  treatment_risk: low
+findings:
+- code: copd_history
+  p: 0.85
+  conf: 0.9
+- code: smoking_history
+  p: 0.9
+  conf: 0.9
+- code: wheeze
+  p: 0.6
+  conf: 0.9
+- code: productive_cough
+  p: 0.5
+  conf: 0.9
+tests:
+  test_pulse_oximetry:
+    dist:
+      normal: 0.4
+      hypoxia: 0.6
+    conf: 0.9
+  lab_bnp:
+    dist:
+      normal: 0.8
+      elevated: 0.2
+    conf: 0.9
+  lab_cbc:
+    dist:
+      normal: 0.65
+      leukocytosis: 0.35
+    conf: 0.9
+  img_chest_xray:
+    dist:
+      normal: 0.35
+      hyperinflation: 0.6
+      consolidation: 0.05
+    conf: 0.9
+mimics:
+- heart_failure_exacerbation
+- pneumonia
+provenance:
+  status: fixture
+  source: Illustrative frequencies approximated from textbook and JAMA Rational Clinical
+    Examination data; not individually sourced.
+  version: '0.2'

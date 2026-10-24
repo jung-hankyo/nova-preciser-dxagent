@@ -1,0 +1,472 @@
+{
+  "v0.2:v0.3@default": {
+    "top1": {
+      "diff": 0.043,
+      "lo": 0.0342,
+      "hi": 0.0528,
+      "better": true,
+      "worse": false
+    },
+    "in_list": {
+      "diff": 0.0136,
+      "lo": 0.0104,
+      "hi": 0.017,
+      "better": true,
+      "worse": false
+    },
+    "brier": {
+      "diff": -0.04699158501467729,
+      "lo": -0.053945774319463326,
+      "hi": -0.040152397434680444,
+      "better": true,
+      "worse": false
+    },
+    "logloss": {
+      "diff": -0.16293152772809893,
+      "lo": -0.1940379938806035,
+      "hi": -0.13221793261090264,
+      "better": true,
+      "worse": false
+    },
+    "turns": {
+      "diff": -0.455,
+      "lo": -0.5178,
+      "hi": -0.3918,
+      "better": true,
+      "worse": false
+    },
+    "cost": {
+      "diff": -27.09,
+      "lo": -39.587,
+      "hi": -14.187,
+      "better": true,
+      "worse": false
+    },
+    "llm": {
+      "diff": -0.9252,
+      "lo": -1.0408,
+      "hi": -0.806,
+      "better": true,
+      "worse": false
+    },
+    "ece": {
+      "diff": -0.02639767606683443,
+      "lo": -0.038878963816130034,
+      "hi": -0.015147751167886012,
+      "better": true,
+      "worse": false
+    },
+    "mcnemar_p": 1.0706923757258234e-19,
+    "cm_missed": {
+      "diff": -0.029213483146067417,
+      "lo": -0.0651685393258427,
+      "hi": 0.006741573033707865,
+      "better": false,
+      "worse": false,
+      "n": 445
+    },
+    "verdict": "accept",
+    "base_metrics": {
+      "n": 5000,
+      "top1": 0.8874,
+      "in_list": 0.9792,
+      "brier": 0.10934095982781011,
+      "ece": 0.05725660753012836,
+      "logloss": 0.49875559251154244,
+      "turns": 5.6928,
+      "cost": 254.681,
+      "cm_missed": 0.16179775280898875,
+      "llm_calls": 14.7816,
+      "calls": {
+        "extract": 6.69,
+        "generator": 5.32,
+        "critic": 1.7,
+        "report": 1.0,
+        "card": 0.07
+      }
+    },
+    "arm_metrics": {
+      "n": 5000,
+      "top1": 0.9304,
+      "in_list": 0.9928,
+      "brier": 0.06234937481313283,
+      "ece": 0.03085893146329393,
+      "logloss": 0.33582406478344345,
+      "turns": 5.2378,
+      "cost": 227.591,
+      "cm_missed": 0.13258426966292136,
+      "llm_calls": 13.8564,
+      "calls": {
+        "extract": 6.24,
+        "generator": 4.82,
+        "critic": 1.61,
+        "report": 1.05,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "base_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    },
+    "arm_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    }
+  },
+  "no-A1:v0.3@default": {
+    "top1": {
+      "diff": 0.0136,
+      "lo": 0.0076,
+      "hi": 0.02,
+      "better": true,
+      "worse": false
+    },
+    "in_list": {
+      "diff": 0.001,
+      "lo": -0.0004,
+      "hi": 0.0024,
+      "better": false,
+      "worse": false
+    },
+    "brier": {
+      "diff": -0.019939072497639026,
+      "lo": -0.024221174484169956,
+      "hi": -0.015390774025672137,
+      "better": true,
+      "worse": false
+    },
+    "logloss": {
+      "diff": -0.08633424435199448,
+      "lo": -0.10526994955630514,
+      "hi": -0.06784447061041936,
+      "better": true,
+      "worse": false
+    },
+    "turns": {
+      "diff": -0.3714,
+      "lo": -0.416,
+      "hi": -0.3242,
+      "better": true,
+      "worse": false
+    },
+    "cost": {
+      "diff": -37.592,
+      "lo": -48.913,
+      "hi": -26.012,
+      "better": true,
+      "worse": false
+    },
+    "llm": {
+      "diff": -0.7094,
+      "lo": -0.7852,
+      "hi": -0.6252,
+      "better": true,
+      "worse": false
+    },
+    "ece": {
+      "diff": -0.017837386977568315,
+      "lo": -0.024415837552438455,
+      "hi": -0.011576266943133545,
+      "better": true,
+      "worse": false
+    },
+    "mcnemar_p": 1.0376911162608427e-05,
+    "cm_missed": {
+      "diff": 0.0044943820224719105,
+      "lo": -0.020224719101123594,
+      "hi": 0.029213483146067417,
+      "better": false,
+      "worse": false,
+      "n": 445
+    },
+    "verdict": "accept",
+    "base_metrics": {
+      "n": 5000,
+      "top1": 0.9168,
+      "in_list": 0.9918,
+      "brier": 0.08228844731077185,
+      "ece": 0.048696318440862245,
+      "logloss": 0.42215830913543795,
+      "turns": 5.6092,
+      "cost": 265.183,
+      "cm_missed": 0.12808988764044943,
+      "llm_calls": 14.5658,
+      "calls": {
+        "extract": 6.61,
+        "generator": 5.04,
+        "critic": 1.73,
+        "report": 1.06,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "arm_metrics": {
+      "n": 5000,
+      "top1": 0.9304,
+      "in_list": 0.9928,
+      "brier": 0.06234937481313283,
+      "ece": 0.03085893146329393,
+      "logloss": 0.33582406478344345,
+      "turns": 5.2378,
+      "cost": 227.591,
+      "cm_missed": 0.13258426966292136,
+      "llm_calls": 13.8564,
+      "calls": {
+        "extract": 6.24,
+        "generator": 4.82,
+        "critic": 1.61,
+        "report": 1.05,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "base_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    },
+    "arm_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    }
+  },
+  "no-A2,A3:v0.3@default": {
+    "top1": {
+      "diff": 0.0074,
+      "lo": 0.0026,
+      "hi": 0.0126,
+      "better": true,
+      "worse": false
+    },
+    "in_list": {
+      "diff": 0.002,
+      "lo": 0.0006,
+      "hi": 0.0036,
+      "better": true,
+      "worse": false
+    },
+    "brier": {
+      "diff": -0.007227032779553196,
+      "lo": -0.010652014074803089,
+      "hi": -0.0038875327750286957,
+      "better": true,
+      "worse": false
+    },
+    "logloss": {
+      "diff": -0.03591902528233555,
+      "lo": -0.05325355692387204,
+      "hi": -0.020457012729311882,
+      "better": true,
+      "worse": false
+    },
+    "turns": {
+      "diff": -0.121,
+      "lo": -0.1522,
+      "hi": -0.0912,
+      "better": true,
+      "worse": false
+    },
+    "cost": {
+      "diff": -8.847,
+      "lo": -16.885,
+      "hi": -1.014,
+      "better": true,
+      "worse": false
+    },
+    "llm": {
+      "diff": -0.5044,
+      "lo": -0.5686,
+      "hi": -0.439,
+      "better": true,
+      "worse": false
+    },
+    "ece": {
+      "diff": 0.006230431544630755,
+      "lo": 0.0005696238842289869,
+      "hi": 0.011584700943074653,
+      "better": false,
+      "worse": true
+    },
+    "mcnemar_p": 0.003921773116093405,
+    "cm_missed": {
+      "diff": -0.017977528089887642,
+      "lo": -0.04044943820224719,
+      "hi": 0.0022471910112359553,
+      "better": false,
+      "worse": false,
+      "n": 445
+    },
+    "verdict": "fail: ece",
+    "base_metrics": {
+      "n": 5000,
+      "top1": 0.923,
+      "in_list": 0.9908,
+      "brier": 0.06957640759268602,
+      "ece": 0.024628499918663175,
+      "logloss": 0.371743090065779,
+      "turns": 5.3588,
+      "cost": 236.438,
+      "cm_missed": 0.15056179775280898,
+      "llm_calls": 14.3608,
+      "calls": {
+        "extract": 6.36,
+        "generator": 5.18,
+        "critic": 1.66,
+        "report": 1.06,
+        "card": 0.1
+      }
+    },
+    "arm_metrics": {
+      "n": 5000,
+      "top1": 0.9304,
+      "in_list": 0.9928,
+      "brier": 0.06234937481313283,
+      "ece": 0.03085893146329393,
+      "logloss": 0.33582406478344345,
+      "turns": 5.2378,
+      "cost": 227.591,
+      "cm_missed": 0.13258426966292136,
+      "llm_calls": 13.8564,
+      "calls": {
+        "extract": 6.24,
+        "generator": 4.82,
+        "critic": 1.61,
+        "report": 1.05,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "base_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    },
+    "arm_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    }
+  },
+  "v0.3+reverse_prevalence_prior=0:v0.3@default": {
+    "top1": {
+      "diff": 0.0102,
+      "lo": 0.0042,
+      "hi": 0.0166,
+      "better": true,
+      "worse": false
+    },
+    "in_list": {
+      "diff": 0.0032,
+      "lo": 0.0012,
+      "hi": 0.0052,
+      "better": true,
+      "worse": false
+    },
+    "brier": {
+      "diff": -0.008589364516857047,
+      "lo": -0.013005191113124797,
+      "hi": -0.0040876642156926725,
+      "better": true,
+      "worse": false
+    },
+    "logloss": {
+      "diff": -0.05311515584084524,
+      "lo": -0.07321386015302749,
+      "hi": -0.03251869779355939,
+      "better": true,
+      "worse": false
+    },
+    "turns": {
+      "diff": -0.1038,
+      "lo": -0.1458,
+      "hi": -0.062,
+      "better": true,
+      "worse": false
+    },
+    "cost": {
+      "diff": -13.125,
+      "lo": -24.082,
+      "hi": -2.429,
+      "better": true,
+      "worse": false
+    },
+    "llm": {
+      "diff": -0.229,
+      "lo": -0.302,
+      "hi": -0.1534,
+      "better": true,
+      "worse": false
+    },
+    "ece": {
+      "diff": 0.0020774051820360608,
+      "lo": -0.004703848946445637,
+      "hi": 0.008857089537604848,
+      "better": false,
+      "worse": false
+    },
+    "mcnemar_p": 0.0020719070938236875,
+    "cm_missed": {
+      "diff": 0.02247191011235955,
+      "lo": 0.0022471910112359553,
+      "hi": 0.04719101123595506,
+      "better": false,
+      "worse": true,
+      "n": 445
+    },
+    "verdict": "accept",
+    "base_metrics": {
+      "n": 5000,
+      "top1": 0.9202,
+      "in_list": 0.9896,
+      "brier": 0.07093873932998988,
+      "ece": 0.02878152628125787,
+      "logloss": 0.38893922062428876,
+      "turns": 5.3416,
+      "cost": 240.716,
+      "cm_missed": 0.1101123595505618,
+      "llm_calls": 14.0854,
+      "calls": {
+        "extract": 6.34,
+        "generator": 4.93,
+        "critic": 1.63,
+        "report": 1.05,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "arm_metrics": {
+      "n": 5000,
+      "top1": 0.9304,
+      "in_list": 0.9928,
+      "brier": 0.06234937481313283,
+      "ece": 0.03085893146329393,
+      "logloss": 0.33582406478344345,
+      "turns": 5.2378,
+      "cost": 227.591,
+      "cm_missed": 0.13258426966292136,
+      "llm_calls": 13.8564,
+      "calls": {
+        "extract": 6.24,
+        "generator": 4.82,
+        "critic": 1.61,
+        "report": 1.05,
+        "card": 0.1,
+        "code_match": 0.03
+      }
+    },
+    "base_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    },
+    "arm_veto": {
+      "vetoes_per_case": 0.0,
+      "honored_per_case": 0.0,
+      "cases_with_veto": 0.0
+    }
+  }
+}

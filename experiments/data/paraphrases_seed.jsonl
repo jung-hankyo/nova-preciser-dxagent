@@ -1,0 +1,87 @@
+{"code": "bilateral_leg_edema", "text": "both my ankles have been puffing up"}
+{"code": "bilateral_leg_edema", "text": "my legs are swollen, both of them"}
+{"code": "bilateral_leg_edema", "text": "pitting edema to the mid-shin bilaterally"}
+{"code": "chest_pain_exertional", "text": "the pain comes on when I walk uphill"}
+{"code": "chest_pain_exertional", "text": "it hurts in my chest when I climb stairs and goes away when I rest"}
+{"code": "chest_pain_exertional", "text": "chest discomfort with exertion"}
+{"code": "chest_pain_pleuritic", "text": "it stabs when I take a deep breath"}
+{"code": "chest_pain_pleuritic", "text": "hurts more when I breathe in"}
+{"code": "chest_pain_pleuritic", "text": "sharp pain on inspiration"}
+{"code": "chest_pain_positional_relief", "text": "it's better if I sit up and lean forward"}
+{"code": "chest_pain_positional_relief", "text": "leaning forward helps the pain"}
+{"code": "chest_pain_positional_relief", "text": "the pain eases when I sit forward"}
+{"code": "chest_pain_radiating_arm", "text": "the pain goes down my left arm"}
+{"code": "chest_pain_radiating_arm", "text": "it spreads into my shoulder and arm"}
+{"code": "chest_pain_radiating_arm", "text": "pain radiating to the left arm"}
+{"code": "chest_pain_tearing_back", "text": "it felt like something ripping through to my back"}
+{"code": "chest_pain_tearing_back", "text": "tearing pain going through to my back"}
+{"code": "chest_pain_tearing_back", "text": "a tearing sensation between my shoulder blades"}
+{"code": "copd_history", "text": "I have emphysema"}
+{"code": "copd_history", "text": "I was diagnosed with COPD years ago"}
+{"code": "copd_history", "text": "I use inhalers for my chronic lung disease"}
+{"code": "crackles", "text": "crackles heard at both bases"}
+{"code": "crackles", "text": "rales at the right base"}
+{"code": "crackles", "text": "fine inspiratory crepitations bilaterally"}
+{"code": "diaphoresis", "text": "I was drenched in sweat"}
+{"code": "diaphoresis", "text": "he was sweaty and clammy"}
+{"code": "diaphoresis", "text": "I broke out in a cold sweat"}
+{"code": "fever", "text": "I've been running a temperature"}
+{"code": "fever", "text": "I had the chills last night"}
+{"code": "fever", "text": "I've felt feverish for two days"}
+{"code": "hemoptysis", "text": "I coughed up some blood"}
+{"code": "hemoptysis", "text": "there were streaks of blood in what I brought up"}
+{"code": "hemoptysis", "text": "hemoptysis this morning"}
+{"code": "hypertension_history", "text": "I take pills for high blood pressure"}
+{"code": "hypertension_history", "text": "I have hypertension"}
+{"code": "hypertension_history", "text": "my blood pressure has been high for years"}
+{"code": "jvd", "text": "JVP raised at 6 cm"}
+{"code": "jvd", "text": "distended neck veins"}
+{"code": "jvd", "text": "jugular venous distension noted"}
+{"code": "orthopnea", "text": "I get breathless when I lie flat"}
+{"code": "orthopnea", "text": "I have to sleep propped up on three pillows"}
+{"code": "orthopnea", "text": "I can't breathe lying down"}
+{"code": "paroxysmal_nocturnal_dyspnea", "text": "I wake up at night gasping for air"}
+{"code": "paroxysmal_nocturnal_dyspnea", "text": "I woke up at night short of breath"}
+{"code": "paroxysmal_nocturnal_dyspnea", "text": "sudden breathlessness that wakes me from sleep"}
+{"code": "pericardial_friction_rub", "text": "a scratchy rub heard over the heart"}
+{"code": "pericardial_friction_rub", "text": "friction rub at the left sternal border"}
+{"code": "pericardial_friction_rub", "text": "pericardial rub present"}
+{"code": "prior_vte", "text": "I had a blood clot in my leg before"}
+{"code": "prior_vte", "text": "I had a clot in my lung two years ago"}
+{"code": "prior_vte", "text": "history of DVT"}
+{"code": "productive_cough", "text": "I'm coughing up yellow phlegm"}
+{"code": "productive_cough", "text": "a wet cough with green mucus"}
+{"code": "productive_cough", "text": "cough productive of sputum"}
+{"code": "pulse_deficit", "text": "the blood pressure differs by 30 between the arms"}
+{"code": "pulse_deficit", "text": "left radial pulse is weaker than the right"}
+{"code": "pulse_deficit", "text": "pulse deficit in the left arm"}
+{"code": "recent_immobilization_or_surgery", "text": "I had knee surgery two weeks ago"}
+{"code": "recent_immobilization_or_surgery", "text": "I just got back from a long flight"}
+{"code": "recent_immobilization_or_surgery", "text": "I've been bedridden since my hip operation"}
+{"code": "recent_viral_illness", "text": "I had a cold last week"}
+{"code": "recent_viral_illness", "text": "I had the flu recently"}
+{"code": "recent_viral_illness", "text": "a sore throat and runny nose a week ago"}
+{"code": "s3_gallop", "text": "an S3 is audible"}
+{"code": "s3_gallop", "text": "third heart sound heard"}
+{"code": "s3_gallop", "text": "gallop rhythm on auscultation"}
+{"code": "smoking_history", "text": "I smoke a pack a day"}
+{"code": "smoking_history", "text": "I used to smoke for 20 years"}
+{"code": "smoking_history", "text": "smoker, 30 pack-years"}
+{"code": "sudden_onset", "text": "it came on all of a sudden"}
+{"code": "sudden_onset", "text": "it started abruptly while I was sitting"}
+{"code": "sudden_onset", "text": "the pain began suddenly"}
+{"code": "tachycardia", "text": "heart rate 118"}
+{"code": "tachycardia", "text": "pulse is 124 and regular"}
+{"code": "tachycardia", "text": "tachycardic at 110"}
+{"code": "temp_gt_38", "text": "temperature 38.9 C"}
+{"code": "temp_gt_38", "text": "febrile at 39.1"}
+{"code": "temp_gt_38", "text": "temp is 38.6 degrees"}
+{"code": "unilateral_leg_swelling", "text": "my right calf is swollen and sore"}
+{"code": "unilateral_leg_swelling", "text": "left leg is bigger than the right"}
+{"code": "unilateral_leg_swelling", "text": "unilateral calf tenderness and swelling"}
+{"code": "unilateral_reduced_breath_sounds", "text": "breath sounds are reduced on the left"}
+{"code": "unilateral_reduced_breath_sounds", "text": "absent breath sounds on the right side"}
+{"code": "unilateral_reduced_breath_sounds", "text": "decreased air entry on one side"}
+{"code": "wheeze", "text": "wheezing heard throughout"}
+{"code": "wheeze", "text": "expiratory wheeze bilaterally"}
+{"code": "wheeze", "text": "a whistling sound when I breathe out"}

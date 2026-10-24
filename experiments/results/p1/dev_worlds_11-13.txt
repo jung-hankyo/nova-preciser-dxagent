@@ -1,0 +1,16 @@
+
+== LEAK=0.0  (n = 1500)  v0.3: top1 0.931  ECE 0.026  leader changes under flat priors 1.4%
+  v0.3+P1: top1 0.935 (McNemar p 0.36)  ECE +0.005 [-0.003, +0.014]  flat-prior leader change 2.0%  proposer-vs-assessor |shift| 0.31 buckets, >=2 in 0.6%
+    top1 +0.005 [-0.004, +0.013] | in_list +0.001 [-0.001, +0.003] | brier -0.002 [-0.008, +0.004] | logloss -0.004 [-0.029, +0.021] | turns +0.021 [-0.031, +0.079] | cost +5.817 [-8.483, +20.073] | llm +5.700 [+5.505, +5.895]
+  v0.3+P1+prior_samples=1: top1 0.931 (McNemar p 1)  ECE +0.000 [-0.008, +0.010]  flat-prior leader change 1.9%  proposer-vs-assessor |shift| 0.33 buckets, >=2 in 0.6%
+    top1 +0.000 [-0.009, +0.009] | in_list +0.001 [-0.001, +0.003] | brier +0.002 [-0.004, +0.008] | logloss +0.008 [-0.017, +0.033] | turns +0.023 [-0.029, +0.079] | cost +3.500 [-10.967, +17.667] | llm +1.935 [+1.822, +2.055]
+
+== LEAK=1.0  (n = 1500)  v0.3: top1 0.935  ECE 0.024  leader changes under flat priors 1.4%
+  v0.3+P1: top1 0.935 (McNemar p 1)  ECE +0.007 [-0.002, +0.016]  flat-prior leader change 2.0%  proposer-vs-assessor |shift| 1.07 buckets, >=2 in 31.2%
+    top1 +0.000 [-0.008, +0.008] | in_list +0.002 [-0.001, +0.005] | brier +0.002 [-0.003, +0.008] | logloss +0.007 [-0.018, +0.031] | turns +0.123 [+0.064, +0.184] | cost +23.763 [+8.310, +38.990] | llm +5.835 [+5.625, +6.041]
+  v0.3+P1+prior_samples=1: top1 0.931 (McNemar p 0.371)  ECE +0.002 [-0.007, +0.012]  flat-prior leader change 1.9%  proposer-vs-assessor |shift| 1.08 buckets, >=2 in 31.4%
+    top1 -0.005 [-0.013, +0.005] | in_list +0.002 [-0.001, +0.005] | brier +0.006 [-0.000, +0.013] | logloss +0.019 [-0.007, +0.047] | turns +0.124 [+0.065, +0.183] | cost +21.447 [+6.520, +36.997] | llm +2.071 [+1.949, +2.197]
+
+== LEAK=1.0_LEAK_KB=0.0  (n = 1500)  v0.3: top1 0.937  ECE 0.026  leader changes under flat priors 1.5%
+  v0.3+P1: top1 0.935 (McNemar p 0.755)  ECE +0.005 [-0.003, +0.015]  flat-prior leader change 2.0%  proposer-vs-assessor |shift| 1.13 buckets, >=2 in 34.2%
+    top1 -0.002 [-0.011, +0.007] | in_list +0.001 [-0.001, +0.004] | brier +0.004 [-0.001, +0.010] | logloss +0.018 [-0.008, +0.045] | turns +0.141 [+0.085, +0.205] | cost +25.363 [+9.787, +41.270] | llm +5.861 [+5.651, +6.073]

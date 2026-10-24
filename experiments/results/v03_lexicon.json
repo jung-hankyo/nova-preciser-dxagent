@@ -1,0 +1,225 @@
+{
+  "dev": {
+    "set": "paraphrases_seed.jsonl",
+    "n": 87,
+    "recall": 0.931,
+    "top1": 0.851,
+    "mean_offered": 1.59,
+    "misses": [
+      {
+        "code": "copd_history",
+        "text": "I use inhalers for my chronic lung disease",
+        "got": [
+          "crackles"
+        ]
+      },
+      {
+        "code": "crackles",
+        "text": "fine inspiratory crepitations bilaterally",
+        "got": [
+          "bilateral_leg_edema",
+          "chest_pain_pleuritic"
+        ]
+      },
+      {
+        "code": "hypertension_history",
+        "text": "my blood pressure has been high for years",
+        "got": []
+      },
+      {
+        "code": "pulse_deficit",
+        "text": "the blood pressure differs by 30 between the arms",
+        "got": []
+      },
+      {
+        "code": "temp_gt_38",
+        "text": "febrile at 39.1",
+        "got": [
+          "fever"
+        ]
+      },
+      {
+        "code": "unilateral_leg_swelling",
+        "text": "left leg is bigger than the right",
+        "got": [
+          "bilateral_leg_edema"
+        ]
+      }
+    ]
+  },
+  "test": {
+    "set": "paraphrases_seed_test.jsonl",
+    "n": 58,
+    "recall": 0.793,
+    "top1": 0.741,
+    "mean_offered": 1.34,
+    "misses": [
+      {
+        "code": "chest_pain_exertional",
+        "text": "I get chest tightness when I mow the lawn",
+        "got": [
+          "jvd"
+        ]
+      },
+      {
+        "code": "chest_pain_pleuritic",
+        "text": "it catches me every time I breathe deeply",
+        "got": [
+          "orthopnea",
+          "paroxysmal_nocturnal_dyspnea"
+        ]
+      },
+      {
+        "code": "crackles",
+        "text": "bibasal crepitations",
+        "got": []
+      },
+      {
+        "code": "hypertension_history",
+        "text": "I'm on amlodipine for my blood pressure",
+        "got": []
+      },
+      {
+        "code": "jvd",
+        "text": "the veins in my neck stick out",
+        "got": []
+      },
+      {
+        "code": "pericardial_friction_rub",
+        "text": "there's a scratching sound over the heart",
+        "got": []
+      },
+      {
+        "code": "pulse_deficit",
+        "text": "the right arm pressure is much higher than the left",
+        "got": [
+          "jvd",
+          "chest_pain_radiating_arm"
+        ]
+      },
+      {
+        "code": "recent_immobilization_or_surgery",
+        "text": "I was in a cast for six weeks",
+        "got": []
+      },
+      {
+        "code": "sudden_onset",
+        "text": "it hit me out of nowhere",
+        "got": []
+      },
+      {
+        "code": "tachycardia",
+        "text": "my heart is going 130",
+        "got": []
+      },
+      {
+        "code": "tachycardia",
+        "text": "HR 115 bpm",
+        "got": []
+      },
+      {
+        "code": "temp_gt_38",
+        "text": "fever of 39 C in triage",
+        "got": [
+          "fever"
+        ]
+      }
+    ]
+  },
+  "a3": {
+    "same": [
+      {
+        "new": "pyrexia",
+        "target": "fever",
+        "best": "fever",
+        "score": 0.618
+      },
+      {
+        "new": "fever_present",
+        "target": "fever",
+        "best": "fever",
+        "score": 0.618
+      },
+      {
+        "new": "dyspnea_lying_flat",
+        "target": "orthopnea",
+        "best": "orthopnea",
+        "score": 0.783
+      },
+      {
+        "new": "coughing_blood",
+        "target": "hemoptysis",
+        "best": "hemoptysis",
+        "score": 1.0
+      },
+      {
+        "new": "sweating",
+        "target": "diaphoresis",
+        "best": "diaphoresis",
+        "score": 0.792
+      },
+      {
+        "new": "raised_jvp",
+        "target": "jvd",
+        "best": "jvd",
+        "score": 0.667
+      },
+      {
+        "new": "calf_swelling_unilateral",
+        "target": "unilateral_leg_swelling",
+        "best": "unilateral_leg_swelling",
+        "score": 0.743
+      },
+      {
+        "new": "pleuritic_pain",
+        "target": "chest_pain_pleuritic",
+        "best": "chest_pain_pleuritic",
+        "score": 0.807
+      },
+      {
+        "new": "wheezing",
+        "target": "wheeze",
+        "best": "wheeze",
+        "score": 0.712
+      },
+      {
+        "new": "smoker",
+        "target": "smoking_history",
+        "best": "smoking_history",
+        "score": 0.344
+      }
+    ],
+    "different": [
+      {
+        "new": "chest_pain_at_rest",
+        "must_not_merge_into": "chest_pain_exertional",
+        "best": "chest_pain_exertional",
+        "score": 0.422
+      },
+      {
+        "new": "bilateral_crackles",
+        "must_not_merge_into": "bilateral_leg_edema",
+        "best": "bilateral_leg_edema",
+        "score": 0.433
+      },
+      {
+        "new": "hypotension",
+        "must_not_merge_into": "hypertension_history",
+        "best": "hypotension",
+        "score": 0.42
+      },
+      {
+        "new": "bradycardia",
+        "must_not_merge_into": "tachycardia",
+        "best": "tachycardia",
+        "score": 0.256
+      },
+      {
+        "new": "dry_cough",
+        "must_not_merge_into": "productive_cough",
+        "best": "hemoptysis",
+        "score": 0.447
+      }
+    ]
+  }
+}

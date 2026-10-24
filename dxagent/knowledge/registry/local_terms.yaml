@@ -1,0 +1,29 @@
+# Local ontology extension terms (v0.4). Clinical entities that MONDO does not model as diseases, anchored under
+# MONDO parents so the hierarchy, inheritance, and the planner's tree view still apply. Identity only: labels,
+# synonyms, parents, cross-references. Cards for these terms are compiled from sources like any other disease.
+# Parent ids were verified against MONDO releases/2026-09-01.
+- id: "DXA:0000001"
+  name: aortic dissection
+  synonyms: [acute aortic dissection, dissecting aortic aneurysm, dissection of aorta]
+  parents: ["MONDO:0005561"]  # aortic disorder
+  xrefs: {ICD10CM: ["ICD10CM:I71.0"], HP: ["HP:0002647"]}
+- id: "DXA:0000002"
+  name: COPD exacerbation
+  synonyms: [acute exacerbation of COPD, exacerbation of chronic obstructive pulmonary disease, AECOPD]
+  parents: ["MONDO:0005002"]  # chronic obstructive pulmonary disease
+  xrefs: {ICD10CM: ["ICD10CM:J44.1"]}
+- id: "DXA:0000003"
+  name: acute pericarditis
+  synonyms: [acute pericarditis, acute idiopathic pericarditis]
+  parents: ["MONDO:0005904"]  # pericarditis
+  xrefs: {ICD10CM: ["ICD10CM:I30"]}
+- id: "DXA:0000004"
+  name: acute decompensated heart failure
+  synonyms: [heart failure exacerbation, acute heart failure, decompensated heart failure, ADHF]
+  parents: ["MONDO:0005252"]  # heart failure
+  xrefs: {ICD10CM: ["ICD10CM:I50.9"]}
+- id: "DXA:0000005"
+  name: community-acquired pneumonia
+  synonyms: [community acquired pneumonia]
+  parents: ["MONDO:0005249"]  # pneumonia
+  xrefs: {ICD10CM: ["ICD10CM:J18.9"]}

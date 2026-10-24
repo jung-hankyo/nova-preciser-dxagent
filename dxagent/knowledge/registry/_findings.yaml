@@ -1,0 +1,61 @@
+# v0.3.1: category tags every finding; vital-sign rules map numeric values deterministically.
+- {code: chest_pain_pleuritic, label: chest pain worse on breathing in, source: history, background: 0.25, cluster: pain_character, category: symptom}
+- {code: chest_pain_exertional, label: chest pain brought on by exertion, source: history, background: 0.2, cluster: pain_character, category: symptom}
+- {code: chest_pain_radiating_arm, label: chest pain radiating to arm or shoulder, source: history, background: 0.2, cluster: pain_radiation, category: symptom}
+- {code: chest_pain_tearing_back, label: tearing pain radiating to the back, source: history, background: 0.03, cluster: pain_radiation, category: symptom}
+- {code: chest_pain_positional_relief, label: pain eased by sitting up and leaning forward, source: history, background: 0.05, cluster: pain_position, category: symptom}
+- {code: sudden_onset, label: sudden onset of symptoms, source: history, background: 0.3, cluster: onset, category: symptom}
+- {code: diaphoresis, label: sweating with the pain, source: history, background: 0.2, cluster: autonomic, category: symptom}
+- {code: fever, label: fever or chills, source: history, background: 0.2, cluster: fever, category: symptom}
+- {code: productive_cough, label: cough with sputum, source: history, background: 0.2, cluster: cough, category: symptom}
+- {code: hemoptysis, label: coughing up blood, source: history, background: 0.05, cluster: hemoptysis, category: symptom}
+- {code: orthopnea, label: breathless when lying flat, source: history, background: 0.15, cluster: congestion_symptoms, category: symptom}
+- {code: paroxysmal_nocturnal_dyspnea, label: waking at night breathless, source: history, background: 0.1, cluster: congestion_symptoms, category: symptom}
+- {code: recent_immobilization_or_surgery, label: 'recent surgery, immobilization, or long travel', source: history, background: 0.1, cluster: vte_risk, category: risk_factor}
+- {code: prior_vte, label: previous DVT or PE, source: history, background: 0.05, cluster: vte_risk, category: risk_factor}
+- {code: recent_viral_illness, label: recent cold or flu-like illness, source: history, background: 0.15, cluster: prodrome, category: risk_factor}
+- {code: smoking_history, label: smoker or ex-smoker, source: history, background: 0.3, cluster: smoking, category: risk_factor}
+- {code: copd_history, label: known COPD or emphysema, source: history, background: 0.12, cluster: lung_disease, category: risk_factor}
+- {code: hypertension_history, label: history of hypertension, source: history, background: 0.4, cluster: hypertension, category: risk_factor}
+- {code: unilateral_leg_swelling, label: one-sided leg swelling or calf tenderness, source: exam, background: 0.08, cluster: dvt_signs, category: sign}
+- code: tachycardia
+  label: heart rate above 100
+  source: exam
+  background: 0.3
+  cluster: vitals
+  category: vital
+  rules:
+  - {analyte: heart_rate, op: gt, value: 100, outcome: present, else_outcome: absent}
+- code: temp_gt_38
+  label: measured temperature above 38 C
+  source: exam
+  background: 0.15
+  cluster: fever
+  category: vital
+  rules:
+  - {analyte: temperature_c, op: gt, value: 38.0, outcome: present, else_outcome: absent}
+  - {analyte: temperature_f, op: gt, value: 100.4, outcome: present, else_outcome: absent}
+- {code: crackles, label: crackles on lung auscultation, source: exam, background: 0.25, cluster: lung_exam, category: sign}
+- {code: wheeze, label: wheeze on auscultation, source: exam, background: 0.15, cluster: lung_exam_wheeze, category: sign}
+- {code: jvd, label: raised jugular venous pressure, source: exam, background: 0.1, cluster: congestion_signs, category: sign}
+- {code: s3_gallop, label: third heart sound, source: exam, background: 0.05, cluster: heart_sounds, category: sign}
+- {code: bilateral_leg_edema, label: swelling of both legs, source: exam, background: 0.15, cluster: congestion_signs, category: sign}
+- {code: unilateral_reduced_breath_sounds, label: reduced breath sounds on one side, source: exam, background: 0.05, cluster: lung_exam_unilateral, category: sign}
+- {code: pulse_deficit, label: pulse deficit or arm blood-pressure difference, source: exam, background: 0.03, cluster: vascular_exam, category: sign}
+- {code: pericardial_friction_rub, label: pericardial friction rub, source: exam, background: 0.03, cluster: heart_sounds_rub, category: sign}
+- code: tachypnea
+  label: respiratory rate above 22 per minute
+  source: exam
+  background: 0.25
+  cluster: tachypnea
+  category: vital
+  rules:
+  - {analyte: resp_rate, op: gt, value: 22, outcome: present, else_outcome: absent}
+- code: hypotension
+  label: systolic blood pressure below 90 mmHg
+  source: exam
+  background: 0.05
+  cluster: shock
+  category: vital
+  rules:
+  - {analyte: sbp, op: lt, value: 90, outcome: present, else_outcome: absent}

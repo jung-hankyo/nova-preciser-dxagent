@@ -1,0 +1,4 @@
+v0.3     LEAK=0.0: n 5000 top1 0.930 | mean confidence 0.900 | cant-miss missed 0.133 | flat-prior leader change 0.018
+v0.3+P1  LEAK=0.0: n 5000 top1 0.929 | mean confidence 0.900 | cant-miss missed 0.124 | flat-prior leader change 0.019
+v0.3     LEAK=1.0: n 5000 top1 0.934 | mean confidence 0.904 | cant-miss missed 0.110 | flat-prior leader change 0.016
+v0.3+P1  LEAK=1.0: n 5000 top1 0.929 | mean confidence 0.900 | cant-miss missed 0.124 | flat-prior leader change 0.019

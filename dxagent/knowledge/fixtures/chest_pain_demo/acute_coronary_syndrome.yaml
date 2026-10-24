@@ -1,0 +1,81 @@
+id: acute_coronary_syndrome
+name: Acute coronary syndrome
+aliases:
+- ACS
+- myocardial infarction
+- acute myocardial infarction
+- unstable angina
+- NSTEMI
+- STEMI
+prevalence: common  # v0.3 (C3): pretest bucket in adult acute chest pain / dyspnea
+prevalence_by_complaint: {chest_pain: common, dyspnea: common}  # v0.3.1 (P1): keyed by canonical complaint
+harm:
+  untreated_course: lethal
+  urgency: hours
+  treatments:
+  - antiplatelet
+  - anticoagulation
+  - reperfusion
+  treatment_risk: high
+findings:
+- code: chest_pain_exertional
+  p: 0.5
+  conf: 0.9
+- code: chest_pain_radiating_arm
+  p: 0.45
+  conf: 0.9
+- code: chest_pain_pleuritic
+  p: 0.05
+  conf: 0.9
+- code: diaphoresis
+  p: 0.45
+  conf: 0.9
+- code: hypertension_history
+  p: 0.6
+  conf: 0.9
+- code: smoking_history
+  p: 0.45
+  conf: 0.9
+tests:
+  test_ecg:
+    dist:
+      normal: 0.2
+      regional_st_elevation: 0.3
+      diffuse_st_elevation_pr_depression: 0.02
+      st_depression_or_t_inversion: 0.43
+      sinus_tachycardia_only: 0.05
+    conf: 0.9
+  lab_troponin:
+    dist:
+      normal: 0.1
+      elevated: 0.9
+    conf: 0.9
+  lab_d_dimer:
+    dist:
+      normal: 0.5
+      elevated: 0.5
+    conf: 0.9
+  img_chest_xray:
+    dist:
+      normal: 0.85
+      pulmonary_edema: 0.15
+    conf: 0.9
+  img_echocardiography:
+    dist:
+      normal: 0.55
+      reduced_ef_or_wall_motion: 0.45
+    conf: 0.9
+  proc_coronary_angiography:
+    dist:
+      no_culprit_lesion: 0.1
+      culprit_lesion: 0.9
+    conf: 0.9
+mimics:
+- pulmonary_embolism
+- aortic_dissection
+- pericarditis
+provenance:
+  status: fixture
+  source: Illustrative frequencies approximated from textbook and JAMA Rational Clinical
+    Examination data; not individually sourced.
+  version: '0.2'

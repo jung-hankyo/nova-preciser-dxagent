@@ -1,0 +1,61 @@
+# Template for sources/manifest.yaml (v0.4.1). Copy to sources/manifest.yaml, keep the entries whose files you have
+# downloaded, and set `path` (relative to sources/), `edition`, and `diseases`.
+#   diseases: [names]  -> compiled ahead by `dxagent kb compile` for these diseases
+#   diseases: []       -> a general reference: never compiled ahead, searched on demand by the local fallback
+# `dxagent kb fetch` adds the ontologies and the HPO annotations (hpo_annotations) automatically.
+version: 1
+sources:
+  # ---------------------------------------------------------------- MUST
+  - id: jama_rce_book
+    kind: rce
+    title: "The Rational Clinical Examination: Evidence-Based Clinical Diagnosis (JAMAevidence)"
+    publisher: JAMA / McGraw-Hill
+    edition: "2009"
+    licence: "subscription (institutional access); private research use, files stay in sources/"
+    access: institutional
+    path: docs/rce/rce_book.pdf          # or one file per chapter, each its own entry scoped to its diseases
+    url: https://jamaevidence.mhmedical.com
+    diseases: []
+    population: adult
+  - id: jama_rce_articles
+    kind: rce
+    title: "JAMA Rational Clinical Examination series (articles after the book, e.g. 2009 onward)"
+    publisher: JAMA
+    licence: "subscription (institutional access)"
+    access: institutional
+    path: docs/rce/articles/              # one entry per article file in practice
+    url: https://jamanetwork.com/journals/jama   # search "Rational Clinical Examination"
+    diseases: []
+    population: adult
+  - id: mcgee_ebpd
+    kind: reference
+    title: "McGee, Evidence-Based Physical Diagnosis (latest edition)"
+    publisher: Elsevier
+    licence: "subscription (ClinicalKey, institutional access)"
+    access: institutional
+    path: docs/mcgee/
+    url: https://www.clinicalkey.com
+    diseases: []
+    population: adult
+  - id: statpearls_<topic>
+    kind: reference
+    title: "StatPearls chapter: <disease>"
+    publisher: StatPearls Publishing (NCBI Bookshelf)
+    licence: "per-chapter licence on the page (check); bulk download only via the NLM LitArch FTP if listed"
+    access: open
+    path: docs/statpearls/<disease>.html  # save the chapter page; one entry per chapter, scoped to its disease
+    url: https://www.ncbi.nlm.nih.gov/books/NBK430685/
+    diseases: [<disease>]
+    population: mixed
+  - id: esc_pe_2019
+    kind: guideline
+    title: "2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism"
+    publisher: European Society of Cardiology
+    edition: "2019"
+    licence: "publisher copyright; private research use"
+    access: open
+    path: docs/guidelines/esc_pe_2019.pdf
+    url: https://www.escardio.org/Guidelines
+    diseases: [pulmonary embolism]
+    population: adult
+  # (same pattern for the other must-have guidelines listed in docs/SOURCES.md)
