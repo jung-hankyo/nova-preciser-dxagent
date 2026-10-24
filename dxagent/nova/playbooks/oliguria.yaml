@@ -1,0 +1,114 @@
+id: oliguria
+title: {ko: 소변량 감소, en: Decreased urine output (oliguria)}
+status: draft
+reviewer: ""
+population: any
+pain: false
+match:
+  any: [소변 양이 줄, 소변양이 줄, 소변량이 줄, 소변량이 감소, 소변 양이 감소, 소변이 줄었, 소변이 줄어, 소변 양이 적, 소변양이 적, 소변량이 적, 소변이 적게, 소변을 적게, 소변을 거의 안, 소변이 거의 안, 오줌 양이 줄, 오줌이 줄, 오줌을 거의 안, 오줌이 거의 안, 화장실을 거의 안, 소변을 안 본 지, 소변을 하루 종일 안, 핍뇨, 무뇨]
+  not: []
+history:
+  - {id: onset, q: "언제부터 소변이 줄었나요?", item: Onset, p: 1}
+  - {id: frequency, q: "하루에 소변을 몇 번 보나요?", item: Voiding frequency, p: 1}
+  - {id: urge, q: "소변이 마려운데 안 나오나요?", item: Urge without voiding (retention), p: 1}
+  - {id: intake, q: "최근 물을 평소만큼 마셨나요?", item: Oral intake, p: 1}
+  - {id: vomiting, q: "토한 적이 있나요?", item: Vomiting, p: 1}
+  - id: diarrhea
+    q: "설사를 하나요?"
+    item: Diarrhea
+    p: 1
+    then:
+      - {id: times, q: "하루에 몇 번 설사하나요?", item: Diarrhea frequency, known: "번|회"}
+      - {id: bloody, q: "변에 피가 섞였나요?", item: Bloody diarrhea, known: "피|혈"}
+  - {id: orthostatic, q: "일어설 때 어지러운가요?", item: Orthostatic dizziness, p: 1, only: adult}
+  - {id: color, q: "소변 색이 어떤가요?", item: Urine color, p: 1}
+  - {id: edema, q: "몸이 붓나요?", item: Edema, p: 1}
+  - id: fever
+    q: "열이 나나요?"
+    item: Fever
+    p: 1
+    then:
+      - {id: outdoor, q: "최근 야외 활동을 했나요?", item: Outdoor exposure, known: "산|밭|논|등산|캠핑|야외|농사|훈련|풀밭"}
+  - {id: last_void, q: "마지막으로 소변을 본 게 언제인가요?", item: Last void, p: 2}
+  - {id: dyspnea, q: "숨이 차나요?", item: Dyspnea, p: 2}
+  - {id: foamy, q: "소변에 거품이 많이 생기나요?", item: Foamy urine, p: 2}
+  - {id: myalgia, q: "근육이 아픈가요?", item: Myalgia, p: 2}
+  - {id: flank, q: "옆구리가 아픈가요?", item: Flank pain, p: 2}
+  - {id: weak_stream, q: "소변 줄기가 약해졌나요?", item: Weak stream, p: 2, only: [male, adult]}
+  - {id: sore_throat, q: "최근 목감기를 앓았나요?", item: Recent pharyngitis, p: 3}
+  - {id: weight_gain, q: "몸무게가 늘었나요?", item: Weight gain, p: 3}
+  - {id: rash, q: "피부에 발진이 생겼나요?", item: Rash, sec: ros, p: 3}
+  - {id: tears, q: "울 때 눈물이 나오나요?", item: Tears, sec: ros, p: 3, only: child}
+  - {id: kidney_dx, q: "콩팥 질환이 있나요?", item: kidney disease, sec: pmh, p: 1}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 2, only: adult}
+  - {id: contrast, q: "최근 조영제 검사를 받았나요?", item: Contrast exposure, sec: pmh, p: 2, only: adult}
+  - {id: liver_dx, q: "간 질환이 있나요?", item: liver disease, sec: pmh, p: 3, only: adult}
+  - {id: nsaid, q: "진통제를 자주 드세요?", item: NSAID, sec: meds, p: 1, only: adult}
+  - {id: bp_drug, q: "드시는 혈압약 이름을 아세요?", item: "ACE inhibitor, ARB or diuretic", sec: meds, p: 2, only: adult}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: herbal, q: "한약이나 건강식품을 드셨나요?", item: Herbal medicine, sec: meds, p: 3, only: adult}
+  - {id: fh_kidney, q: "가족 중 콩팥병 있는 분 있나요?", item: "FHx: kidney disease", sec: fhx, p: 3}
+exams:
+  - {name: 기립성 혈압 측정, item: V/S, p: 1, only: adult}
+  - {name: 모세혈관 재충전 시간, item: Extremities, p: 1, only: child}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 경정맥압 측정, item: Neck, p: 1, only: adult}
+  - {name: 방광 촉진, item: Abdomen, p: 1}
+  - {name: 하지 함요부종 확인, item: Extremities, p: 1}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 전립선 촉진, item: GU, p: 3, only: [male, adult]}
+differential:
+  - {en: "Prerenal acute kidney injury (dehydration, heart failure, cirrhosis)", ko: 신전성 급성 신손상(탈수·심부전·간경변)}
+  - {en: "Drug-induced acute kidney injury (NSAID, ACE inhibitor or ARB, diuretic, contrast)", ko: 약물 유발 급성 신손상(NSAID·ACE억제제·ARB·이뇨제·조영제)}
+  - {en: Acute tubular necrosis (sepsis or shock), ko: 급성 세뇨관 괴사(패혈증·쇼크), cant_miss: true}
+  - {en: Postrenal obstruction (urinary retention or bilateral ureteral obstruction), ko: 신후성 폐색(요폐·양측 요관 폐색), cant_miss: true}
+  - {en: Acute glomerulonephritis (post-infectious or rapidly progressive), ko: 급성 사구체신염(감염 후·급속 진행성), cant_miss: true}
+  - {en: Rhabdomyolysis, ko: 횡문근융해증, cant_miss: true}
+  - {en: Hemorrhagic fever with renal syndrome, ko: 신증후군출혈열, cant_miss: true}
+  - {en: Hemolytic uremic syndrome, ko: 용혈성 요독 증후군, cant_miss: true}
+tests:
+  - {name: "Serum creatinine, BUN, electrolytes (potassium), bicarbonate", for: ["Prerenal acute kidney injury (dehydration, heart failure, cirrhosis)", "Drug-induced acute kidney injury (NSAID, ACE inhibitor or ARB, diuretic, contrast)", Acute tubular necrosis (sepsis or shock), Postrenal obstruction (urinary retention or bilateral ureteral obstruction), safety], why: "급성 신손상 단계(KDIGO)·고칼륨·산증 확인"}
+  - {name: "Urinalysis with microscopy (casts, RBC, WBC, protein)", for: [Acute glomerulonephritis (post-infectious or rapidly progressive), Acute tubular necrosis (sepsis or shock), Rhabdomyolysis, "Drug-induced acute kidney injury (NSAID, ACE inhibitor or ARB, diuretic, contrast)"], why: "원주·적혈구로 원인 구분(잠혈 양성·적혈구 없음은 근색소뇨)"}
+  - {name: "Urine sodium and fractional excretion of sodium (urea if on diuretics)", for: ["Prerenal acute kidney injury (dehydration, heart failure, cirrhosis)", Acute tubular necrosis (sepsis or shock)], why: "신전성(FENa 1% 미만)과 세뇨관 괴사 구분"}
+  - {name: "Bladder scan (post-void residual) and renal ultrasound", for: [Postrenal obstruction (urinary retention or bilateral ureteral obstruction)], why: "요폐·수신증 확인"}
+  - {name: "Creatine kinase", for: [Rhabdomyolysis], why: "횡문근융해 확인"}
+  - {name: "CBC with platelets and smear, LDH, haptoglobin", for: [Hemolytic uremic syndrome, Hemorrhagic fever with renal syndrome], why: "혈소판 감소·용혈 확인"}
+  - {name: "Hantavirus antibody (fever, thrombocytopenia, outdoor exposure)", for: [Hemorrhagic fever with renal syndrome], why: "신증후군출혈열 확인"}
+  - {name: "ASO, C3, C4, ANCA, anti-GBM antibody", for: [Acute glomerulonephritis (post-infectious or rapidly progressive)], why: "사구체신염 원인 확인"}
+  - {name: "Stool culture and Shiga toxin test (bloody diarrhea)", for: [Hemolytic uremic syndrome], why: "장출혈성 대장균 확인"}
+  - {name: "Blood cultures and lactate (fever or hypotension)", for: [Acute tubular necrosis (sepsis or shock)], why: "패혈증 확인"}
+  - {name: "12-lead ECG (potassium elevated or unknown)", for: [safety], why: "고칼륨혈증 심전도 변화 확인"}
+plan:
+  treatment:
+    - "탈수에 의한 신전성 손상은 수액으로 보충하고 소변량·체중 확인"
+    - "요폐는 즉시 도뇨관 삽입, 수신증은 비뇨의학과에서 원인 해소"
+    - "NSAID·ACE억제제·ARB·이뇨제 등 신독성 약물 중단 또는 용량 조정, 조영제 피함"
+    - "고칼륨·폐부종·산증이 교정되지 않으면 신장내과 협진하여 투석 고려"
+  disposition: "크레아티닌 상승이나 6시간 이상 소변량 0.5 mL/kg/h 미만(KDIGO), 무뇨, 고칼륨은 입원 또는 응급 평가; 경미한 탈수는 수액 후 24~48시간 내 재검"
+  follow_up:
+    - "24~48시간 내 크레아티닌·전해질·소변량 재확인"
+    - "회복 후 3개월 내 신기능 재평가(급성 신손상 후 만성 콩팥병 위험)"
+  red_flags: ["소변이 전혀 나오지 않음", "숨이 차거나 몸이 많이 부음", "의식이 흐려짐", "콜라색 소변이나 피가 섞인 설사"]
+education:
+  - "피검사와 소변검사를 할게요."
+  - "소염진통제는 당분간 피해 주세요."
+  - "소변이 전혀 안 나오면 바로 오세요."
+guidelines:
+  - KR_Journals/kr_journal_10.3904_kjm.2015.88.4.357.md
+  - US_StatPearls/statpearls_article-17169.md
+  - US_StatPearls/statpearls_article-91960.md
+  - KR_HealthInfo/health_kdca_5279.md
+notes: >
+  New in v0.8.0: the uncovered half of the official "소변량 변화" presentation (polyuria.yaml covers the other half).
+  First separate retention (an urge to void that cannot be passed, a palpable bladder: catheterise) from low
+  production, then sort prerenal (vomiting, diarrhea, poor intake, orthostatic symptoms, dry mucosa; heart failure or
+  cirrhosis), intrinsic (sepsis, nephrotoxins, glomerulonephritis with cola urine, edema and foamy urine,
+  rhabdomyolysis after exertion with myalgia) and postrenal causes. Definitions: oliguria under 400 mL a day in adults
+  (anuria under 100 mL); KDIGO 2012 AKI: creatinine rise of 0.3 mg/dL or more within 48 hours, 1.5 times baseline
+  within 7 days, or urine output under 0.5 mL/kg/h for 6 hours (Korean AKI guideline, Korean J Med 2015). FENa under
+  1% suggests prerenal, over 2% tubular necrosis; use urea excretion on diuretics. The ACE inhibitor/ARB, diuretic
+  and NSAID combination is a classic drug cause. Korea: hemorrhagic fever with renal syndrome (Hantaan virus; fever,
+  thrombocytopenia, then oliguria; outdoor work, farming or military field training; peaks October to December,
+  KDCA). Children: dehydration from gastroenteritis (capillary refill LR 4.1), post-streptococcal GN, and HUS after
+  bloody diarrhea. A child's history goes to the guardian; questions here are worded without a subject so they suit
+  both.

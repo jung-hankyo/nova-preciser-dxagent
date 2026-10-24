@@ -1,0 +1,111 @@
+id: constipation
+title: {ko: 변비, en: Constipation}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [변비, 변을 못 보, 대변을 못 보, 변이 안 나, 대변이 안 나, 화장실을 못 가, 변 보기가 힘들, 변보기가 힘들, 변을 못 봐, 변을 못 봤, 변을 잘 못 보, 변을 잘 못 봐, 변이 잘 안 나, 변을 보기 힘들, 변 보는 게 힘들, 화장실을 잘 못 가, 변이 딱딱]
+  not: [소변을 못, 소변을 잘 못, 소변 보기, 소변보기, 소변을 보기]
+history:
+  - {id: onset, q: "언제부터 변비가 있으셨어요?", item: Onset, p: 1}
+  - {id: frequency, q: "일주일에 대변을 몇 번 보세요?", item: Frequency, p: 1}
+  - {id: hard, q: "변이 딱딱한가요?", item: Hard stool, p: 1}
+  - {id: straining, q: "변을 볼 때 힘을 많이 주나요?", item: Straining, p: 1}
+  - {id: caliber, q: "변이 가늘어졌나요?", item: Stool caliber, p: 1}
+  - {id: blood, q: "변에 피가 섞여 나오나요?", item: Bloody stool, p: 1}
+  - id: abd_pain
+    q: "배도 아프세요?"
+    item: Abdominal pain
+    p: 1
+    then:
+      - {id: relief, q: "변을 보면 배 아픈 게 달라지나요?", item: Pain related to defecation, known: "덜|나아|좋아|편해|심해|그대로|똑같"}
+      - {id: pain_freq, q: "얼마나 자주 배가 아프세요?", item: Pain frequency, known: "매일|주에|일주일|달에|한 달|번|가끔|항상"}
+  - {id: incomplete, q: "변을 봐도 덜 본 느낌인가요?", item: Incomplete evacuation, p: 2}
+  - {id: blockage, q: "항문이 막힌 느낌이 드나요?", item: Anorectal blockage, p: 2}
+  - {id: digitation, q: "손으로 변을 파낸 적 있나요?", item: Manual evacuation, p: 2}
+  - {id: alternating, q: "변비와 설사가 번갈아 생기나요?", item: Alternating bowel habit, p: 2}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 2}
+  - {id: flatus, q: "방귀는 나오나요?", item: Flatus, p: 2}
+  - {id: anal_pain, q: "변볼 때 항문이 아프세요?", item: Anal pain, p: 2}
+  - {id: bloating, q: "배가 더부룩한가요?", item: Bloating, p: 3}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 1
+    then:
+      - {id: kg, q: "몇 킬로그램 빠졌나요?", item: Weight loss (kg), known: "킬로|kg|키로"}
+      - {id: period, q: "얼마 동안 빠졌나요?", item: Weight loss period, known: "(\\d+|한|두|세|석|네|다섯|여섯|몇|여러)\\s*(주|달|개월|일|년|해)|일 ?년|일주일|며칠|보름|반년|작년|올해"}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, sec: ros, p: 2}
+  - {id: colonoscopy, q: "대장내시경을 받아 보셨나요?", item: Colonoscopy, sec: pmh, p: 1}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: laxative, q: "변비약을 드시나요?", item: Laxative use, sec: meds, p: 2}
+  - id: fh_crc
+    q: "가족 중 대장암 걸린 분 있나요?"
+    item: "FHx: colorectal cancer"
+    sec: fhx
+    p: 1
+    then:
+      - {id: age_dx, q: "그분은 몇 살에 진단받았나요?", item: Age at relative's diagnosis, known: "살|세|대에|\\d"}
+  - {id: water, q: "물은 하루에 얼마나 드세요?", item: Fluid intake, sec: shx, p: 2}
+  - {id: fiber, q: "채소를 자주 드시는 편인가요?", item: Fiber intake, sec: shx, p: 3}
+  - {id: exercise, q: "운동은 얼마나 하세요?", item: Exercise, sec: shx, p: 3}
+exams:
+  - {name: 복부 시진, item: Abdomen, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 직장수지검사, item: Rectal, p: 1}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 갑상선 촉진, item: Neck, p: 2}
+  - {name: 복부 타진, item: Abdomen, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 3}
+differential:
+  - {en: Functional constipation, ko: 기능성 변비}
+  - {en: Constipation-predominant irritable bowel syndrome, ko: 변비형 과민성 장증후군}
+  - {en: Drug-induced constipation, ko: 약물 유발 변비}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Colorectal cancer, ko: 대장암, cant_miss: true}
+  - {en: Bowel obstruction, ko: 장폐색, cant_miss: true}
+  - {en: Anal fissure or hemorrhoids, ko: 치열·치핵}
+  - {en: Hypercalcemia, ko: 고칼슘혈증}
+  - {en: Pelvic floor dysfunction, ko: 골반저근 기능장애}
+tests:
+  - {name: "CBC", for: [Colorectal cancer, Functional constipation, Constipation-predominant irritable bowel syndrome], why: "빈혈 확인·기질적 원인 배제"}
+  - {name: "TSH", for: [Hypothyroidism], why: "갑상샘저하증 확인"}
+  - {name: "Calcium, glucose, electrolytes", for: [Hypercalcemia, Drug-induced constipation], why: "대사성 원인 확인"}
+  - {name: "Colonoscopy (alarm features, family history, or age 45 or more without recent screening)", for: [Colorectal cancer, Constipation-predominant irritable bowel syndrome], why: "대장암 배제"}
+  - {name: "Fecal immunochemical test (screening alternative without alarm features)", for: [Colorectal cancer], why: "대장암 선별"}
+  - {name: "Plain abdominal X-ray (suspected obstruction or impaction)", for: [Bowel obstruction, Functional constipation], why: "장폐색·분변 매복 확인"}
+  - {name: "Anorectal manometry and balloon expulsion test (suspected evacuation disorder)", for: [Pelvic floor dysfunction], why: "배변 협조 장애 확인"}
+  - {name: "Anoscopy (anal pain or bleeding)", for: [Anal fissure or hemorrhoids], why: "항문 병변 확인"}
+plan:
+  treatment:
+    - "식이섬유와 수분 섭취, 식후 일정한 시간 배변 습관"
+    - "효과 없으면 삼투성 완하제(PEG·산화마그네슘), 이후 자극성 완하제 추가"
+    - "원인 약물(아편유사제·철분제·칼슘통로차단제·항콜린제) 조정"
+    - "배변 협조 장애가 확인되면 바이오피드백 치료"
+  disposition: "경고 증상 없으면 외래 치료; 복통·구토·방귀 정지는 장폐색 의심으로 응급 평가, 경고 증상은 대장내시경 의뢰"
+  follow_up:
+    - "4주 후 배변 횟수와 변 형태 재평가"
+    - "호전 없으면 대장내시경·항문직장 기능검사"
+  red_flags: ["변에 피가 섞임", "배가 불러 오고 방귀가 안 나옴", "계속 토함", "체중 감소"]
+education:
+  - "물을 충분히 드세요."
+  - "매일 같은 시간에 화장실에 가세요."
+  - "변에 피가 나오면 꼭 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-19913.md
+  - KR_EuropePMC/europepmc_PMC11986658.md
+  - KR_EuropePMC/europepmc_PMC13382552.md
+  - US_StatPearls/statpearls_article-19739.md
+notes: >
+  v0.8.0: anorectal blockage added and manual evacuation raised to priority 2 (Rome items that point to an evacuation
+  disorder); the relief-with-defecation item became a follow-up of abdominal pain and asks whether pain changes with
+  defecation (IBS criteria use "related to defecation"; Rome V, 2026, restores "pain or discomfort" and is reported
+  to need about 3 days a month, Corsetti 2026); bloating moved to priority 3. Family-history follow-up asks the
+  relative's age at diagnosis (a first-degree relative diagnosed young brings colonoscopy forward). Alarm features:
+  new onset at 45 or more (Korean CRC screening guideline 2025 revision: average-risk adults 45-74, FIT every 1-2
+  years or colonoscopy every 10 years; the national programme offers FIT from 50), change in stool caliber, blood,
+  weight loss, anemia, family history of colorectal cancer, obstruction symptoms. Review drugs (opioids, iron,
+  calcium channel blockers, anticholinergics). Magnesium laxatives need caution in kidney disease.

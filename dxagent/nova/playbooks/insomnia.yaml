@@ -1,0 +1,119 @@
+id: insomnia
+title: {ko: 불면, en: Insomnia}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [잠을 못, 잠을 잘 못, 잠이 안, 잠들기가 힘들, 잠들기 힘들, 불면, 수면제, 자다가 자주 깨, 잠이 오지, 잠을 설치, 자다가 깨, 밤에 깨, 깊이 못 자, 잠들기 어려, 새벽에 깨]
+  not: []
+history:
+  - {id: onset, q: "언제부터 잠을 못 주무셨어요?", item: Onset, p: 1}
+  - {id: latency, q: "잠들기까지 얼마나 걸리세요?", item: Sleep onset latency, p: 1}
+  - {id: awakenings, q: "자다가 몇 번 깨세요?", item: Sleep maintenance, p: 1}
+  - {id: early, q: "새벽에 일찍 깨서 다시 못 주무세요?", item: Early awakening, p: 1}
+  - {id: hours, q: "하루에 몇 시간 주무세요?", item: Total sleep time, p: 1}
+  - {id: nights, q: "일주일에 며칠 잠을 설치세요?", item: Frequency, p: 1}
+  - {id: daytime, q: "낮에 많이 졸리세요?", item: Daytime sleepiness, p: 1}
+  - {id: day_function, q: "잠 때문에 낮에 생활이 힘드세요?", item: Daytime impairment, p: 1}
+  - {id: trigger, q: "잠을 못 자게 된 계기가 있나요?", item: Precipitating event, p: 1}
+  - {id: mood, q: "기분이 우울하세요?", item: Depressed mood, p: 1}
+  - {id: worry, q: "걱정이 많아 잠이 안 오나요?", item: Worry, p: 1}
+  - {id: apnea, q: "자다가 숨을 멈춘다는 말을 들었나요?", item: Witnessed apnea, p: 1}
+  - {id: snore, q: "주무실 때 코를 고세요?", item: Snoring, p: 1}
+  - {id: bedtime, q: "보통 몇 시에 잠자리에 드세요?", item: Bedtime, p: 2}
+  - {id: wake, q: "아침에 보통 몇 시에 일어나세요?", item: Wake time, p: 2}
+  - {id: anhedonia, q: "즐겁던 일이 재미없어졌나요?", item: Anhedonia, p: 2}
+  - {id: rls, q: "밤에 쉴 때 다리가 불편하고 움직이면 나아지나요?", item: Restless legs, p: 2}
+  - {id: nocturia, q: "밤에 소변 보러 깨세요?", item: Nocturia, p: 3}
+  - {id: nap, q: "낮잠을 주무세요?", item: Napping, p: 3}
+  - id: hypnotic
+    q: "수면제를 드시나요?"
+    item: Hypnotic use
+    sec: meds
+    p: 1
+    then:
+      - {id: hyp_dose, q: "하룻밤에 몇 알 드세요?", item: Hypnotic tablets per night, known: "\\d\\s*(알|정|개)|한 알|두 알|세 알|네 알|반 알|알씩|mg|밀리"}
+      - {id: hyp_since, q: "수면제는 언제부터 드셨어요?", item: Hypnotic duration, known: "개월|달째|달 전|년|주째|주 전|주일"}
+      - {id: hyp_up, q: "처음보다 약 양이 늘었나요?", item: Dose escalation (tolerance), known: "늘었|늘려|늘어|처음엔|처음에는"}
+  - id: stop_try
+    q: "수면제를 끊어 본 적 있나요?"
+    item: Attempts to stop
+    sec: meds
+    p: 2
+    then:
+      - {id: withdrawal, q: "끊었을 때 어떤 증상이 있었나요?", item: Withdrawal symptoms, known: "못 잤|못 자|불안|떨|땀|두근|경련"}
+  - {id: prescribers, q: "여러 병원에서 약을 받으세요?", item: Multiple prescribers, sec: meds, p: 3}
+  - {id: otc, q: "약국에서 수면유도제를 사 드세요?", item: OTC sleep aid, sec: meds, p: 3}
+  - {id: caffeine, q: "커피는 하루 몇 잔 드세요?", item: Caffeine, sec: shx, p: 1}
+  - {id: alcohol_sleep, q: "잠들려고 술을 드시나요?", item: Alcohol as hypnotic, sec: shx, p: 2}
+  - {id: shift, q: "밤에 일하는 교대 근무를 하세요?", item: Shift work, sec: shx, p: 2}
+  - {id: phone, q: "자기 전에 휴대폰을 보세요?", item: Screen use at bedtime, sec: shx, p: 3}
+  - {id: psych, q: "정신과 진료를 받은 적 있나요?", item: Psychiatric history, sec: pmh, p: 3}
+  - {id: pain, q: "아파서 잠을 깨시나요?", item: Pain, sec: ros, p: 3}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 3}
+  - {id: hot_flush, q: "얼굴이 화끈 달아오르나요?", item: Hot flushes, sec: ros, p: 3, only: female}
+exams:
+  - {name: 의식·지남력 평가, item: General, p: 1}
+  - {name: 주간 진정·불안 관찰, item: General, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 정동 평가, item: Mental status, p: 2}
+  - {name: 자세성 떨림, item: Neuro, p: 2}
+  - {name: 안구진탕 확인, item: Neuro, p: 3}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 3}
+  - {name: 병식 평가, item: Mental status, p: 3}
+differential:
+  - {en: Chronic insomnia disorder, ko: 만성 불면장애}
+  - {en: Short-term insomnia disorder, ko: 단기 불면장애}
+  - {en: "Sedative-hypnotic use disorder (tolerance, withdrawal)", ko: 진정수면제 사용장애(내성·금단)}
+  - {en: Major depressive disorder, ko: 주요우울장애}
+  - {en: Generalized anxiety disorder, ko: 범불안장애}
+  - {en: Obstructive sleep apnea, ko: 폐쇄성 수면무호흡}
+  - {en: Restless legs syndrome, ko: 하지불안증후군}
+  - {en: Circadian rhythm sleep-wake disorder, ko: 일주기리듬 수면-각성장애}
+  - {en: Hyperthyroidism, ko: 갑상샘항진증}
+  - {en: "Substance-related insomnia (caffeine, alcohol)", ko: 물질 관련 불면(카페인·알코올)}
+tests:
+  - {name: "Sleep diary for 2 weeks", for: [Chronic insomnia disorder, Short-term insomnia disorder, Circadian rhythm sleep-wake disorder, "Substance-related insomnia (caffeine, alcohol)"], why: "수면 양상·약·카페인 사용 기록"}
+  - {name: "Insomnia Severity Index", for: [Chronic insomnia disorder], why: "불면 심각도 평가"}
+  - {name: "Controlled-drug prescription history (NIMS) and urine drug screen", for: ["Sedative-hypnotic use disorder (tolerance, withdrawal)"], why: "다기관 처방·실제 복용량 확인"}
+  - {name: "PHQ-9", for: [Major depressive disorder], why: "우울 선별"}
+  - {name: "GAD-7", for: [Generalized anxiety disorder], why: "불안 선별"}
+  - {name: "TSH", for: [Hyperthyroidism], why: "갑상선 기능 확인"}
+  - {name: "Ferritin (restless legs)", for: [Restless legs syndrome], why: "철 결핍 확인"}
+  - {name: "STOP-Bang, then polysomnography", for: [Obstructive sleep apnea], why: "수면무호흡 선별·확진"}
+  - {name: "Alcohol use screening (AUDIT)", for: ["Substance-related insomnia (caffeine, alcohol)"], why: "알코올 사용 평가"}
+plan:
+  treatment:
+    - "만성 불면장애: 불면 인지행동치료(CBT-I)와 수면 위생이 일차 치료"
+    - "수면제 의존: 갑자기 끊지 말고 몇 주에 걸쳐 서서히 감량, CBT-I 병행"
+    - "수면무호흡 의심 시 수면다원검사 후 양압기 치료"
+    - "우울·불안이 동반되면 그 치료를 함께 시작"
+  disposition: "외래 치료; 수면제 과다 복용, 자살 사고, 심한 금단(경련·섬망)은 즉시 응급 진료"
+  follow_up:
+    - "2주 뒤 수면 일기로 수면 효율과 약 사용량 확인"
+    - "감량 중에는 2-4주마다 금단 증상과 수면 재평가"
+  red_flags: ["수면제를 한꺼번에 많이 먹음", "죽고 싶은 생각", "약을 끊은 뒤 경련이나 헛것", "운전 중 졸음"]
+education:
+  - "수면 일기를 2주간 써 보세요."
+  - "매일 같은 시간에 일어나세요."
+  - "수면제는 갑자기 끊지 마세요."
+  - "오후에는 커피를 드시지 마세요."
+guidelines:
+  - US_StatPearls/statpearls_article-19531.md
+  - US_VA-DoD/vadod_insomnia_i-osa-cpg-2025-guideline-final-20250915.md
+  - US_StatPearls/statpearls_article-18220.md
+  - KR_EuropePMC/europepmc_PMC7711116.md
+notes: >
+  v0.8.0 (evidence review 2026-10): a positive hypnotic answer is now quantified at once: tablets
+  per night, since when, and escalation (tolerance); attempts to stop are asked at p2 and followed by the withdrawal
+  symptoms (the focus call drops this item when no hypnotic is used). Multiple prescribers moved to p3 for the focus
+  call. The restless-legs item follows the validated single question (evening or night discomfort at rest, relieved by
+  movement; 100% sensitive, 96.8% specific; Ferri, Eur J Neurol 2007). Psychiatric history moved to p3; cognitive
+  screening was dropped for the oropharynx inspection (p3, crowded airway when snoring or apnea is yes), which the
+  focus call chooses against nystagmus (sedative toxicity). Snoring, witnessed apnea and sleepiness are three STOP
+  items (STOP-Bang sensitivity 90% in sleep clinics; Nagappa 2015). Chronic insomnia (ICSD-3-TR 2023): difficulty
+  initiating or maintaining sleep at least 3 nights a week for 3 months with daytime impairment, not solely due to
+  another condition. First-line therapy is CBT-I; never stop benzodiazepines or zolpidem abruptly. In Korea zolpidem
+  is a controlled psychotropic: the prescription history can be checked in the narcotics information system (NIMS).
+  Korean insomnia guideline 2020 (KR_EuropePMC PMC7711116).

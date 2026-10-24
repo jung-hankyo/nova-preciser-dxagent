@@ -1,0 +1,108 @@
+id: vomiting
+title: {ko: 구역·구토, en: Nausea and vomiting}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [토하, 토했, 토해, 구토, 메스꺼, 울렁거, 구역질, 토할 것 같, 속이 울렁, 메슥]
+  not: [피를 토, 토혈, 토할 때 피, 토했는데 피, 토한 것에 피, 피 섞인 토, 피가 섞인 걸 토, 커피색]
+history:
+  - {id: onset, q: "언제부터 토하셨어요?", item: Onset, p: 1}
+  - {id: frequency, q: "하루에 몇 번 토하세요?", item: Frequency, p: 1}
+  - {id: content, q: "토한 것은 어떤 모양인가요?", item: Vomitus, p: 1}
+  - id: blood
+    q: "토한 것에 피가 섞였나요?"
+    item: Hematemesis
+    p: 1
+    then:
+      - {id: amount, q: "피가 얼마나 섞여 나왔나요?", item: Hematemesis amount, known: "조금|약간|줄무늬|실처럼|많|컵|숟가락|덩어리"}
+  - id: abd_pain
+    q: "배도 아프세요?"
+    item: Abdominal pain
+    p: 1
+    then:
+      - {id: pain_first, q: "아프고 나서 토하셨나요?", item: Pain before vomiting, known: "먼저|나서|난 뒤|난 후|아픈 뒤|아픈 후|다음에"}
+  - {id: diarrhea, q: "설사를 하시나요?", item: Diarrhea, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 1}
+  - {id: intake, q: "물은 마실 수 있나요?", item: Oral intake, p: 1}
+  - {id: urine, q: "소변은 평소만큼 보세요?", item: Urine output, p: 1}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, sec: ob, p: 1, only: female}
+  - {id: meal_timing, q: "식사 후 얼마 만에 토하세요?", item: Timing after meals, p: 2}
+  - {id: flatus, q: "방귀는 나오나요?", item: Flatus, p: 2}
+  - {id: vertigo, q: "주변이 빙빙 도는 느낌인가요?", item: Vertigo, p: 2}
+  - {id: orthostatic, q: "일어설 때 어지러우세요?", item: Orthostatic dizziness, p: 2}
+  - {id: contacts, q: "같이 먹은 사람도 아픈가요?", item: Sick contacts, p: 2}
+  - {id: food, q: "최근 상한 음식을 드셨나요?", item: Suspicious food, p: 2}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 2}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, sec: ros, p: 3}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, sec: ros, p: 3}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, sec: ros, p: 3}
+  - {id: surgery_abd, q: "배 수술을 받은 적 있나요?", item: Abdominal surgery, sec: pmh, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+exams:
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 복부 시진, item: Abdomen, p: 2}
+  - {name: 기립성 혈압 측정, item: V/S, p: 2}
+  - {name: 경부 강직, item: Neuro, p: 3}
+  - {name: 피부 긴장도 확인, item: Skin, p: 3}
+differential:
+  - {en: Acute gastroenteritis, ko: 급성 위장관염}
+  - {en: Food poisoning, ko: 식중독}
+  - {en: Bowel obstruction, ko: 장폐색, cant_miss: true}
+  - {en: Acute pancreatitis, ko: 급성 췌장염, cant_miss: true}
+  - {en: Acute cholecystitis, ko: 급성 담낭염}
+  - {en: Nausea and vomiting of pregnancy, ko: 입덧·임신오조}
+  - {en: Diabetic ketoacidosis, ko: 당뇨병케톤산증, cant_miss: true}
+  - {en: Raised intracranial pressure, ko: 두개내압 상승, cant_miss: true}
+  - {en: Vestibular disorder, ko: 전정 질환}
+  - {en: Medication-induced vomiting, ko: 약물 유발 구토}
+  - {en: Gastric outlet obstruction, ko: 위출구 폐쇄}
+  - {en: Acute myocardial infarction, ko: 급성 심근경색, cant_miss: true}
+  - {en: Acute appendicitis, ko: 급성 충수염, cant_miss: true}
+  - {en: Adrenal insufficiency, ko: 부신 기능 저하증}
+  - {en: Hypercalcemia, ko: 고칼슘혈증}
+tests:
+  - {name: "Electrolytes, BUN, creatinine, glucose, calcium", for: [Acute gastroenteritis, Food poisoning, Diabetic ketoacidosis, Hypercalcemia, Adrenal insufficiency], why: "탈수·전해질·혈당·칼슘 확인"}
+  - {name: "CBC", for: [Acute appendicitis, Acute cholecystitis], why: "염증 반응 확인"}
+  - {name: "Lipase, liver function tests", for: [Acute pancreatitis, Acute cholecystitis], why: "췌장·담도 원인 확인"}
+  - {name: "Urine or serum ketones, venous blood gas (high glucose)", for: [Diabetic ketoacidosis], why: "케톤산증 확인"}
+  - {name: "Urine hCG (women 12-55)", for: [Nausea and vomiting of pregnancy, safety], why: "임신 확인(약물·영상 전)"}
+  - {name: "Plain abdominal X-ray (supine and erect)", for: [Bowel obstruction, Gastric outlet obstruction], why: "장폐색 확인"}
+  - {name: "Abdominal ultrasound or CT as indicated", for: [Acute cholecystitis, Acute appendicitis, Bowel obstruction], why: "담낭·충수·폐색 확인"}
+  - {name: "Upper endoscopy (suspected gastric outlet obstruction)", for: [Gastric outlet obstruction], why: "위출구 폐쇄 원인 확인"}
+  - {name: "12-lead ECG and troponin", for: [Acute myocardial infarction, safety], why: "심근경색 배제·QT 확인(항구토제 전)"}
+  - {name: "Brain CT or MRI (headache, focal signs or central vertigo)", for: [Raised intracranial pressure, Vestibular disorder], why: "중추성 원인 배제"}
+  - {name: "Morning cortisol (hypotension, hyponatremia, hyperkalemia)", for: [Adrenal insufficiency], why: "부신 기능 확인"}
+  - {name: "Serum drug level if taking digoxin, lithium or theophylline", for: [Medication-induced vomiting], why: "약물 중독 확인"}
+plan:
+  treatment:
+    - "조금씩 자주 경구 수분 보충, 불가능하면 수액과 전해질 교정"
+    - "항구토제 투여(QT 연장 약물은 심전도 확인 후)"
+    - "원인 치료: 장폐색은 금식·감압·외과 협진, 케톤산증은 수액·인슐린"
+  disposition: "경구 섭취 가능하고 탈수 경미하면 외래; 경구 섭취 불가, 중등도 이상 탈수, 담즙·분변성 구토, 심한 두통 동반은 응급 평가"
+  follow_up:
+    - "24~48시간 내 증상과 소변량 재확인"
+    - "검사 이상 시 결과 확인 후 원인 치료"
+  red_flags: ["피를 토함", "소변이 줄거나 안 나옴", "심한 복통이나 배가 불러 옴", "심한 두통이나 의식 저하"]
+education:
+  - "검사 결과를 보고 식사를 정할게요."
+  - "피검사로 탈수를 확인할게요."
+  - "피를 토하거나 소변이 줄면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-22095.md
+  - US_StatPearls/statpearls_article-26081.md
+  - KR_EuropePMC/europepmc_PMC6609748.md
+notes: >
+  v0.8.0: skin turgor moved to priority 3 (no proven value in adults; a dry axilla LR+ 2.8 and moist mucosa or a
+  tongue without furrows LR- 0.3 carry the evidence, McGee JAMA 1999); orthostatic BP stays (a pulse rise of 30/min
+  or severe postural dizziness), skipped when supine vitals already show shock. Follow-ups: pain before vomiting
+  points to a surgical cause (vomiting first suggests gastroenteritis); the amount of blood separates streaks
+  (Mallory-Weiss) from a bleed. Adrenal insufficiency and hypercalcemia added as metabolic causes; GLP-1 receptor
+  agonists are a common modern drug cause (asked by the new-medication item). Assess dehydration first (intake, urine
+  output, orthostatic symptoms). Bilious or feculent vomitus, distension and no flatus suggest obstruction; headache
+  with vomiting suggests a central cause; pregnancy and DKA must be excluded. ECG before QT-prolonging antiemetics.

@@ -1,0 +1,114 @@
+id: seizure
+title: {ko: 경련, en: Seizure}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [경련, 발작, 거품을 물, 뇌전증, 간질, 몸이 굳으면서, 몸을 떨면서 쓰러, 팔다리를 떨면서, 몸을 떨, 온몸을 떨, 뻣뻣해지면서, 눈이 돌아가, 눈이 뒤집]
+  not: [공황 발작, 쥐가, 눈 밑, 눈꺼풀]
+history:
+  - {id: onset, q: "언제 경련을 하셨어요?", item: Onset, p: 1}
+  - {id: witness, q: "옆에서 본 사람이 있나요?", item: Witness, p: 1}
+  - {id: standing, q: "오래 서 있다가 쓰러졌나요?", item: Prolonged standing, p: 1}
+  - {id: prodrome, q: "경련 전에 식은땀이 났나요?", item: Presyncopal prodrome, p: 1}
+  - {id: aura, q: "경련 전에 이상한 느낌이 있었나요?", item: Aura, p: 1}
+  - {id: movements, q: "몸이 어떻게 떨렸나요?", item: Movements, p: 1}
+  - {id: loc, q: "그때 의식이 있었나요?", item: Loss of consciousness, p: 1}
+  - {id: duration, q: "경련은 몇 분 동안 했나요?", item: Duration, p: 1}
+  - {id: tongue, q: "그때 혀 옆쪽을 깨물었나요?", item: Tongue bite, p: 1}
+  - {id: postictal, q: "깨어난 뒤 한동안 멍했나요?", item: Postictal confusion, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: trauma, q: "머리를 다친 적 있나요?", item: Head trauma, p: 1}
+  - {id: head_turn, q: "고개가 한쪽으로 돌아갔나요?", item: Head turning, p: 2}
+  - {id: incontinence, q: "그때 소변을 지렸나요?", item: Incontinence, p: 2}
+  - {id: focal, q: "한쪽 팔다리만 떨렸나요?", item: Focal onset, p: 2}
+  - {id: todd, q: "끝난 뒤 팔다리에 힘이 빠졌나요?", item: Postictal weakness, p: 2}
+  - {id: exertion, q: "운동 중에 쓰러지셨나요?", item: Exertional event, p: 2}
+  - {id: palpitation, q: "쓰러지기 전 가슴이 두근거렸나요?", item: Palpitation before event, p: 2}
+  - {id: sleep_loss, q: "최근 잠을 못 주무셨나요?", item: Sleep deprivation, p: 2}
+  - id: alcohol_stop
+    q: "최근 술을 갑자기 끊으셨나요?"
+    item: Alcohol withdrawal
+    p: 2
+    then:
+      - {id: last_drink, q: "마지막으로 술을 드신 게 언제인가요?", item: Time since last drink, known: "시간|어제|그제|그저께|일 전|며칠"}
+  - {id: lightheaded, q: "쓰러지기 전에 눈앞이 캄캄했나요?", item: Presyncope, p: 3}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 3}
+  - {id: neck_stiff, q: "목이 뻣뻣하세요?", item: Neck stiffness, p: 3}
+  - {id: brain_dx, q: "뇌 질환을 앓은 적 있나요?", item: Brain disease, sec: pmh, p: 2}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 3}
+  - {id: febrile_sz, q: "어릴 때 열성경련을 했나요?", item: Febrile seizure history, sec: pmh, p: 3}
+  - id: aed
+    q: "경련약을 드시고 계세요?"
+    item: Antiepileptic drug
+    sec: meds
+    p: 1
+    then:
+      - {id: aed_miss, q: "최근 약을 거른 적 있나요?", item: AED nonadherence, known: "거르|걸렀|빼먹|안 먹|못 먹|끊"}
+  - {id: dm_drug, q: "당뇨약이나 인슐린을 쓰시나요?", item: Hypoglycemic agent, sec: meds, p: 3}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 3}
+  - {id: fh_seizure, q: "가족 중 경련하는 분 있나요?", item: "FHx: epilepsy", sec: fhx, p: 3}
+  - {id: fh_scd, q: "가족 중 갑자기 돌아가신 분 있나요?", item: "FHx: sudden death", sec: fhx, p: 3}
+  - {id: driving, q: "운전을 하시나요?", item: Driving, sec: shx, p: 3}
+exams:
+  - {name: 의식·지남력 평가, item: General, p: 1}
+  - {name: 혀 시진, item: H/E/E/N/T, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 안면 근력 검사, item: Neuro, p: 2}
+  - {name: 경부 강직, item: Neuro, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 3}
+  - {name: 기립성 혈압 측정, item: V/S, p: 3}
+differential:
+  - {en: Unprovoked seizure or generalized epilepsy, ko: 비유발성 발작·전신 뇌전증}
+  - {en: Focal epilepsy with a structural lesion, ko: 구조적 병변에 의한 국소 뇌전증}
+  - {en: "Provoked seizure (hypoglycemia, hyponatremia, alcohol withdrawal)", ko: 유발 발작(저혈당·저나트륨혈증·알코올 금단)}
+  - {en: "Convulsive syncope (including cardiac arrhythmia)", ko: 경련성 실신(부정맥 포함), cant_miss: true}
+  - {en: Psychogenic non-epileptic seizure, ko: 심인성 비뇌전증 발작}
+  - {en: Central nervous system infection, ko: 중추신경계 감염, cant_miss: true}
+  - {en: Stroke or intracranial hemorrhage, ko: 뇌졸중·뇌출혈, cant_miss: true}
+  - {en: Brain tumor, ko: 뇌종양, cant_miss: true}
+  - {en: Eclampsia, ko: 자간증, cant_miss: true}
+tests:
+  - {name: "Glucose, electrolytes (sodium, calcium, magnesium), creatinine", for: ["Provoked seizure (hypoglycemia, hyponatremia, alcohol withdrawal)"], why: "대사성 유발 원인 확인"}
+  - {name: "12-lead ECG", for: ["Convulsive syncope (including cardiac arrhythmia)"], why: "부정맥·QT 연장·전도 장애 확인"}
+  - {name: "Echocardiography and Holter monitoring (exertional event, murmur, palpitation)", for: ["Convulsive syncope (including cardiac arrhythmia)"], why: "구조적 심질환·부정맥 확인"}
+  - {name: "Brain CT (trauma, focal deficit, slow recovery, anticoagulation)", for: [Stroke or intracranial hemorrhage], why: "급성 출혈·병변 확인"}
+  - {name: "Brain MRI (epilepsy protocol)", for: [Focal epilepsy with a structural lesion, Brain tumor, Unprovoked seizure or generalized epilepsy], why: "구조적 병변 확인"}
+  - {name: "EEG", for: [Unprovoked seizure or generalized epilepsy, Focal epilepsy with a structural lesion], why: "뇌전증파·재발 위험 평가"}
+  - {name: "Video-EEG monitoring (suspected psychogenic events)", for: [Psychogenic non-epileptic seizure], why: "발작 중 뇌파로 심인성 감별"}
+  - {name: "CBC, CRP; lumbar puncture if fever, meningism or immunosuppression", for: [Central nervous system infection], why: "뇌수막염·뇌염 확인"}
+  - {name: "Urine β-hCG (women 12-55)", for: [Eclampsia, safety], why: "임신 확인(자간증·항경련제 선택)"}
+  - {name: "Blood pressure and urine protein (pregnant or postpartum)", for: [Eclampsia], why: "자간증 확인"}
+  - {name: "Liver function tests, CBC (before antiseizure drugs)", for: [safety], why: "항경련제 전 기준치"}
+plan:
+  treatment:
+    - "유발 원인(저혈당·저나트륨·알코올 금단·수면 부족) 확인 후 교정"
+    - "첫 비유발 발작은 뇌파·MRI로 재발 위험을 본 뒤 항경련제 시작 여부 결정"
+    - "가임기 여성은 임신 확인 후 발프로산을 피해 항경련제 선택"
+  disposition: "의식이 회복된 첫 발작은 당일 혈액검사·심전도 후 외래 MRI·뇌파; 5분 이상 지속, 반복 발작, 회복 지연, 국소 결손, 발열은 응급실"
+  follow_up:
+    - "1-2주 안에 MRI·뇌파 결과로 재발 위험과 치료 결정"
+    - "항경련제 복용 중에는 발작 일지와 부작용·혈액검사 추적"
+  red_flags: ["5분 넘게 계속되는 경련", "깨어나지 못하고 이어지는 경련", "운동 중 쓰러짐이나 가슴 두근거림", "발열과 심한 두통"]
+education:
+  - "경련이 5분 넘으면 119를 부르세요."
+  - "당분간 운전은 하지 마세요."
+  - "심전도와 뇌 검사를 할게요."
+  - "잠을 충분히 주무세요."
+guidelines:
+  - US_StatPearls/statpearls_article-28836.md
+  - US_StatPearls/statpearls_article-26708.md
+  - US_StatPearls/statpearls_article-29805.md
+notes: >
+  v0.8.0 (evidence review 2026-10): Sheldon syncope discriminators raised to p1 (prolonged standing, presyncopal
+  sweating; the history score classified seizure vs syncope with 94% sensitivity and specificity, Sheldon JACC 2002),
+  head turning to p2. Urinary incontinence moved to p2: it does not distinguish seizure from syncope (LR+ 0.88, Brigo
+  Seizure 2013), so the assessment must not cite it as evidence of epilepsy. Lateral tongue biting (LR+ 8.2, Brigo
+  2012) is asked at p1 and examined (tongue inspection p1; facial strength to p2). Convulsive syncope from arrhythmia is
+  a can't-miss: exertion and palpitation before the event (p2), family sudden death (p3), heart auscultation and an ECG
+  for every patient. Alcohol withdrawal seizures occur 6-48 hours after the last drink. The witness account is the key
+  data; prolonged postictal confusion and head turning favour seizure; brief jerks after pallor and prodrome favour
+  convulsive syncope. A seizure lasting 5 minutes or more is status epilepticus. Advise no driving until the work-up
+  and the neurologist allow it; avoid valproate in women of childbearing potential.

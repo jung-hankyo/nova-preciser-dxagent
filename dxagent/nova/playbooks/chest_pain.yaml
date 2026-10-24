@@ -1,0 +1,123 @@
+id: chest_pain
+title: {ko: 흉통, en: Chest pain}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [가슴이 아파, 가슴이 아프, 가슴 통증, 흉통, 가슴이 답답, 가슴이 조이, 가슴이 쥐어, 가슴이 뻐근, 가슴이 따끔, 가슴이 찌르, 가슴이 조여, 가슴이 짓눌, 가슴을 누르, 가슴이 찢어, 가슴이 무거, 가슴이 찌릿]
+  not: []
+history:
+  - {id: onset, q: "언제부터 아프셨어요?", item: Onset, p: 1}
+  - {id: sudden, q: "갑자기 아프기 시작했나요?", item: Onset mode, p: 1}
+  - {id: location, q: "가슴 어느 부위가 아프세요?", item: Location, p: 1}
+  - {id: character, q: "어떤 느낌으로 아프세요?", item: Character, p: 1}
+  - {id: radiation, q: "아픈 게 다른 곳으로 퍼지나요?", item: Radiation, p: 1}
+  - {id: duration, q: "한 번 아프면 얼마나 오래가나요?", item: Duration, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - id: exertion
+    q: "힘든 일을 하면 더 아프세요?"
+    item: "Aggravating: exertion"
+    p: 1
+    then:
+      - {id: rest, q: "쉬면 좋아지나요?", item: "Relieving: rest", known: "쉬면|쉬니|쉬고|쉬어|멈추면|앉아 있으면"}
+      - {id: threshold, q: "얼마나 움직이면 아프기 시작하나요?", item: Exertional threshold, known: "계단|층|미터|걸으|걸을|뛰"}
+      - {id: crescendo, q: "요즘 더 자주 아프세요?", item: Crescendo pattern, known: "자주|잦아|점점|심해"}
+  - {id: pleuritic, q: "숨을 깊이 쉬면 더 아프세요?", item: Pleuritic pain, p: 2}
+  - {id: positional, q: "몸을 앞으로 숙이면 덜 아프세요?", item: Positional relief, p: 2}
+  - {id: syncope, q: "정신을 잃은 적이 있나요?", item: Syncope, p: 2}
+  - {id: reflux, q: "신물이 넘어오나요?", item: Acid regurgitation, p: 2}
+  - {id: frequency, q: "얼마나 자주 아프세요?", item: Frequency, p: 3}
+  - {id: tender, q: "아픈 곳을 누르면 더 아프세요?", item: Chest wall tenderness, p: 3}
+  - {id: meal, q: "식사하고 나서 아픈 편인가요?", item: Meal-related, p: 3}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: diaphoresis, q: "아플 때 식은땀이 나나요?", item: Diaphoresis, p: 1}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 3}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, p: 3}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 2}
+  - {id: leg, q: "한쪽 다리가 부은 적 있나요?", item: Unilateral leg swelling, sec: ros, p: 2}
+  - {id: cough, q: "기침을 하시나요?", item: Cough, sec: ros, p: 3}
+  - {id: hemoptysis, q: "가래에 피가 섞여 나오나요?", item: Hemoptysis, sec: ros, p: 3}
+  - {id: vesicle, q: "아픈 부위에 물집이 생겼나요?", item: Vesicular rash, sec: ros, p: 3}
+  - {id: trauma, q: "가슴을 부딪힌 적 있나요?", item: Chest trauma, sec: ros, p: 3}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 1}
+  - {id: lipid, q: "콜레스테롤이 높다고 들으셨어요?", item: dyslipidemia, sec: pmh, p: 1}
+  - {id: immobile, q: "최근 오래 누워 지낸 적 있나요?", item: Immobilization, sec: pmh, p: 2}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 3}
+  - {id: claudication, q: "걸으면 종아리가 아프세요?", item: Claudication (PAD), sec: pmh, p: 3}
+  - {id: prior_vte, q: "다리에 혈전이 생긴 적 있나요?", item: Prior DVT/PE, sec: pmh, p: 3}
+  - {id: cancer, q: "암 치료를 받은 적 있나요?", item: Malignancy, sec: pmh, p: 3}
+  - {id: estrogen, q: "여성 호르몬제를 드시나요?", item: "Estrogen (OCP/HRT)", sec: meds, p: 3, only: female}
+  - {id: fh_heart, q: "가족 중 심장병 있는 분 있나요?", item: "FHx: heart disease", sec: fhx, p: 1}
+  - {id: stress, q: "요즘 스트레스가 많으세요?", item: Stress, sec: shx, p: 3}
+exams:
+  - {name: 심음 청진, item: Heart, p: 1}
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 흉벽 압통 촉진, item: Chest, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 1}
+  - {name: 전반적 외관 시진, item: General, p: 2}
+  - {name: 경정맥압 측정, item: Neck, p: 2}
+  - {name: 양팔 혈압 비교, item: V/S, p: 2}
+  - {name: 복부 촉진, item: Abdomen, p: 3}
+differential:
+  - {en: Acute coronary syndrome, ko: 급성 관상동맥증후군, cant_miss: true}
+  - {en: Stable angina, ko: 안정형 협심증}
+  - {en: Aortic dissection, ko: 대동맥 박리, cant_miss: true}
+  - {en: Pulmonary embolism, ko: 폐색전증, cant_miss: true}
+  - {en: Pneumothorax, ko: 기흉, cant_miss: true}
+  - {en: Acute pericarditis, ko: 급성 심낭염}
+  - {en: Gastroesophageal reflux disease, ko: 위식도역류질환}
+  - {en: Costochondritis, ko: 늑연골염}
+  - {en: Panic disorder, ko: 공황장애}
+  - {en: Pneumonia, ko: 폐렴}
+  - {en: Herpes zoster, ko: 대상포진}
+tests:
+  - {name: "12-lead ECG", for: [Acute coronary syndrome, Stable angina, Acute pericarditis, Pulmonary embolism, Costochondritis, Panic disorder, Herpes zoster], why: "ST 변화·심낭염 소견 확인, 심장 원인 배제"}
+  - {name: "Cardiac troponin (serial)", for: [Acute coronary syndrome, Costochondritis, Panic disorder], why: "심근 손상 확인·배제"}
+  - {name: "Chest X-ray", for: [Pneumothorax, Pneumonia, Aortic dissection], why: "기흉·폐렴·종격동 확장 확인"}
+  - {name: "D-dimer (low or intermediate pretest probability)", for: [Pulmonary embolism], why: "폐색전증 배제"}
+  - {name: "CT pulmonary angiography", for: [Pulmonary embolism], why: "폐색전증 확진(고위험 또는 D-dimer 양성)"}
+  - {name: "CT angiography of the aorta", for: [Aortic dissection], why: "대동맥 박리 확인"}
+  - {name: "Echocardiography", for: [Acute pericarditis, Acute coronary syndrome, Aortic dissection], why: "심낭삼출·벽운동 이상 확인"}
+  - {name: "Coronary CT angiography or exercise stress test", for: [Stable angina], why: "안정 시 관상동맥 협착 평가"}
+  - {name: "Lipid profile, HbA1c", for: [Stable angina, Acute coronary syndrome], why: "심혈관 위험인자 평가"}
+  - {name: "Upper endoscopy (alarm features or no response to PPI)", for: [Gastroesophageal reflux disease], why: "식도염·경보 질환 확인"}
+  - {name: "CBC, electrolytes, creatinine", for: [Pneumonia, safety], why: "빈혈·신기능 확인(조영제·항응고 전)"}
+plan:
+  treatment:
+    - "급성 관상동맥증후군 의심 시 금기 없으면 아스피린 후 즉시 응급실 이송"
+    - "안정형 협심증: 관상동맥 검사 확인 후 항혈소판제·스타틴, 발작 시 설하 니트로글리세린"
+    - "위식도역류 의심(경보 증상 없음): 양성자펌프억제제 경험적 치료"
+    - "근골격계 통증: 진통소염제와 안심 설명(심장 원인 배제 후)"
+  disposition: "지속 통증·ST 변화·트로포닌 상승·혈역학 불안정이면 즉시 응급실, 저위험이면 외래 심장 검사"
+  follow_up:
+    - "1-2주 내 외래에서 심장 검사 결과 확인"
+    - "혈압·지질·혈당·흡연 등 위험인자 정기 관리"
+  red_flags:
+    - "5분 넘게 지속되는 가슴 통증"
+    - "식은땀·호흡곤란 동반 통증"
+    - "등으로 찢어지는 듯한 통증"
+    - "실신"
+education:
+  - "심전도와 혈액검사를 먼저 할게요."
+  - "검사 결과를 보고 치료를 정할게요."
+  - "통증이 5분 넘게 가면 바로 119를 부르세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17555.md
+  - US_StatPearls/statpearls_article-20023.md
+  - US_StatPearls/statpearls_article-100323.md
+  - US_StatPearls/statpearls_article-20603.md
+notes: >
+  v0.8.0. ERROR fixed: the closing line said to call 119 after 20 minutes; 20 minutes defines prolonged rest angina,
+  not a safe wait. Call emergency services when discomfort lasts more than a few minutes (AHA warning signs; NHLBI
+  Act in Time: within 5 minutes). PERC/Wells items added at p3 for the focus call when PE is in play: hemoptysis,
+  estrogen, prior DVT/PE, cancer (PERC sensitivity 0.97; Wells tiers 5/17/53%, Wells 2006 JAMA RCE); claudication
+  p3 (PAD LR 2.7, Fanaroff 2015). Relief with rest, exertional threshold and a crescendo pattern are follow-ups of
+  exertional pain. Demoted to p3 (LR near 1 or duplicated by the chest-wall palpation maneuver): frequency, nausea,
+  palpitation, tenderness. Describe pain as cardiac, possibly cardiac or noncardiac, not "typical/atypical" (AHA/ACC
+  2021). Pleuritic, positional, stabbing or palpation-reproducible pain LR 0.2-0.3 for ACS; radiation to one or both
+  arms or exertional pain LR 2.3-4.7 (Swap 2005). History, exam and ECG alone neither confirm nor exclude ACS: use
+  the HEART score (History, ECG, Age, Risk factors, Troponin; 0-3 low risk LR 0.20, 7-10 high risk LR 13; Fanaroff
+  2015 JAMA RCE). Dissection: absence of sudden onset LR- 0.3, BP differential between arms LR+ 5.7 (Klompas 2002);
+  raise the both-arm BP maneuver when onset was sudden or pain tearing. Red flags: rest pain over 20 minutes, tearing
+  pain to the back, syncope, dyspnea with hypoxia.

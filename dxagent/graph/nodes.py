@@ -25,8 +25,6 @@ from concurrent.futures import ThreadPoolExecutor
 from dxagent import usage
 from typing import Any, Optional
 
-from langgraph.types import interrupt
-
 from dxagent.config import DEFAULT_ACTION_COST, PRIOR_BUCKET
 from dxagent.knowledge.cards import norm_key, slug
 from dxagent.prompts import (
@@ -556,10 +554,12 @@ class Nodes:
 
     # -------------------------------------------------------------------- critic
 
-    def critic(self, state: dict[str, Any]) -> dict[str, Any]:
+    def critic(self, state: dict[str, Any], force: bool = False) -> dict[str, Any]:
+        """`force` (v0.5): the competition runtime calls the critic exactly once, just before it closes the
+        encounter, and treats that call as "about to commit" whatever the leader's probability."""
         if not self.s.critic:  # v0.4.1 ablation switch (DX_CRITIC=0)
             return {"critic_added": False}
-        call, considering = should_call_critic(state, self.s)
+        call, considering = (True, True) if force else should_call_critic(state, self.s)
         if not call:
             return {"critic_added": False}
         turn = state.get("turn", 0)
@@ -752,6 +752,8 @@ class Nodes:
     # --------------------------------------------------------------- await_reply
 
     def await_reply(self, state: dict[str, Any]) -> dict[str, Any]:
+        from langgraph.types import interrupt  # v0.5: imported here so the competition runtime needs no LangGraph
+
         actions = state.get("last_actions", [])
         reply = interrupt({"message": state.get("doctor_message", ""), "actions": actions, "turn": state.get("turn", 0)})
         kind = actions[0]["type"] if actions else "history"

@@ -3,6 +3,56 @@
 Newest first. Decision numbers refer to `docs/decisions/`; test counts are the full suite at release (the runtime's share
 in parentheses where given). Each branch's changelog stops at its own version.
 
+## 0.8.1 (2026-10-17, `first-simple-approach`)
+
+A new Doctor model. Decision 104. Official run: **63.131**. The model ID is sent on the HTTP route only; temperature is
+never sent; effort stays medium; output room per call was raised (assessment 16,000 tokens) with one retry at twice the room
+and a case cap that keeps room for the assessment and the chart. 308 tests (206).
+
+## 0.8.0 (2026-10-16)
+
+An evidence review applied to the visit, the playbooks and the note. Decisions 95-103.
+
+- **Diagnostic time-out:** one call after the history (leading diagnoses for and against, open can't-miss causes, up to 3
+  questions that would change the ranking, the exam ranked). A visit makes 4 calls.
+- **Follow-ups** after positive answers; **5 closing explanations**; gathering ends at 44, the plan is cut at 38.
+- **Note:** the number check reads Korean numerals; P.tests per purpose from linked tests; a three-part follow-up.
+- **Safety:** pelvic and speculum exams only for sexually active patients. **Playbooks:** tests and a `plan` block in all;
+  corrections from the audits; five new ones (dyslipidemia, oliguria, neck_pain, nasal_symptoms, easy_bruising).
+- Offline, 18 local cases: history 0.84, key exams 0.83, 42.5 turns. 307 tests.
+
+## 0.7.2 and 0.7.1 (2026-10-12)
+
+Every maneuver one action (decisions 92-94): 18 bundled maneuver names became single actions across 30 playbooks and
+model-written maneuvers are filtered the same way. The revised rules (86-91): 40 turns became an aim, not a cut; wrongly
+sent actions cost a turn and are counted; `reasoning_effort="medium"`; slow calls are resent under the same
+`request_id`; an SDK older than 1.0.1 is refused; the most specific diagnosis; a revised note layout. 280 tests (178).
+
+## 0.7.0 (2026-10-11)
+
+A lean, patient-specific visit and a chart-shaped note. Decisions 80-85. **Model calls 13 to 3** per playbook visit: the
+Bayesian core is off by default. One mid-visit focus call; priority tiers; communication inside 30 characters; a note with
+chart sections, turns and `( )` for what was not asked. 275 tests.
+
+## 0.6.0 (2026-10-11)
+
+Presentation playbooks. Decisions 72-79. 53 YAML playbooks (one per CPX chief complaint) with a loader, selection,
+validator and review sheet; six independent AI clinical reviewers (320 findings, each checked by hand); fixture cards off.
+Offline, 18 local cases: history 0.55 to 0.85, key exams 0.36 to 0.86. 258 tests.
+
+## 0.5.2, 0.5.1, 0.5.0 (2026-10-10)
+
+The contest runtime `dxagent/nova` and `run.py` around the unchanged core. Decisions 38-71.
+
+- **0.5.2** aligned with SDK 1.0 and the development kit: a topic plan at turn 0, children interviewed through the
+  guardian, error codes by class, a time budget anchored to the session deadline. 144 tests.
+- **0.5.1** the official contract: `prepare()` / `consult()`, the SDK adapter and model route through `client.chat()`,
+  the 30-character rule, bundled-question handling, the ledger-based note with number and sign guards, the guideline
+  library, pinned requirements, the ZIP builder. 140 tests.
+- **0.5.0** a runtime with its own model client, per-case budget, one action per turn, a Korean documentation checklist,
+  deterministic safety checks and the SOAP note from the ledger. Simulation: one action per turn costs -0.9 pp top-1, no
+  tests -18.9 pp. 123 tests.
+
 ## 0.4.2 (2026-10-02, `main`)
 
 DeepSeek (OpenAI-compatible endpoint, thinking mode per spec) and OpenAI reasoning models; default profile DeepSeek agent

@@ -1,15 +1,9 @@
 # nova-preciser-dxagent
 
-A diagnostic-interview agent, built in two layers.
-
-1. **A research core** (this branch, `main`): a knowledge-first diagnostic agent. An LLM reads replies and proposes
-   diagnoses; a deterministic core updates the probabilities from compiled disease cards, chooses the next question,
-   exam or test by value of information, and decides when to stop.
-2. **A contest runtime** (the three numbered branches): an interviewing doctor for the N.O.V.A competition, built
-   around the research core and developed against the organizers' starter package and development kit. It plays a
-   Korean, CPX-style outpatient visit one action per turn and ends with an S/O/A/P note and one diagnosis.
-
-Research prototype; not a medical device, not medical advice. No license is granted with this repository.
+A diagnostic-interview agent, built in two layers: a **research core** (`main`) and a **contest runtime** around it (the
+three `*-approach` branches), developed against the N.O.V.A competition's starter package and development kit. This
+branch, `first-simple-approach`, is the first contest version. Research prototype; not a medical device, not medical advice.
+No license is granted with this repository.
 
 ## Branches
 
@@ -25,74 +19,96 @@ Each branch builds on the one above it; the commit on each branch is the whole s
 "Official score" is the total (out of 100) of one preliminary-round evaluation. Each is a single run of a few cases; a
 difference under about 10 points between runs is noise. `second-clean-approach` is the best of the three.
 
-## How the research core works
+## What this branch does
 
-The agent reasons the way a clinician does, but writes every step down as numbers.
-
-1. **Listen.** A reply becomes a coded finding ("pain worse on inspiration": present, confidence 0.9).
-2. **Suspect.** An LLM proposes candidate diagnoses. A separate call that sees only age, sex, setting and the main
-   complaint sets each one's starting probability, so everything else the patient says counts once, as evidence.
-3. **Look up knowledge.** Each candidate has a *disease card*: how often each finding and test result occurs in that
-   disease, with the source, quote and confidence of every number.
-4. **Update.** Probabilities are recomputed from the findings by arithmetic, not by an LLM's opinion.
-5. **Double-check.** A critic looks for missed and dangerous diagnoses and can block a premature commit.
-6. **Choose the next move.** For every possible question, exam or test the agent estimates how much it would sharpen
-   the differential, minus its cost and risk, and takes the best one, or stops.
-7. **Ask**, wait for the answer, repeat.
+`run.py` and `dxagent/nova/` play one Korean, CPX-style outpatient visit per case: the agent asks one question or
+requests one exam maneuver per turn (at most 30 characters, 50 turns), explains its findings to the patient, and ends
+with an S/O/A/P note and one diagnosis. It follows the contest SDK's contract (`run_agent(prepare, consult)`) and needs
+only six pinned wheels.
 
 ```mermaid
-flowchart TD
-    A[Reply] --> B[Perceive: coded findings]
-    B --> C[Hypothesize: candidate diagnoses]
-    C --> D[Load knowledge: a disease card per candidate]
-    D --> E[Update belief]
-    E --> F{Critic: something missed?}
-    F -- yes --> D
-    F -- no --> G{Plan: stop or ask?}
-    G -- ask --> H[Interview: one conversational turn] --> I[Wait for reply] --> A
-    G -- stop --> J[Report: diagnosis and rationale]
+flowchart LR
+    O[Opening and vital signs] --> P[Pick the complaint's playbook]
+    P --> H1[History of the complaint]
+    H1 --> F[Focus call: trim and extend for this patient]
+    F --> H2[Background and review of systems]
+    H2 --> T[Time-out call: re-read, ask what would change the ranking, order the exam]
+    T --> E[Exam, one maneuver per turn]
+    E --> C[Assessment call, then 5 spoken explanations]
+    C --> N[Chart call, S/O/A/P note, one diagnosis]
 ```
 
-Knowledge is **compiled offline, never drafted during a case**: a language model copies verbatim quotes with their
-numbers from cited sources (guidelines, diagnostic-accuracy reviews, curated databases), code verifies each quote and
-computes the value, and confidence comes from a fixed table by source tier. Disease identity comes from the MONDO
-ontology and findings map to HPO. Details: `docs/CORE.md`.
+- **Playbooks lead.** 58 YAML files, one per chief complaint, give the history questions, maneuvers, differential,
+  work-up and plan. They are the deterministic floor: the visit still works when the model returns broken output. They
+  are `status: draft` until a clinician signs them off (`docs/PLAYBOOK_REVIEW.md`).
+- **Four model calls.** A focus call after the complaint's history (skips or adds items for this patient), a diagnostic
+  time-out before the exam, the assessment and plan, and the chart. Positive answers are followed up by the playbook's
+  own questions (how much, how long, getting worse).
+- **Friendly and explicit.** The doctor greets by name, acknowledges pain and worry, asks what worries the patient, and
+  ends with five spoken explanations (cause, tests, treatment, warning signs, the answer to the worry). Gathering ends
+  by turn 44 of 50.
+- **The note is written from a ledger** of what was asked and answered, in a CPX chart layout; items not confirmed stay
+  `( )`; a number the visit never produced is dropped. Deterministic safety checks run on the plan.
+- **It never fails a case.** A per-case budget keeps a valid DIAGNOSE and the one required model call, whatever the
+  model or the network does.
+- The research core (LangGraph, Bayesian belief update, knowledge cards) is still in the package but off by default
+  (`docs/CORE.md`).
+
+Offline, on 18 local practice cases with a scripted patient: history coverage 0.84, key-exam coverage 0.83, 42.5 turns,
+no refused action; the kit's three sample cases complete from the built ZIP in 38-45 turns. These numbers compare
+versions; they do not predict the score.
+
+Official run, in points (the total is out of 100):
+
+| Branch | Total | Gathering /25 | Reasoning /15 | Tests /10 | Safety /15 | Communication /15 | Efficiency /20 |
+|---|---|---|---|---|---|---|---|
+| `first-simple-approach` | 63.131 | 14.07 | 11.33 | 6.29 | 15.00 | 5.20 | 11.24 |
 
 ## Quick start
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-cp .env.example .env                    # API keys (DEEPSEEK_API_KEY, OPENAI_API_KEY) for the live commands
-
-pytest -q                               # 102 tests, no API key
-dxagent chat --offline                  # plumbing check on demo fixtures, no API key
-
-dxagent kb fetch                        # MONDO, HPO and HPO annotations
-dxagent kb compile                      # compile disease cards from sources/manifest.yaml (docs/SOURCES.md)
-dxagent chat --show-state               # a real conversation: you are the patient
-dxagent download && dxagent bench -n 20 # the AgentClinic benchmark (docs/LIVE_EXPERIMENT.md)
+python3.12 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt pytest                             # the runtime's 6 wheels
+python run.py --case dxagent/nova/cases/sample_pe.json --offline   # a full visit through consult(), no model
+pytest -q tests/test_nova.py tests/test_playbooks.py tests/test_visit.py tests/test_review.py   # 206 tests, seconds
+python -m dxagent.nova.playbooks                                   # validate the 58 playbooks
+python -m dxagent.nova.package --out dist/submission.zip           # the submission ZIP; needs the SDK's nova_sdk.py in the root
+pip install -r requirements-dev.txt && pytest -q                   # all 308 tests (graph, bench, compiler)
 ```
+
+`nova_sdk.py`, the sample runner and the guideline library come from the contest's starter package; they are git-ignored
+and not included here. Live runs with a development key: `docs/LIVE_RUNS.md`. Never put a key in a file or a commit.
+
+**Contest material.** The contest runtime was developed against the organizers' starter package and development kit.
+None of their files are in this repository, and the documents here do not restate the competition's rules, scoring or
+cases; the practice cases, answer keys and playbooks are this project's own.
 
 ## Layout
 
 ```
-dxagent/   cli, config, prompts, llm, session, priors; graph/ (LangGraph nodes); reasoning/ (belief, planner, harm,
-           safety); knowledge/ (cards, ontology, compiler/, registry/); env/ (AgentClinic adapter); bench/ (runner, report)
-tests/     102 tests: belief, planner, graph end to end, benchmark, compiler, providers
-experiments/  simulation studies of the core, their scripts and paired analyses (README.md)
-docs/      CORE.md, LIVE_EXPERIMENT.md, SOURCES.md, decisions/
+run.py              contest entry point: prepare(), consult(client, state); --case, --bench, --stdio for development
+dxagent/nova/       the runtime: agent (the visit), playbooks + playbooks/*.yaml, checklist, ledger, soap (the note),
+                    prompts, safety, korean, protocol, sdk (client adapter), llm, budget, guidelines, config,
+                    env + devclient + offline + judge + bench (development), package (the submission ZIP)
+dxagent/            the research core: graph/, reasoning/, knowledge/, env/, bench/, session, priors, llm, cli
+tests/              runtime tests (test_nova, test_playbooks, test_visit, test_review) and core tests; 308 in all
+experiments/        simulation studies, the 18 local CPX cases (data/nova_cpx) and their checks, live-run report
+docs/               guides and decision records
 ```
 
 ## Documentation
 
 | File | What it holds |
 |---|---|
-| `docs/CORE.md` | The core's design: loop, knowledge cards, planner, prior context, running it |
-| `docs/decisions/` | Decision records: prior context (20-22), the knowledge compiler (29-35) |
-| `docs/LIVE_EXPERIMENT.md` | How to run the live benchmark and read its report |
-| `docs/SOURCES.md` | Source documents the compiler can use |
-| `experiments/README.md` | Simulation studies and their results |
+| `docs/AGENT.md` | The runtime guide: the visit, playbooks, the note, failure handling, configuration, testing |
+| `docs/decisions/v0.5-simple-approach.md` | Decisions 38-104 (the runtime), with the evidence |
+| `docs/PLAYBOOK_REVIEW.md` | The AI review log and the doubts for a clinician |
+| `docs/LIVE_RUNS.md` | Step-by-step live runs with a development key |
+| `docs/CORE.md` | The research core: design, knowledge, planner, benchmark |
+| `docs/decisions/v0.3.1-prior-context.md`, `v0.4-knowledge-compiler.md` | Decisions 20-35 (the core) |
+| `docs/SOURCES.md`, `docs/sources_manifest.template.yaml` | Source documents for the knowledge compiler |
+| `experiments/README.md` | Simulation studies and the local case checks |
 | `CHANGELOG.md` | What changed in each version |
 
-Acknowledgements: AgentClinic (Schmidgall et al., MIT-licensed); the test fixtures hold three of its cases.
+The playbook review sheet (`docs/PLAYBOOKS.md`, 400 KB) is generated, not committed:
+`python -m dxagent.nova.playbooks --sheet docs/PLAYBOOKS.md`.

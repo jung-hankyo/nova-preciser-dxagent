@@ -1,0 +1,104 @@
+id: hematuria
+title: {ko: 붉은색 소변, en: Red urine and hematuria}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [소변에 피, 피오줌, 혈뇨, 소변이 빨갛, 소변 색이 빨, 소변이 붉, 콜라색 소변, 소변이 콜라, 소변 색이 콜라, 소변에서 피, 소변에 핏, 소변이 빨개, 소변 색깔이 빨, 소변 색깔이 붉, 피 섞인 소변, 피가 섞인 소변, 빨간 소변, 붉은 소변, 소변이 핏빛, 소변볼 때 피, 소변 볼 때 피, 소변을 볼 때 피, 소변을 보면 피, 붉은색 소변, 소변이 붉은색]
+  not: []
+history:
+  - {id: onset, q: "언제부터 소변 색이 변했나요?", item: Onset, p: 1}
+  - {id: color, q: "소변 색이 어떤가요?", item: Color, p: 1}
+  - {id: clots, q: "핏덩어리가 나오나요?", item: Clots, p: 1}
+  - {id: painful, q: "소변볼 때 아프세요?", item: Dysuria, p: 1}
+  - {id: flank, q: "옆구리도 아프세요?", item: Flank pain, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: menses, q: "지금 생리 중이신가요?", item: Menstruation, sec: ob, p: 1, only: female}
+  - {id: timing, q: "소변 보는 중 언제 피가 보이나요?", item: Timing in stream, p: 2}
+  - {id: stream, q: "소변 줄기가 약해졌나요?", item: Weak stream, p: 2, only: male}
+  - {id: edema, q: "몸이 붓나요?", item: Edema, p: 2}
+  - {id: foamy, q: "소변에 거품이 많이 생기나요?", item: Foamy urine, p: 2}
+  - {id: oliguria, q: "소변량이 줄었나요?", item: Oliguria, p: 2}
+  - {id: uri, q: "최근 목감기를 앓았나요?", item: Recent pharyngitis, p: 2}
+  - {id: exercise, q: "최근 심하게 운동하셨나요?", item: Strenuous exercise, p: 2}
+  - {id: myalgia, q: "근육이 아프세요?", item: Myalgia, p: 2}
+  - {id: red_food, q: "최근 붉은색 음식을 드셨나요?", item: "Red food (beet, dragon fruit)", p: 2}
+  - {id: trauma, q: "옆구리를 다친 적 있나요?", item: Trauma, p: 2}
+  - {id: frequency, q: "소변을 자주 보세요?", item: Frequency, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 3}
+  - {id: bruise, q: "멍이 잘 드는 편인가요?", item: Easy bruising, sec: ros, p: 3}
+  - {id: stone, q: "요로결석을 앓은 적 있나요?", item: Urolithiasis history, sec: pmh, p: 2}
+  - {id: kidney_dx, q: "콩팥 질환이 있으세요?", item: kidney disease, sec: pmh, p: 2}
+  - {id: radiation, q: "골반 방사선 치료를 받은 적 있나요?", item: Pelvic radiation, sec: pmh, p: 3}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 1}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: herbal, q: "한약을 오래 드신 적 있나요?", item: Herbal (aristolochic acid), sec: meds, p: 3}
+  - {id: chemicals, q: "일하면서 화학물질을 다루나요?", item: Occupational exposure, sec: shx, p: 1}
+  - {id: fh_kidney, q: "가족 중 콩팥병 있는 분 있나요?", item: "FHx: kidney disease", sec: fhx, p: 3}
+exams:
+  - {name: 늑골척추각 압통, item: CVA, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 2}
+  - {name: 방광 촉진, item: Abdomen, p: 2}
+  - {name: 전립선 촉진, item: GU, p: 2, only: male}
+  - {name: 안검 부종 시진, item: H/E/E/N/T, p: 3}
+  - {name: 피부 시진, item: Skin, p: 3}
+differential:
+  - {en: Urinary tract infection, ko: 요로감염}
+  - {en: Urolithiasis, ko: 요로결석}
+  - {en: "Urothelial carcinoma (bladder, upper tract)", ko: 요로상피암(방광·상부요로), cant_miss: true}
+  - {en: Renal cell carcinoma, ko: 신세포암, cant_miss: true}
+  - {en: Benign prostatic hyperplasia, ko: 양성 전립선 비대증}
+  - {en: Prostate cancer, ko: 전립선암}
+  - {en: IgA nephropathy, ko: IgA 신병증}
+  - {en: Post-streptococcal glomerulonephritis, ko: 연쇄상구균 감염 후 사구체신염}
+  - {en: Polycystic kidney disease, ko: 다낭성 신장병}
+  - {en: Exercise-induced hematuria, ko: 운동 유발 혈뇨}
+  - {en: Rhabdomyolysis (myoglobinuria), ko: 횡문근융해증(근색소뇨), cant_miss: true}
+  - {en: "Pseudohematuria (menstruation, food, drugs)", ko: 가성 혈뇨(생리·음식·약물)}
+tests:
+  - {name: "Urinalysis with microscopy (RBC count and morphology, casts)", for: [Urinary tract infection, Urolithiasis, IgA nephropathy, Post-streptococcal glomerulonephritis, Rhabdomyolysis (myoglobinuria), "Pseudohematuria (menstruation, food, drugs)"], why: "적혈구 유무(잠혈 양성·적혈구 없음은 근색소뇨)·사구체성 구분"}
+  - {name: "Urine culture", for: [Urinary tract infection], why: "요로감염 확인"}
+  - {name: "CK, potassium, creatinine (cola-coloured urine with muscle pain)", for: [Rhabdomyolysis (myoglobinuria)], why: "횡문근융해·급성 신손상 확인"}
+  - {name: "Creatinine, eGFR, urine protein/creatinine ratio", for: [IgA nephropathy, Post-streptococcal glomerulonephritis, Polycystic kidney disease], why: "사구체 질환·신기능 확인"}
+  - {name: "ASO, C3, C4 (recent pharyngitis)", for: [Post-streptococcal glomerulonephritis], why: "연쇄상구균 감염 후 사구체신염 확인"}
+  - {name: "Urine cytology (gross or high-risk hematuria; not routine for microhematuria)", for: ["Urothelial carcinoma (bladder, upper tract)"], why: "요로상피암 보조 검사"}
+  - {name: "CT urography (gross or high-risk hematuria); renal ultrasound (intermediate-risk microhematuria)", for: ["Urothelial carcinoma (bladder, upper tract)", Renal cell carcinoma, Urolithiasis, Polycystic kidney disease], why: "상부요로 종양·결석·낭종 확인"}
+  - {name: "Cystoscopy (all gross hematuria without a benign cause; microhematuria by risk: age, smoking, exposure)", for: ["Urothelial carcinoma (bladder, upper tract)", Benign prostatic hyperplasia], why: "방광암 배제"}
+  - {name: "PSA (men, after shared decision)", for: [Prostate cancer], why: "전립선암 선별"}
+  - {name: "Repeat urinalysis after 48-72 hours of rest, after menses or off the suspect food or drug", for: [Exercise-induced hematuria, "Pseudohematuria (menstruation, food, drugs)"], why: "일시적·가성 혈뇨 확인"}
+  - {name: "PT/aPTT or INR (on anticoagulants)", for: [safety], why: "항응고 정도 확인(혈뇨 원인 검사는 그대로 진행)"}
+plan:
+  treatment:
+    - "요로감염은 배양 후 항생제, 치료 후 소변검사로 혈뇨 소실 확인"
+    - "요로결석은 진통제·수분, 작은 원위 요관결석은 알파차단제 배출 치료"
+    - "횡문근융해증은 수액으로 소변량을 유지하고 칼륨·신기능 확인"
+    - "핏덩어리로 소변이 막히면 도뇨관 삽입과 방광 세척"
+  disposition: "양성 원인이 확인되지 않은 육안적 혈뇨는 나이와 관계없이 비뇨의학과 의뢰(방광내시경·CT 요로조영); 혈전 요폐·빈혈·신기능 저하는 응급"
+  follow_up:
+    - "치료 후 소변검사로 혈뇨 소실 확인"
+    - "저위험 미세혈뇨는 6개월 내 소변검사 재검(AUA/SUFU 2025)"
+    - "사구체성 혈뇨는 단백뇨·신기능·혈압을 신장내과에서 추적"
+  red_flags: ["핏덩어리로 소변이 막힘", "어지러움", "고열과 옆구리 통증", "소변량이 크게 줄어듦"]
+education:
+  - "소변검사와 영상검사를 할게요."
+  - "필요하면 방광내시경을 할게요."
+  - "소변이 막히면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-22710.md
+  - US_StatPearls/statpearls_article-18354.md
+  - US_StatPearls/statpearls_article-74865.md
+  - US_EuropePMC/europepmc_PMC8804685.md
+notes: >
+  v0.8.0: the official presentation is "붉은색 소변" (red urine), which includes non-blood causes, so drugs
+  (rifampin, phenazopyridine, others) and strenuous exercise were raised to priority 2, and red food (beet, red
+  dragon fruit) and muscle pain (cola-coloured urine with myalgia after exertion: rhabdomyolysis, dipstick heme with
+  no RBCs) were added; rhabdomyolysis is listed as can't-miss. Occupational chemicals raised to priority 1 (one of the
+  few history items that changes the urothelial-cancer risk category); long-term herbal medicine added at p3
+  (aristolochic acid: nephropathy and upper-tract urothelial cancer); weight loss and frequency moved to p3. Painless
+  gross hematuria in a smoker or older adult is urothelial cancer until proven otherwise, even on anticoagulants:
+  cystoscopy and CT urography for all gross hematuria without a benign cause (AUA/SUFU). Microhematuria (3 or more
+  RBC/HPF) is risk-stratified (AUA/SUFU 2020, amended 2025: low/negligible risk repeats urinalysis; age alone no
+  longer makes a woman high risk). Dysmorphic RBCs, red cell casts, proteinuria, edema or hypertension suggest a
+  glomerular source; IgA nephropathy bleeds within days of a sore throat, post-streptococcal GN after 1-3 weeks.

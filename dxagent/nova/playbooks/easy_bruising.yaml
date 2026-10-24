@@ -1,0 +1,117 @@
+id: easy_bruising
+title: {ko: 쉽게 멍이 듦, en: Easy bruising}
+status: draft
+reviewer: ""
+population: any
+pain: false
+match:
+  any: [멍이 잘, 멍이 쉽게, 멍이 자주, 멍이 들, 멍이 생, 멍이 많, 멍이 났, 멍이 퍼, 멍투성이, 쉽게 멍, 자주 멍, 잘 멍, 멍 자국, 멍자국, 멍들, 피멍, 피가 잘 안 멎, 피가 잘 안 멈, 지혈이 잘 안]
+  not: []
+history:
+  - {id: onset, q: "언제부터 멍이 잘 들었나요?", item: Onset, p: 1}
+  - {id: site, q: "멍이 주로 어디에 생기나요?", item: Bruise distribution, p: 1}
+  - {id: spontaneous, q: "부딪히지 않았는데도 멍이 드나요?", item: Spontaneous bruising, p: 1}
+  - {id: mechanism, q: "아이가 어떻게 하다가 멍이 들었나요?", item: Mechanism of injury, p: 1, only: child}
+  - {id: petechiae, q: "피부에 작고 붉은 점들이 생겼나요?", item: Petechiae, p: 1}
+  - id: nosebleed
+    q: "코피가 자주 나나요?"
+    item: Epistaxis
+    p: 1
+    then:
+      - {id: nose_duration, q: "코피가 나면 10분 넘게 가나요?", item: Epistaxis over 10 minutes, known: "분|시간"}
+  - {id: fever, q: "열이 나나요?", item: Fever, p: 1}
+  - {id: gum, q: "잇몸에서 피가 자주 나나요?", item: Gum bleeding, p: 2}
+  - {id: wound, q: "작은 상처에도 피가 오래 나나요?", item: Prolonged bleeding from minor wounds, p: 2}
+  - id: menorrhagia
+    q: "생리 양이 많은 편인가요?"
+    item: Heavy menstrual bleeding
+    p: 2
+    only: [female, adult]
+    then:
+      - {id: pads, q: "패드를 하루에 몇 개 쓰세요?", item: Pads per day, known: "개|장"}
+  - {id: fatigue, q: "쉽게 지치나요?", item: Fatigue, p: 2}
+  - {id: weight, q: "최근 살이 빠졌나요?", item: Weight loss, p: 2}
+  - {id: bone_pain, q: "뼈가 아픈 곳이 있나요?", item: Bone pain, p: 2}
+  - {id: recent_infection, q: "최근 감기 같은 병을 앓았나요?", item: Recent viral illness, p: 2}
+  - {id: joint, q: "관절이 이유 없이 부은 적 있나요?", item: Hemarthrosis, p: 3}
+  - {id: excreta, q: "소변이나 대변에 피가 섞이나요?", item: Hematuria or GI bleeding, sec: ros, p: 3}
+  - {id: surgical_bleed, q: "수술이나 이를 뽑은 뒤 피가 안 멎었나요?", item: Bleeding after surgery or dental extraction, sec: pmh, p: 2}
+  - {id: hbv, q: "B형 간염이 있다고 들은 적 있나요?", item: Hepatitis B, sec: pmh, p: 2, only: adult}
+  - id: anticoag
+    q: "피를 묽게 하는 약을 드시나요?"
+    item: Anticoagulant or antiplatelet
+    sec: meds
+    p: 1
+    only: adult
+    then:
+      - {id: anticoag_name, q: "어떤 약인가요?", item: Anticoagulant name, known: "아스피린|와파린|쿠마딘|클로피도그렐|플라빅스|자렐토|엘리퀴스|프라닥사|릭시아나|티카그렐러"}
+  - {id: nsaid, q: "진통제를 자주 드시나요?", item: NSAID use, sec: meds, p: 2, only: adult}
+  - {id: herbal, q: "한약이나 건강식품을 드시나요?", item: Herbal or supplement use, sec: meds, p: 2, only: adult}
+  - {id: steroid, q: "스테로이드를 오래 드신 적 있나요?", item: Long-term glucocorticoid, sec: meds, p: 3, only: adult}
+  - {id: antibiotic, q: "최근 항생제를 오래 드셨나요?", item: Prolonged antibiotics (vitamin K), sec: meds, p: 3, only: adult}
+  - {id: fh_bleed, q: "가족 중 피가 잘 안 멎는 분 있나요?", item: "FHx: bleeding disorder", sec: fhx, p: 1}
+  - {id: caregiver, q: "아이를 주로 누가 돌보나요?", item: Caregivers, sec: shx, p: 2, only: child}
+  - {id: mobile, q: "아이가 혼자 걷거나 기어다니나요?", item: Mobility (infant), sec: shx, p: 3, only: child}
+  - {id: diet, q: "채소나 과일을 거의 안 먹나요?", item: Diet (vitamin C), sec: shx, p: 3}
+  - {id: violence, q: "누가 때려서 멍이 든 적 있나요?", item: Interpersonal violence, sec: shx, p: 3, only: adult}
+exams:
+  - {name: 피부 시진, item: Skin, p: 1}
+  - {name: 점상출혈 확인, item: Skin, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 간·비장 촉진, item: Abdomen, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 전반적 외관 시진, item: General, p: 2}
+  - {name: 신체 계측, item: General, p: 3}
+differential:
+  - {en: "Physical abuse (child, partner or elder)", ko: 신체 학대(아동·배우자·노인), cant_miss: true}
+  - {en: "Medication-related bleeding (anticoagulants, antiplatelets, NSAIDs, herbal products)", ko: 약물 관련 출혈(항응고제·항혈소판제·NSAID·한약·건강식품)}
+  - {en: Immune thrombocytopenia, ko: 면역 혈소판감소증}
+  - {en: Acute leukemia or bone marrow failure, ko: 급성 백혈병·골수부전, cant_miss: true}
+  - {en: Von Willebrand disease or hemophilia, ko: 폰빌레브란트병·혈우병}
+  - {en: "Liver disease coagulopathy (cirrhosis)", ko: 간질환 응고장애(간경변)}
+  - {en: Vitamin C or K deficiency, ko: 비타민 C·K 결핍}
+  - {en: "Simple easy bruising (senile purpura, steroid skin fragility)", ko: 단순 쉬운 멍(노인성 자반·스테로이드 피부 취약)}
+tests:
+  - {name: "CBC with platelets, peripheral smear", for: [Immune thrombocytopenia, Acute leukemia or bone marrow failure, "Liver disease coagulopathy (cirrhosis)", "Simple easy bruising (senile purpura, steroid skin fragility)"], why: "혈소판 수·모세포·혈구 감소 확인(첫 검사)"}
+  - {name: "PT/INR, aPTT", for: ["Medication-related bleeding (anticoagulants, antiplatelets, NSAIDs, herbal products)", "Liver disease coagulopathy (cirrhosis)", Vitamin C or K deficiency, Von Willebrand disease or hemophilia, "Physical abuse (child, partner or elder)"], why: "응고인자 이상·와파린 효과 확인(학대 평가 시 출혈 질환 배제)"}
+  - {name: "VWF antigen and activity, factor VIII and IX", for: [Von Willebrand disease or hemophilia], why: "출혈 병력이 뚜렷하거나 aPTT 연장 시"}
+  - {name: "LFT, albumin, HBsAg", for: ["Liver disease coagulopathy (cirrhosis)"], why: "간질환·B형 간염 확인"}
+  - {name: "Bone marrow examination", for: [Acute leukemia or bone marrow failure, Immune thrombocytopenia], why: "도말 이상·두 계열 이상 혈구 감소, 비전형 ITP"}
+  - {name: "Skeletal survey, head imaging", for: ["Physical abuse (child, partner or elder)"], why: "학대가 의심되는 2세 미만 아이의 숨은 골절·두개 내 손상"}
+  - {name: "Vitamin C level", for: [Vitamin C or K deficiency], why: "편식·영양 결핍 시 괴혈병 확인"}
+plan:
+  treatment:
+    - "CBC·도말·PT/aPTT 결과에 따라 원인별로 치료합니다."
+    - "의심 약물(항혈소판제·NSAID·한약·건강식품)은 처방의와 상의해 중단하거나 조정합니다(항응고제는 임의 중단 금지)."
+    - "ITP는 피부 출혈뿐이면 관찰, 점막 출혈이 있으면 스테로이드나 면역글로불린을 씁니다."
+    - "비타민 K·C 결핍은 보충하고, 폰빌레브란트병·혈우병은 혈액 전문의가 지혈 계획을 세웁니다."
+  disposition: "혈소판·응고검사가 정상인 단순 멍은 외래; 심한 혈소판 감소에 점막 출혈, 발열·창백 동반 혈구감소는 당일 혈액내과 의뢰, 아동 학대 의심은 보호 조치와 112 신고."
+  follow_up:
+    - "1주 안에 혈액검사 결과를 확인합니다."
+    - "ITP나 약물 조정 후 1-2주 간격으로 혈소판 수와 멍을 추적합니다."
+  red_flags: ["멎지 않는 코피나 잇몸 출혈", "심한 두통이나 구토", "검은 변이나 피 섞인 소변", "열과 창백·뼈 통증"]
+education:
+  - "피검사로 원인을 확인할게요."
+  - "새 진통제나 한약은 먹지 마세요."
+  - "코피가 안 멎거나 머리가 아프면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-18367.md
+  - US_StatPearls/statpearls_article-23385.md
+  - US_StatPearls/statpearls_article-31270.md
+  - US_StatPearls/statpearls_article-26823.md
+notes: >
+  New in v0.8.0 (official KMLE presentation 쉽게 멍이 듦). The bleeding history follows the ISTH-BAT domains (Rodeghiero
+  2010: bruising, epistaxis over 10 minutes, minor wounds, gums, heavy menses, surgery and dental extraction,
+  joints, family history); mucocutaneous bleeding suggests a platelet or von Willebrand defect, deep joint or muscle
+  bleeding a factor deficiency (ASH/ISTH/NHF/WFH 2021 von Willebrand guideline). Children: bruising is a can't-miss
+  sign of physical abuse; TEN-4-FACESp (Pierce 2021, sensitivity 95.6%, specificity 87.1%): bruising on the torso,
+  ears, neck, frenulum, angle of the jaw, cheeks, eyelids or subconjunctivae in a child under 4 years, any bruise in an
+  infant under 4.99 months, or a patterned bruise; "those who don't cruise rarely bruise" (Sugar 1999). Ask the
+  mechanism openly, check that it fits the child's development, and exclude a bleeding disorder (CBC, PT, aPTT); in
+  Korea medical staff are mandatory reporters (112). Adults: anticoagulants, antiplatelets, NSAIDs and herbal
+  products (ginkgo, fish oil) first; liver disease (hepatitis B, 2.9% HBsAg prevalence in Korea; alcohol); senile
+  purpura on the forearms; long-term steroids. Fever, pallor, bone pain or splenomegaly with bruising suggests
+  leukemia (smear); isolated thrombocytopenia after a viral illness in a well child suggests ITP (ASH 2019:
+  observation if skin bleeding only). Fever with petechiae and confusion: consider TTP or DIC (smear for
+  schistocytes) and send to the emergency room.

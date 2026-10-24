@@ -146,6 +146,14 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ", text.lower().replace("_", " "))).strip()
 
 
+HANGUL = re.compile(r"[\uac00-\ud7a3]")
+
+
+def _compact(text: str) -> str:
+    """Lowercase, whitespace removed: the form Korean terms are matched in."""
+    return re.sub(r"\s+", "", text.lower())
+
+
 def concepts(text: str) -> list[str]:
     """Concept tokens of a text, in order (duplicates kept for the caller to set() if needed)."""
     t = f" {normalize(text)} "
@@ -168,9 +176,13 @@ class Lexicon:
 
     def __init__(self, entries: Iterable[tuple[str, str, Iterable[str]]]):
         self.codes: dict[str, set[str]] = {}
+        self.ko: dict[str, list[str]] = {}  # v0.5: Korean terms, matched as substrings (Korean is agglutinative)
         for code, label, aliases in entries:
             cs = set(concepts(code)) | set(concepts(label))
             for a in aliases:
+                if HANGUL.search(a):
+                    self.ko.setdefault(code, []).append(_compact(a))
+                    continue
                 cs |= set(concepts(a))
             if cs:
                 self.codes[code] = cs
@@ -187,17 +199,20 @@ class Lexicon:
     def retrieve(self, text: str, k: int = 60, min_cover: float = 0.2) -> list[tuple[str, float]]:
         """Codes whose concepts are mostly covered by the text, best first (IDF-weighted coverage)."""
         tc = set(concepts(text))
-        if not tc:
-            return []
-        scored = []
-        for code, cs in self.codes.items():
+        best: dict[str, float] = {}
+        for code, cs in self.codes.items() if tc else ():
             hit = cs & tc
             if not hit:
                 continue
             cover = self._w(hit) / self._w(cs)
             if cover >= min_cover:
-                scored.append((code, cover))
-        scored.sort(key=lambda x: (-x[1], x[0]))
+                best[code] = cover
+        if self.ko and HANGUL.search(text):  # v0.5: a Korean term found anywhere in the reply offers its code
+            flat = _compact(text)
+            for code, terms in self.ko.items():
+                if any(t and t in flat for t in terms):
+                    best[code] = 1.0
+        scored = sorted(best.items(), key=lambda x: (-x[1], x[0]))
         return scored[:k]
 
     def similar(self, code: str, label: str, k: int = 3, exclude: Iterable[str] = ()) -> list[tuple[str, float]]:

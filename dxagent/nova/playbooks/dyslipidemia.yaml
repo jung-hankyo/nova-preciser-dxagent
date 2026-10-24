@@ -1,0 +1,131 @@
+id: dyslipidemia
+title: {ko: 이상지질혈증, en: Dyslipidemia}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [콜레스테롤, 고지혈, 이상지질, 중성지방, 중성 지방, 엘디엘, ldl, 피가 끈적, 피가 탁, 혈중 지질, 지질 수치]
+  not: []
+history:
+  - {id: onset, q: "언제 받은 검사였나요?", item: Onset (test date), p: 1}
+  - id: values
+    q: "수치가 얼마로 나왔나요?"
+    item: Lipid values
+    p: 1
+    then:
+      - {id: ldl, q: "나쁜 콜레스테롤은 얼마였나요?", item: LDL-C, known: "엘디엘|LDL|ldl|나쁜"}
+      - {id: tg, q: "중성지방은 얼마였나요?", item: Triglyceride, known: "중성"}
+  - {id: fasting, q: "검사 전에 금식하셨나요?", item: Fasting state, p: 2}
+  - {id: prior, q: "전에도 콜레스테롤이 높다고 들었나요?", item: Prior dyslipidemia, p: 1}
+  - id: care
+    q: "콜레스테롤 약을 드신 적 있나요?"
+    item: Lipid-lowering therapy
+    p: 1
+    then:
+      - {id: myalgia, q: "약을 드시고 근육이 아팠나요?", item: Statin-associated muscle symptoms, known: "근육|쑤시|저려"}
+  - {id: chest_pain, q: "힘든 일을 하면 가슴이 아프세요?", item: Exertional chest pain, p: 1}
+  - {id: claudication, q: "걸으면 종아리가 아프세요?", item: Claudication, p: 2}
+  - {id: neuro, q: "한쪽 팔다리에 힘이 빠진 적 있나요?", item: TIA symptoms, p: 3}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, sec: ros, p: 2}
+  - {id: weight, q: "최근 몸무게가 늘었나요?", item: Weight gain, sec: ros, p: 2}
+  - {id: foamy, q: "소변에 거품이 많이 생기나요?", item: Foamy urine, sec: ros, p: 2}
+  - {id: edema, q: "몸이 붓나요?", item: Edema, sec: ros, p: 3}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, sec: ros, p: 3}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, sec: ros, p: 3}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 1}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 1}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: kidney_dx, q: "콩팥 질환이 있으세요?", item: kidney disease, sec: pmh, p: 3}
+  - {id: liver_dx, q: "간 질환이 있으세요?", item: liver disease, sec: pmh, p: 3}
+  - {id: pancreatitis, q: "췌장염을 앓은 적 있나요?", item: Pancreatitis, sec: pmh, p: 3}
+  - {id: steroid, q: "스테로이드를 드신 적 있나요?", item: Steroid use, sec: meds, p: 2}
+  - {id: bp_drug, q: "드시는 혈압약 이름을 아세요?", item: "Antihypertensive (thiazide or beta-blocker?)", sec: meds, p: 3}
+  - {id: psych_drug, q: "정신과 약을 드시나요?", item: Antipsychotic, sec: meds, p: 3}
+  - {id: hormone, q: "여성 호르몬제를 드시나요?", item: "Estrogen (OCP/HRT)", sec: meds, p: 3, only: female}
+  - id: fh_cad
+    q: "가족 중 일찍 심장병에 걸린 분 있나요?"
+    item: "FHx: premature CAD"
+    sec: fhx
+    p: 1
+    then:
+      - {id: fh_age, q: "그분이 몇 살 때 걸리셨나요?", item: Age at onset in the relative, known: "살|세|대에|대 때"}
+  - {id: fh_lipid, q: "가족 중 콜레스테롤이 높은 분 있나요?", item: "FHx: hypercholesterolemia", sec: fhx, p: 1}
+  - {id: diet, q: "기름진 음식을 자주 드세요?", item: Diet (saturated fat), sec: shx, p: 1}
+  - {id: carbs, q: "밥이나 면을 많이 드시는 편인가요?", item: Carbohydrate intake, sec: shx, p: 2}
+  - {id: exercise, q: "운동은 얼마나 하세요?", item: Exercise, sec: shx, p: 1}
+  - {id: pregnancy_plan, q: "임신 계획이 있으신가요?", item: Pregnancy plan, sec: ob, p: 3, only: female}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 허리둘레 측정, item: General, p: 1}
+  - {name: 황색종 시진, item: Skin, p: 1}
+  - {name: 각막환 확인, item: H/E/E/N/T, p: 2}
+  - {name: 갑상선 촉진, item: Neck, p: 2}
+  - {name: 경동맥 잡음 청진, item: Neck, p: 2}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 하지 말초 진찰, item: Extremities, p: 3}
+differential:
+  - {en: Primary (polygenic) hypercholesterolemia, ko: 원발성(다유전자) 고콜레스테롤혈증}
+  - {en: Familial hypercholesterolemia, ko: 가족성 고콜레스테롤혈증, cant_miss: true}
+  - {en: "Hypertriglyceridemia (diet, alcohol, obesity)", ko: 고중성지방혈증(식사·음주·비만)}
+  - {en: Diabetes mellitus or metabolic syndrome, ko: 당뇨병·대사증후군 동반 이상지질혈증}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Nephrotic syndrome or chronic kidney disease, ko: 신증후군·만성 콩팥병}
+  - {en: Drug-induced dyslipidemia, ko: 약물 유발 이상지질혈증}
+  - {en: Atherosclerotic cardiovascular disease, ko: 죽상경화성 심혈관질환, cant_miss: true}
+tests:
+  - {name: "Fasting lipid profile (total cholesterol, LDL-C, HDL-C, triglyceride)", for: [Primary (polygenic) hypercholesterolemia, Familial hypercholesterolemia, "Hypertriglyceridemia (diet, alcohol, obesity)", Drug-induced dyslipidemia], why: "진단 확인(중성지방은 공복 재검)"}
+  - {name: "Fasting glucose, HbA1c", for: [Diabetes mellitus or metabolic syndrome, safety], why: "당뇨병 확인(스타틴 전 기준치)"}
+  - {name: "TSH", for: [Hypothyroidism], why: "이차성 원인(갑상샘) 확인"}
+  - {name: "Urinalysis, creatinine/eGFR, albumin", for: [Nephrotic syndrome or chronic kidney disease], why: "이차성 원인(콩팥) 확인"}
+  - {name: "ALT/AST, CK (baseline before a statin)", for: [safety], why: "스타틴 전 간기능·근육효소 기준치"}
+  - {name: "Urine hCG (women 12-55, before a statin)", for: [safety], why: "임신 배제(스타틴 전)"}
+  - {name: "12-lead ECG", for: [Atherosclerotic cardiovascular disease], why: "허혈 소견 확인"}
+  - {name: "Exercise stress test or coronary CT angiography (exertional chest pain)", for: [Atherosclerotic cardiovascular disease], why: "관상동맥질환 확인"}
+  - {name: "Ankle-brachial index (claudication)", for: [Atherosclerotic cardiovascular disease], why: "말초동맥질환 확인"}
+  - {name: "Family cascade screening, genetic testing optional (LDL-C 190 or more, xanthoma)", for: [Familial hypercholesterolemia], why: "가족성 고콜레스테롤혈증 확인"}
+plan:
+  treatment:
+    - "모든 환자: 포화지방·정제 탄수화물 줄이기, 규칙적 유산소 운동, 금연, 절주, 체중 조절"
+    - "이차성 원인(갑상샘·콩팥·당뇨·약물) 확인 후 교정"
+    - "심혈관 위험도별 LDL-C 목표를 넘으면 간기능·임신 여부 확인 후 스타틴 시작"
+    - "중성지방 500 이상이면 금주·저지방식과 약물로 췌장염 예방"
+  disposition: "외래 관리, 운동 시 흉통 등 심혈관 증상이면 심장 검사 의뢰, LDL-C 190 이상이거나 조기 심질환 가족력이면 가족성 평가"
+  follow_up:
+    - "생활요법·약물 시작 후 4-12주에 지질·간기능 재검"
+    - "목표 도달 후 6-12개월마다 지질 검사"
+  red_flags:
+    - "운동할 때 가슴 통증"
+    - "한쪽 팔다리 마비나 말이 어눌함"
+    - "심한 윗배 통증"
+    - "약 복용 후 심한 근육통이나 검은 소변"
+education:
+  - "기름진 음식과 단 음식을 줄이세요."
+  - "꾸준히 걷기 운동을 하세요."
+  - "다음 방문 때 피검사를 다시 할게요."
+  - "가슴이 아프면 바로 오세요."
+guidelines:
+  - KR_KoMGI/komgi_chronic90_4.md
+  - KR_EuropePMC/europepmc_PMC7379116.md
+  - KR_EuropePMC/europepmc_PMC11439749.md
+  - KR_EuropePMC/europepmc_PMC9515735.md
+  - KR_EuropePMC/europepmc_PMC9925153.md
+  - US_StatPearls/statpearls_article-20796.md
+notes: >
+  v0.8.0, new (KMLE presentation 이상지질혈증 had no playbook). Korean definitions (KSoLA Dyslipidemia Fact Sheet,
+  2018 and 2022 guidelines): LDL-C 160 mg/dL or more (190 or more very high), total cholesterol 240 or more,
+  triglyceride 200 or more (500 or more very high), HDL-C below 40. Major risk factors: age (men 45 or more, women 55
+  or more), family history of premature coronary disease (first-degree men under 55, women under 65), hypertension,
+  smoking, low HDL-C; HDL-C 60 or more subtracts one. LDL-C targets: coronary artery disease below 55 and a 50% or
+  greater reduction (KSoLA 2022); the 2026 KSoLA guideline (September 2026, press reports, full text not verified)
+  extends below 55 (non-HDL below 85) to high-risk recurrent atherosclerotic ischemic stroke and adds risk-enhancing
+  factors. Diabetes (KDA/KSoLA 2023): with ASCVD below 55; 10 years or more, a major risk factor or target-organ
+  damage below 70; otherwise below 100. Primary prevention without diabetes (2018/2022): 2 or more risk factors below
+  130, 0-1 below 160. LDL-C 190 or more, tendon xanthoma or premature CAD in the family: suspect familial
+  hypercholesterolemia (KSoLA 2022 FH consensus) and screen relatives. Secondary causes to exclude before treatment:
+  hypothyroidism, nephrotic syndrome or CKD, diabetes, cholestatic liver disease, drugs (glucocorticoids, thiazides,
+  beta-blockers, estrogen, retinoids, antipsychotics, immunosuppressants), alcohol (triglyceride), pregnancy (KSoLA
+  2024 secondary dyslipidemia). Statins are avoided in pregnancy: check pregnancy status in women of childbearing age.
+  Recheck lipids and ALT 4-12 weeks after starting, then every 6-12 months. Triglyceride 500 or more: treat to prevent
+  pancreatitis. Routing: openings that name cholesterol, triglyceride or 고지혈 come here; blood pressure, weight and
+  chest pain openings keep their own playbooks when stated first.

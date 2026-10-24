@@ -1,0 +1,248 @@
+# Local CPX-style practice cases, part 2 (format and key: see cases_a.yaml).
+
+- case_id: L10
+  opening: 이름은 최영수이고, 나는 쉰두 살 남자이다. 두 달 전부터 목이 자주 마르고 살이 빠져서 병원에 왔다.
+  vital_signs: "혈압 : 138/86 mmHg\n맥박 : 84 회/분\n호흡 : 16 회/분\n체온 : 36.7°C"
+  script: |
+    두 달 전부터 목이 자주 말라서 하루에 물을 삼 리터 넘게 마신다. 소변도 자주 보고, 밤에 세 번씩 깨서 화장실에 간다. 두 달 사이에 몸무게가 팔십팔에서 팔십사 키로그람으로 사 키로그람 빠졌다. 일부러 뺀 건 아니다.
+    오히려 배가 자주 고프고 먹는 양은 늘었다. 쉽게 피곤하다. 요즘 글씨가 조금 흐릿하게 보인다. 발끝이 가끔 저리다. 상처가 잘 낫지 않는 것 같다.
+    더위를 타거나 가슴이 두근거리지는 않는다. 설사나 복통은 없다. 소변볼 때 아프지 않고 소변에 피가 섞이지 않는다. 열은 없다.
+    오 년 전에 고혈압을 진단받아 약을 먹고 있다. 건강검진은 삼 년 동안 받지 않았다. 약 알레르기는 없다. 아버지가 당뇨로 인슐린을 맞으셨고, 형도 당뇨가 있다.
+    담배는 하루 반 갑 피운다. 술은 일주일에 두 번 마신다. 택시 운전을 해서 식사가 불규칙하고 단 커피와 음료를 자주 마신다. 운동은 하지 않는다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 복부 비만
+    신체 계측 (Anthropometry): 키 172cm, 체중 84kg, 체질량지수 28.4, 허리둘레 98cm
+    활력징후 측정 (Vital signs): 138/86mmHg, 84회/분, 16회/분, 36.7°C
+    흑색가시세포증 시진 (Acanthosis nigricans): 목 뒤 착색(+)
+    구강 점막 시진 (Oral mucosa inspection): 건조(+)
+    안저 검사 (Fundoscopy): 미세동맥류(-), 출혈(-)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    단섬유 감각 검사 (Monofilament test): 양측 발바닥 10곳 중 8곳 감지(8/10, 8/10)
+    하지 말초 진찰 (Peripheral pulse and edema): 족배동맥 맥박 정상(+/+), 부종(-/-), 발 궤양(-)
+  key:
+    diagnosis: Type 2 diabetes mellitus
+    history: [onset, pmh, meds, fh, smoking, alcohol, job,
+              {polyuria: "(소변|화장실)", polydipsia: "(목이 마르|물을|갈증)", weight: "(몸무게|체중|살)", appetite: "(입맛|식욕|먹는 양|배가 고프)",
+               vision: "(눈|시야|흐릿|보이)", neuropathy: "(저리|감각)", diet: "(식사|음료|단 |식습관)", exercise: "운동", checkup: "(검진|검사)"}]
+    exams: [단섬유 감각 검사 (Monofilament test), 하지 말초 진찰 (Peripheral pulse and edema),
+            흑색가시세포증 시진 (Acanthosis nigricans), 안저 검사 (Fundoscopy)]
+
+- case_id: L11
+  opening: 이름은 김하은이고, 세 살 여자아이이다. 엄마 박소영, 서른세 살이 보호자로 함께 왔다. 엄마는 하은이가 이틀 전부터 열이 나고 귀를 자꾸 만져서 병원에 데려왔다.
+  vital_signs: "혈압 : 측정 안 함\n맥박 : 128 회/분\n호흡 : 26 회/분\n체온 : 38.8°C"
+  script: |
+    엄마가 대답한다. 하은이는 이틀 전부터 열이 났고 가장 높을 때 삼십팔 도 구 부였다. 해열제를 먹이면 떨어졌다가 여섯 시간쯤 지나 다시 오른다. 오른쪽 귀를 자꾸 잡아당기고 만지며 운다.
+    일주일 전부터 콧물과 약한 기침이 있었다. 밤에 자주 깨서 보채고, 평소보다 잘 안 먹지만 물이나 우유는 마신다. 소변은 하루 대여섯 번 기저귀가 젖는다. 토하거나 설사하지 않았다. 몸에 발진은 없다.
+    귀에서 고름이 나오지는 않는다. 목을 잘 돌리고 축 처지지는 않으며 열이 떨어지면 잘 논다. 경련은 없었다.
+    작년에 중이염을 한 번 앓았다. 그 밖에 큰 병이나 입원은 없다. 예방접종은 나이에 맞게 다 맞았다. 약 알레르기는 없다. 만삭에 자연분만으로 태어났고 발달은 정상이다.
+    어린이집에 다니고 같은 반에 감기에 걸린 아이들이 많다. 아빠가 담배를 피우지만 밖에서 피운다. 가족 중에 특별한 병은 없다.
+  exams:
+    전반적 외관 시진 (General appearance): 보챔(+), 처짐(-), 탈수 소견(-)
+    활력징후 측정 (Vital signs): 128회/분, 26회/분, 38.8°C
+    이경 검사 (Otoscopy): 우측 고막 발적(+), 팽륜(+), 광반사 소실(+), 좌측 정상
+    인두 시진 (Pharynx inspection): 경도 발적(+), 편도 비대(-), 삼출물(-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 우측 작은 림프절 촉지(+), 압통(-)
+    경부 강직 (Neck stiffness): 강직(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-), 천명음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적 빈맥, 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 간비종대(-)
+    피부 시진 (Skin inspection): 발진(-)
+  key:
+    diagnosis: Acute otitis media (right)
+    history: [onset, pmh, meds, fh,
+              {fever: "(열|체온)", ear: "(귀|고름)", uri: "(콧물|기침|감기)", feeding: "(먹|마시|수유|식사)", urine: "(소변|기저귀)",
+               gi: "(토|설사)", vaccine: "예방접종", daycare: "(어린이집|유치원)", activity: "(처지|놀|보채|기운)", seizure: "경련", birth: "(태어|출생|분만)"}]
+    exams: [이경 검사 (Otoscopy), 인두 시진 (Pharynx inspection), 경부 강직 (Neck stiffness), 폐 청진 (Lung auscultation)]
+
+- case_id: L12
+  opening: 이름은 송유나이고, 나는 스물여섯 살 여자이다. 이틀 전부터 소변볼 때 아파서 병원에 왔다.
+  vital_signs: "혈압 : 112/70 mmHg\n맥박 : 82 회/분\n호흡 : 16 회/분\n체온 : 36.9°C"
+  script: |
+    이틀 전부터 소변을 볼 때 요도가 화끈거리고 따갑다. 소변이 자주 마려워서 한 시간에 한 번은 화장실에 가고, 갑자기 참기 힘들게 마렵다. 보고 나서도 덜 본 것 같다. 아랫배가 묵직하다.
+    소변이 뿌옇고 어제는 끝에 피가 살짝 비쳤다. 열이나 오한은 없다. 옆구리나 허리가 아프지 않다. 구역이나 구토는 없다.
+    질 분비물이 늘거나 냄새가 나지 않는다. 가렵지도 않다. 한 달 전부터 새로 사귄 남자 친구와 성관계를 하고 있고 콘돔은 가끔 쓴다. 마지막 생리는 일주일 전에 끝났고 주기는 규칙적이다.
+    일 년 전에 비슷한 증상으로 방광염 진단을 받고 약을 먹고 나았다. 지병은 없다. 먹는 약은 없고 약 알레르기도 없다.
+    물을 많이 마시지 않는 편이다. 담배는 안 피우고 술은 가끔 마신다. 회사원이다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 112/70mmHg, 82회/분, 16회/분, 36.9°C
+    복부 시진 (Abdominal inspection): 편평, 팽만(-)
+    복부 촉진 (Abdominal palpation): 치골상부 압통(+), 반발압통(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    장음 청진 (Bowel sound auscultation): 정상 8회/분
+  key:
+    diagnosis: Acute uncomplicated cystitis
+    history: [onset, character, prior, pmh, meds, lmp, pregnancy, smoking,
+              {frequency: "(자주|몇 번)", urgency: "(참기|급하|갑자기)", residual: "(덜 본|잔뇨|시원)", hematuria: "(피|색|뿌옇)",
+               fever: "(열|오한)", flank: "(옆구리|허리)", discharge: "(분비물|냉|가려)", sexual: "(성관계|성생활)", fluid: "(물을|수분)"}]
+    exams: [늑골척추각 압통 (Costovertebral angle tenderness), 복부 촉진 (Abdominal palpation), 활력징후 측정 (Vital signs)]
+
+- case_id: L13
+  opening: 이름은 임정숙이고, 나는 쉰한 살 여자이다. 석 달 전부터 손가락 마디가 붓고 아파서 병원에 왔다.
+  vital_signs: "혈압 : 124/78 mmHg\n맥박 : 80 회/분\n호흡 : 16 회/분\n체온 : 37.2°C"
+  script: |
+    석 달 전부터 양쪽 손가락 마디가 아프다. 손가락이 시작되는 마디와 가운데 마디가 붓고 누르면 아프다. 양쪽 손목도 조금 아프다. 무릎이나 발은 괜찮다.
+    아침에 일어나면 손이 뻣뻣해서 주먹을 쥘 수가 없고, 한 시간 반쯤 지나야 풀린다. 움직이면 오히려 낫다. 병뚜껑을 열거나 단추 채우기가 힘들다.
+    몸이 무겁고 피곤하다. 미열이 있는 것 같고 석 달 사이 이 키로그람이 빠졌다. 얼굴에 발진이 생기거나 햇빛에 피부가 예민해지지 않는다. 입안이 헐지 않는다. 눈이나 입이 특별히 마르지는 않는다. 손가락이 추울 때 하얘지지 않는다.
+    다친 적은 없다. 최근 설사나 소변 증상, 목감기는 없었다. 진통제를 먹으면 조금 낫다. 지병은 없고 약 알레르기는 없다. 폐경은 일 년 전에 되었다.
+    이모가 류마티스 관절염을 앓았다. 담배는 안 피우고 술은 마시지 않는다. 식당에서 일해서 손을 많이 쓴다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 124/78mmHg, 80회/분, 16회/분, 37.2°C
+    손 관절 진찰 (Hand joint examination): 양측 제2·3 중수지관절과 근위지관절 부종(+), 압통(+), 원위지관절 정상, 변형(-)
+    손목 관절 진찰 (Wrist examination): 양측 압통(+), 부종 경도(+)
+    무릎 관절 진찰 (Knee examination): 부종(-/-), 압통(-/-)
+    피부 시진 (Skin inspection): 발진(-), 류마티스 결절(-)
+    구강 점막 시진 (Oral mucosa inspection): 궤양(-)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백 경도(+/+), 충혈(-/-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+  key:
+    diagnosis: Rheumatoid arthritis
+    history: [onset, location, severity, aggravating, relieving, pmh, meds, fh, smoking, job,
+              {joints: "(어느|어디|마디|관절)", symmetry: "(양쪽|한쪽|대칭)", morning: "(아침|뻣뻣|강직)", swelling: "(붓|부어)",
+               systemic: "(열|피곤|피로|체중|살이)", rash: "(발진|햇빛|피부)", sicca: "(입이 마르|눈이 마르|건조)", raynaud: "(하얘|추울|색이)",
+               trauma: "(다친|다치)", infection: "(설사|소변|목감기|감기)"}]
+    exams: [손 관절 진찰 (Hand joint examination), 손목 관절 진찰 (Wrist examination), 피부 시진 (Skin inspection)]
+
+- case_id: L14
+  opening: 이름은 배준호이고, 나는 서른한 살 남자이다. 두 달 전부터 기분이 계속 가라앉아서 병원에 왔다.
+  vital_signs: "혈압 : 122/76 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    두 달 전에 다니던 회사에서 구조조정으로 그만두게 되었다. 그 뒤로 거의 매일 하루 종일 기분이 가라앉아 있다. 예전에 좋아하던 축구나 게임도 재미가 없어서 안 한다.
+    새벽 네 시쯤 깨서 다시 잠들지 못한다. 입맛이 없어서 하루 한 끼 정도 먹고, 두 달 사이에 사 키로그람이 빠졌다. 늘 기운이 없고 집중이 안 돼서 구직 서류를 쓰다 말다 한다. 내가 쓸모없는 사람 같고 가족에게 미안하다.
+    가끔 차라리 잠들어서 깨지 않았으면 좋겠다는 생각이 들지만, 구체적으로 죽을 방법을 생각하거나 시도한 적은 없다. 자해한 적도 없다. 기분이 지나치게 들뜨거나 잠을 안 자도 힘이 넘친 적은 없다. 헛것이 보이거나 들리지 않는다.
+    요즘 혼자 술을 마시는 날이 늘어서 일주일에 네 번, 한 번에 소주 한 병을 마신다. 담배는 하루 반 갑 피운다. 정신과 진료나 상담을 받은 적은 없다. 지병은 없고 먹는 약도 없다. 약 알레르기는 없다.
+    더위나 추위를 특별히 타지 않는다. 어머니가 우울증으로 치료를 받으셨다. 부모님과 함께 산다.
+  exams:
+    전반적 외관 시진 (General appearance): 위생 상태 양호, 시선 접촉 감소, 정신운동 지체 경도(+)
+    의식·지남력 평가 (Mental status): 명료, 지남력 3/3점
+    기분·정동 평가 (Mood and affect): 우울한 기분, 정동 위축(+), 사고 내용 무가치감(+), 자살 계획(-)
+    활력징후 측정 (Vital signs): 122/76mmHg, 74회/분, 16회/분, 36.5°C
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    인지기능 선별검사 (Cognitive screening): 정상 범위
+  key:
+    diagnosis: Major depressive disorder
+    history: [onset, pmh, meds, fh, smoking, alcohol, job,
+              {mood: "(기분|우울)", anhedonia: "(흥미|재미|즐거)", sleep: "(잠|수면)", appetite: "(입맛|식욕|체중|몸무게)",
+               energy: "(기운|피곤|피로)", concentration: "집중", guilt: "(쓸모|자책|죄책|미안)", suicide: "(죽|자살|해치|자해)",
+               trigger: "(스트레스|계기|힘든 일|일이 있)", mania: "(들뜨|기분이 좋|힘이 넘)", psychosis: "(헛것|환청|들리)", psych_care: "(정신과|상담|치료)"}]
+    exams: [기분·정동 평가 (Mood and affect), 의식·지남력 평가 (Mental status), 갑상선 촉진 (Thyroid palpation)]
+
+- case_id: L15
+  opening: 이름은 조병철이고, 일흔여섯 살 남자이다. 딸 조은정, 마흔여덟 살이 보호자로 함께 왔다. 딸은 아버지가 일 년 전부터 자꾸 깜빡하셔서 모시고 왔다.
+  vital_signs: "혈압 : 142/84 mmHg\n맥박 : 70 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
+  script: |
+    딸이 주로 대답한다. 일 년 전부터 아버지가 방금 한 이야기를 또 묻고, 약속을 자꾸 잊으신다. 처음에는 나이 탓이라 생각했는데 점점 심해졌다. 갑자기 나빠진 적은 없고 서서히 나빠졌다.
+    옛날 일은 잘 기억하시는데 최근 일을 잊으신다. 지난달에는 자주 가던 시장에서 길을 잃어 경찰이 모셔 왔다. 통장 관리를 못 하셔서 공과금이 밀렸다. 요리하다 가스 불을 켜 놓고 잊은 적도 있다. 옷 입기나 식사, 화장실은 혼자 하신다.
+    성격이 조금 고집스러워졌지만 화를 내거나 헛것을 보시지는 않는다. 기분이 우울해 보이지는 않는다. 잘 넘어지지 않고 걸음걸이는 괜찮다. 손이 떨리지 않는다. 소변 실수는 없다. 머리를 다친 적은 없다.
+    고혈압과 고지혈증 약을 드신다. 수면제나 다른 약은 드시지 않는다. 뇌졸중을 앓은 적은 없다. 약 알레르기는 없다. 할머니가 치매를 앓으셨다.
+    아버지는 혼자 사시고 딸이 일주일에 두 번 들른다. 담배는 이십 년 전에 끊으셨고 술은 드시지 않는다. 초등학교를 졸업하셨다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 단정함
+    의식·지남력 평가 (Mental status): 명료, 시간 지남력 저하(+), 장소·사람 지남력 정상
+    인지기능 선별검사 (Cognitive screening): 간이정신상태검사 21/30, 지연 회상 0/3
+    활력징후 측정 (Vital signs): 142/84mmHg, 70회/분, 16회/분, 36.4°C
+    뇌신경 검사 (Cranial nerve examination): 이상 소견(-)
+    사지 근력 검사 (Limb muscle power): 상하지 근력 5/5
+    떨림·서동 관찰 (Resting tremor and bradykinesia): 안정 시 떨림(-), 서동(-), 경축(-)
+    보행 관찰 (Gait): 정상
+    심부건반사 (Deep tendon reflex): 정상(2+), 바빈스키 징후(-/-)
+    경동맥 잡음 청진 (Carotid bruit): 잡음(-/-)
+  key:
+    diagnosis: Alzheimer disease dementia
+    history: [onset, pmh, meds, fh, smoking, alcohol,
+              {course: "(점점|갑자기|서서히|계단|나빠)", recent_remote: "(최근|옛날|예전)", adl: "(일상|돈|통장|운전|길을|요리|옷|식사)",
+               behavior: "(성격|화를|헛것|환각)", mood: "(우울|기분)", gait: "(넘어|걸음|걷)", tremor: "떨리", continence: "(소변 실수|실금)",
+               head_injury: "(머리를 다|다친)", stroke: "뇌졸중", sedatives: "(수면제|약)", education: "(학교|교육)", living: "(혼자|같이 사|함께 사)"}]
+    exams: [인지기능 선별검사 (Cognitive screening), 의식·지남력 평가 (Mental status), 보행 관찰 (Gait),
+            떨림·서동 관찰 (Resting tremor and bradykinesia)]
+
+- case_id: L16
+  opening: 이름은 정다은이고, 나는 스물네 살 여자이다. 넉 달째 생리를 하지 않아서 병원에 왔다.
+  vital_signs: "혈압 : 122/80 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    마지막 생리는 넉 달 전이다. 열네 살에 초경을 했고, 그때부터 생리가 두세 달에 한 번씩 불규칙하게 왔다. 이렇게 넉 달 동안 없었던 적은 처음이라 걱정이 된다.
+    일 년 사이에 몸무게가 육 키로그람 늘었다. 턱과 입 주위에 여드름이 자주 나고, 턱과 배에 굵은 털이 나서 신경 쓰인다. 머리카락이 조금 빠진다.
+    성관계는 한 적이 없어서 임신 가능성은 없다. 젖꼭지에서 분비물이 나온 적은 없다. 두통이나 시야가 좁아지는 증상은 없다. 더위나 추위를 타지 않고 피곤하지 않다.
+    무리하게 다이어트를 하거나 운동을 심하게 하지 않는다. 최근 특별한 스트레스는 없다. 먹는 약은 없고 지병도 없다. 약 알레르기는 없다.
+    어머니가 당뇨가 있다. 담배는 안 피우고 술은 가끔 마신다. 대학원생이다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 비만
+    신체 계측 (Anthropometry): 키 162cm, 체중 76kg, 체질량지수 29.0
+    활력징후 측정 (Vital signs): 122/80mmHg, 76회/분, 16회/분, 36.6°C
+    피부 시진 (Skin inspection): 턱·입 주위 여드름(+)
+    다모증 평가 (Hirsutism): 턱·하복부 성모 증가(+), 수정 페리먼-갤웨이 점수 12점
+    흑색가시세포증 시진 (Acanthosis nigricans): 목 뒤 착색(+)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    유즙 분비 확인 (Galactorrhea): 분비(-/-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+  key:
+    diagnosis: Polycystic ovary syndrome
+    history: [pmh, meds, fh, smoking, alcohol,
+              {lmp: "(마지막 생리|마지막 월경|언제)", cycle: "(주기|초경|규칙)", pregnancy: "(임신|성관계)", weight: "(몸무게|체중|살)",
+               hirsutism: "털", acne: "여드름", galactorrhea: "(젖|유즙|분비물)", pituitary: "(두통|시야)", thyroid: "(더위|추위)",
+               diet_exercise: "(다이어트|운동)", stress: "스트레스"}]
+    exams: [다모증 평가 (Hirsutism), 흑색가시세포증 시진 (Acanthosis nigricans), 유즙 분비 확인 (Galactorrhea),
+            갑상선 촉진 (Thyroid palpation)]
+
+- case_id: L17
+  opening: 이름은 유시우이고, 일곱 살 남자아이이다. 엄마 김나래, 서른여덟 살이 보호자로 함께 왔다. 엄마는 시우의 얼굴이 일주일 전부터 부어서 병원에 데려왔다.
+  vital_signs: "혈압 : 102/64 mmHg\n맥박 : 92 회/분\n호흡 : 20 회/분\n체온 : 36.6°C"
+  script: |
+    엄마가 대답한다. 일주일 전부터 아침에 일어나면 시우의 눈두덩이 퉁퉁 부어 있다. 오후가 되면 조금 빠지는데, 사흘 전부터는 발목과 정강이도 붓고 신발이 꽉 낀다. 배도 조금 불러 보인다.
+    소변에 거품이 많이 생기고 오래 남는다. 소변량은 평소보다 조금 줄었다. 소변 색이 콜라처럼 진하거나 피가 섞이지는 않았다. 일주일 사이 몸무게가 이 키로그람 늘었다.
+    이 주 전에 콧물 감기를 앓았다. 목이 붓거나 아프다고 하지는 않았다. 열은 없다. 피부에 발진이나 멍이 없고 관절이 아프다고 하지 않는다. 숨이 차거나 기침하지는 않는다. 배가 조금 아프다고 한다.
+    예방접종은 다 맞았다. 만삭 자연분만으로 태어났고 발달은 정상이다. 큰 병을 앓은 적은 없고 먹는 약도 없다. 약 알레르기는 없다.
+    가족 중에 콩팥병을 앓은 사람은 없다. 초등학교 일학년이다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 안면 부종(+)
+    활력징후 측정 (Vital signs): 102/64mmHg, 92회/분, 20회/분, 36.6°C
+    안검 부종 시진 (Eyelid edema): 양측 안검 부종(+/+)
+    인두 시진 (Pharynx inspection): 발적(-), 편도 비대(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-), 호흡음 감소(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 시진 (Abdominal inspection): 경도 팽만(+)
+    복수 확인 (Shifting dullness): 이동탁음(+)
+    복부 촉진 (Abdominal palpation): 압통(-), 간비종대(-)
+    하지 말초 진찰 (Peripheral pulse and edema): 함요부종 양측 정강이(2+/2+)
+    피부 시진 (Skin inspection): 발진(-), 자반(-)
+  key:
+    diagnosis: Nephrotic syndrome (minimal change disease)
+    history: [onset, pmh, meds, fh,
+              {site: "(어디|얼굴|눈|다리|발)", diurnal: "(아침|오후|저녁)", urine_amount: "(소변 양|소변량|소변을 덜)", urine_look: "(거품|색|피)",
+               weight: "(몸무게|체중)", infection: "(감기|목이|인후|편도)", rash_joint: "(발진|멍|관절)", dyspnea: "(숨|기침)",
+               vaccine: "예방접종", birth: "(태어|출생|분만)", fever: "열"}]
+    exams: [하지 말초 진찰 (Peripheral pulse and edema), 안검 부종 시진 (Eyelid edema), 복수 확인 (Shifting dullness),
+            활력징후 측정 (Vital signs)]
+
+- case_id: L18
+  opening: 이름은 신동욱이고, 나는 예순일곱 살 남자이다. 두 달 전부터 대변에 피가 섞여 나와서 병원에 왔다.
+  vital_signs: "혈압 : 126/74 mmHg\n맥박 : 92 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    두 달 전부터 대변에 검붉은 피가 섞여 나온다. 일주일에 서너 번 그렇다. 휴지에만 묻는 게 아니라 변에 섞여 있다. 항문이 아프지는 않다.
+    대변이 예전보다 가늘어졌고, 변비와 묽은 변이 번갈아 생긴다. 변을 보고 나도 덜 본 것 같은 느낌이 자주 든다. 배가 가끔 더부룩하지만 많이 아프지는 않다. 구토는 없다.
+    석 달 사이에 몸무게가 오 키로그람 빠졌고 입맛이 없다. 요즘 쉽게 피곤하고 계단을 오르면 숨이 찬다. 열이나 식은땀은 없다.
+    대장내시경은 받아 본 적이 없다. 치질은 없다. 고혈압 약을 먹고 있고, 아스피린이나 피를 묽게 하는 약은 먹지 않는다. 약 알레르기는 없다.
+    아버지가 일흔 살에 대장암으로 돌아가셨다. 담배는 하루 한 갑씩 사십 년 피웠고, 술은 일주일에 세 번 마신다. 고기를 좋아하고 채소는 잘 안 먹는다. 은퇴한 공무원이다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 마른 체형
+    활력징후 측정 (Vital signs): 126/74mmHg, 92회/분, 16회/분, 36.5°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(+/+), 황달(-/-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 시진 (Abdominal inspection): 편평, 팽만(-)
+    장음 청진 (Bowel sound auscultation): 정상 10회/분
+    복부 촉진 (Abdominal palpation): 좌하복부 경도 압통(+), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    직장수지검사 (Digital rectal examination): 종괴 촉지(-), 장갑에 검붉은 혈액(+), 치핵(-)
+  key:
+    diagnosis: Colorectal cancer
+    history: [onset, timing, pmh, meds, fh, smoking, alcohol,
+              {blood_color: "(색|검|선홍|붉)", mixed: "(섞|묻|휴지)", bowel_habit: "(가늘|변비|설사|묽|습관)", tenesmus: "(덜 본|잔변|시원)",
+               weight: "(몸무게|체중|살)", abd_pain: "(배가|복통|배)", colonoscopy: "(대장내시경|내시경)", anticoagulant: "(아스피린|피를 묽|항응고)",
+               anemia: "(피곤|어지|숨이)", diet: "(고기|채소|식습관|음식)", anal: "(항문|치질)"}]
+    exams: [직장수지검사 (Digital rectal examination), 결막·공막 시진 (Conjunctiva and sclera inspection),
+            복부 촉진 (Abdominal palpation), 간·비장 촉진 (Liver and spleen palpation)]

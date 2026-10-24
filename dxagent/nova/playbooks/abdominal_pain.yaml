@@ -1,0 +1,124 @@
+id: abdominal_pain
+title: {ko: 복통, en: Abdominal pain}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [배가 아파, 배가 아프, 복통, 배를 쥐어, 명치가 아파, 명치가 아프, 윗배가 아파, 윗배가 아프, 아랫배가 아파, 아랫배가 아프, 옆구리가 아파, 옆구리가 아프, 배꼽 주위가 아, 배 아파, 배아파, 배가 살살, 배가 쥐어, 배가 콕콕, 배가 쑤, 배가 뒤틀, 배가 끊어질, 배가 찢어질, 복부 통증, 배꼽 주변]
+  not: []
+history:
+  - {id: onset, q: "언제부터 아프셨어요?", item: Onset, p: 1}
+  - {id: sudden, q: "갑자기 아프기 시작했나요?", item: Onset mode, p: 1}
+  - {id: location, q: "배 어느 쪽이 아프세요?", item: Location, p: 1}
+  - {id: migration, q: "처음 아팠던 곳과 지금이 같나요?", item: Migration, p: 1}
+  - {id: character, q: "어떤 느낌으로 아프세요?", item: Character, p: 1}
+  - {id: radiation, q: "아픈 게 다른 곳으로 퍼지나요?", item: Radiation, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: constant, q: "아픈 게 계속되나요?", item: Constant or colicky, p: 1}
+  - {id: meal, q: "식사하면 더 아프세요?", item: Meal relation, p: 1}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 1}
+  - id: vomiting
+    q: "토하신 적 있나요?"
+    item: Vomiting
+    p: 1
+    then:
+      - {id: pain_first, q: "아프고 나서 토하셨나요?", item: Pain before vomiting, known: "먼저|나서|난 뒤|난 후|아픈 뒤|아픈 후|다음에"}
+  - {id: last_stool, q: "마지막 대변은 언제 보셨어요?", item: Last bowel movement, p: 1}
+  - {id: diarrhea, q: "설사를 하시나요?", item: Diarrhea, p: 1}
+  - {id: stool_color, q: "변 색깔은 어떤가요?", item: Stool color, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, sec: ob, p: 1, only: female}
+  - {id: movement, q: "움직이면 더 아프세요?", item: Pain with movement, p: 2}
+  - {id: vag_bleeding, q: "생리 외에 피가 비친 적 있나요?", item: Vaginal bleeding, sec: ob, p: 2, only: female}
+  - {id: dysuria, q: "소변볼 때 아프세요?", item: Dysuria, sec: ros, p: 2}
+  - {id: nsaid, q: "진통제를 자주 드세요?", item: NSAID, sec: meds, p: 2}
+  - {id: relieving, q: "어떻게 하면 덜 아프세요?", item: Relieving, p: 2}
+  - {id: duration, q: "한 번 아프면 얼마나 가나요?", item: Duration, p: 3}
+  - {id: defecation, q: "변을 보면 덜 아픈가요?", item: Relief with defecation, p: 3}
+  - {id: appetite, q: "입맛은 어떠세요?", item: Appetite, p: 3}
+  - {id: flatus, q: "방귀는 나오나요?", item: Flatus, p: 3}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, sec: ros, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 3}
+  - {id: hematuria, q: "소변에 피가 섞여 나오나요?", item: Hematuria, sec: ros, p: 3}
+  - {id: chest, q: "가슴도 아프세요?", item: Chest pain, sec: ros, p: 3}
+  - {id: discharge, q: "질 분비물이 늘었나요?", item: Vaginal discharge, sec: ob, p: 3, only: female}
+  - {id: sexual, q: "성관계를 하신 적 있나요?", item: Sexual activity, sec: ob, p: 3, only: [female, adult], gate: sexual}
+  - {id: gi_dx, q: "위장 질환을 앓은 적 있나요?", item: GI disease, sec: pmh, p: 3}
+  - {id: gallstone, q: "담석이 있다고 들은 적 있나요?", item: Gallstone, sec: pmh, p: 3}
+  - {id: af, q: "부정맥이 있다고 들은 적 있나요?", item: Atrial fibrillation, sec: pmh, p: 3}
+  - {id: food, q: "최근 상한 음식을 드셨나요?", item: Suspicious food, sec: shx, p: 3}
+exams:
+  - {name: 복부 시진, item: Abdomen, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 반발압통, item: Abdomen, p: 1}
+  - {name: 늑골척추각 압통, item: CVA, p: 1}
+  - {name: 맥버니점 압통, item: Abdomen, p: 2}
+  - {name: 머피 징후, item: Abdomen, p: 2}
+  - {name: 양손 골반 내진, item: GU, p: 2, only: [female, sexually_active]}
+differential:
+  - {en: Acute appendicitis, ko: 급성 충수염, cant_miss: true}
+  - {en: "Acute cholecystitis, biliary colic or cholangitis", ko: 급성 담낭염·담석 산통·담관염, cant_miss: true}
+  - {en: Acute pancreatitis, ko: 급성 췌장염, cant_miss: true}
+  - {en: Peptic ulcer disease or perforation, ko: 소화성 궤양·천공, cant_miss: true}
+  - {en: Acute gastroenteritis, ko: 급성 위장관염}
+  - {en: Ureteral stone, ko: 요관결석}
+  - {en: Bowel obstruction, ko: 장폐색, cant_miss: true}
+  - {en: Ectopic pregnancy, ko: 자궁외 임신, cant_miss: true}
+  - {en: Pelvic inflammatory disease, ko: 골반염}
+  - {en: Diverticulitis, ko: 게실염}
+  - {en: Acute pyelonephritis, ko: 급성 신우신염}
+  - {en: Mesenteric ischemia, ko: 장간막 허혈, cant_miss: true}
+  - {en: Acute myocardial infarction (epigastric pain), ko: 급성 심근경색(명치 통증), cant_miss: true}
+  - {en: Irritable bowel syndrome, ko: 과민성 장증후군}
+  - {en: Ruptured abdominal aortic aneurysm, ko: 복부대동맥류 파열, cant_miss: true}
+  - {en: Ovarian torsion or ruptured ovarian cyst, ko: 난소 염전·난소낭종 파열, cant_miss: true}
+tests:
+  - {name: "CBC, CRP", for: [Acute appendicitis, "Acute cholecystitis, biliary colic or cholangitis", Diverticulitis, Pelvic inflammatory disease, Irritable bowel syndrome], why: "염증 반응 확인"}
+  - {name: "Lipase (amylase only if lipase is unavailable)", for: [Acute pancreatitis], why: "췌장염 확인(정상 상한 3배 이상)"}
+  - {name: "Liver function tests (bilirubin, ALP, GGT)", for: ["Acute cholecystitis, biliary colic or cholangitis"], why: "담도 폐쇄·담관염 확인"}
+  - {name: "Electrolytes, BUN, creatinine", for: [Acute gastroenteritis, Bowel obstruction, safety], why: "탈수 확인·조영제 전 신기능"}
+  - {name: "Urinalysis", for: [Ureteral stone, Acute pyelonephritis], why: "혈뇨·농뇨 확인"}
+  - {name: "Serum or urine hCG (women 12-55)", for: [Ectopic pregnancy, safety], why: "임신 배제(영상·약물 전)"}
+  - {name: "Abdominal ultrasound", for: ["Acute cholecystitis, biliary colic or cholangitis", Acute appendicitis], why: "담낭·담관·충수 확인"}
+  - {name: "Pelvic or transvaginal ultrasound (women)", for: [Ectopic pregnancy, "Ovarian torsion or ruptured ovarian cyst", Pelvic inflammatory disease], why: "자궁외 임신·난소 확인"}
+  - {name: "Abdominal CT (contrast)", for: [Acute appendicitis, Diverticulitis, Bowel obstruction, Peptic ulcer disease or perforation, Ureteral stone], why: "충수염·게실염·폐색·천공 확인"}
+  - {name: "CT angiography (suspected mesenteric ischemia or aortic aneurysm)", for: [Mesenteric ischemia, Ruptured abdominal aortic aneurysm], why: "혈관 원인 확인"}
+  - {name: "Erect chest X-ray and plain abdominal X-ray", for: [Peptic ulcer disease or perforation, Bowel obstruction], why: "유리 공기·장폐색 확인"}
+  - {name: "12-lead ECG and troponin (epigastric pain with cardiac risk)", for: [Acute myocardial infarction (epigastric pain)], why: "심근경색 배제"}
+  - {name: "NAAT for chlamydia and gonorrhea (sexually active women)", for: [Pelvic inflammatory disease], why: "골반염 원인균 확인"}
+plan:
+  treatment:
+    - "금식, 수액, 통증 조절(진통제는 진단을 늦추지 않음)"
+    - "영상검사로 충수염·담낭염·천공·폐색 확인 시 외과 협진"
+    - "hCG 양성이면 산부인과 협진, 골반염은 항생제 시작"
+  disposition: "복막자극 징후, 활력징후 불안정, 임신 반응 양성 복통은 응급 평가; 원인 불명의 경미한 복통은 외래 재평가"
+  follow_up:
+    - "원인이 정해지지 않으면 24시간 내 재진하여 복부 재진찰"
+    - "검사 결과 확인 후 원인 질환별 치료와 추적"
+  red_flags: ["점점 심해지는 복통", "고열이나 반복되는 구토", "토혈이나 검은 변", "어지럼이나 실신"]
+education:
+  - "피검사와 복부 영상검사를 할게요."
+  - "검사 전까지는 금식해 주세요."
+  - "통증이 심해지면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17142.md
+  - US_StatPearls/statpearls_article-17784.md
+  - US_StatPearls/statpearls_article-19448.md
+  - US_StatPearls/statpearls_article-26578.md
+notes: >
+  v0.8.0: Rovsing sign replaced by McBurney point tenderness (Rovsing has the weakest evidence of the RLQ signs; psoas
+  LR+ 2.4 and rigidity LR+ 3.8, Snyder AFP 2018); the focus call may add 요근 징후 or 폐쇄근 징후 for RLQ pain.
+  "Pain before vomiting" is now a follow-up of the vomiting item (vomiting before pain argues against appendicitis,
+  Wagner JAMA 1996). Relieving factors, duration, appetite, flatus, jaundice, weight loss, prior GI disease and
+  vaginal discharge moved to priority 3 to keep the female plan within 40 turns (it ran to about 48-51). Abdominal
+  percussion gave its slot to a bimanual pelvic exam for sexually active women (PID minimum criteria: cervical motion,
+  uterine or adnexal tenderness, CDC 2021; ectopic pregnancy, ovarian torsion). Never had intercourse: no speculum or
+  bimanual; transabdominal ultrasound; rectal exam only if a mass is suspected. Location guides the differential (RLQ
+  appendicitis, RUQ biliary, epigastric pancreatitis/ulcer/MI, flank stone or pyelonephritis, lower abdomen pelvic
+  causes). Alvarado below 5 makes appendicitis unlikely; it over-predicts in women (Ohle 2011). Exclude pregnancy in
+  women 12-55 before imaging or drugs. Early analgesia does not impair diagnostic accuracy. Lipase over 3 times the
+  upper limit supports pancreatitis.
+  v0.8.0 (integration): relieving factors back at p2, a standard pain-history item; the plan cap may cut it,
+  and the backfill after the time-out asks it when turns remain.

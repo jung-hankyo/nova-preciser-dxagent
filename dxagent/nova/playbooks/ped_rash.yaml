@@ -1,0 +1,114 @@
+id: ped_rash
+title: {ko: 소아 발진, en: Rash in a child}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [발진, 두드러기, 빨갛게 올라, 물집이, 반점이, 뭐가 났, 뭐가 올라, 가려워, 오돌토돌, 수두, 수족구, 피부가 빨갛, 빨간 게]
+  not: []
+history:
+  - {id: onset, q: "아이가 언제부터 발진이 생겼나요?", item: Onset, p: 1}
+  - {id: first_site, q: "처음 어디에 생겼나요?", item: Initial site, p: 1}
+  - {id: spread, q: "다른 곳으로 퍼졌나요?", item: Spread, p: 1}
+  - id: fever
+    q: "아이가 열이 나나요?"
+    item: Fever
+    p: 1
+    then:
+      - {id: fever_days, q: "열은 며칠째 나고 있나요?", item: Fever duration, known: "일|며칠|어제|오늘|그제|주"}
+      - {id: after_fever, q: "열이 내린 뒤에 발진이 생겼나요?", item: Rash after defervescence, known: "내린 뒤|떨어지고|내리고"}
+  - {id: itch, q: "아이가 가려워하나요?", item: Pruritus, p: 1}
+  - {id: blister, q: "물집이 생겼나요?", item: Vesicles, p: 1}
+  - {id: mouth, q: "아이 입 안이 헐었나요?", item: Oral lesions, p: 1}
+  - {id: activity, q: "아이가 축 처지나요?", item: Lethargy, p: 1}
+  - {id: breathing, q: "아이가 숨쉬기 힘들어하나요?", item: Respiratory distress, p: 1}
+  - {id: contacts, q: "주변에 비슷한 아이가 있나요?", item: Sick contacts, p: 1}
+  - {id: blanch, q: "눌러도 없어지지 않는 반점인가요?", item: Non-blanching rash, p: 1}
+  - {id: eyes, q: "아이 눈이 충혈되었나요?", item: Conjunctival injection, p: 2}
+  - {id: lips, q: "입술이 빨갛게 갈라졌나요?", item: Red cracked lips, p: 2}
+  - id: hands_feet
+    q: "손발에도 발진이 있나요?"
+    item: Hands and feet
+    p: 2
+    then:
+      - {id: myoclonus, q: "자다가 깜짝깜짝 놀라나요?", item: Myoclonic jerks, safety: true}
+      - {id: vomiting, q: "아이가 토하나요?", item: Vomiting, known: "토|구토"}
+  - {id: tender, q: "피부를 만지면 아파하나요?", item: Skin tenderness, p: 2}
+  - {id: cough, q: "아이가 기침을 하나요?", item: Cough, p: 2}
+  - {id: intake, q: "아이가 물은 잘 마시나요?", item: Oral intake, p: 2}
+  - {id: throat, q: "아이가 목이 아프다고 하나요?", item: Sore throat, p: 3}
+  - {id: food, q: "새로운 음식을 먹었나요?", item: New food, p: 3}
+  - {id: abd_pain, q: "아이가 배를 아파하나요?", item: Abdominal pain, p: 3}
+  - {id: joint, q: "아이가 관절을 아파하나요?", item: Joint pain, p: 3}
+  - {id: new_drug, q: "최근 새로 먹은 약이 있나요?", item: New medication, sec: meds, p: 1}
+  - {id: varicella_vax, q: "수두 예방접종을 했나요?", item: Varicella vaccine, sec: pmh, p: 2}
+  - {id: atopy, q: "아이가 아토피가 있나요?", item: Atopic dermatitis, sec: pmh, p: 2}
+  - {id: daycare, q: "어린이집에 다니나요?", item: Daycare, sec: shx, p: 3}
+exams:
+  - {name: 피부 시진, item: Skin, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 유리압진 검사, item: Skin, p: 2}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 2}
+  - {name: 니콜스키 징후, item: Skin, p: 3}
+differential:
+  - {en: "Viral exanthem (including roseola infantum)", ko: 바이러스 발진(돌발진 포함)}
+  - {en: Hand-foot-and-mouth disease, ko: 수족구병}
+  - {en: Varicella, ko: 수두}
+  - {en: Kawasaki disease, ko: 가와사키병, cant_miss: true}
+  - {en: Meningococcemia or other petechial rash with fever, ko: 수막구균혈증 등 발열 동반 점상 출혈, cant_miss: true}
+  - {en: Stevens-Johnson syndrome or severe drug reaction, ko: 스티븐스-존슨 증후군·중증 약물 반응, cant_miss: true}
+  - {en: Staphylococcal scalded skin syndrome, ko: 포도알균 열상 피부 증후군, cant_miss: true}
+  - {en: Eczema herpeticum, ko: 포진상 습진, cant_miss: true}
+  - {en: Urticaria, ko: 두드러기}
+  - {en: Atopic dermatitis, ko: 아토피피부염}
+  - {en: Scarlet fever, ko: 성홍열}
+  - {en: Measles, ko: 홍역}
+  - {en: "IgA vasculitis (Henoch-Schonlein purpura)", ko: IgA 혈관염(헤노흐-쇤라인 자반증)}
+  - {en: Impetigo, ko: 농가진}
+tests:
+  - {name: "CBC with platelets, CRP, blood culture", for: [Meningococcemia or other petechial rash with fever], why: "발열 동반 점상출혈의 패혈증·혈소판 확인"}
+  - {name: "CRP, ESR, albumin, ALT, urinalysis, echocardiography", for: [Kawasaki disease], why: "5일 이상 발열과 가와사키 특징"}
+  - {name: "Rapid strep test or throat culture", for: [Scarlet fever], why: "성홍열 의심 시 A군 연쇄상구균 확인"}
+  - {name: "HSV PCR", for: [Eczema herpeticum], why: "습진 위 펀치 모양 미란에서 단순포진 확인"}
+  - {name: "Bacterial culture of skin and nares", for: [Staphylococcal scalded skin syndrome, Impetigo], why: "포도알균 확인(SSSS는 물집 안이 아닌 비인두·결막 등 감염 부위)"}
+  - {name: "Enterovirus PCR", for: [Hand-foot-and-mouth disease], why: "중증·신경 증상 동반 수족구병"}
+  - {name: "VZV PCR", for: [Varicella], why: "비전형 수포의 수두 확인"}
+  - {name: "Measles IgM or PCR", for: [Measles], why: "홍역 의심(법정 감염병 신고)"}
+  - {name: "Urinalysis, blood pressure", for: ["IgA vasculitis (Henoch-Schonlein purpura)"], why: "IgA 혈관염의 신장 침범 확인"}
+  - {name: "CBC, liver function", for: [Stevens-Johnson syndrome or severe drug reaction], why: "중증 약물 반응의 장기 침범 확인"}
+plan:
+  treatment:
+    - "대부분 대증 치료: 가려움은 항히스타민제와 보습제, 열은 해열제를 씁니다."
+    - "성홍열은 신속항원검사 확인 후 페니실린계 항생제, 농가진은 국소 또는 경구 항생제."
+    - "포진상 습진은 즉시 아시클로버, SSSS는 입원해 정맥 항생제; 의심 약물은 중단합니다."
+    - "가와사키병은 입원해 정맥 면역글로불린과 아스피린으로 치료합니다."
+  disposition: "대부분 외래 치료와 등원 제한; 발열 동반 점상출혈, 피부 박리·통증, 점막 침범, 수족구병 신경 증상은 응급실."
+  follow_up:
+    - "2-3일 뒤 발진과 열 경과를 재평가합니다."
+    - "열이 5일 넘거나 손발 껍질이 벗겨지면 가와사키병을 평가합니다."
+  red_flags: ["열과 눌러도 안 없어지는 반점", "피부가 벗겨지거나 만지면 아파함", "자다가 깜짝깜짝 놀람·축 처짐", "입이 헐어 물을 못 마심"]
+education:
+  - "발진 부위를 긁지 않게 해 주세요."
+  - "축 처지거나 숨이 차면 바로 오세요."
+  - "자다가 깜짝깜짝 놀라면 바로 오세요."
+  - "열이 5일 넘게 나면 꼭 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-22561.md
+  - US_StatPearls/statpearls_article-30982.md
+  - US_StatPearls/statpearls_article-23847.md
+  - US_StatPearls/statpearls_article-28741.md
+notes: >
+  v0.8.0 (evidence review): fever duration and rash after defervescence asked as follow-ups of fever (Kawasaki needs
+  5 days; roseola appears as a 3-5 day fever breaks); HFMD neurologic warning signs (myoclonic jerks, vomiting)
+  follow hand-and-foot lesions (EV-A71: myoclonic jerks in 51.7% of severe cases; lethargy and vomiting predicted
+  neurologic complications in a Korean cohort); staphylococcal scalded skin syndrome and eczema herpeticum added as
+  can't-miss blistering conditions with a skin-tenderness item and the Nikolsky sign (replaces lung auscultation);
+  non-blanching rash raised to p1 (NICE red feature); abdominal and joint pain split (Ankara 2008 IgA vasculitis
+  criteria: palpable purpura with lower-limb predominance plus abdominal pain, arthritis or arthralgia, renal
+  involvement or histology); food and daycare demoted. Fever with non-blanching petechiae or purpura is an emergency.
+  Kawasaki: fever 5 days or more with at least 4 of 5 principal features (AHA 2017, unchanged in 2024). Vesicles in
+  crops at different stages = varicella; oral ulcers with hand and foot vesicles = HFMD.

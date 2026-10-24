@@ -1,0 +1,117 @@
+id: joint_pain
+title: {ko: 관절 통증, en: Joint pain}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [관절이 아파, 관절이 아프, 관절통, 관절이 붓, 무릎이 아파, 무릎이 아프, 손가락 마디, 마디가 아, 마디가 붓, 발가락이 아, 엄지발가락, 어깨가 아파, 어깨가 아프, 손목이 아, 발목이 아, 무릎이 붓, 무릎이 부, 무릎이 시, 손가락이 아, 손가락이 붓, 손가락이 부, 발가락이 붓, 발가락이 부, 관절, 통풍]
+  not: []
+history:
+  - {id: onset, q: "언제부터 아프셨어요?", item: Onset, p: 1}
+  - id: sudden
+    q: "갑자기 아프기 시작했나요?"
+    item: Onset mode
+    p: 1
+    then:
+      - {id: peak_time, q: "가장 심해질 때까지 얼마나 걸렸나요?", item: Time to maximal pain, known: "시간|하루|밤사이|자고 일어나|분 만에|분만에"}
+  - {id: joints, q: "어느 관절이 아프세요?", item: Location, p: 1}
+  - {id: number, q: "아픈 관절이 몇 군데인가요?", item: Number of joints, p: 1}
+  - {id: symmetry, q: "양쪽 관절이 같이 아픈가요?", item: Symmetry, p: 1}
+  - {id: swelling, q: "관절이 붓나요?", item: Swelling, p: 1}
+  - {id: red_hot, q: "관절이 빨갛게 변했나요?", item: Redness, p: 1}
+  - id: morning
+    q: "아침에 관절이 뻣뻣한가요?"
+    item: Morning stiffness
+    p: 1
+    then:
+      - {id: stiff_duration, q: "뻣뻣함은 얼마나 오래가나요?", item: Morning stiffness duration, known: "분 정도|분쯤|분 동안|분이면|시간|금방|잠깐|오전"}
+  - {id: activity, q: "움직이면 더 아픈가요?", item: Activity relation, p: 1}
+  - {id: trauma, q: "다친 적이 있나요?", item: Trauma, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: rest, q: "쉬면 나아지나요?", item: Relief with rest, p: 2}
+  - {id: rash, q: "피부에 발진이 생겼나요?", item: Rash, p: 2}
+  - {id: infection, q: "최근 설사를 한 적 있나요?", item: Preceding diarrhea, p: 2}
+  - {id: urethritis, q: "소변볼 때 아픈 적 있었나요?", item: Urethritis, p: 2}
+  - {id: injection, q: "최근 관절에 주사를 맞았나요?", item: Recent intra-articular injection, p: 2}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 2}
+  - {id: fatigue, q: "쉽게 피곤하세요?", item: Fatigue, sec: ros, p: 3}
+  - {id: oral_ulcer, q: "입 안이 자주 허나요?", item: Oral ulcer, sec: ros, p: 3}
+  - {id: sicca, q: "입이 자주 마르세요?", item: Dry mouth, sec: ros, p: 3}
+  - {id: raynaud, q: "추우면 손가락이 하얘지나요?", item: Raynaud phenomenon, sec: ros, p: 3}
+  - {id: back, q: "허리도 아프세요?", item: Back pain, sec: ros, p: 3}
+  - {id: eye, q: "눈이 충혈된 적 있나요?", item: Red eye, sec: ros, p: 3}
+  - {id: girdle, q: "아침에 어깨가 뻣뻣하세요?", item: Shoulder girdle stiffness, sec: ros, p: 3}
+  - {id: gout_dx, q: "통풍 진단을 받은 적 있나요?", item: Gout history, sec: pmh, p: 2}
+  - {id: prosthesis, q: "아픈 관절에 인공관절이 있나요?", item: Prosthetic joint, sec: pmh, p: 2}
+  - {id: psoriasis, q: "건선이 있으세요?", item: Psoriasis, sec: pmh, p: 3}
+  - {id: diuretic, q: "이뇨제를 드시나요?", item: Diuretic, sec: meds, p: 3}
+  - {id: fh_arthritis, q: "가족 중 관절염 있는 분 있나요?", item: "FHx: arthritis", sec: fhx, p: 2}
+  - {id: diet, q: "고기를 즐겨 드시나요?", item: Purine-rich diet, sec: shx, p: 3}
+  - {id: sex_partner, q: "최근 성관계 상대가 바뀌었나요?", item: Sexual history, sec: shx, p: 3, only: adult}
+exams:
+  - {name: 무릎 관절 촉진, item: Extremities, p: 2}
+  - {name: 손 관절 촉진, item: Extremities, p: 2}
+  - {name: 손목 관절 촉진, item: Extremities, p: 2}
+  - {name: 발가락 관절 촉진, item: Extremities, p: 2}
+  - {name: 어깨 관절 운동 범위 검사, item: Extremities, p: 2}
+  - {name: 피부 시진, item: Skin, p: 2}
+  - {name: 발목 관절 촉진, item: Extremities, p: 3}
+  - {name: 고관절 운동 범위 검사, item: Extremities, p: 3}
+differential:
+  - {en: Osteoarthritis, ko: 골관절염}
+  - {en: Rheumatoid arthritis, ko: 류마티스 관절염}
+  - {en: Gout, ko: 통풍}
+  - {en: "Calcium pyrophosphate deposition disease (pseudogout)", ko: 칼슘피로인산 침착병(가성통풍)}
+  - {en: Septic arthritis, ko: 화농성 관절염, cant_miss: true}
+  - {en: Reactive arthritis, ko: 반응성 관절염}
+  - {en: Psoriatic arthritis, ko: 건선 관절염}
+  - {en: Systemic lupus erythematosus, ko: 전신홍반루푸스}
+  - {en: Viral arthritis, ko: 바이러스 관절염}
+  - {en: Polymyalgia rheumatica, ko: 류마티스 다발근통}
+  - {en: "Periarticular disorder (rotator cuff, adhesive capsulitis, bursitis)", ko: 관절 주위 질환(회전근개 병변·유착관절낭염·윤활낭염)}
+tests:
+  - {name: "Joint aspiration: cell count, Gram stain, culture, crystals (acute monoarthritis)", for: [Septic arthritis, Gout, "Calcium pyrophosphate deposition disease (pseudogout)"], why: "화농성·결정성 관절염 확인"}
+  - {name: "CBC, ESR, CRP; blood cultures if febrile", for: [Septic arthritis, Rheumatoid arthritis, Polymyalgia rheumatica], why: "염증·감염 확인"}
+  - {name: "Serum uric acid (may be normal during a flare)", for: [Gout], why: "고요산혈증 확인"}
+  - {name: "Rheumatoid factor, anti-CCP antibody", for: [Rheumatoid arthritis], why: "류마티스 관절염 혈청 검사"}
+  - {name: "Antinuclear antibody (systemic features)", for: [Systemic lupus erythematosus], why: "루푸스 선별"}
+  - {name: "X-ray of the affected joints", for: [Osteoarthritis, "Calcium pyrophosphate deposition disease (pseudogout)", Psoriatic arthritis, Rheumatoid arthritis], why: "관절 손상·석회화 확인"}
+  - {name: "Ultrasound of the shoulder or affected joint", for: ["Periarticular disorder (rotator cuff, adhesive capsulitis, bursitis)", Gout], why: "관절 주위 병변·통풍 결정 확인"}
+  - {name: "Parvovirus B19 IgM, hepatitis B and C serology", for: [Viral arthritis], why: "바이러스 관절염 확인"}
+  - {name: "Urine chlamydia and gonorrhea NAAT, stool culture (after diarrhea or urethritis)", for: [Reactive arthritis, Septic arthritis], why: "선행 감염·임균 확인"}
+  - {name: "Creatinine, liver function tests, hepatitis B serology (before NSAIDs, colchicine, methotrexate or steroids)", for: [safety], why: "신장·간 기능과 B형 간염 확인(약물 전)"}
+plan:
+  treatment:
+    - "골관절염: 체중 조절·근력 운동, 아세트아미노펜 또는 국소·경구 NSAID"
+    - "급성 통풍: 신기능 확인 후 NSAID·콜히친·스테로이드 중 하나, 잦은 발작이면 요산저하제"
+    - "화농성 관절염 의심: 관절액·혈액 배양 후 즉시 정맥 항생제와 배액"
+    - "류마티스 관절염: 류마티스내과 의뢰, 조기 메토트렉세이트(B형 간염·간기능·혈구 확인 후)"
+  disposition: "대부분 외래; 열감과 부종이 있는 급성 단관절염은 당일 관절 천자, 화농성이면 입원"
+  follow_up:
+    - "1-2주 뒤 통증·부종과 검사 결과 확인"
+    - "통풍은 요산 6 mg/dL 미만을 목표로 추적, 류마티스는 1-3개월마다 활성도와 부작용 확인"
+  red_flags: ["관절이 붓고 뜨거우며 열이 남", "관절을 전혀 못 움직임", "인공관절 부위 통증과 발열"]
+education:
+  - "피검사와 관절 사진을 찍을게요."
+  - "관절을 무리하게 쓰지 마세요."
+  - "관절이 붓고 열이 나면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17856.md
+  - US_StatPearls/statpearls_article-26373.md
+  - US_StatPearls/statpearls_article-22376.md
+  - US_StatPearls/statpearls_article-17857.md
+notes: >
+  v0.8.0 (evidence review 2026-10): the examined joint follows the complaint. All joint maneuvers are p2 or p3 so the
+  focus call examines the joint(s) named in the opening first and skips the others (knee, hand, wrist, first toe and
+  shoulder p2; ankle, newly added, and hip p3: select them when they hurt; symmetric small-joint polyarthritis =
+  hand and wrist). Spinal tenderness was dropped (back pain has its own playbook). A positive abrupt-onset answer is
+  followed by the time to maximal pain (within 1 day is a Janssens gout-rule item: male sex, prior attack, onset within
+  1 day, redness, first MTP, hypertension or cardiovascular disease, urate above 5.88 mg/dL; Arch Intern Med 2010), and
+  morning stiffness by its duration (inflammatory over 1 hour). A prosthetic joint was added (septic arthritis risk;
+  fever absent in about 43%, so "no fever" must not lower the urgency of aspirating a hot joint; Margaretten, JAMA
+  2007). Fatigue moved to p3; the sexual-history item is adult-only. Inflammatory (morning stiffness over 1 hour,
+  swelling, better with use) versus mechanical (worse with use, brief stiffness). Acute hot monoarthritis is septic
+  arthritis until aspiration proves otherwise. ACR/EULAR 2010 RA classification needs synovitis and 6 of 10 points.
+  Gout treat-to-target urate below 6 mg/dL (ACR 2020); Korean gout guideline 2023.

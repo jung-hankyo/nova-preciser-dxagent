@@ -1,0 +1,112 @@
+id: ped_vomiting_diarrhea
+title: {ko: 소아 구토·설사·복통, en: "Vomiting, diarrhea or abdominal pain in a child"}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [토하, 토해, 토했, 구토, 설사, 배가 아프다고, 배가 아파서, 배를 아파, 배가 아프, 배가 아파, 복통, 묽은 변, 변이 묽, 물똥, 변에 피, 혈변, 게워]
+  not: []
+history:
+  - {id: onset, q: "아이가 언제부터 그랬나요?", item: Onset, p: 1}
+  - {id: vomit_freq, q: "아이가 하루에 몇 번 토하나요?", item: Vomiting frequency, p: 1}
+  - {id: bilious, q: "토한 것이 초록색인가요?", item: Bilious vomiting, p: 1}
+  - {id: projectile, q: "토할 때 뿜듯이 세게 토하나요?", item: Projectile vomiting, p: 1}
+  - {id: stool_freq, q: "설사는 하루에 몇 번 하나요?", item: Diarrhea frequency, p: 1}
+  - id: bloody
+    q: "변에 피가 섞여 나오나요?"
+    item: Bloody stool
+    p: 1
+    then:
+      - {id: jelly, q: "변이 딸기잼 같은 모양인가요?", item: Currant jelly stool, known: "딸기잼|젤리|점액"}
+  - {id: abd_pain, q: "아이가 배가 아프다고 하나요?", item: Abdominal pain, p: 1}
+  - {id: fever, q: "아이가 열이 나나요?", item: Fever, p: 1}
+  - {id: intake, q: "물이나 우유는 잘 먹나요?", item: Oral intake, p: 1}
+  - {id: urine, q: "소변은 평소만큼 보나요?", item: Urine output, p: 1}
+  - {id: lethargy, q: "아이가 축 처지나요?", item: Lethargy, p: 1}
+  - {id: contacts, q: "주변에 비슷한 아이가 있나요?", item: Sick contacts, p: 1}
+  - {id: pain_site, q: "배 어디가 아프다고 하나요?", item: Pain location, p: 2}
+  - {id: watery, q: "변이 물처럼 나오나요?", item: Watery stool, p: 2}
+  - {id: crying, q: "갑자기 자지러지게 울다 멈추나요?", item: Episodic crying, p: 2}
+  - {id: blood_vomit, q: "토한 것에 피가 있었나요?", item: Hematemesis, p: 2}
+  - {id: tears, q: "울 때 눈물이 나오나요?", item: Tears, p: 2}
+  - {id: headache, q: "아이가 머리가 아프다고 하나요?", item: Headache, p: 2}
+  - {id: food, q: "최근 특별한 음식을 먹었나요?", item: Food exposure, p: 3}
+  - id: polydipsia
+    q: "평소보다 물을 많이 찾나요?"
+    item: Polydipsia
+    sec: ros
+    p: 2
+    then:
+      - {id: polyuria, q: "소변을 평소보다 많이 보나요?", item: Polyuria, known: "소변", safety: true}
+  - {id: weight, q: "아이 체중이 줄었나요?", item: Weight loss, sec: ros, p: 3}
+  - {id: rota, q: "로타바이러스 예방접종을 했나요?", item: Rotavirus vaccine, sec: pmh, p: 3}
+  - {id: antibiotics, q: "최근 항생제를 먹었나요?", item: Recent antibiotics, sec: meds, p: 3}
+exams:
+  - {name: 모세혈관 재충전 시간, item: V/S, p: 1}
+  - {name: 피부 긴장도 확인, item: Skin, p: 1}
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 서혜부 탈장 확인, item: Abdomen, p: 2}
+  - {name: 신체 계측, item: General, p: 2}
+  - {name: 고환 촉진, item: GU, p: 3, only: male}
+differential:
+  - {en: "Viral gastroenteritis (rotavirus, norovirus)", ko: 바이러스성 위장관염(로타·노로바이러스)}
+  - {en: Dehydration, ko: 탈수, cant_miss: true}
+  - {en: Intussusception, ko: 장중첩증, cant_miss: true}
+  - {en: Acute appendicitis, ko: 급성 충수염, cant_miss: true}
+  - {en: Malrotation with volvulus, ko: 장회전이상·장염전, cant_miss: true}
+  - {en: Incarcerated inguinal hernia or testicular torsion, ko: 감돈 서혜부 탈장·고환 염전, cant_miss: true}
+  - {en: Bacterial gastroenteritis, ko: 세균성 위장관염}
+  - {en: Urinary tract infection, ko: 요로감염}
+  - {en: Hypertrophic pyloric stenosis, ko: 비후성 유문협착증, cant_miss: true}
+  - {en: Meningitis, ko: 수막염, cant_miss: true}
+  - {en: Food poisoning, ko: 식중독}
+  - {en: Diabetic ketoacidosis, ko: 당뇨병케톤산증, cant_miss: true}
+  - {en: Functional constipation, ko: 기능성 변비}
+  - {en: Hemolytic uremic syndrome, ko: 용혈요독증후군, cant_miss: true}
+tests:
+  - {name: "Electrolytes, glucose, BUN, creatinine", for: [Dehydration, Hemolytic uremic syndrome], why: "중등도 이상 탈수, 정맥 수액 전 전해질·신기능"}
+  - {name: "Capillary glucose, ketones, venous blood gas", for: [Diabetic ketoacidosis], why: "다음·다뇨·깊은 호흡 시 당뇨병케톤산증 확인"}
+  - {name: "Urinalysis and urine culture", for: [Urinary tract infection, Diabetic ketoacidosis], why: "요로감염·요당·케톤 확인"}
+  - {name: "Stool culture or multiplex PCR", for: [Bacterial gastroenteritis, Food poisoning], why: "혈변·고열·집단 발생 시만"}
+  - {name: "Stool rotavirus or norovirus antigen", for: ["Viral gastroenteritis (rotavirus, norovirus)"], why: "입원·집단 발생의 감염 관리용으로만"}
+  - {name: "Abdominal ultrasound", for: [Intussusception, Acute appendicitis, Hypertrophic pyloric stenosis], why: "장중첩·충수염·유문협착 확인"}
+  - {name: "Upper GI contrast study", for: [Malrotation with volvulus], why: "담즙성 구토 시 장회전이상 확인"}
+  - {name: "CBC, smear, platelets, creatinine", for: [Hemolytic uremic syndrome], why: "혈성 설사 후 용혈·혈소판감소·신부전 확인"}
+  - {name: "Scrotal Doppler ultrasound", for: [Incarcerated inguinal hernia or testicular torsion], why: "애매할 때만(염전 의심이면 수술 지연 금지)"}
+  - {name: "Lumbar puncture", for: [Meningitis], why: "수막 자극·대천문 팽윤 시"}
+plan:
+  treatment:
+    - "경도·중등도 탈수는 저삼투압 경구수액(ORS)을 소량씩 자주, 3-4시간에 걸쳐 보충합니다."
+    - "모유 수유와 평소 식사는 일찍 다시 시작하고, 지사제(로페라마이드)는 쓰지 않습니다."
+    - "구토로 경구수액이 어려우면 온단세트론 후 재시도하고, 실패하거나 중증 탈수면 정맥 수액."
+    - "담즙성 구토·장중첩·감돈 탈장·고환 염전은 소아외과에 즉시 의뢰합니다."
+  disposition: "경도 탈수는 외래 경구수액; 담즙성 구토, 혈변, 중증 탈수, 축 처짐, 서혜부·음낭 종괴나 통증은 응급실."
+  follow_up:
+    - "24시간 안에 섭취량·소변량·체중을 다시 확인합니다."
+    - "설사가 2주 넘게 지속되면 재평가합니다."
+  red_flags: ["초록색 구토", "혈변이나 딸기잼 같은 변", "6-8시간 넘게 소변이 없음", "축 처짐이나 심한 복통"]
+education:
+  - "경구 수액을 조금씩 자주 먹이세요."
+  - "초록색으로 토하면 바로 오세요."
+  - "변에 피가 섞이면 바로 오세요."
+  - "소변이 줄거나 축 처지면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-26833.md
+  - US_StatPearls/statpearls_article-23743.md
+  - KR_EuropePMC/europepmc_PMC6609748.md
+notes: >
+  v0.8.0 (evidence review): inguinal hernia examination replaces bowel-sound auscultation and testicular palpation is
+  added for boys, so the can't-miss incarcerated hernia or torsion has a maneuver; rebound tenderness left the list
+  (8-maneuver cap; an older child with right lower quadrant pain: add 맥버니점 압통 through the time-out). Thirst item
+  with polyuria as follow-up for diabetic ketoacidosis (a normal urine output does not reassure in osmotic diuresis).
+  Currant jelly stool asked as a follow-up of bloody stool; food demoted. Oral rehydration closing line added
+  (ESPGHAN/ESPID 2014: reduced-osmolarity ORS first line, continue breastfeeding, early refeeding, no loperamide;
+  ondansetron may help vomiting). Grade dehydration with capillary refill (LR 4.1), skin turgor (LR 2.5), respiratory
+  pattern (LR 2.0), general appearance, tears and mucosa (Steiner 2004; Gorelick 1997: 2 or more of capillary refill
+  over 2 s, absent tears, dry mucosa, ill appearance means 5% or more). Bilious vomiting is a surgical emergency
+  (malrotation); intermittent crying with drawn-up legs and currant jelly stool suggests intussusception (6 months to
+  3 years); projectile non-bilious vomiting at 2 to 8 weeks suggests pyloric stenosis; bloody diarrhea needs the HUS
+  work-up.

@@ -4,6 +4,10 @@ A multi-turn diagnostic agent on LangGraph and LangChain. In each encounter it c
 re-plans after every reply and commits to a diagnosis when more information is no longer worth its cost. Research
 prototype; not a medical device, not medical advice.
 
+In this branch the core sits behind the contest runtime (`docs/AGENT.md`), which was built around it. **The contest
+visit does not use the core by default** (`NOVA_CORE=0` since 0.7.0, decision 80): no knowledge cards ship, so it cost
+about 10 model calls per case and added nothing. The core remains for `dxagent chat`, `dxagent bench` and `NOVA_CORE=1`.
+
 - **LLMs handle language:** replies to coded findings, candidate diagnoses, question phrasing, and (offline) copying
   verbatim quotes from cited sources.
 - **A deterministic core handles inference and decisions:** knowledge is stored per disease as frequencies; ratios are

@@ -1,0 +1,118 @@
+id: back_pain
+title: {ko: 요통, en: Low back pain}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [허리가 아파, 허리가 아프, 요통, 허리 통증, 허리가 뻐근, 허리를 삐, 허리를 다쳐, 허리가 끊어질, 허리가, 허리를, 엉치]
+  not: []
+history:
+  - {id: onset, q: "언제부터 허리가 아프셨어요?", item: Onset, p: 1}
+  - {id: trigger, q: "아프게 된 계기가 있나요?", item: Precipitating event, p: 1}
+  - {id: location, q: "허리 어디가 아프세요?", item: Location, p: 1}
+  - id: radiation
+    q: "다리로 퍼지는 통증이 있나요?"
+    item: Radiation to leg
+    p: 1
+    then:
+      - {id: below_knee, q: "무릎 아래까지 내려가나요?", item: Radiation below the knee, known: "무릎|종아리|정강이|발목|발가락|발"}
+  - {id: numbness, q: "다리가 저리세요?", item: Leg numbness, p: 1}
+  - {id: weakness, q: "다리에 힘이 빠지나요?", item: Leg weakness, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: posture, q: "어떤 자세에서 더 아프세요?", item: Aggravating posture, p: 1}
+  - {id: night, q: "밤에 누워 있어도 아프세요?", item: Night or rest pain, p: 1}
+  - {id: bladder, q: "소변보기가 힘드세요?", item: Urinary retention, p: 1}
+  - {id: saddle, q: "항문 주위 감각이 둔한가요?", item: Saddle anesthesia, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: claudication, q: "걸으면 다리가 아파서 쉬나요?", item: Neurogenic claudication, p: 2}
+  - {id: sit_relief, q: "앉아 있으면 안 아프세요?", item: No pain when seated, p: 2}
+  - {id: flexion_relief, q: "허리를 숙이면 다리가 편해지나요?", item: Relief on flexion, p: 2}
+  - {id: exercise_relief, q: "움직이면 허리가 덜 아프세요?", item: Improvement with exercise, p: 2}
+  - {id: character, q: "어떤 느낌으로 아프세요?", item: Character, p: 3}
+  - {id: morning, q: "아침에 허리가 뻣뻣한가요?", item: Morning stiffness, p: 3}
+  - {id: spinal_injection, q: "최근 허리에 주사를 맞았나요?", item: Recent spinal injection, p: 3}
+  - {id: fecal, q: "대변을 지린 적 있나요?", item: Fecal incontinence, p: 3}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, sec: ros, p: 3}
+  - {id: dysuria, q: "소변볼 때 아프세요?", item: Dysuria, sec: ros, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 1}
+  - id: cancer
+    q: "암을 앓은 적 있나요?"
+    item: Malignancy history
+    sec: pmh
+    p: 1
+    then:
+      - {id: cancer_type, q: "어떤 암이었나요?", item: Cancer type, known: "암|종양|림프종|골수종"}
+  - {id: osteoporosis, q: "골다공증이 있다고 들었나요?", item: Osteoporosis, sec: pmh, p: 2}
+  - id: steroid
+    q: "스테로이드를 드신 적 있나요?"
+    item: Steroid use
+    sec: meds
+    p: 1
+    then:
+      - {id: steroid_duration, q: "스테로이드를 얼마나 오래 드셨나요?", item: Steroid duration, known: "개월|달째|달 전|년|주째|주 전|주일|주간"}
+  - {id: job, q: "어떤 일을 하세요?", item: Occupation, sec: shx, p: 3}
+exams:
+  - {name: 척추 압통 촉진, item: Back, p: 1}
+  - {name: 하지직거상 검사, item: Neuro, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 촉각 검사, item: Neuro, p: 1}
+  - {name: 심부건반사, item: Neuro, p: 1}
+  - {name: 보행 관찰, item: Neuro, p: 2}
+  - {name: 늑골척추각 압통, item: CVA, p: 2}
+  - {name: 요추 운동 범위, item: Back, p: 3}
+differential:
+  - {en: "Nonspecific mechanical low back pain (lumbar strain)", ko: 비특이적 기계적 요통(요추 염좌)}
+  - {en: Lumbar disc herniation with radiculopathy, ko: 신경근병증을 동반한 요추 추간판 탈출증}
+  - {en: Lumbar spinal stenosis, ko: 요추 척추관 협착증}
+  - {en: Osteoporotic vertebral compression fracture, ko: 골다공증성 척추 압박골절}
+  - {en: Ankylosing spondylitis, ko: 강직척추염}
+  - {en: Cauda equina syndrome, ko: 마미 증후군, cant_miss: true}
+  - {en: "Spinal infection (vertebral osteomyelitis, epidural abscess)", ko: 척추 감염(척추골수염·경막외 농양), cant_miss: true}
+  - {en: Spinal metastasis or multiple myeloma, ko: 척추 전이암·다발골수종, cant_miss: true}
+  - {en: Acute pyelonephritis or ureteral stone, ko: 급성 신우신염·요관결석}
+  - {en: Abdominal aortic aneurysm, ko: 복부대동맥류, cant_miss: true}
+tests:
+  - {name: "No imaging for acute nonspecific pain without red flags", for: ["Nonspecific mechanical low back pain (lumbar strain)"], why: "적신호 없으면 영상 불필요"}
+  - {name: "Lumbar spine X-ray (trauma, older age, steroid use, suspected fracture)", for: [Osteoporotic vertebral compression fracture], why: "압박골절 확인"}
+  - {name: "Lumbar MRI (urgent for cauda equina or infection; radiculopathy beyond 6 weeks)", for: [Cauda equina syndrome, Lumbar disc herniation with radiculopathy, Lumbar spinal stenosis, "Spinal infection (vertebral osteomyelitis, epidural abscess)", Spinal metastasis or multiple myeloma], why: "신경 압박·감염·종양 확인"}
+  - {name: "CBC, ESR, CRP", for: ["Spinal infection (vertebral osteomyelitis, epidural abscess)", Spinal metastasis or multiple myeloma], why: "감염·염증·종양 선별"}
+  - {name: "Serum calcium, protein electrophoresis (suspected myeloma)", for: [Spinal metastasis or multiple myeloma], why: "다발골수종 선별"}
+  - {name: "Bone densitometry (DXA)", for: [Osteoporotic vertebral compression fracture], why: "골다공증 확인"}
+  - {name: "HLA-B27, sacroiliac joint MRI (inflammatory back pain)", for: [Ankylosing spondylitis], why: "축성 척추관절염 확인"}
+  - {name: "Urinalysis", for: [Acute pyelonephritis or ureteral stone], why: "요로감염·혈뇨 확인"}
+  - {name: "Abdominal ultrasound or CT (pulsatile mass, older smoker)", for: [Abdominal aortic aneurysm], why: "대동맥류 확인"}
+  - {name: "Serum creatinine (before NSAIDs in older adults)", for: [safety], why: "신기능 확인(NSAID 전)"}
+  - {name: "Urine β-hCG (women 12-55, before X-ray or CT)", for: [safety], why: "임신 확인(방사선 전)"}
+plan:
+  treatment:
+    - "적신호 없는 급성 요통: 활동 유지, 온찜질, NSAID 단기 사용(위장·신장 위험 확인 후)"
+    - "신경근병증: 6주 보존 치료, 진행성 근력 저하나 호전 없으면 MRI 후 주사·수술 상의"
+    - "압박골절: 진통과 보조기, 골밀도검사 후 골다공증 치료"
+    - "염증성 요통: NSAID와 운동, 류마티스내과 의뢰"
+  disposition: "적신호가 없으면 외래 보존 치료; 소변 저류·안장 마취·진행성 마비는 즉시 응급 MRI, 발열이나 암 병력은 당일 검사"
+  follow_up:
+    - "2-4주 뒤 통증과 기능 재평가"
+    - "6주 넘게 지속되거나 신경 증상이 남으면 MRI와 척추 전문의 의뢰"
+  red_flags: ["소변을 못 보거나 지림", "항문 주위 감각 저하", "다리 힘이 점점 빠짐", "발열"]
+education:
+  - "통증이 허락하는 만큼 움직이세요."
+  - "검사 결과를 보고 치료를 정할게요."
+  - "소변이 안 나오면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-18089.md
+  - US_NCBI-Bookshelf/bookshelf_NBK572334.md
+  - US_StatPearls/statpearls_article-24453.md
+  - US_StatPearls/statpearls_article-24463.md
+notes: >
+  v0.8.0 (evidence review 2026-10): red flags ranked by evidence (Downie, BMJ 2013): prolonged corticosteroid use
+  (post-test probability of fracture 33%) raised to p1 and followed by its duration, osteoporosis to p2, cancer history
+  (33% for malignancy) followed by the cancer type; night pain stays p1 but reads mainly as an inflammatory feature.
+  Spinal stenosis items added at p2: no pain when seated (LR 7.4) and relief on bending forward (LR 6.4; Suri, JAMA
+  2010); wide-based gait (LR 13) is the gait exam. Improvement with exercise added at p2, the strongest ASAS
+  inflammatory-back-pain item (OR 23.1; Sieper, Ann Rheum Dis 2009). Radiation below the knee is asked after a positive
+  radiation answer (radicular vs referred pain). Character, morning stiffness, spinal injection, fecal incontinence
+  (late; bladder and saddle items cover cauda equina), occupation and lumbar range of motion moved to p3. When saddle or
+  bladder symptoms are present the focus call should add perineal sensation (회음부 감각 검사). SLR is the sensitive
+  rule-out test (0.92), the crossed SLR the specific one (Cochrane 2010). No imaging for acute nonspecific pain without
+  red flags; MRI for red flags or radiculopathy beyond 6 weeks.

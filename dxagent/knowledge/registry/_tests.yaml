@@ -1,9 +1,13 @@
 - id: test_ecg
+  ko: '12유도 심전도'
+  ask_ko: '12유도 심전도 검사를 하겠습니다.'
   name: 12-lead ECG
   type: poc
   outcomes: [normal, regional_st_elevation, diffuse_st_elevation_pr_depression, st_depression_or_t_inversion, sinus_tachycardia_only]
   background: {normal: 0.6, regional_st_elevation: 0.05, diffuse_st_elevation_pr_depression: 0.03, st_depression_or_t_inversion: 0.15, sinus_tachycardia_only: 0.17}
 - id: test_pulse_oximetry
+  ko: '산소포화도'
+  ask_ko: '산소포화도를 측정하겠습니다.'
   name: Pulse oximetry
   type: poc
   outcomes: [normal, hypoxia]
@@ -11,6 +15,8 @@
   rules:
   - {analyte: spo2, op: lt, value: 92, unit: '%', outcome: hypoxia, else_outcome: normal}
 - id: lab_troponin
+  ko: '고감도 트로포닌'
+  ask_ko: '고감도 트로포닌 검사를 하겠습니다.'
   name: High-sensitivity troponin
   type: lab
   outcomes: [normal, elevated]
@@ -18,6 +24,8 @@
   rules:
   - {analyte: troponin, op: gt, value: 0.04, unit: ng/mL, outcome: elevated, else_outcome: normal}
 - id: lab_d_dimer
+  ko: 'D-dimer'
+  ask_ko: 'D-dimer 검사를 하겠습니다.'
   name: D-dimer
   type: lab
   outcomes: [normal, elevated]
@@ -25,6 +33,8 @@
   rules:
   - {analyte: d_dimer, op: gt, value: 500, unit: ng/mL, outcome: elevated, else_outcome: normal}
 - id: lab_bnp
+  ko: 'BNP'
+  ask_ko: 'BNP 검사를 하겠습니다.'
   name: BNP
   type: lab
   outcomes: [normal, elevated]
@@ -32,31 +42,43 @@
   rules:
   - {analyte: bnp, op: gt, value: 100, unit: pg/mL, outcome: elevated, else_outcome: normal}
 - id: lab_cbc
+  ko: '일반혈액검사(CBC)'
+  ask_ko: '일반혈액검사(CBC)를 하겠습니다.'
   name: Complete blood count
   type: lab
   outcomes: [normal, leukocytosis]
   background: {normal: 0.7, leukocytosis: 0.3}
 - id: img_chest_xray
+  ko: '흉부 X선'
+  ask_ko: '흉부 X선을 찍겠습니다.'
   name: Chest X-ray
   type: imaging
   outcomes: [normal, consolidation, pulmonary_edema, pneumothorax, widened_mediastinum, hyperinflation, pleural_effusion]
   background: {normal: 0.5, consolidation: 0.15, pulmonary_edema: 0.1, pneumothorax: 0.03, widened_mediastinum: 0.03, hyperinflation: 0.09, pleural_effusion: 0.1}
 - id: img_echocardiography
+  ko: '경흉부 심장초음파'
+  ask_ko: '심장초음파를 하겠습니다.'
   name: Transthoracic echocardiography
   type: imaging
   outcomes: [normal, reduced_ef_or_wall_motion, pericardial_effusion, rv_strain]
   background: {normal: 0.6, reduced_ef_or_wall_motion: 0.2, pericardial_effusion: 0.08, rv_strain: 0.12}
 - id: img_ctpa
+  ko: 'CT 폐동맥조영술'
+  ask_ko: 'CT 폐동맥조영술을 하겠습니다.'
   name: CT pulmonary angiography
   type: advanced_imaging
   outcomes: [no_embolus, filling_defect]
   background: {no_embolus: 0.9, filling_defect: 0.1}
 - id: img_ct_aortic_angiography
+  ko: '대동맥 CT 혈관조영술'
+  ask_ko: '대동맥 CT 혈관조영술을 하겠습니다.'
   name: CT angiography of the aorta
   type: advanced_imaging
   outcomes: [normal, intimal_flap]
   background: {normal: 0.97, intimal_flap: 0.03}
 - id: proc_coronary_angiography
+  ko: '관상동맥조영술'
+  ask_ko: '관상동맥조영술을 하겠습니다.'
   name: Coronary angiography
   type: procedure
   outcomes: [no_culprit_lesion, culprit_lesion]

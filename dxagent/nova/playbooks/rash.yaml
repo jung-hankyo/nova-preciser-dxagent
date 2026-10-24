@@ -1,0 +1,120 @@
+id: rash
+title: {ko: 피부 발진, en: Rash}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [발진, 두드러기, 피부가 가려, 몸이 가려, 피부에 뭐가 났, 빨갛게 올라, 피부가 빨갛, 물집이 생, 반점이, 오돌토돌, 피부가 뒤집, 뭐가 났, 뭐가 올라, 빨간 게, 물집이, 대상포진, 가려워]
+  not: []
+history:
+  - {id: onset, q: "언제부터 발진이 생겼나요?", item: Onset, p: 1}
+  - {id: first_site, q: "처음 어디에 생겼나요?", item: Initial site, p: 1}
+  - {id: spread, q: "다른 곳으로 퍼졌나요?", item: Spread, p: 1}
+  - {id: itch, q: "가려우세요?", item: Pruritus, p: 1}
+  - {id: pain, q: "발진이 아프세요?", item: Skin pain, p: 1}
+  - id: fever
+    q: "열이 나세요?"
+    item: Fever
+    p: 1
+    then:
+      - {id: outdoor, q: "최근 풀밭이나 산에 다녀오셨나요?", item: Outdoor exposure, known: "산|밭|풀|야외|등산|농사|캠핑|벌초|성묘"}
+  - id: mucosa
+    q: "입 안이 헐었나요?"
+    item: Oral mucosal involvement
+    p: 1
+    then:
+      - {id: genital, q: "생식기 쪽도 헐었나요?", item: Genital mucosal involvement, known: "생식기|성기|음부", safety: true}
+  - {id: eye, q: "눈이 빨갛게 충혈됐나요?", item: Ocular involvement, p: 1}
+  - {id: dyspnea, q: "숨쉬기 힘드세요?", item: Dyspnea, p: 1}
+  - {id: shape, q: "발진이 어떤 모양인가요?", item: Morphology, p: 2}
+  - {id: blister, q: "물집이 생겼나요?", item: Blisters, p: 2}
+  - {id: transient, q: "생겼다가 몇 시간 만에 없어지나요?", item: Lesion duration, p: 2}
+  - {id: night_itch, q: "밤에 더 가려우세요?", item: Nocturnal pruritus, p: 2}
+  - {id: angioedema, q: "입술이나 눈이 붓나요?", item: Angioedema, p: 2}
+  - {id: products, q: "새로운 화장품이나 세제를 썼나요?", item: New contactant, p: 2}
+  - {id: food, q: "특별한 음식을 드셨나요?", item: Food trigger, p: 2}
+  - {id: contacts, q: "주변에 비슷한 사람이 있나요?", item: Contacts, p: 2}
+  - {id: palm_sole, q: "손바닥이나 발바닥에도 났나요?", item: Palm and sole involvement, p: 3}
+  - {id: joint, q: "관절도 아프세요?", item: Arthralgia, sec: ros, p: 2}
+  - {id: sun, q: "햇빛에 나가면 심해지나요?", item: Photosensitivity, sec: ros, p: 3}
+  - {id: atopy, q: "아토피나 알레르기가 있나요?", item: Atopy, sec: pmh, p: 2}
+  - {id: varicella, q: "수두를 앓은 적 있나요?", item: Varicella history, sec: pmh, p: 3}
+  - id: new_drug
+    q: "최근 새로 먹기 시작한 약이 있나요?"
+    item: New medication
+    sec: meds
+    p: 1
+    then:
+      - {id: drug_name, q: "어떤 약인가요?", item: Suspected drug, known: "항생제|진통제|소염제|통풍|경련|해열|알로퓨리놀|카바마제핀|라모트리진|설파|페니실린|아목시"}
+      - {id: drug_timing, q: "그 약은 언제부터 드셨나요?", item: Drug start date (latency), known: "일 전|주 전|달 전|개월|어제|그제|며칠|일주일|보름"}
+  - {id: job, q: "어떤 일을 하세요?", item: Occupation, sec: shx, p: 3}
+  - {id: fh_atopy, q: "가족 중 알레르기 질환이 있나요?", item: "FHx: atopy", sec: fhx, p: 3}
+exams:
+  - {name: 피부 시진, item: Skin, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 유리압진 검사, item: Skin, p: 2}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 니콜스키 징후, item: Skin, p: 3}
+  - {name: 가피 확인, item: Skin, p: 3}
+differential:
+  - {en: Urticaria, ko: 두드러기}
+  - {en: Contact dermatitis, ko: 접촉피부염}
+  - {en: Drug eruption, ko: 약진}
+  - {en: Stevens-Johnson syndrome or toxic epidermal necrolysis, ko: 스티븐스-존슨 증후군·독성 표피괴사용해, cant_miss: true}
+  - {en: Anaphylaxis, ko: 아나필락시스, cant_miss: true}
+  - {en: "Petechial rash with fever (meningococcemia, vasculitis)", ko: 발열 동반 점상 출혈(수막구균혈증·혈관염), cant_miss: true}
+  - {en: "DRESS (drug reaction with eosinophilia and systemic symptoms)", ko: 호산구증가·전신증상 동반 약물반응, cant_miss: true}
+  - {en: Scrub typhus, ko: 쯔쯔가무시증, cant_miss: true}
+  - {en: Atopic dermatitis, ko: 아토피피부염}
+  - {en: Herpes zoster, ko: 대상포진}
+  - {en: Viral exanthem, ko: 바이러스 발진}
+  - {en: Scabies, ko: 옴}
+  - {en: Psoriasis, ko: 건선}
+  - {en: Tinea, ko: 피부사상균증}
+  - {en: Pityriasis rosea, ko: 장미색 비강진}
+  - {en: Secondary syphilis, ko: 2기 매독}
+tests:
+  - {name: "CBC with eosinophils, LFT, creatinine", for: ["DRESS (drug reaction with eosinophilia and systemic symptoms)", Drug eruption, Stevens-Johnson syndrome or toxic epidermal necrolysis], why: "약물 반응 의심 시 호산구·간·신장 침범 확인"}
+  - {name: "Skin biopsy", for: [Stevens-Johnson syndrome or toxic epidermal necrolysis, Psoriasis, Drug eruption], why: "물집·피부 박리 또는 불분명한 중증 발진"}
+  - {name: "Serum tryptase", for: [Anaphylaxis], why: "아나필락시스 의심 시 수 시간 안에 채혈"}
+  - {name: "CBC with platelets, coagulation, blood culture", for: ["Petechial rash with fever (meningococcemia, vasculitis)"], why: "발열 동반 점상출혈의 패혈증·혈소판 확인"}
+  - {name: "Scrub typhus antibody (IFA) or PCR", for: [Scrub typhus], why: "발열·가피·야외 활동 후"}
+  - {name: "KOH preparation", for: [Tinea], why: "인설 병변의 진균 확인"}
+  - {name: "Skin scraping for mites", for: [Scabies], why: "야간 가려움·굴 병변에서 옴 진드기 확인"}
+  - {name: "Patch test", for: [Contact dermatitis], why: "회복 후 알레르기 접촉피부염 원인 확인"}
+  - {name: "Tzanck smear or VZV PCR", for: [Herpes zoster], why: "비전형 수포의 대상포진 확인"}
+  - {name: "RPR or VDRL with TPHA", for: [Secondary syphilis, Pityriasis rosea], why: "손발바닥 발진·장미색 비강진 유사 발진에서 매독 배제"}
+  - {name: "CBC, CRP", for: [Urticaria], why: "6주 넘는 만성 두드러기에서만"}
+plan:
+  treatment:
+    - "의심 약물과 원인 물질을 즉시 중단합니다."
+    - "두드러기는 2세대 항히스타민제, 습진·접촉피부염은 국소 스테로이드와 보습제를 씁니다."
+    - "아나필락시스는 즉시 에피네프린 근육주사 후 응급 처치합니다."
+    - "쯔쯔가무시 의심(발열·가피)은 독시사이클린, 옴은 퍼메트린을 동거인과 함께 바릅니다."
+  disposition: "대부분 외래 치료; 점막 침범·피부 박리·호흡곤란·혈압 저하·발열 동반 점상출혈은 즉시 응급실."
+  follow_up:
+    - "1-2주 뒤 발진 경과와 원인 약물 중단 효과를 확인합니다."
+    - "약물 반응이면 원인 약을 알레르기로 기록하고 다시 쓰지 않습니다."
+  red_flags: ["입안·눈·생식기가 헐거나 피부가 벗겨짐", "숨이 차거나 입술·혀가 부음", "열과 함께 눌러도 안 없어지는 반점", "고열과 피부 통증"]
+education:
+  - "원인이 되는 물질을 피해 주세요."
+  - "긁지 말고 보습제를 바르세요."
+  - "숨이 차거나 입안이 헐면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17251.md
+  - US_StatPearls/statpearls_article-20379.md
+  - US_StatPearls/statpearls_article-22841.md
+  - US_StatPearls/statpearls_article-20378.md
+notes: >
+  v0.8.0 (evidence review): drug name and start date asked as follow-ups of the new-drug item, since the latency
+  separates urticarial reactions (minutes to days), SJS/TEN (about 4 days to 4 weeks; ALDEN 2010: 5-28 days
+  suggestive, over 56 days unlikely) and DRESS (2-8 weeks; RegiSCAR 2007); genital mucosa asked after oral mucosa
+  (SJS/TEN usually involves two or more mucosal sites); outdoor exposure asked after fever, and an eschar search
+  (가피 확인: axilla, groin, waistline, under the breasts) added for scrub typhus, which peaks in Korea from October
+  to November (also ask about SFTS and HFRS in fever after outdoor work); Nikolsky sign moved to p3 for blistering or
+  painful skin. Secondary syphilis added (palm and sole rash; rising in Korea). Emergencies: mucosal involvement,
+  skin pain, blistering or detachment (SJS/TEN), dyspnea or angioedema (anaphylaxis), fever with petechiae or
+  purpura. Wheals lasting under 24 hours = urticaria (chronic if over 6 weeks); dermatomal painful vesicles = zoster.

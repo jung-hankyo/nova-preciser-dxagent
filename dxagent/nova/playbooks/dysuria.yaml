@@ -1,0 +1,102 @@
+id: dysuria
+title: {ko: 배뇨통·빈뇨, en: Dysuria and urinary frequency}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [소변볼 때 아파, 소변볼 때 아프, 소변 볼 때 아, 배뇨통, 소변이 따가, 소변볼 때 따가, 소변볼 때 화끈, 소변을 자주, 소변이 자주, 화장실을 자주, 빈뇨, 소변을 볼 때 아, 소변을 볼 때 따, 소변볼 때 찌릿, 소변 볼 때 찌릿, 소변 볼 때 따가, 소변볼 때 쓰라, 소변 볼 때 쓰라, 소변볼 때마다 아, 소변 볼 때마다 아, 오줌 눌 때 아, 방광염, 소변이 뿌옇]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: character, q: "소변볼 때 어떤 느낌이 드세요?", item: Character, p: 1}
+  - {id: frequency, q: "소변을 얼마나 자주 보세요?", item: Frequency, p: 1}
+  - {id: urgency, q: "소변을 참기 힘드세요?", item: Urgency, p: 1}
+  - {id: hematuria, q: "소변에 피가 섞여 나오나요?", item: Hematuria, p: 1}
+  - {id: flank, q: "옆구리도 아프세요?", item: Flank pain, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - id: sexual
+    q: "최근 성관계가 있으셨나요?"
+    item: Sexual activity
+    p: 1
+    only: adult
+    gate: sexual
+    then:
+      - {id: partner, q: "최근 새로운 성 파트너가 있나요?", item: New sexual partner, known: "새로|처음|새 파트너|새 애인"}
+      - {id: condom, q: "콘돔을 사용하셨나요?", item: Condom use, known: "콘돔"}
+  - {id: discharge_f, q: "질 분비물이 늘었나요?", item: Vaginal discharge, sec: ob, p: 1, only: female}
+  - {id: itch, q: "질 부위가 가려우세요?", item: Vulvovaginal pruritus, sec: ob, p: 1, only: female}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, sec: ob, p: 1, only: female}
+  - {id: discharge_m, q: "요도에서 분비물이 나오나요?", item: Urethral discharge, p: 1, only: male}
+  - {id: perineal, q: "항문과 고환 사이가 아프세요?", item: Perineal pain, p: 1, only: male}
+  - {id: stream, q: "소변 줄기가 약해졌나요?", item: Weak stream, p: 1, only: male}
+  - {id: residual, q: "소변을 봐도 남은 느낌이 드나요?", item: Incomplete emptying, p: 2}
+  - {id: cloudy, q: "소변이 뿌옇게 나오나요?", item: Cloudy urine, p: 2}
+  - {id: suprapubic, q: "아랫배가 아프세요?", item: Suprapubic pain, p: 2}
+  - {id: chills, q: "오한이 있으세요?", item: Chills, p: 2}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 2}
+  - {id: testis, q: "고환이 아프세요?", item: Testicular pain, p: 2, only: male}
+  - {id: vesicles, q: "성기에 물집이 생겼나요?", item: Genital vesicles, p: 3}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, sec: ros, p: 3}
+  - {id: stone, q: "요로결석을 앓은 적 있나요?", item: Urolithiasis history, sec: pmh, p: 3}
+  - {id: antibiotics, q: "최근 항생제를 드셨나요?", item: Recent antibiotics, sec: meds, p: 3}
+  - {id: water, q: "물은 하루에 얼마나 드세요?", item: Fluid intake, sec: shx, p: 3}
+exams:
+  - {name: 늑골척추각 압통, item: CVA, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 방광 촉진, item: Abdomen, p: 2}
+  - {name: 양손 골반 내진, item: GU, p: 3, only: [female, sexually_active]}
+  - {name: 전립선 촉진, item: GU, p: 3, only: male}
+  - {name: 고환 촉진, item: GU, p: 3, only: male}
+differential:
+  - {en: Acute uncomplicated cystitis, ko: 급성 단순 방광염}
+  - {en: Acute pyelonephritis, ko: 급성 신우신염, cant_miss: true}
+  - {en: "Urethritis (chlamydia, gonorrhea)", ko: 요도염(클라미디아·임질)}
+  - {en: Vaginitis, ko: 질염}
+  - {en: Genital herpes, ko: 생식기 포진}
+  - {en: Acute bacterial prostatitis, ko: 급성 세균성 전립선염, cant_miss: true}
+  - {en: Epididymitis, ko: 부고환염}
+  - {en: Urolithiasis, ko: 요로결석}
+  - {en: Interstitial cystitis, ko: 간질성 방광염}
+  - {en: Bladder cancer, ko: 방광암, cant_miss: true}
+tests:
+  - {name: "Urinalysis (nitrite, leukocyte esterase, microscopy)", for: [Acute uncomplicated cystitis, Acute pyelonephritis, Acute bacterial prostatitis, Urolithiasis, Interstitial cystitis], why: "농뇨·세균뇨·혈뇨 확인"}
+  - {name: "Urine culture (men, pregnancy, recurrence, pyelonephritis, failed therapy)", for: [Acute pyelonephritis, Acute bacterial prostatitis, Acute uncomplicated cystitis], why: "원인균·감수성 확인"}
+  - {name: "Urine hCG (women 12-55)", for: [safety], why: "임신 확인(항생제·영상 전)"}
+  - {name: "CBC, CRP, creatinine; blood cultures if septic or hospitalized", for: [Acute pyelonephritis, Acute bacterial prostatitis], why: "전신 감염·신기능 확인"}
+  - {name: "NAAT for chlamydia and gonorrhea (urethritis or cervicitis)", for: ["Urethritis (chlamydia, gonorrhea)", Epididymitis], why: "성매개 감염 확인"}
+  - {name: "Vaginal discharge microscopy and pH (vaginal symptoms)", for: [Vaginitis], why: "질염 원인 확인"}
+  - {name: "HSV PCR of a vesicle swab", for: [Genital herpes], why: "포진 확인"}
+  - {name: "Scrotal Doppler ultrasound (testicular pain)", for: [Epididymitis], why: "부고환염 확인·고환 염전 배제"}
+  - {name: "Renal ultrasound or CT (pyelonephritis not improving, stones, recurrence)", for: [Acute pyelonephritis, Urolithiasis], why: "폐쇄·농양·결석 확인"}
+  - {name: "Cystoscopy and urine cytology (hematuria persisting after infection, age or smoking)", for: [Bladder cancer, Interstitial cystitis], why: "방광 병변 확인"}
+plan:
+  treatment:
+    - "단순 방광염은 소변검사 확인 후 1차 경구 항생제 단기 치료(지역 내성률 고려)"
+    - "신우신염·전립선염은 요배양 후 항생제, 패혈 징후나 구토는 입원 정맥 항생제"
+    - "요도염은 NAAT 후 임균·클라미디아 치료와 성 파트너 치료"
+    - "질염은 분비물 검사 결과에 따라 치료"
+  disposition: "방광에 국한된 감염은 남녀 모두 외래; 고열·옆구리 통증·회음부 통증·요폐는 복잡성 요로감염으로 배양 후 치료, 패혈 징후·임신·구토는 입원"
+  follow_up:
+    - "2~3일 내 증상 호전 확인, 없으면 요배양 결과로 항생제 조정"
+    - "치료 후에도 혈뇨가 지속되면 비뇨의학과 의뢰"
+  red_flags: ["고열과 오한", "옆구리 통증", "소변이 안 나옴", "구토로 약을 먹지 못함"]
+education:
+  - "소변검사를 해 볼게요."
+  - "물을 충분히 드세요."
+  - "열이 나거나 옆구리가 아프면 오세요."
+guidelines:
+  - KR_Journals/kr_journal_10.14777_uti.2017.12.2.55.md
+  - US_StatPearls/statpearls_article-40407.md
+  - US_StatPearls/statpearls_article-17151.md
+  - US_StatPearls/statpearls_article-28095.md
+notes: >
+  v0.8.0: IDSA 2025 complicated UTI guideline: an infection confined to the bladder is uncomplicated in women and in
+  men; fever or systemic signs, flank pain, CVA tenderness, pyelonephritis, prostatitis, bacteremia or a catheter
+  make it complicated; male sex, diabetes or BPH alone do not. Perineal pain and weak stream are now priority 1 for
+  men (prostatitis discriminators); the prostate is palpated gently, never massaged, in acute prostatitis. Vaginal
+  irritation raised to priority 1 for women (LR 0.2; dysuria plus frequency without discharge or irritation LR 24.6,
+  Bent JAMA 2002). New partner and condom use became follow-ups of the sexual-activity item, which gates the bimanual
+  exam. Never had intercourse: no speculum or bimanual; transabdominal ultrasound; rectal exam only if a mass is
+  suspected. Fever, flank pain or CVA tenderness = upper tract infection. Vaginal discharge or itching points to
+  vaginitis or cervicitis rather than cystitis.

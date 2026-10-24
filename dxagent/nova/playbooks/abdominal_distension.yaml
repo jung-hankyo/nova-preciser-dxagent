@@ -1,0 +1,103 @@
+id: abdominal_distension
+title: {ko: 복부 팽만, en: Abdominal distension}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [배가 불러, 배가 나와, 배가 커져, 배가 부풀, 복부 팽만, 배가 빵빵, 배가 점점 커, 배에 물이 차, 배에 물이 찼, 헛배, 가스가 차]
+  not: []
+history:
+  - {id: onset, q: "언제부터 배가 불러 왔나요?", item: Onset, p: 1}
+  - {id: course, q: "배가 점점 커지고 있나요?", item: Course, p: 1}
+  - id: weight_gain
+    q: "몸무게가 늘었나요?"
+    item: Weight gain
+    p: 1
+    then:
+      - {id: kg, q: "몇 킬로그램 늘었나요?", item: Weight gain (kg), known: "킬로|kg|키로"}
+      - {id: period, q: "얼마 동안 늘었나요?", item: Weight gain period, known: "(\\d+|한|두|세|석|네|다섯|여섯|몇|여러)\\s*(주|달|개월|일|년|해)|일 ?년|일주일|며칠|보름|반년|작년|올해"}
+  - {id: pain, q: "배도 아프세요?", item: Abdominal pain, p: 1}
+  - {id: flatus, q: "방귀는 나오나요?", item: Flatus, p: 1}
+  - {id: last_stool, q: "마지막 대변은 언제 보셨어요?", item: Last bowel movement, p: 1}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 1}
+  - {id: leg_edema, q: "다리가 붓나요?", item: Leg edema, p: 1}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, p: 1}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, sec: ob, p: 1, only: female}
+  - {id: diurnal, q: "하루 중 배 크기가 달라지나요?", item: Diurnal variation, p: 2}
+  - {id: satiety, q: "조금만 먹어도 배가 부른가요?", item: Early satiety, p: 2}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 2}
+  - {id: foamy_urine, q: "소변에 거품이 많이 생기나요?", item: Foamy urine, sec: ros, p: 2}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 2}
+  - {id: appetite, q: "입맛은 어떠세요?", item: Appetite, sec: ros, p: 3}
+  - {id: weight_loss, q: "팔다리 살은 빠졌나요?", item: Muscle wasting, sec: ros, p: 3}
+  - {id: confusion, q: "정신이 흐려진 적이 있나요?", item: Confusion, sec: ros, p: 3}
+  - {id: liver_dx, q: "간 질환이 있으세요?", item: liver disease, sec: pmh, p: 1}
+  - {id: hbv, q: "B형 간염이 있다고 들은 적 있나요?", item: HBV carrier, sec: pmh, p: 1}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 2}
+  - {id: kidney_dx, q: "콩팥 질환이 있으세요?", item: kidney disease, sec: pmh, p: 2}
+  - {id: cancer_dx, q: "암을 진단받은 적 있나요?", item: Malignancy, sec: pmh, p: 2}
+exams:
+  - {name: 복부 시진, item: Abdomen, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복수 이동탁음 확인, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 경정맥압 측정, item: Neck, p: 2}
+  - {name: 간·비장 촉진, item: Abdomen, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 하지 말초 진찰, item: Extremities, p: 2}
+differential:
+  - {en: Liver cirrhosis with ascites, ko: 복수를 동반한 간경변}
+  - {en: Malignant ascites (ovarian or peritoneal cancer), ko: 악성 복수(난소암·복막암), cant_miss: true}
+  - {en: Heart failure, ko: 심부전}
+  - {en: Nephrotic syndrome, ko: 신증후군}
+  - {en: Bowel obstruction, ko: 장폐색, cant_miss: true}
+  - {en: Functional bloating or irritable bowel syndrome, ko: 기능성 팽만·과민성 장증후군}
+  - {en: Ovarian mass, ko: 난소 종괴}
+  - {en: Tuberculous peritonitis, ko: 결핵성 복막염}
+  - {en: Pregnancy, ko: 임신}
+  - {en: Spontaneous bacterial peritonitis, ko: 자발성 세균성 복막염, cant_miss: true}
+  - {en: Hepatocellular carcinoma, ko: 간세포암, cant_miss: true}
+tests:
+  - {name: "Abdominal ultrasound with Doppler", for: [Liver cirrhosis with ascites, Hepatocellular carcinoma, Ovarian mass, Malignant ascites (ovarian or peritoneal cancer)], why: "복수·간 실질·골반 종괴 확인"}
+  - {name: "Diagnostic paracentesis (SAAG, cell count, culture, cytology, ADA)", for: [Liver cirrhosis with ascites, Heart failure, Malignant ascites (ovarian or peritoneal cancer), Spontaneous bacterial peritonitis, Tuberculous peritonitis], why: "복수 원인 감별(SAAG 1.1 이상 문맥압)·감염 확인"}
+  - {name: "Liver function tests, albumin, PT/INR", for: [Liver cirrhosis with ascites], why: "간 합성능 확인"}
+  - {name: "HBsAg, anti-HCV", for: [Liver cirrhosis with ascites, Hepatocellular carcinoma], why: "B·C형 간염 확인"}
+  - {name: "Alpha-fetoprotein", for: [Hepatocellular carcinoma], why: "간세포암 표지자"}
+  - {name: "Creatinine, electrolytes, urinalysis (protein)", for: [Nephrotic syndrome, safety], why: "단백뇨 확인·이뇨제 전 신기능"}
+  - {name: "NT-proBNP and echocardiography", for: [Heart failure], why: "심부전 확인"}
+  - {name: "Plain abdominal X-ray (supine and erect)", for: [Bowel obstruction, Functional bloating or irritable bowel syndrome], why: "장폐색·장내 가스 확인"}
+  - {name: "CA-125 and pelvic ultrasound (women)", for: [Ovarian mass, Malignant ascites (ovarian or peritoneal cancer)], why: "난소 종괴 확인"}
+  - {name: "Urine hCG (women 12-55)", for: [Pregnancy, safety], why: "임신 확인(영상·약물 전)"}
+plan:
+  treatment:
+    - "복수: 저염식과 이뇨제(전해질·신기능 확인 후)"
+    - "긴장성 복수나 호흡곤란은 치료적 복수천자"
+    - "장폐색 확인 시 금식·비위관 감압·외과 협진"
+    - "기능성 팽만은 식이 조절과 배변 습관 교정"
+  disposition: "발열·복통 동반 복수(SBP 의심), 장폐색, 호흡곤란, 의식 변화는 입원; 그 외는 외래에서 원인 검사"
+  follow_up:
+    - "이뇨제 시작 1주 내 체중·전해질·신기능 확인"
+    - "간경변·만성 B형간염은 6개월마다 초음파·AFP로 간암 감시"
+  red_flags: ["발열이나 복통", "의식이 흐려짐", "토혈이나 검은 변", "숨이 참"]
+education:
+  - "복부 초음파 검사를 할게요."
+  - "소금을 줄여 드시는 게 좋아요."
+  - "숨이 차거나 열이 나면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17881.md
+  - KR_EuropePMC/europepmc_PMC13430399.md
+  - US_StatPearls/statpearls_article-19569.md
+  - US_StatPearls/statpearls_article-26081.md
+notes: >
+  v0.8.0: JVP (경정맥압 측정) replaces abdominal percussion: shifting dullness is itself percussion, and a raised JVP
+  points to cardiac (or constrictive) rather than hepatic ascites. Shifting dullness (LR+ 2.7, sensitive; absent LR-
+  about 0.3) is kept over the fluid wave (LR+ 6.0, specific) (Williams & Simel JAMA 1992). A direct hepatitis B
+  question was added at priority 1: HBV is the leading cause of cirrhosis in Korea, HBsAg prevalence is about 2.9%
+  and 77.8% of carriers did not know their status (PMC4835708, PMC4398152); "간 질환" misses carriers. Weight-gain follow-ups
+  quantify fluid gain; appetite moved to priority 3. Fluid (gradual, constant, shifting dullness, edema, liver
+  disease) versus gas (intermittent, meals, flatus) versus obstruction (pain, vomiting, no flatus) versus mass or
+  pregnancy. SAAG 1.1 g/dL or more = portal hypertension (cirrhosis, heart failure); below 1.1 = peritoneal disease
+  (malignancy, TB: high ADA, lymphocytes). Ascitic PMN 250/mm3 or more = SBP. Fever, abdominal pain or confusion in a
+  cirrhotic patient need paracentesis. KASL 2026 ascites guideline for salt restriction and diuretics; HCC
+  surveillance every 6 months with ultrasound and AFP in cirrhosis or chronic hepatitis B.

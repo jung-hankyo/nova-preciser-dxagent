@@ -1,0 +1,121 @@
+id: syncope
+title: {ko: 실신, en: Syncope}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [쓰러, 기절, 정신을 잃, 의식을 잃, 실신, 눈앞이 캄캄, 눈앞이 깜깜, 정신이 나갔, 의식이 없어졌, 의식이 없었]
+  not: [쓰러질 것 같, 쓰러질 듯, 경련, 몸을 떨, 온몸을 떨, 거품을 물, 뻣뻣해지, 눈이 돌아가, 눈이 뒤집]
+history:
+  - {id: onset, q: "언제 쓰러지셨어요?", item: Onset, p: 1}
+  - {id: witness, q: "쓰러질 때 옆에서 본 사람이 있나요?", item: Witness, p: 1}
+  - {id: situation, q: "그때 무엇을 하고 계셨어요?", item: Situation, p: 1}
+  - {id: posture, q: "서 있다가 쓰러지셨나요?", item: Posture, p: 1}
+  - {id: prodrome, q: "쓰러지기 전에 어떤 느낌이었나요?", item: Prodrome, p: 1}
+  - {id: exertion, q: "운동하다가 쓰러지셨나요?", item: Exertional syncope, p: 1}
+  - {id: palpitation, q: "쓰러지기 전에 두근거렸나요?", item: Palpitation, p: 1}
+  - {id: chest_pain, q: "그때 가슴이 아팠나요?", item: Chest pain, p: 1}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: loc_duration, q: "정신을 잃은 시간은 얼마였나요?", item: LOC duration, p: 1}
+  - id: jerks
+    q: "쓰러졌을 때 몸을 떨었나요?"
+    item: Convulsive movements
+    p: 1
+    then:
+      - {id: jerk_time, q: "몇 초 정도 떨었나요?", item: Duration of jerking, known: "초|분|잠깐|잠시"}
+  - {id: confusion, q: "깨어난 뒤 한동안 멍했나요?", item: Post-event confusion, p: 1}
+  - {id: tongue, q: "그때 혀 옆쪽을 깨물었나요?", item: Lateral tongue bite, p: 1}
+  - {id: abd_pain, q: "그때 배가 아팠나요?", item: Abdominal pain, p: 2}
+  - {id: headache, q: "그때 머리가 아팠나요?", item: Headache, p: 2}
+  - {id: injury, q: "쓰러지면서 다치셨나요?", item: Injury, p: 2}
+  - {id: incontinence, q: "그때 소변을 지렸나요?", item: Incontinence, p: 3}
+  - {id: supine, q: "누워 있을 때 정신을 잃었나요?", item: Supine syncope, p: 3}
+  - {id: weakness, q: "팔다리에 힘이 빠지나요?", item: Focal weakness, p: 3}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, sec: ros, p: 2}
+  - {id: fluid_loss, q: "최근 설사를 하셨나요?", item: Diarrhea, sec: ros, p: 3}
+  - {id: meal, q: "식사는 제때 하셨나요?", item: Fasting, sec: ros, p: 3}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 1}
+  - {id: seizure_dx, q: "예전에 경련을 한 적이 있나요?", item: Seizure history, sec: pmh, p: 2}
+  - {id: new_drug, q: "최근 약이 바뀐 적 있나요?", item: Medication change, sec: meds, p: 2}
+  - {id: bp_drug, q: "혈압약을 드시나요?", item: Antihypertensives, sec: meds, p: 3}
+  - id: fh_sudden
+    q: "가족 중 갑자기 사망한 분 있나요?"
+    item: "FHx: sudden death"
+    sec: fhx
+    p: 1
+    then:
+      - {id: fh_age, q: "그분이 몇 살에 돌아가셨나요?", item: Age at sudden death, known: "살|세|대에|대 때"}
+exams:
+  - {name: 기립성 혈압 측정, item: V/S, p: 1}
+  - {name: 심음 청진, item: Heart, p: 1}
+  - {name: 요골동맥 맥박 촉진, item: V/S, p: 1}
+  - {name: 의식·지남력 평가, item: General, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 직장수지검사, item: Rectal, p: 3}
+differential:
+  - {en: Vasovagal syncope, ko: 혈관미주신경성 실신}
+  - {en: Situational syncope, ko: 상황 실신}
+  - {en: Orthostatic hypotension, ko: 기립성 저혈압}
+  - {en: Cardiac arrhythmia, ko: 부정맥, cant_miss: true}
+  - {en: "Structural heart disease (aortic stenosis, hypertrophic cardiomyopathy)", ko: 구조적 심질환(대동맥판 협착·비대심근병증), cant_miss: true}
+  - {en: Pulmonary embolism, ko: 폐색전증, cant_miss: true}
+  - {en: Gastrointestinal bleeding, ko: 위장관 출혈, cant_miss: true}
+  - {en: Aortic dissection, ko: 대동맥 박리, cant_miss: true}
+  - {en: Subarachnoid hemorrhage, ko: 지주막하 출혈, cant_miss: true}
+  - {en: Ectopic pregnancy, ko: 자궁외 임신, cant_miss: true}
+  - {en: Seizure, ko: 뇌전증 발작}
+  - {en: Hypoglycemia, ko: 저혈당}
+  - {en: Psychogenic pseudosyncope, ko: 심인성 가성실신}
+tests:
+  - {name: "12-lead ECG", for: [Cardiac arrhythmia, "Structural heart disease (aortic stenosis, hypertrophic cardiomyopathy)", Pulmonary embolism, Vasovagal syncope, Situational syncope], why: "부정맥·전도장애·좌심실비대 확인"}
+  - {name: "Orthostatic vital signs", for: [Orthostatic hypotension], why: "기립 시 혈압 저하 확인"}
+  - {name: "CBC, glucose, electrolytes", for: [Gastrointestinal bleeding, Hypoglycemia, Orthostatic hypotension], why: "빈혈·저혈당·탈수 확인"}
+  - {name: "Echocardiography (murmur or known heart disease)", for: ["Structural heart disease (aortic stenosis, hypertrophic cardiomyopathy)"], why: "대동맥판 협착·비대심근병증 확인"}
+  - {name: "Holter monitoring or implantable loop recorder", for: [Cardiac arrhythmia], why: "증상 시 리듬 포착"}
+  - {name: "Tilt-table test (recurrent unexplained syncope)", for: [Vasovagal syncope, Psychogenic pseudosyncope], why: "반사성 실신·가성실신 확인"}
+  - {name: "EEG (if seizure is suspected)", for: [Seizure], why: "뇌전증 확인"}
+  - {name: "Head CT (headache at the event)", for: [Subarachnoid hemorrhage], why: "지주막하 출혈 확인"}
+  - {name: "CT angiography of the aorta (chest, back or abdominal pain)", for: [Aortic dissection], why: "대동맥 박리 확인"}
+  - {name: "D-dimer or CT pulmonary angiography", for: [Pulmonary embolism], why: "폐색전증 배제·확진"}
+  - {name: "Urine hCG (women of childbearing age)", for: [Ectopic pregnancy, safety], why: "임신 확인(영상·약물 전)"}
+plan:
+  treatment:
+    - "반사성 실신: 전구 증상 시 바로 앉거나 눕기, 다리 꼬기·주먹 쥐기 등 물리적 대항 요법, 수분·염분 섭취"
+    - "기립성 저혈압: 원인 약물 조정, 천천히 일어나기"
+    - "부정맥·구조적 심질환 확인 시 심장내과 의뢰(심박조율기·제세동기 등)"
+  disposition: "운동 중·누운 자세 실신, 실신 전 두근거림, 흉통·호흡곤란, 심장병, 비정상 심전도면 입원·응급 평가, 저위험 반사성 실신은 외래"
+  follow_up:
+    - "1-2주 후 홀터 등 검사 결과 확인"
+    - "재발 빈도와 운전·고위험 작업 가능 여부 재평가"
+  red_flags:
+    - "운동 중 실신"
+    - "실신 전 가슴 두근거림"
+    - "가슴 통증·호흡곤란 동반"
+    - "심한 두통이나 복통 동반"
+education:
+  - "심전도 검사를 먼저 할게요."
+  - "원인을 알 때까지 운전은 피하세요."
+  - "어지러우면 바로 앉거나 누우세요."
+  - "다시 쓰러지면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-29805.md
+  - US_StatPearls/statpearls_article-31039.md
+  - US_StatPearls/statpearls_article-26349.md
+notes: >
+  v0.8.0. ESC 2018 major high-risk symptoms added: new abdominal pain (ruptured AAA, ectopic pregnancy) and headache
+  (SAH) at p2, dyspnea raised to p1. Tongue biting asked for the event and the side of the tongue at p1 (tongue biting
+  LR+ 8.2 for seizure vs syncope, Brigo 2012 Seizure; lateral biting specificity about 100% vs psychogenic events,
+  Brigo 2012 Epilepsy Behav). Follow-ups: seconds of jerking (over 15-30 s favors seizure) and age at sudden death in
+  the family. Demoted to p3: incontinence (LR+ 0.88, no value), focal weakness (the limb power maneuver covers it),
+  antihypertensives (the standard medication item lists them); supine syncope at p3. Facial strength replaced by the
+  rectal exam at p3 (GI bleeding on rectal exam is an ESC high-risk finding; stated from memory, ESC table text not
+  retrieved). Aortic dissection, SAH, ectopic pregnancy and psychogenic pseudosyncope added. ESC 2018 major high-risk
+  features: new chest discomfort, breathlessness, abdominal pain or headache; syncope during exertion or supine;
+  sudden palpitation immediately followed by syncope; structural heart disease. Minor (high risk only with structural
+  heart disease or abnormal ECG): no or under 10 s prodrome, family history of young sudden death, syncope while
+  sitting. Low risk: typical reflex prodrome, prolonged standing, hot crowded places, meals, cough, defecation or
+  micturition. Everyone: history, examination with standing BP, ECG. Prolonged confusion and prolonged tonic-clonic
+  movements favor seizure; brief myoclonic jerks are common in syncope.

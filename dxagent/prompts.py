@@ -67,7 +67,10 @@ Rules:
   presents it as the reason for the visit, and the code of the finding that expresses it. Leave the list empty
   for any later reply. Report the care setting only if the text states or clearly implies it.
 - For exam or test replies, set source to the channel of the action that was taken.
-- Update the one-sentence problem representation to include everything known so far."""
+- Update the one-sentence problem representation to include everything known so far.
+- The reply may be in Korean. Write codes, labels and the problem representation in English; copy `evidence`
+  verbatim from the reply (in Korean when the reply is Korean). Several questions and answers may be given at once
+  ("Q: ... A: ..."): code every answer, including denials."""
 
 
 def extract_user(

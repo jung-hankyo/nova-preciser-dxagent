@@ -1,0 +1,107 @@
+id: breast_mass
+title: {ko: 유방 덩이·통증, en: Breast lump or pain}
+status: draft
+reviewer: ""
+population: female
+pain: false
+match:
+  any: [가슴에 혹, 유방에 혹, 가슴에 멍울, 유방에 멍울, 유방 통증, 유방이 아파, 유방이 아프, 가슴에 뭐가 만져, 유방에 뭐가 만져, 젖꼭지에서, 유두에서, 가슴에 덩어리, 유방에 덩어리, 가슴에 몽우리, 유방에 몽우리, 가슴 몽우리, 유방 몽우리, 가슴 멍울, 유방 멍울, 가슴에서 덩어리, 가슴에서 혹, 유방에서 혹, 유방에서 덩어리, 가슴에 뭔가 만져, 유방에 뭔가 만져, 젖에서 피, 유방이 부]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: side, q: "어느 쪽 유방인가요?", item: Location, p: 1}
+  - id: lump
+    q: "유방에 혹이 만져지나요?"
+    item: Breast lump
+    p: 1
+    then:
+      - {id: size, q: "혹 크기는 어느 정도인가요?", item: Lump size, known: "cm|센티|mm|밀리|콩|동전|만한|만해"}
+  - {id: growth, q: "혹이 커지고 있나요?", item: Growth, p: 1}
+  - {id: cyclic, q: "생리 주기에 따라 변하나요?", item: Cyclic change, p: 1}
+  - {id: pain, q: "유방이 아프세요?", item: Pain, p: 1}
+  - id: discharge
+    q: "젖꼭지에서 분비물이 나오나요?"
+    item: Nipple discharge
+    p: 1
+    then:
+      - {id: spontaneous, q: "분비물이 저절로 나오나요?", item: Spontaneous discharge, known: "저절로|짜면|짜야|눌러야|누르면"}
+      - {id: bloody, q: "분비물에 피가 섞였나요?", item: Bloody discharge, known: "피|혈|빨간|붉"}
+      - {id: one_side, q: "한쪽에서만 나오나요?", item: Unilateral discharge, known: "한쪽|양쪽|오른|왼"}
+  - {id: skin, q: "유방 피부가 움푹 들어갔나요?", item: Skin dimpling, p: 1}
+  - {id: axilla, q: "겨드랑이에 혹이 만져지나요?", item: Axillary lump, p: 1}
+  - {id: noticed, q: "어떻게 발견하셨어요?", item: How noticed, p: 2}
+  - {id: retraction, q: "젖꼭지가 최근 안으로 들어갔나요?", item: Nipple retraction, p: 2}
+  - {id: red, q: "유방 피부가 빨개졌나요?", item: Erythema, p: 2}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 2}
+  - {id: breastfeeding, q: "모유 수유 중이신가요?", item: Lactation, p: 2}
+  - {id: trauma, q: "가슴을 다친 적 있나요?", item: Trauma, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 2}
+  - {id: bone_pain, q: "뼈가 아픈 곳이 있나요?", item: Bone pain, sec: ros, p: 3}
+  - {id: mammogram, q: "유방촬영은 언제 하셨어요?", item: Last mammogram, sec: pmh, p: 1}
+  - {id: breast_hx, q: "유방 질환을 앓은 적 있나요?", item: Breast disease history, sec: pmh, p: 2}
+  - {id: menarche, q: "초경은 몇 살에 하셨어요?", item: Menarche, sec: ob, p: 2}
+  - {id: menopause, q: "폐경은 되셨나요?", item: Menopausal status, sec: ob, p: 2}
+  - {id: first_birth, q: "첫 출산은 몇 살에 하셨나요?", item: Age at first birth, sec: ob, p: 3}
+  - {id: hormone, q: "호르몬제를 드시나요?", item: Hormone therapy, sec: meds, p: 2}
+  - {id: prokinetic, q: "위장약이나 소화제를 자주 드시나요?", item: "Prokinetic use (levosulpiride, domperidone)", sec: meds, p: 3}
+  - {id: fh_breast, q: "가족 중 유방암 걸린 분 있나요?", item: "FHx: breast cancer", sec: fhx, p: 1}
+  - {id: fh_ovary, q: "가족 중 난소암 걸린 분 있나요?", item: "FHx: ovarian cancer", sec: fhx, p: 3}
+exams:
+  - {name: 유방 시진, item: Breast, p: 1}
+  - {name: 유방 촉진, item: Breast, p: 1}
+  - {name: 겨드랑이 림프절 촉진, item: Lymph nodes, p: 1}
+  - {name: 쇄골상 림프절 촉진, item: Lymph nodes, p: 2}
+  - {name: 유즙 분비 확인, item: Breast, p: 3}
+  - {name: 폐 청진, item: Chest, p: 3}
+  - {name: 간·비장 촉진, item: Abdomen, p: 3}
+differential:
+  - {en: Fibroadenoma, ko: 섬유선종}
+  - {en: Fibrocystic changes, ko: 섬유낭성 변화}
+  - {en: Breast cancer, ko: 유방암, cant_miss: true}
+  - {en: Breast cyst, ko: 유방 낭종}
+  - {en: Intraductal papilloma, ko: 관내 유두종}
+  - {en: Mastitis or breast abscess, ko: 유방염·유방 농양}
+  - {en: Mammary duct ectasia, ko: 유관 확장증}
+  - {en: Fat necrosis, ko: 지방 괴사}
+  - {en: Phyllodes tumor, ko: 엽상 종양}
+  - {en: Cyclic mastalgia, ko: 주기성 유방통}
+  - {en: "Extramammary chest wall pain (costochondritis)", ko: 유방 외 흉벽 통증(늑연골염)}
+  - {en: "Galactorrhea (hyperprolactinemia, drugs)", ko: 유즙 분비(고프로락틴혈증·약물)}
+tests:
+  - {name: "Breast ultrasound", for: [Fibroadenoma, Fibrocystic changes, Breast cancer, Breast cyst, Intraductal papilloma, Mastitis or breast abscess, Phyllodes tumor, Cyclic mastalgia], why: "고형·낭성 구분, BI-RADS 분류(30세 미만·임신·수유 중 첫 검사)"}
+  - {name: "Diagnostic mammography", for: [Breast cancer, Fat necrosis, Mammary duct ectasia], why: "40세 이상 첫 검사(30-39세는 초음파와 선택), 석회화 확인"}
+  - {name: "Core needle biopsy", for: [Breast cancer, Phyllodes tumor, Fibroadenoma, Fat necrosis], why: "BI-RADS 4-5이거나 커지는 고형 종괴의 조직 확인"}
+  - {name: "Ductography or breast MRI", for: [Intraductal papilloma, Breast cancer], why: "병적 분비물인데 영상이 정상일 때"}
+  - {name: "Prolactin, TSH, hCG", for: ["Galactorrhea (hyperprolactinemia, drugs)", safety], why: "양측 우유색 분비물의 원인 확인, 임신 배제"}
+  - {name: "Needle aspiration with culture", for: [Mastitis or breast abscess, Breast cyst], why: "농양 배농·균 확인, 증상 있는 낭종 흡인"}
+plan:
+  treatment:
+    - "삼중 평가(진찰·영상·조직검사) 결과에 따라 치료합니다."
+    - "단순 낭종은 증상이 있으면 흡인하고, 섬유선종은 추적 관찰하거나 커지면 절제합니다."
+    - "주기성 유방통은 잘 맞는 속옷과 안심 설명, 필요하면 국소 또는 경구 NSAID."
+    - "유방염은 수유를 계속하며 항생제로 치료하고, 농양은 배농합니다."
+  disposition: "외래 영상검사; BI-RADS 4-5나 병리 이상은 유방외과 의뢰, 고열과 파동 있는 농양은 당일 배농."
+  follow_up:
+    - "1-2주 뒤 영상·조직검사 결과를 설명합니다."
+    - "BI-RADS 3은 6개월 뒤 추적 초음파를 합니다."
+  red_flags: ["혹이 빨리 커짐", "피부 함몰이나 귤껍질 모양 변화", "한쪽 젖꼭지의 피 섞인 분비물", "고열과 유방 발적"]
+education:
+  - "유방 영상검사를 할게요."
+  - "필요하면 조직검사를 할게요."
+  - "혹이 커지거나 변하면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-18564.md
+  - US_StatPearls/statpearls_article-18600.md
+  - US_StatPearls/statpearls_article-24762.md
+notes: >
+  v0.8.0 (evidence review): nipple discharge characterised by follow-ups (spontaneous, bloody, unilateral), the split
+  between physiologic and pathologic discharge (ACR Appropriateness Criteria 2017); breast inspection (asymmetry,
+  dimpling, peau d'orange, nipple retraction or eczema) named as its own maneuver before palpation; supraclavicular
+  nodes in place of the general cervical nodes (regional spread); galactorrhea added with a prokinetic question
+  (levosulpiride and domperidone raise prolactin, common in Korea). Triple assessment: clinical exam, imaging,
+  tissue sampling. Imaging by age (ACR 2017): ultrasound first under 30, pregnant or lactating; mammography or
+  ultrasound at 30-39; diagnostic mammography with ultrasound at 40 or more. Korean screening guideline (2015):
+  biennial mammography at 40-69; dense breasts, common in Korean women, lower mammographic sensitivity, so ultrasound
+  is usually added. BI-RADS 3: 6-month follow-up; 4-5: core biopsy. Concerning: hard irregular fixed mass, skin
+  changes, spontaneous single-duct bloody discharge, axillary nodes, postmenopausal age, family history. Men with a
+  breast lump have no playbook (population female).

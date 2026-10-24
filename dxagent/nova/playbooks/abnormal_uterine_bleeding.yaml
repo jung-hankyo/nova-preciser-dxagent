@@ -1,0 +1,125 @@
+id: abnormal_uterine_bleeding
+title: {ko: 비정상 자궁 출혈, en: Abnormal uterine bleeding}
+status: draft
+reviewer: ""
+population: female
+pain: false
+match:
+  any: [부정 출혈, 부정출혈, 생리가 아닌데 피, 하혈, 질 출혈, 생리량이 많, 생리가 너무 많, 생리를 오래, 폐경 후 피, 폐경 후에 피, 생리가 안 멈, 피가 비쳐, 피가 비치, 생리 양이 많, 생리량이 늘, 생리 양이 늘, 생리를 너무 많이, 생리가 많이 나와, 생리가 자주 와, 생리를 자주 해, 생리가 너무 자주, 생리 아닌데 피, 생리도 아닌데, 생리 기간이 아닌데, 생리가 끝나지 않, 생리가 안 끝나, 생리가 멈추지 않, 생리가 길, 폐경했는데 피, 폐경했는데 다시, 폐경했는데 생리, 폐경이 됐는데 피, 폐경됐는데 피, 폐경인데 피, 폐경 후 출혈, 폐경 후에 생리, 질에서 피, 질출혈, 밑에서 피, 아래에서 피, 성관계 후 피, 성관계 후에 피, 생리 중간에 피, 한 달에 두 번 생리, 생리를 한 달에 두 번, 생리를 두 번]
+  not: [변기, 대변, 항문, 잇몸, 콧물, 코피, 코에서, 가래, 변 볼 때 하혈, 변볼 때 하혈]
+history:
+  - {id: onset, q: "언제부터 피가 났나요?", item: Onset, p: 1}
+  - {id: lmp, q: "마지막 생리는 언제였나요?", item: LMP, p: 1}
+  - {id: pattern, q: "생리와 상관없이 피가 나오나요?", item: Pattern, p: 1}
+  - id: amount
+    q: "패드를 하루에 몇 개 쓰세요?"
+    item: Amount (pads per day)
+    p: 1
+    then:
+      - {id: soak, q: "패드가 두 시간 안에 다 젖나요?", item: Pad soaked within 2 hours, known: "1시간|한 시간|2시간|두 시간|시간마다"}
+  - {id: duration, q: "출혈은 며칠 동안 하나요?", item: Duration, p: 1}
+  - {id: cycle, q: "생리는 며칠마다 하나요?", item: Cycle length and regularity, p: 1}
+  - {id: sexual, q: "성관계를 하신 적 있나요?", item: Sexual activity, p: 1, only: adult, gate: sexual}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, p: 1, only: adult}
+  - {id: postcoital, q: "성관계 후 피가 비치나요?", item: Postcoital bleeding, p: 1, only: adult}
+  - {id: menopause, q: "폐경은 되셨나요?", item: Menopausal status, p: 1, only: adult}
+  - {id: pain, q: "아랫배가 아프세요?", item: Pelvic pain, p: 1}
+  - {id: dizzy, q: "어지러우세요?", item: Dizziness, p: 1}
+  - {id: ped_injury, q: "아이가 생식기를 다친 적 있나요?", item: Genital injury, p: 1, only: child}
+  - {id: ped_object, q: "아이가 생식기에 뭘 넣은 적 있나요?", item: Vaginal foreign body, p: 1, only: child}
+  - {id: ped_breast, q: "아이 가슴이 나오기 시작했나요?", item: Thelarche, p: 2, only: child}
+  - id: clots
+    q: "핏덩어리가 나오나요?"
+    item: Clots
+    p: 2
+    then:
+      - {id: clot_size, q: "핏덩어리가 500원 동전보다 큰가요?", item: Clot size, known: "동전|cm|센티|크기|만한|만해"}
+  - {id: discharge, q: "질 분비물이 늘었나요?", item: Vaginal discharge, p: 2}
+  - {id: weight, q: "최근 체중이 변했나요?", item: Weight change, p: 3}
+  - {id: bruise, q: "멍이 잘 드는 편인가요?", item: Easy bruising, sec: ros, p: 2}
+  - {id: gum, q: "잇몸에서 피가 자주 나나요?", item: Gum bleeding, sec: ros, p: 3}
+  - {id: hirsutism, q: "몸에 털이 많아졌나요?", item: Hirsutism, sec: ros, p: 3}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, sec: ros, p: 3}
+  - {id: pap, q: "자궁경부암 검사는 언제 하셨어요?", item: Last Pap smear, sec: pmh, p: 1, only: adult}
+  - {id: fibroid, q: "자궁근종이 있다고 들었나요?", item: Uterine fibroid, sec: pmh, p: 2, only: adult}
+  - {id: iud, q: "루프 같은 피임기구를 하셨나요?", item: Intrauterine device, sec: pmh, p: 2, only: adult}
+  - {id: hormone, q: "호르몬제를 드시나요?", item: Hormone therapy, sec: meds, p: 1}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 2}
+  - id: since_menarche
+    q: "초경 때부터 생리량이 많았나요?"
+    item: Heavy menses since menarche
+    sec: ob
+    p: 2
+    then:
+      - {id: surgical_bleed, q: "수술이나 이를 뽑은 뒤 피가 안 멎었나요?", item: Bleeding after surgery or dental extraction}
+      - {id: fh_bleed, q: "가족 중 피가 잘 안 멎는 분 있나요?", item: "FHx: bleeding disorder"}
+  - {id: recent_loss, q: "최근 유산하신 적 있나요?", item: Recent pregnancy loss, sec: ob, p: 2, only: adult}
+  - {id: cesarean, q: "제왕절개를 하신 적 있나요?", item: Cesarean delivery, sec: ob, p: 3, only: adult}
+  - {id: fh_gyn_ca, q: "가족 중 부인암 걸린 분 있나요?", item: "FHx: gynecologic cancer", sec: fhx, p: 3}
+exams:
+  - {name: 질경 검사, item: GU, p: 1, only: sexually_active}
+  - {name: 양손 골반 내진, item: GU, p: 1, only: sexually_active}
+  - {name: 외음부 시진, item: GU, p: 1, only: child}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 기립성 혈압 측정, item: V/S, p: 2}
+  - {name: 점상출혈 확인, item: Skin, p: 3}
+  - {name: 갑상선 촉진, item: Neck, p: 3}
+differential:
+  - {en: "Pregnancy-related bleeding (miscarriage, ectopic pregnancy, molar pregnancy)", ko: 임신 관련 출혈(유산·자궁외 임신·포상기태), cant_miss: true}
+  - {en: "Ovulatory dysfunction (PCOS, thyroid disease, perimenopause)", ko: 배란 장애(다낭성 난소 증후군·갑상샘 질환·폐경 이행기)}
+  - {en: Uterine leiomyoma, ko: 자궁근종}
+  - {en: Endometrial polyp, ko: 자궁내막 용종}
+  - {en: Endometrial hyperplasia or cancer, ko: 자궁내막 증식증·자궁내막암, cant_miss: true}
+  - {en: Cervical cancer, ko: 자궁경부암, cant_miss: true}
+  - {en: Adenomyosis, ko: 자궁선근증}
+  - {en: "Coagulopathy (von Willebrand disease)", ko: 응고장애(폰빌레브란트병)}
+  - {en: "Iatrogenic bleeding (anticoagulants, hormones, IUD)", ko: 의인성 출혈(항응고제·호르몬·자궁 내 장치)}
+  - {en: "Cervicitis or endometritis (chlamydia, gonorrhea)", ko: 자궁경부염·자궁내막염}
+  - {en: Cervical polyp or ectropion, ko: 자궁경부 용종·외번}
+  - {en: "Cesarean scar defect (niche)", ko: 제왕절개 반흔 결손(니치)}
+  - {en: Atrophic vaginitis, ko: 위축성 질염}
+  - {en: "Prepubertal bleeding (vaginal foreign body, genital injury or abuse, precocious puberty)", ko: 사춘기 전 질 출혈(질 이물·외상·학대·성조숙증), cant_miss: true}
+tests:
+  - {name: "Urine or serum hCG", for: ["Pregnancy-related bleeding (miscarriage, ectopic pregnancy, molar pregnancy)", safety], why: "임신 배제(첫 검사, 호르몬제 전)"}
+  - {name: "CBC, ferritin", for: ["Coagulopathy (von Willebrand disease)", safety], why: "빈혈·철결핍·혈소판 확인"}
+  - {name: "TSH, prolactin", for: ["Ovulatory dysfunction (PCOS, thyroid disease, perimenopause)"], why: "배란 장애의 내분비 원인 확인"}
+  - {name: "PT/INR, aPTT, VWF antigen and activity", for: ["Coagulopathy (von Willebrand disease)", "Iatrogenic bleeding (anticoagulants, hormones, IUD)"], why: "출혈 경향·항응고 상태 확인(초경부터 과다 출혈, 출혈 병력 양성)"}
+  - {name: "Pelvic ultrasound", for: [Uterine leiomyoma, Endometrial polyp, Adenomyosis, Endometrial hyperplasia or cancer, "Cesarean scar defect (niche)", "Pregnancy-related bleeding (miscarriage, ectopic pregnancy, molar pregnancy)", Atrophic vaginitis], why: "구조적 원인·내막 두께·임신 위치 확인(경질, 성경험 없으면 경복부)"}
+  - {name: "Endometrial biopsy", for: [Endometrial hyperplasia or cancer], why: "내막 증식증·암 배제(45세 이상, 비대항 에스트로겐, 치료 실패, 폐경 후 내막 4 mm 초과)"}
+  - {name: "Pap smear and HPV test", for: [Cervical cancer, Cervical polyp or ectropion], why: "자궁경부 병변 확인"}
+  - {name: "NAAT for chlamydia and gonorrhea", for: ["Cervicitis or endometritis (chlamydia, gonorrhea)"], why: "자궁경부염 원인균 확인(월경 사이·성교 후 출혈)"}
+  - {name: "Vaginoscopy under sedation", for: ["Prepubertal bleeding (vaginal foreign body, genital injury or abuse, precocious puberty)"], why: "사춘기 전 질 이물·외상·종양 확인"}
+  - {name: "LH, estradiol, bone age", for: ["Prepubertal bleeding (vaginal foreign body, genital injury or abuse, precocious puberty)"], why: "유방 발달 동반 시 성조숙증 확인"}
+plan:
+  treatment:
+    - "hCG 음성과 혈색소를 확인한 뒤 PALM-COEIN 원인별로 치료합니다."
+    - "배란 장애·내막 원인 출혈: 복합 경구피임약, 프로게스틴 또는 LNG-IUS; 비호르몬 치료는 트라넥삼산·NSAID."
+    - "철결핍이면 철분제를 보충하고, 용종·근종은 초음파 확인 후 부인과 시술을 의뢰합니다."
+    - "사춘기 전 출혈은 외음부 진찰 후 진정하 질내시경을 의뢰합니다(외래 질경 검사는 하지 않음)."
+  disposition: "활력징후가 안정적이고 임신 음성이면 외래 검사·치료; 임신 양성에 복통·어지럼, 1시간에 패드가 흠뻑 젖는 출혈, 활력징후 불안정은 응급실."
+  follow_up:
+    - "1-2주 뒤 초음파·혈액·조직검사 결과를 확인합니다."
+    - "치료 3개월 뒤 출혈량·혈색소를 재평가합니다."
+  red_flags: ["어지럼·실신", "1시간에 패드가 흠뻑 젖는 출혈", "심한 아랫배 통증"]
+education:
+  - "피검사와 초음파 검사를 할게요."
+  - "필요하면 자궁내막 검사를 할게요."
+  - "어지럽거나 출혈이 많으면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20790.md
+  - US_StatPearls/statpearls_article-27521.md
+  - US_StatPearls/statpearls_article-21102.md
+notes: >
+  v0.8.0 (evidence review): pelvic pain raised to p1, the item that flags ectopic pregnancy (ACOG PB 193, 2018);
+  speculum and bimanual limited to sexually active patients and the sexual-history items to adults (ACOG CO 754,
+  2018); never had intercourse: no speculum or bimanual; transabdominal ultrasound; rectal exam only if a mass is
+  suspected. Girls under 13: genital injury, foreign body and breast development asked, external genital inspection
+  only, vaginoscopy under sedation; unexplained genital injury needs a safeguarding assessment (mandatory report to
+  112 in Korea). Bleeding-disorder screen (ACOG CO 785, 2019) as follow-ups of heavy menses since menarche (surgery or
+  dental bleeding, family history); cesarean scar niche added (FIGO 2018 AUB-N); postcoital bleeding differential
+  adds cervical polyp or ectropion. Regularity replaced by cycle length. FIGO 2018 normal limits: frequency 24-38
+  days, duration up to 8 days, cycle variation under 7-9 days; heavy bleeding when a pad soaks within 1-2 hours or
+  clots exceed 2.5 cm (larger than a 500-won coin). Postmenopausal bleeding: transvaginal ultrasound first,
+  endometrium 4 mm or less has over 99% negative predictive value (ACOG CO 734, 2018). Korea's national program screens
+  the cervix from age 20 every 2 years.

@@ -1,0 +1,113 @@
+id: ped_fever
+title: {ko: 소아 발열, en: Fever in a child}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [열이 나, 열이 났, 열이 있, 열이 계속, 고열, 발열, 열나, 몸이 뜨거, 몸이 뜨끈, 열감, 열이 올라, 열이 안 떨어, 열성경련, 경기를]
+  not: []
+history:
+  - {id: onset, q: "아이가 언제부터 열이 났나요?", item: Onset, p: 1}
+  - {id: max_temp, q: "열은 최고 몇 도까지 올랐나요?", item: Max temperature, p: 1}
+  - {id: activity, q: "아이가 평소처럼 잘 노나요?", item: Activity, p: 1}
+  - {id: intake, q: "아이가 물이나 우유는 잘 먹나요?", item: Oral intake, p: 1}
+  - {id: urine, q: "소변은 평소만큼 보나요?", item: Urine output, p: 1}
+  - {id: cough, q: "아이가 기침을 하나요?", item: Cough, p: 1}
+  - {id: breathing, q: "아이가 숨쉬기 힘들어하나요?", item: Respiratory distress, p: 1}
+  - {id: vomiting, q: "아이가 토한 적 있나요?", item: Vomiting, p: 1}
+  - {id: diarrhea, q: "아이가 설사를 하나요?", item: Diarrhea, p: 1}
+  - id: rash
+    q: "몸에 발진이 생겼나요?"
+    item: Rash
+    p: 1
+    then:
+      - {id: blanch, q: "눌러도 색이 안 없어지나요?", item: Non-blanching rash, known: "눌러|없어지", safety: true}
+  - id: seizure
+    q: "열이 날 때 경련을 했나요?"
+    item: Febrile seizure
+    p: 1
+    then:
+      - {id: sz_duration, q: "경련은 몇 분 동안 했나요?", item: Seizure duration, known: "분|초", safety: true}
+      - {id: sz_focal, q: "한쪽 팔다리만 떨었나요?", item: Focal seizure, known: "한쪽|양쪽|온몸|전신"}
+      - {id: sz_repeat, q: "하루에 두 번 이상 했나요?", item: Recurrence within 24 hours, known: "번|회"}
+  - {id: contacts, q: "주변에 아픈 아이가 있나요?", item: Sick contacts, p: 1}
+  - {id: ear, q: "아이가 귀를 자주 만지나요?", item: Ear pulling, p: 2}
+  - {id: throat, q: "아이가 목이 아프다고 하나요?", item: Sore throat, p: 2}
+  - {id: neck, q: "아이가 목을 잘 움직이나요?", item: Neck stiffness, p: 2}
+  - {id: irritable, q: "평소보다 많이 보채나요?", item: Irritability, p: 2}
+  - {id: dysuria, q: "소변볼 때 아파하나요?", item: Dysuria, p: 2}
+  - {id: eyes, q: "아이 눈이 충혈되었나요?", item: Conjunctival injection, p: 2}
+  - {id: lips, q: "입술이 빨갛게 갈라졌나요?", item: Red cracked lips, p: 2}
+  - {id: hands, q: "손발이 붓거나 빨개졌나요?", item: Extremity changes, p: 3}
+  - {id: node, q: "아이 목에 멍울이 만져지나요?", item: Cervical lymphadenopathy, p: 3}
+  - {id: bcg, q: "BCG 맞은 자리가 빨개졌나요?", item: BCG site erythema, p: 3}
+  - {id: rhinorrhea, q: "아이가 콧물이 나나요?", item: Rhinorrhea, p: 3}
+  - {id: antipyretic, q: "해열제를 먹이면 열이 떨어지나요?", item: Antipyretic response, p: 3}
+  - {id: outdoor, q: "최근 풀밭이나 산에 다녀왔나요?", item: Outdoor exposure, p: 3}
+  - {id: prior_fs, q: "전에도 열성경련을 한 적 있나요?", item: Febrile seizure history, sec: pmh, p: 2}
+  - {id: uti_hx, q: "요로감염을 앓은 적 있나요?", item: UTI history, sec: pmh, p: 3}
+  - {id: daycare, q: "어린이집에 다니나요?", item: Daycare, sec: shx, p: 3}
+exams:
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 모세혈관 재충전 시간, item: V/S, p: 1}
+  - {name: 이경 검사, item: H/E/E/N/T, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 피부 시진, item: Skin, p: 1}
+  - {name: 경부 강직, item: Neuro, p: 2}
+  - {name: 대천문 촉진, item: H/E/E/N/T, p: 2}
+differential:
+  - {en: Viral upper respiratory infection, ko: 바이러스 상기도 감염}
+  - {en: Acute otitis media, ko: 급성 중이염}
+  - {en: Urinary tract infection, ko: 요로감염}
+  - {en: Bacterial meningitis, ko: 세균성 수막염, cant_miss: true}
+  - {en: Kawasaki disease, ko: 가와사키병, cant_miss: true}
+  - {en: Sepsis, ko: 패혈증, cant_miss: true}
+  - {en: Influenza, ko: 인플루엔자}
+  - {en: Streptococcal pharyngitis, ko: 연쇄상구균 인두염}
+  - {en: Pneumonia, ko: 폐렴}
+  - {en: Acute gastroenteritis, ko: 급성 위장관염}
+  - {en: Hand-foot-and-mouth disease or herpangina, ko: 수족구병·헤르판지나}
+tests:
+  - {name: "Urinalysis and urine culture", for: [Urinary tract infection], why: "2세 미만 원인 불명 발열(도뇨·치골상부 채취)"}
+  - {name: "CBC, CRP, procalcitonin, blood culture", for: [Sepsis, Bacterial meningitis, Pneumonia], why: "3개월 미만 영아나 아파 보이는 아이의 중증 세균 감염 평가"}
+  - {name: "Lumbar puncture", for: [Bacterial meningitis], why: "수막 자극·대천문 팽윤, 영아는 AAP 2021 연령별 기준"}
+  - {name: "Rapid strep test or throat culture", for: [Streptococcal pharyngitis], why: "3세 이상 인두염"}
+  - {name: "Rapid influenza antigen or PCR", for: [Influenza], why: "유행 시기"}
+  - {name: "Chest X-ray", for: [Pneumonia], why: "빠른 호흡·청진 이상 등 폐렴 의심"}
+  - {name: "CBC, CRP, ESR, albumin, ALT, urinalysis, echocardiography", for: [Kawasaki disease], why: "5일 이상 발열과 가와사키 특징(불완전형 포함)"}
+plan:
+  treatment:
+    - "해열제(아세트아미노펜 또는 이부프로펜)는 열 수치보다 아이의 불편감을 덜기 위해 씁니다."
+    - "급성 중이염·연쇄상구균 인두염은 항생제, 바이러스 감염은 수분 공급과 대증 치료."
+    - "3개월 미만 발열이나 중증 소견은 혈액·소변(필요 시 뇌척수액) 검사 후 경험적 정맥 항생제."
+    - "가와사키병은 입원해 정맥 면역글로불린과 아스피린으로 치료합니다."
+  disposition: "대부분 외래 관찰; 3개월 미만 38도 이상, 축 처짐·경련·점상출혈·호흡곤란·탈수는 응급실."
+  follow_up:
+    - "24-48시간 뒤 열·섭취량·소변량을 재평가합니다."
+    - "열이 5일 넘으면 가와사키병 평가를 위해 다시 봅니다."
+  red_flags: ["축 처지고 잘 깨지 않음", "경련", "눌러도 안 없어지는 반점", "숨이 가쁨"]
+education:
+  - "물을 자주 조금씩 먹이세요."
+  - "해열제는 간격을 지켜 먹이세요."
+  - "축 처지거나 경련하면 바로 오세요."
+  - "열이 5일 넘게 나면 꼭 오세요."
+guidelines:
+  - US_NCBI-Bookshelf/bookshelf_NBK92690.md
+  - US_StatPearls/statpearls_article-23847.md
+  - US_StatPearls/statpearls_article-21653.md
+  - US_StatPearls/statpearls_article-17163.md
+notes: >
+  v0.8.0 (evidence review): neck stiffness moved to p2 with the anterior fontanelle beside it (under 12 months:
+  대천문 촉진, drop 경부 강직; 12-18 months both; over 18 months 경부 강직, drop 대천문 촉진), since neck stiffness is
+  unreliable in infants and a bulging fontanelle is a NICE NG143 red feature; cervical node palpation left the list
+  (8-maneuver cap). Kawasaki path: fever 5 days or more (or 4 days with 4 features) -> ask eyes, lips, hands, neck
+  node and BCG site, and have the time-out add 결막·공막 시진 and 경부 림프절 촉진 (AHA 2017 and 2024: fever plus at
+  least 4 of 5 principal features: bilateral non-exudative conjunctival injection, oral changes, polymorphous rash,
+  extremity changes, cervical node 1.5 cm or more; fewer features need the incomplete-KD work-up). Korea has one of
+  the highest KD incidences (196.9 per 100,000 under 5); BCG-site redness is an early sign in Korean infants. Febrile
+  seizure characterised by follow-ups (complex if over 15 minutes, focal, or repeated within 24 hours); rash followed
+  by the blanching question. Rhinorrhea and daycare demoted. Age drives risk: any fever of 38 C or more under 3 months
+  needs full evaluation (AAP 2021 for 8-60 days; NICE NG143); urine for fever without source under 2 years (AAP 2011).
+  Outdoor exposure in autumn: scrub typhus and SFTS also occur in children.

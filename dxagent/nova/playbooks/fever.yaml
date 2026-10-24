@@ -1,0 +1,142 @@
+id: fever
+title: {ko: 발열, en: Fever}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [열이 나, 열이 났, 열이 있, 열이 계속, 고열, 발열, 오한, 몸살, 열나, 열이 올라, 열이 오르, 열이 안 떨어, 열이 안 내려]
+  not: []
+history:
+  - {id: onset, q: "언제부터 열이 나셨어요?", item: Onset, p: 1}
+  - {id: max_temp, q: "열은 최고 몇 도까지 올랐나요?", item: Max temperature, p: 1}
+  - {id: chills, q: "이가 덜덜 떨릴 만큼 추웠나요?", item: Shaking chills, p: 1}
+  - {id: cough, q: "기침을 하시나요?", item: Cough, p: 1}
+  - {id: sore_throat, q: "목도 아프세요?", item: Sore throat, p: 1}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 1}
+  - {id: neck_stiff, q: "목이 뻣뻣하세요?", item: Neck stiffness, p: 1}
+  - {id: dysuria, q: "소변볼 때 아프세요?", item: Dysuria, p: 1}
+  - {id: flank, q: "옆구리도 아프세요?", item: Flank pain, p: 1}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, p: 1}
+  - {id: diarrhea, q: "설사를 하시나요?", item: Diarrhea, p: 1}
+  - {id: rash, q: "몸에 발진이 생겼나요?", item: Rash, p: 1}
+  - id: outdoor
+    q: "최근 풀밭이나 산에 다녀오셨나요?"
+    item: Outdoor exposure
+    p: 1
+    then:
+      - {id: outdoor_when, q: "언제 다녀오셨나요?", item: Date of outdoor exposure, known: "전|어제|그제|지난|주|일|달"}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, p: 2}
+  - {id: antipyretic, q: "해열제를 드셨나요?", item: Antipyretic, p: 2}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 2}
+  - {id: bite, q: "벌레에 물린 자국이 있나요?", item: Insect bite or eschar, p: 2}
+  - id: travel
+    q: "최근 해외여행을 다녀오셨나요?"
+    item: Travel
+    p: 2
+    then:
+      - {id: travel_where, q: "어느 나라에 다녀오셨나요?", item: Travel destination, known: "베트남|태국|필리핀|인도|아프리카|캄보디아|라오스|미얀마|말레이|인도네시아|중국|일본|미국|유럽|남미|나라"}
+  - {id: sputum, q: "가래가 나오나요?", item: Sputum, p: 3}
+  - {id: pattern, q: "열이 하루 종일 계속 나나요?", item: Fever pattern, p: 3}
+  - {id: rhinorrhea, q: "콧물이 나오나요?", item: Rhinorrhea, p: 3}
+  - {id: joint, q: "관절도 아프세요?", item: Arthralgia, p: 3}
+  - {id: skin_red, q: "피부가 붉게 부은 곳이 있나요?", item: Skin redness, p: 3}
+  - {id: dmz, q: "최근 휴전선 근처에 다녀오셨나요?", item: Malaria risk area (DMZ), p: 3}
+  - {id: contacts, q: "주변에 아픈 사람이 있나요?", item: Sick contacts, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 3}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 3}
+  - {id: discharge, q: "질 분비물이 늘었나요?", item: Vaginal discharge, sec: ob, p: 3, only: female}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: dental, q: "최근 치과 치료를 받으셨나요?", item: Recent dental procedure, sec: pmh, p: 3}
+  - id: immuno
+    q: "항암치료를 받고 계세요?"
+    item: Chemotherapy
+    sec: meds
+    p: 2
+    then:
+      - {id: chemo_last, q: "마지막 항암치료는 언제였나요?", item: Last chemotherapy, known: "전|어제|그제|지난|주|일"}
+exams:
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 1}
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 경부 강직, item: Neuro, p: 1}
+  - {name: 피부 시진, item: Skin, p: 1}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 복부 촉진, item: Abdomen, p: 2}
+  - {name: 늑골척추각 압통, item: CVA, p: 2}
+differential:
+  - {en: Viral upper respiratory infection or influenza, ko: 바이러스 상기도 감염·인플루엔자}
+  - {en: Pneumonia, ko: 폐렴}
+  - {en: Acute pyelonephritis, ko: 급성 신우신염}
+  - {en: Acute gastroenteritis, ko: 급성 위장관염}
+  - {en: Bacterial meningitis, ko: 세균성 수막염, cant_miss: true}
+  - {en: Sepsis, ko: 패혈증, cant_miss: true}
+  - {en: Febrile neutropenia, ko: 호중구감소성 발열, cant_miss: true}
+  - {en: Scrub typhus, ko: 쯔쯔가무시병}
+  - {en: Severe fever with thrombocytopenia syndrome, ko: 중증열성혈소판감소증후군, cant_miss: true}
+  - {en: Hemorrhagic fever with renal syndrome, ko: 신증후군출혈열}
+  - {en: Vivax malaria, ko: 삼일열 말라리아}
+  - {en: Infective endocarditis, ko: 감염성 심내막염, cant_miss: true}
+  - {en: Acute cholangitis, ko: 급성 담관염, cant_miss: true}
+  - {en: Pyogenic liver abscess, ko: 화농성 간농양, cant_miss: true}
+  - {en: Acute viral hepatitis A, ko: 급성 A형 간염}
+  - {en: Cellulitis, ko: 봉와직염}
+  - {en: Tuberculosis, ko: 결핵}
+  - {en: Lymphoma or other malignancy (prolonged fever), ko: 림프종 등 악성종양(지속 발열)}
+  - {en: Drug fever, ko: 약물열}
+tests:
+  - {name: "CBC with differential, CRP", for: [Sepsis, Febrile neutropenia, Pneumonia, Acute pyelonephritis, Cellulitis, Severe fever with thrombocytopenia syndrome, Hemorrhagic fever with renal syndrome, Viral upper respiratory infection or influenza, Drug fever], why: "백혈구·호중구·혈소판 확인"}
+  - {name: "Blood cultures (2 sets)", for: [Sepsis, Febrile neutropenia, Infective endocarditis, Acute pyelonephritis, Acute cholangitis, Pyogenic liver abscess], why: "균혈증 확인(항생제 전)"}
+  - {name: "Urinalysis and urine culture", for: [Acute pyelonephritis, Hemorrhagic fever with renal syndrome], why: "요로감염·단백뇨 확인"}
+  - {name: "Chest X-ray", for: [Pneumonia, Tuberculosis], why: "폐렴·결핵 확인"}
+  - {name: "Stool culture or multiplex PCR (fever with bloody or severe diarrhea)", for: [Acute gastroenteritis], why: "세균성 장염 원인균 확인"}
+  - {name: "Liver function tests, creatinine", for: [Acute cholangitis, Pyogenic liver abscess, Acute viral hepatitis A, Scrub typhus, Hemorrhagic fever with renal syndrome, Sepsis, safety], why: "간·신기능 확인(약물 전)"}
+  - {name: "Rapid influenza test (in season)", for: [Viral upper respiratory infection or influenza], why: "인플루엔자 확인"}
+  - {name: "Lumbar puncture (neck stiffness or altered mentation)", for: [Bacterial meningitis], why: "수막염 확인"}
+  - {name: "Scrub typhus serology or PCR (outdoor exposure, eschar)", for: [Scrub typhus], why: "쯔쯔가무시 확인"}
+  - {name: "SFTS PCR, hantavirus serology (outdoor exposure)", for: [Severe fever with thrombocytopenia syndrome, Hemorrhagic fever with renal syndrome], why: "SFTS·신증후군출혈열 확인"}
+  - {name: "Malaria blood smear or rapid antigen test (DMZ-area or tropical travel)", for: [Vivax malaria], why: "말라리아 확인"}
+  - {name: "Anti-HAV IgM (fever with jaundice)", for: [Acute viral hepatitis A], why: "급성 A형 간염 확인"}
+  - {name: "Echocardiography (new murmur or persistent bacteremia)", for: [Infective endocarditis], why: "판막 증식물 확인"}
+  - {name: "Abdominal ultrasound or CT (RUQ pain, jaundice, or no focus)", for: [Acute cholangitis, Pyogenic liver abscess], why: "담관 확장·간농양 확인"}
+  - {name: "Sputum AFB smear, culture and TB PCR (prolonged fever, cough)", for: [Tuberculosis], why: "결핵 확인"}
+  - {name: "FDG PET-CT (classic FUO after baseline work-up)", for: [Lymphoma or other malignancy (prolonged fever)], why: "불명열 원인 부위 확인"}
+plan:
+  treatment:
+    - "원인 부위 확인 후 원인별 치료, 해열제와 충분한 수분 섭취"
+    - "쯔쯔가무시 의심(야외 활동·가피): 혈청검사 후 독시사이클린 경험적 치료"
+    - "세균 감염 확인 시 배양 후 원인 부위에 맞는 경험적 항생제"
+    - "패혈증·호중구감소성 발열 의심 시 1시간 안에 혈액배양 후 광범위 항생제"
+  disposition: "국소 감염·안정적이면 외래, 저혈압·의식 변화·호흡곤란·항암치료 중 발열이면 응급실"
+  follow_up:
+    - "2-3일 후 열과 검사 결과 확인"
+    - "38.3도 이상이 3주 넘게 지속되면 불명열 정밀검사"
+  red_flags:
+    - "의식 저하"
+    - "목이 뻣뻣함"
+    - "숨이 참"
+    - "피부에 붉은 점상 출혈"
+education:
+  - "피검사와 소변검사를 해 볼게요."
+  - "물을 충분히 드시고 쉬세요."
+  - "목이 뻣뻣하거나 숨이 차면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-21718.md
+  - US_StatPearls/statpearls_article-97831.md
+  - US_StatPearls/statpearls_article-27357.md
+notes: >
+  v0.8.0. Outdoor exposure raised to p1, with its date as a follow-up: October is peak season for scrub typhus
+  (about 6,000 cases a year, more than half in November) and SFTS (about 200 cases a year, fatality 18.5%). Vivax
+  malaria near the DMZ added (about 700 cases a year, May-October, Paju, Yeoncheon, Gimpo, Goyang, Ganghwa; half
+  with long incubation, so cases appear out of season; KDCA), with a DMZ question at p3 and the travel destination
+  as a follow-up. Febrile neutropenia added as can't-miss with the date of the last chemotherapy (nadir about 7-14
+  days). Past TB raised to p1 through the standard "Tbc / hepatitis" item. Shaking chills now asked as a rigor that
+  may have passed (shaking chills LR 4.7 for bacteremia, Coburn 2012 JAMA RCE). Demoted to p3 to keep the plan within
+  turns: sputum, sick contacts, weight loss, night sweats (the focus call adds the last two when fever has lasted 2-3
+  weeks). Classic FUO: 38.3 °C or more on several occasions for more than 3 weeks without a diagnosis after the initial
+  work-up (Petersdorf-Beeson; modern versions use an outpatient work-up). Look for potentially diagnostic clues first;
+  without them FDG PET-CT is the imaging of choice (Korean meta-analysis: sensitivity 0.86, specificity 0.66). Causes:
+  infection (TB in Korea), malignancy (lymphoma), noninfectious inflammatory disease (adult-onset Still disease,
+  vasculitis, Kikuchi disease). qSOFA uses altered mentation: the focus call should add 의식·지남력 평가 when the
+  patient seems confused or hypotensive. Red flags: neck stiffness, altered mentation, hypotension, petechial rash,
+  dyspnea.

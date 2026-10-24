@@ -1,24 +1,25 @@
 # v0.3.1: category tags every finding; vital-sign rules map numeric values deterministically.
-- {code: chest_pain_pleuritic, label: chest pain worse on breathing in, source: history, background: 0.25, cluster: pain_character, category: symptom}
-- {code: chest_pain_exertional, label: chest pain brought on by exertion, source: history, background: 0.2, cluster: pain_character, category: symptom}
-- {code: chest_pain_radiating_arm, label: chest pain radiating to arm or shoulder, source: history, background: 0.2, cluster: pain_radiation, category: symptom}
-- {code: chest_pain_tearing_back, label: tearing pain radiating to the back, source: history, background: 0.03, cluster: pain_radiation, category: symptom}
-- {code: chest_pain_positional_relief, label: pain eased by sitting up and leaning forward, source: history, background: 0.05, cluster: pain_position, category: symptom}
-- {code: sudden_onset, label: sudden onset of symptoms, source: history, background: 0.3, cluster: onset, category: symptom}
-- {code: diaphoresis, label: sweating with the pain, source: history, background: 0.2, cluster: autonomic, category: symptom}
-- {code: fever, label: fever or chills, source: history, background: 0.2, cluster: fever, category: symptom}
-- {code: productive_cough, label: cough with sputum, source: history, background: 0.2, cluster: cough, category: symptom}
-- {code: hemoptysis, label: coughing up blood, source: history, background: 0.05, cluster: hemoptysis, category: symptom}
-- {code: orthopnea, label: breathless when lying flat, source: history, background: 0.15, cluster: congestion_symptoms, category: symptom}
-- {code: paroxysmal_nocturnal_dyspnea, label: waking at night breathless, source: history, background: 0.1, cluster: congestion_symptoms, category: symptom}
-- {code: recent_immobilization_or_surgery, label: 'recent surgery, immobilization, or long travel', source: history, background: 0.1, cluster: vte_risk, category: risk_factor}
-- {code: prior_vte, label: previous DVT or PE, source: history, background: 0.05, cluster: vte_risk, category: risk_factor}
-- {code: recent_viral_illness, label: recent cold or flu-like illness, source: history, background: 0.15, cluster: prodrome, category: risk_factor}
-- {code: smoking_history, label: smoker or ex-smoker, source: history, background: 0.3, cluster: smoking, category: risk_factor}
-- {code: copd_history, label: known COPD or emphysema, source: history, background: 0.12, cluster: lung_disease, category: risk_factor}
-- {code: hypertension_history, label: history of hypertension, source: history, background: 0.4, cluster: hypertension, category: risk_factor}
-- {code: unilateral_leg_swelling, label: one-sided leg swelling or calf tenderness, source: exam, background: 0.08, cluster: dvt_signs, category: sign}
+- {code: chest_pain_pleuritic, label: chest pain worse on breathing in, source: history, background: 0.25, cluster: pain_character, category: symptom, ko: [숨 쉴 때, 숨을 쉴 때, 들이쉴 때, 숨쉴때, 숨 들이쉬], ask_ko: '숨을 들이쉴 때 더 아프세요?'}
+- {code: chest_pain_exertional, label: chest pain brought on by exertion, source: history, background: 0.2, cluster: pain_character, category: symptom, ko: [움직일 때, 운동할 때, 계단, 힘쓸 때, 걸을 때, 걸으면], ask_ko: '움직이거나 힘쓸 때 더 아프세요?'}
+- {code: chest_pain_radiating_arm, label: chest pain radiating to arm or shoulder, source: history, background: 0.2, cluster: pain_radiation, category: symptom, ko: [팔로, 어깨로, 왼팔, 팔까지, 어깨까지, 턱까지], ask_ko: '통증이 팔이나 어깨로 퍼지나요?'}
+- {code: chest_pain_tearing_back, label: tearing pain radiating to the back, source: history, background: 0.03, cluster: pain_radiation, category: symptom, ko: [찢어지, 등으로, 등 쪽, 등까지, 뜯기], ask_ko: '등 쪽으로 찢어지듯 아프세요?'}
+- {code: chest_pain_positional_relief, label: pain eased by sitting up and leaning forward, source: history, background: 0.05, cluster: pain_position, category: symptom, ko: [숙이면, 앞으로 숙, 앉으면 덜, 앉으면 나아], ask_ko: '앉아서 몸을 숙이면 덜 아프세요?'}
+- {code: sudden_onset, label: sudden onset of symptoms, source: history, background: 0.3, cluster: onset, category: symptom, ko: [갑자기, 갑작스럽, 순간적으로], ask_ko: '증상이 갑자기 시작됐나요?'}
+- {code: diaphoresis, label: sweating with the pain, source: history, background: 0.2, cluster: autonomic, category: symptom, ko: [식은땀, 땀이 나, 땀이 많이], ask_ko: '식은땀이 나셨나요?'}
+- {code: fever, label: fever or chills, source: history, background: 0.2, cluster: fever, category: symptom, ko: [열이, 열나, 열감, 오한, 으슬, 발열], ask_ko: '열이나 오한이 있었나요?'}
+- {code: productive_cough, label: cough with sputum, source: history, background: 0.2, cluster: cough, category: symptom, ko: [가래, 기침], ask_ko: '가래가 나오는 기침을 하세요?'}
+- {code: hemoptysis, label: coughing up blood, source: history, background: 0.05, cluster: hemoptysis, category: symptom, ko: [피가 섞, 객혈, 피를 토, 피 가래, 혈담, 피가래], ask_ko: '기침할 때 피가 나왔나요?'}
+- {code: orthopnea, label: breathless when lying flat, source: history, background: 0.15, cluster: congestion_symptoms, category: symptom, ko: [누우면, 누워 있으면, 누울 때, 베개], ask_ko: '누우면 숨이 더 차세요?'}
+- {code: paroxysmal_nocturnal_dyspnea, label: waking at night breathless, source: history, background: 0.1, cluster: congestion_symptoms, category: symptom, ko: [자다가, 밤에 깨, 숨이 차서 깨, 자다 깨], ask_ko: '자다가 숨이 차서 깬 적 있나요?'}
+- {code: recent_immobilization_or_surgery, label: 'recent surgery, immobilization, or long travel', source: history, background: 0.1, cluster: vte_risk, category: risk_factor, ko: [수술, 입원, 장거리, 비행기, 누워만, 깁스, 거동], ask_ko: '최근 수술이나 오래 누워 계셨나요?'}
+- {code: prior_vte, label: previous DVT or PE, source: history, background: 0.05, cluster: vte_risk, category: risk_factor, ko: [혈전, 피떡, 색전], ask_ko: '다리나 폐에 혈전이 생긴 적 있나요?'}
+- {code: recent_viral_illness, label: recent cold or flu-like illness, source: history, background: 0.15, cluster: prodrome, category: risk_factor, ko: [감기, 몸살, 독감, 콧물], ask_ko: '최근 감기 기운이 있었나요?'}
+- {code: smoking_history, label: smoker or ex-smoker, source: history, background: 0.3, cluster: smoking, category: risk_factor, ko: [담배, 흡연, 금연, 피웠], ask_ko: '담배를 피우세요?'}
+- {code: copd_history, label: known COPD or emphysema, source: history, background: 0.12, cluster: lung_disease, category: risk_factor, ko: [폐기종, 만성 폐, 만성폐쇄성, copd, 만성기관지염], ask_ko: '폐기종 같은 폐 질환이 있으세요?'}
+- {code: hypertension_history, label: history of hypertension, source: history, background: 0.4, cluster: hypertension, category: risk_factor, ko: [고혈압, 혈압약, 혈압이 높], ask_ko: '혈압이 높다는 말 들으셨나요?'}
+- {code: unilateral_leg_swelling, label: one-sided leg swelling or calf tenderness, source: exam, background: 0.08, cluster: dvt_signs, category: sign, ko: [한쪽 다리, 한쪽만, 종아리, 다리가 부], ask_ko: '하지 말초 진찰하겠습니다.'}
 - code: tachycardia
+  ko: [맥박이 빠르, 심장이 빨리]
   label: heart rate above 100
   source: exam
   background: 0.3
@@ -27,6 +28,7 @@
   rules:
   - {analyte: heart_rate, op: gt, value: 100, outcome: present, else_outcome: absent}
 - code: temp_gt_38
+  ko: []
   label: measured temperature above 38 C
   source: exam
   background: 0.15
@@ -35,15 +37,16 @@
   rules:
   - {analyte: temperature_c, op: gt, value: 38.0, outcome: present, else_outcome: absent}
   - {analyte: temperature_f, op: gt, value: 100.4, outcome: present, else_outcome: absent}
-- {code: crackles, label: crackles on lung auscultation, source: exam, background: 0.25, cluster: lung_exam, category: sign}
-- {code: wheeze, label: wheeze on auscultation, source: exam, background: 0.15, cluster: lung_exam_wheeze, category: sign}
-- {code: jvd, label: raised jugular venous pressure, source: exam, background: 0.1, cluster: congestion_signs, category: sign}
-- {code: s3_gallop, label: third heart sound, source: exam, background: 0.05, cluster: heart_sounds, category: sign}
-- {code: bilateral_leg_edema, label: swelling of both legs, source: exam, background: 0.15, cluster: congestion_signs, category: sign}
-- {code: unilateral_reduced_breath_sounds, label: reduced breath sounds on one side, source: exam, background: 0.05, cluster: lung_exam_unilateral, category: sign}
-- {code: pulse_deficit, label: pulse deficit or arm blood-pressure difference, source: exam, background: 0.03, cluster: vascular_exam, category: sign}
-- {code: pericardial_friction_rub, label: pericardial friction rub, source: exam, background: 0.03, cluster: heart_sounds_rub, category: sign}
+- {code: crackles, label: crackles on lung auscultation, source: exam, background: 0.25, cluster: lung_exam, category: sign, ko: [수포음, 악설음, 나음], ask_ko: '폐 청진을 하겠습니다.'}
+- {code: wheeze, label: wheeze on auscultation, source: exam, background: 0.15, cluster: lung_exam_wheeze, category: sign, ko: [천명, 쌕쌕, 쌔액], ask_ko: '폐 청진을 하겠습니다.'}
+- {code: jvd, label: raised jugular venous pressure, source: exam, background: 0.1, cluster: congestion_signs, category: sign, ko: [경정맥, 목 정맥, 목정맥], ask_ko: '목 정맥 확장을 확인하겠습니다.'}
+- {code: s3_gallop, label: third heart sound, source: exam, background: 0.05, cluster: heart_sounds, category: sign, ko: [제3심음, 삼심음, s3, 분마음], ask_ko: '심음 청진하겠습니다.'}
+- {code: bilateral_leg_edema, label: swelling of both legs, source: exam, background: 0.15, cluster: congestion_signs, category: sign, ko: [양쪽 다리, 양 다리, 다리 부종, 함요], ask_ko: '하지 말초 진찰하겠습니다.'}
+- {code: unilateral_reduced_breath_sounds, label: reduced breath sounds on one side, source: exam, background: 0.05, cluster: lung_exam_unilateral, category: sign, ko: [호흡음 감소, 호흡음이 감소, 숨소리가 약, 호흡음 저하], ask_ko: '폐 청진을 하겠습니다.'}
+- {code: pulse_deficit, label: pulse deficit or arm blood-pressure difference, source: exam, background: 0.03, cluster: vascular_exam, category: sign, ko: [양팔 혈압, 맥박 차이, 혈압 차이], ask_ko: '양팔 혈압을 비교하겠습니다.'}
+- {code: pericardial_friction_rub, label: pericardial friction rub, source: exam, background: 0.03, cluster: heart_sounds_rub, category: sign, ko: [마찰음], ask_ko: '심음 청진하겠습니다.'}
 - code: tachypnea
+  ko: [숨을 빨리, 호흡이 빠르]
   label: respiratory rate above 22 per minute
   source: exam
   background: 0.25
@@ -52,6 +55,7 @@
   rules:
   - {analyte: resp_rate, op: gt, value: 22, outcome: present, else_outcome: absent}
 - code: hypotension
+  ko: [혈압이 낮, 저혈압]
   label: systolic blood pressure below 90 mmHg
   source: exam
   background: 0.05

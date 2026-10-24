@@ -1,0 +1,123 @@
+id: weight_loss
+title: {ko: 체중 감소, en: Unintentional weight loss}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [살이 빠, 살이 많이 빠, 체중이 줄, 체중이 감소, 몸무게가 줄, 몸무게가 빠, 체중 감소, 체중이 빠, 살이 쭉 빠]
+  not: []
+history:
+  - {id: onset, q: "언제부터 살이 빠지셨어요?", item: Onset, p: 1}
+  - id: amount
+    q: "몇 킬로그램 정도 빠지셨어요?"
+    item: Amount
+    p: 1
+    then:
+      - {id: usual_weight, q: "원래 몸무게는 몇 킬로그램이었나요?", item: Usual weight, known: "원래|평소|에서"}
+  - {id: intentional, q: "일부러 살을 빼신 건가요?", item: Intentional, p: 1}
+  - {id: appetite, q: "입맛은 어떠세요?", item: Appetite, p: 1}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, p: 1}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, p: 1}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, p: 1}
+  - {id: bowel, q: "대변 보는 게 달라졌나요?", item: Bowel habit change, p: 1}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, p: 1}
+  - id: mood
+    q: "기분이 우울하세요?"
+    item: Depressed mood
+    p: 1
+    then:
+      - {id: suicidal, q: "죽고 싶다는 생각이 드시나요?", item: Suicidal ideation, known: "죽고|자살", safety: true}
+  - {id: satiety, q: "조금만 먹어도 배가 부르세요?", item: Early satiety, p: 2}
+  - {id: hematochezia, q: "변에 피가 섞여 나오나요?", item: Hematochezia, p: 2}
+  - {id: dysphagia, q: "음식을 삼키기 힘드세요?", item: Dysphagia, p: 2}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, p: 2}
+  - {id: cough, q: "기침을 하시나요?", item: Cough, p: 2}
+  - {id: intake, q: "먹는 양이 달라졌나요?", item: Food intake, p: 3}
+  - {id: tremor, q: "손이 떨리세요?", item: Tremor, p: 3}
+  - {id: polyuria, q: "소변을 자주 보세요?", item: Polyuria, p: 3}
+  - {id: diarrhea, q: "설사를 하시나요?", item: Diarrhea, p: 3}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 3}
+  - {id: teeth, q: "음식을 씹기 힘드세요?", item: Chewing problem, p: 3}
+  - {id: anhedonia, q: "즐겁던 일이 재미없어졌나요?", item: Anhedonia, p: 3}
+  - {id: menses, q: "생리 주기가 달라졌나요?", item: Menstrual change, sec: ob, p: 3, only: female}
+  - {id: body_image, q: "살찌는 게 많이 두려우세요?", item: Fear of weight gain, sec: ros, p: 3}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: checkup, q: "건강검진은 언제 받으셨어요?", item: Last screening, sec: pmh, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: alone, q: "혼자 사세요?", item: Social isolation, sec: shx, p: 3}
+  - {id: fh_cancer, q: "가족 중 암에 걸린 분 있나요?", item: "FHx: cancer", sec: fhx, p: 3}
+  - {id: fh_thyroid, q: "가족 중 갑상선 질환 있는 분 있나요?", item: "FHx: thyroid disease", sec: fhx, p: 3}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 1}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 2}
+  - {name: 자세성 떨림, item: Extremities / Neuro, p: 2}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+differential:
+  - {en: Hyperthyroidism (Graves disease), ko: 갑상샘항진증(그레이브스병)}
+  - {en: Diabetes mellitus, ko: 당뇨병}
+  - {en: "Gastrointestinal malignancy (gastric, colorectal, pancreatic)", ko: 위장관 악성종양(위·대장·췌장), cant_miss: true}
+  - {en: Hepatocellular carcinoma (chronic hepatitis B), ko: 간세포암(만성 B형 간염), cant_miss: true}
+  - {en: Lung cancer or other malignancy, ko: 폐암 등 악성종양, cant_miss: true}
+  - {en: Pulmonary tuberculosis, ko: 폐결핵, cant_miss: true}
+  - {en: Depression, ko: 우울증}
+  - {en: Peptic ulcer or malabsorption, ko: 소화성 궤양·흡수장애}
+  - {en: "Social or functional causes (isolation, finances, chewing, medications)", ko: 사회·기능적 원인(독거·경제·저작·약물)}
+  - {en: Eating disorder, ko: 섭식장애}
+  - {en: Adrenal insufficiency, ko: 부신기능저하증}
+  - {en: HIV infection, ko: HIV 감염}
+tests:
+  - {name: "CBC, ESR or CRP", for: ["Gastrointestinal malignancy (gastric, colorectal, pancreatic)", Lung cancer or other malignancy, Pulmonary tuberculosis], why: "빈혈·염증 확인"}
+  - {name: "TSH, free T4", for: [Hyperthyroidism (Graves disease)], why: "갑상샘 기능 확인"}
+  - {name: "Fasting glucose or HbA1c", for: [Diabetes mellitus], why: "당뇨병 확인"}
+  - {name: "Liver function tests, creatinine, electrolytes, albumin", for: [Peptic ulcer or malabsorption, Adrenal insufficiency, Hepatocellular carcinoma (chronic hepatitis B), Eating disorder, "Social or functional causes (isolation, finances, chewing, medications)"], why: "영양 상태·간기능·전해질 확인"}
+  - {name: "HBsAg, AFP and liver ultrasound (hepatitis B or liver disease)", for: [Hepatocellular carcinoma (chronic hepatitis B)], why: "간세포암 확인"}
+  - {name: "Urinalysis", for: [Diabetes mellitus], why: "요당 확인"}
+  - {name: "Chest X-ray", for: [Lung cancer or other malignancy, Pulmonary tuberculosis], why: "폐암·결핵 확인"}
+  - {name: "Sputum AFB smear, culture and TB PCR (cough or abnormal X-ray)", for: [Pulmonary tuberculosis], why: "결핵 확인"}
+  - {name: "Upper endoscopy and colonoscopy (age- and symptom-appropriate)", for: ["Gastrointestinal malignancy (gastric, colorectal, pancreatic)", Peptic ulcer or malabsorption], why: "위·대장 종양·궤양 확인"}
+  - {name: "Fecal occult blood or FIT", for: ["Gastrointestinal malignancy (gastric, colorectal, pancreatic)"], why: "대장 출혈 선별"}
+  - {name: "Abdominal CT (abdominal pain, early satiety or jaundice)", for: ["Gastrointestinal malignancy (gastric, colorectal, pancreatic)", Hepatocellular carcinoma (chronic hepatitis B)], why: "췌장·간·복강 종양 확인"}
+  - {name: "Morning serum cortisol", for: [Adrenal insufficiency], why: "부신기능저하 선별"}
+  - {name: "Depression screening (PHQ-9)", for: [Depression], why: "우울증·자살 사고 확인"}
+  - {name: "HIV antibody", for: [HIV infection], why: "HIV 감염 확인"}
+plan:
+  treatment:
+    - "검사로 원인 확인 후 원인 치료(갑상샘항진증·당뇨·악성종양 등)"
+    - "영양 상담과 고열량 식사, 필요하면 경구 영양 보충"
+    - "원인 약물 정리, 치아·저작 문제 치료와 사회적 지원 연계"
+  disposition: "외래 단계적 검사, 삼킴곤란·검은 변·지속 구토 등 경보 증상이면 내시경 등 신속 검사 의뢰"
+  follow_up:
+    - "2주 후 검사 결과 확인"
+    - "1-3개월마다 체중 재측정, 원인이 없으면 3-6개월 경과 관찰"
+  red_flags:
+    - "검은 변이나 혈변"
+    - "삼키기 어려움"
+    - "지속되는 발열·식은땀"
+    - "계속되는 구토"
+education:
+  - "피검사와 갑상선 검사를 할게요."
+  - "식사는 거르지 말고 챙겨 드세요."
+  - "검사 결과를 보고 다시 설명할게요."
+guidelines:
+  - US_StatPearls/statpearls_article-29850.md
+  - US_StatPearls/statpearls_article-22414.md
+  - US_StatPearls/statpearls_article-36052.md
+notes: >
+  v0.8.0. Clinically significant loss: 5% or more of body weight within 6 to 12 months (Gaddey & Holder, AAFP 2021);
+  the usual weight is now a follow-up of the kilograms lost, so the note can state the percentage over months.
+  Older-adult causes added (social isolation, finances, chewing problems, medication burden; malignancy up to a
+  third, no cause in 6-28%) with living alone and chewing at p3. Past TB raised to p1 through the standard "Tbc /
+  hepatitis" item; pulmonary TB marked can't-miss; hepatocellular carcinoma added for chronic hepatitis B carriers.
+  Suicide question follows a positive mood answer. Demoted to p3 (overlap or LR near 1): food intake (appetite
+  covers it), tremor (postural tremor maneuver), polyuria (thirst covers it), vomiting, family history of cancer, menstrual change (LMP is asked as standard).
+  Intentional loss now often follows GLP-1 receptor agonists: ask the drug if the answer is yes. Increased appetite
+  with weight loss points to hyperthyroidism, uncontrolled diabetes or malabsorption; decreased appetite to
+  malignancy, depression, chronic infection. Korean national cancer screening: gastric endoscopy from 40, colorectal
+  stool test from 50 in the national program (the 2015 Korean guideline starts at 45), liver ultrasound and AFP for hepatitis B carriers and cirrhosis.

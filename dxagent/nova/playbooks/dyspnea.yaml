@@ -1,0 +1,114 @@
+id: dyspnea
+title: {ko: 호흡곤란, en: Dyspnea}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [숨이 차, 숨차, 숨이 가빠, 숨쉬기 힘들, 숨쉬기가 힘들, 숨 쉬기가 힘들, 숨 쉬기 힘들, 호흡곤란, 숨이 막, 숨이 답답, 숨이 가쁘, 숨쉬기 어려, 숨 쉬기 어려, 숨을 못 쉬]
+  not: []
+history:
+  - {id: onset, q: "언제부터 숨이 차셨어요?", item: Onset, p: 1}
+  - {id: sudden, q: "갑자기 숨이 차기 시작했나요?", item: Onset mode, p: 1}
+  - {id: tolerance, q: "얼마나 걸으면 숨이 차세요?", item: Exercise tolerance, p: 1}
+  - {id: at_rest, q: "가만히 있어도 숨이 차세요?", item: Dyspnea at rest, p: 1}
+  - {id: course, q: "점점 심해지고 있나요?", item: Course, p: 1}
+  - {id: orthopnea, q: "누우면 숨이 더 차세요?", item: Orthopnea, p: 1}
+  - {id: pnd, q: "자다가 숨이 차서 깬 적 있나요?", item: PND, p: 1}
+  - {id: wheeze, q: "숨쉴 때 쌕쌕 소리가 나나요?", item: Wheezing, p: 1}
+  - {id: cough, q: "기침을 하시나요?", item: Cough, p: 1}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, p: 1}
+  - {id: leg_edema, q: "다리가 붓나요?", item: Leg edema, p: 1}
+  - {id: sputum, q: "가래가 나오나요?", item: Sputum, p: 2}
+  - {id: hemoptysis, q: "가래에 피가 섞여 나오나요?", item: Hemoptysis, p: 2}
+  - {id: unilateral_leg, q: "한쪽 다리만 부은 적 있나요?", item: Unilateral leg swelling, p: 2}
+  - {id: weight_gain, q: "최근 몸무게가 늘었나요?", item: Weight gain, p: 2}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, p: 3}
+  - {id: trigger, q: "어떤 때 숨이 더 차세요?", item: Trigger, p: 3}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 2}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, sec: ros, p: 3}
+  - id: heart_dx
+    q: "심장병을 진단받은 적 있나요?"
+    item: heart disease
+    sec: pmh
+    p: 1
+    then:
+      - {id: heart_kind, q: "어떤 심장병이라고 들으셨어요?", item: Type of heart disease, known: "심부전|협심|심근경색|판막|부정맥|스텐트|심방세동|심장이 커|심장 기능"}
+  - id: lung_dx
+    q: "폐 질환을 앓은 적 있나요?"
+    item: lung disease
+    sec: pmh
+    p: 1
+    then:
+      - {id: lung_kind, q: "어떤 폐 질환이라고 들으셨어요?", item: Type of lung disease, known: "천식|폐기종|기관지|결핵|COPD|만성 폐쇄|만성폐쇄|간질|섬유화"}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: immobile, q: "최근 오래 누워 지낸 적 있나요?", item: Immobilization, sec: pmh, p: 2}
+  - {id: inhaler, q: "흡입기를 쓰고 계세요?", item: Inhaler, sec: meds, p: 3}
+  - {id: estrogen, q: "여성 호르몬제를 드시나요?", item: "Estrogen (OCP/HRT)", sec: meds, p: 3, only: female}
+  - {id: exposure, q: "일하면서 먼지에 노출되나요?", item: Occupational exposure, sec: shx, p: 3}
+exams:
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 심음 청진, item: Heart, p: 1}
+  - {name: 경정맥압 측정, item: Neck, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 1}
+  - {name: 전반적 외관 시진, item: General, p: 2}
+  - {name: 흉부 타진, item: Chest, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 간경정맥 역류 검사, item: Neck, p: 3}
+differential:
+  - {en: Heart failure, ko: 심부전}
+  - {en: Chronic obstructive pulmonary disease, ko: 만성 폐쇄성 폐질환}
+  - {en: Asthma, ko: 천식}
+  - {en: Pneumonia, ko: 폐렴}
+  - {en: Pulmonary embolism, ko: 폐색전증, cant_miss: true}
+  - {en: Acute coronary syndrome, ko: 급성 관상동맥증후군, cant_miss: true}
+  - {en: Pneumothorax, ko: 기흉, cant_miss: true}
+  - {en: Anemia, ko: 빈혈}
+  - {en: Interstitial lung disease, ko: 간질성 폐질환}
+  - {en: Pleural effusion, ko: 흉막삼출}
+  - {en: Anxiety with hyperventilation, ko: 불안·과호흡}
+tests:
+  - {name: "Pulse oximetry, arterial blood gas if hypoxic", for: [Pulmonary embolism, Pneumonia, Chronic obstructive pulmonary disease, Pneumothorax, Anxiety with hyperventilation], why: "저산소증·이산화탄소 저류 확인"}
+  - {name: "Chest X-ray", for: [Heart failure, Pneumonia, Pneumothorax, Pleural effusion, Interstitial lung disease, Chronic obstructive pulmonary disease], why: "폐부종·폐렴·기흉·흉수 확인"}
+  - {name: "12-lead ECG", for: [Acute coronary syndrome, Heart failure, Pulmonary embolism], why: "허혈·부정맥·우심 부하 확인"}
+  - {name: "BNP or NT-proBNP", for: [Heart failure], why: "심부전 확인·배제"}
+  - {name: "Cardiac troponin", for: [Acute coronary syndrome], why: "심근 손상 확인"}
+  - {name: "CBC", for: [Anemia, Pneumonia], why: "빈혈·감염 확인"}
+  - {name: "Spirometry with bronchodilator test", for: [Chronic obstructive pulmonary disease, Asthma, Interstitial lung disease], why: "폐쇄성·제한성 장애 확인"}
+  - {name: "Echocardiography", for: [Heart failure, Pleural effusion], why: "박출률·판막 확인"}
+  - {name: "D-dimer or CT pulmonary angiography", for: [Pulmonary embolism], why: "폐색전증 배제·확진"}
+  - {name: "High-resolution chest CT", for: [Interstitial lung disease], why: "간질성 폐질환 확인"}
+plan:
+  treatment:
+    - "산소포화도·흉부 사진·BNP로 원인 확인 후 원인별 치료"
+    - "심부전: 이뇨제로 울혈 조절, 심초음파로 박출률 확인 후 표준 약물"
+    - "COPD·천식: 폐기능검사 확인 후 흡입 기관지확장제·흡입 스테로이드"
+    - "금연, 독감·폐렴구균 예방접종"
+  disposition: "안정 시 호흡곤란·산소포화도 저하·흉통 동반이면 응급실, 만성·안정적이면 외래 검사"
+  follow_up:
+    - "1-2주 후 검사 결과와 치료 반응 확인"
+    - "만성 질환은 1-3개월마다 증상·체중·폐기능 점검"
+  red_flags:
+    - "쉬어도 숨이 참"
+    - "입술이 파래짐"
+    - "가슴 통증 동반"
+    - "갑자기 심해지는 호흡곤란"
+education:
+  - "흉부 사진과 피검사를 할게요."
+  - "검사 결과를 보고 치료를 정할게요."
+  - "숨이 많이 차면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20808.md
+  - KR_EuropePMC/europepmc_PMC5614939.md
+  - US_StatPearls/statpearls_article-26083.md
+  - US_StatPearls/statpearls_article-17920.md
+notes: >
+  v0.8.0. Past TB raised to p1 through the standard "Tbc / hepatitis" item (post-TB destroyed lung is a common cause
+  of chronic dyspnea in older Koreans; TB notification 35.2/100,000 in 2024, second in the OECD). Smoking years for
+  pack-years (COPD: 10 pack-years or more) are asked by the engine after a positive smoking answer; palpitation demoted to p3 to stay within the turn plan. The kind
+  of heart or lung disease is a follow-up of a positive history (prior heart failure LR+ 5.8). Hepatojugular reflux
+  replaces chest inspection at p3 for an equivocal JVP; estrogen added at p3 for PE. Priorities follow the JAMA RCE
+  (Wang 2005): prior HF LR+ 5.8, PND LR+ 2.6, S3 LR+ 11, absent exertional dyspnea LR- 0.48, absent rales LR- 0.51,
+  BNP < 100 pg/mL LR- 0.11. Orthopnea, PND, edema and weight gain point to heart failure; wheeze with triggers to
+  asthma; smoking with chronic sputum to COPD; sudden onset with pleuritic pain or unilateral leg swelling to
+  pulmonary embolism.

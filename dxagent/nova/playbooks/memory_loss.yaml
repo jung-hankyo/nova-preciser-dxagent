@@ -1,0 +1,119 @@
+id: memory_loss
+title: {ko: 기억력 저하, en: Memory loss}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [깜빡, 기억이 안, 기억력, 건망, 잊어버, 치매, 자꾸 잊, 같은 말을 반복, 같은 질문을 반복, 기억이 잘, 잊어, 잊는]
+  not: []
+history:
+  - {id: onset, q: "언제부터 깜빡하셨어요?", item: Onset, p: 1}
+  - {id: informant, q: "가족분이 먼저 이상하다고 했나요?", item: Informant-reported decline, p: 1}
+  - {id: course, q: "점점 나빠지고 있나요?", item: Course, p: 1}
+  - {id: abrupt, q: "갑자기 나빠진 적이 있나요?", item: Abrupt or stepwise decline, p: 1}
+  - {id: recent, q: "최근 일을 더 잘 잊으시나요?", item: Recent memory, p: 1}
+  - {id: lost, q: "길을 잃은 적이 있나요?", item: Getting lost, p: 1}
+  - {id: money, q: "돈 관리는 혼자 하시나요?", item: IADL (finances), p: 1}
+  - {id: mood, q: "기분이 우울하세요?", item: Depressed mood, p: 1}
+  - {id: gait, q: "걸음걸이가 달라졌나요?", item: Gait change, p: 1}
+  - {id: fluctuate, q: "정신이 맑았다 흐렸다 하나요?", item: Fluctuation, p: 2}
+  - {id: meds_self, q: "약은 혼자 챙겨 드시나요?", item: IADL (medications), p: 2}
+  - {id: word, q: "말할 때 단어가 잘 안 떠오르나요?", item: Word finding, p: 2}
+  - {id: personality, q: "성격이 변하셨나요?", item: Personality change, p: 2}
+  - {id: hallucination, q: "헛것이 보이시나요?", item: Visual hallucination, p: 2}
+  - {id: incontinence, q: "소변 실수가 있나요?", item: Urinary incontinence, p: 2}
+  - id: trauma
+    q: "머리를 다친 적 있나요?"
+    item: Head trauma
+    p: 2
+    then:
+      - {id: trauma_timing, q: "다친 뒤에 증상이 생겼나요?", item: Decline after head trauma, known: "뒤|후|나서|다음|이후"}
+  - {id: repeat, q: "같은 질문을 반복하시나요?", item: Repetition, p: 3}
+  - {id: adl, q: "옷 입기는 혼자 하시나요?", item: Basic ADL, p: 3}
+  - {id: safety, q: "가스불을 켜 놓고 잊은 적 있나요?", item: "Safety (stove)", p: 3}
+  - {id: falls, q: "자주 넘어지시나요?", item: Falls, p: 3}
+  - {id: tremor, q: "손이 떨리세요?", item: Tremor, sec: ros, p: 3}
+  - {id: sleep, q: "잠은 잘 주무세요?", item: Sleep, sec: ros, p: 3}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 1}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 3}
+  - id: sedative
+    q: "수면제를 드시나요?"
+    item: Sedative use
+    sec: meds
+    p: 1
+    then:
+      - {id: sed_duration, q: "수면제를 얼마나 오래 드셨나요?", item: Sedative duration, known: "개월|달째|달 전|년|주째|주 전|주일"}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 3}
+  - {id: fh_dementia, q: "가족 중 치매 있는 분 있나요?", item: "FHx: dementia", sec: fhx, p: 3}
+  - {id: education, q: "학교는 어디까지 다니셨어요?", item: Education, sec: shx, p: 2}
+  - {id: living, q: "누구와 함께 사세요?", item: Living situation, sec: shx, p: 2}
+exams:
+  - {name: 인지기능 선별검사, item: Neuro, p: 1}
+  - {name: 의식·지남력 평가, item: General, p: 1}
+  - {name: 보행 관찰, item: Neuro, p: 1}
+  - {name: 정동 평가, item: Mental status, p: 2}
+  - {name: 회내근 표류 검사, item: Neuro, p: 2}
+  - {name: 떨림·서동 관찰, item: Neuro, p: 2}
+  - {name: 사지 근력 검사, item: Neuro, p: 3}
+  - {name: 심부건반사, item: Neuro, p: 3}
+differential:
+  - {en: Alzheimer disease, ko: 알츠하이머병}
+  - {en: Vascular dementia, ko: 혈관성 치매}
+  - {en: Dementia with Lewy bodies, ko: 루이소체 치매}
+  - {en: Frontotemporal dementia, ko: 전측두엽 치매}
+  - {en: Mild cognitive impairment, ko: 경도인지장애}
+  - {en: "Depression (pseudodementia)", ko: 우울증(가성치매)}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Vitamin B12 deficiency, ko: 비타민 B12 결핍}
+  - {en: Normal pressure hydrocephalus, ko: 정상압 수두증}
+  - {en: Chronic subdural hematoma, ko: 만성 경막하 혈종, cant_miss: true}
+  - {en: Delirium, ko: 섬망, cant_miss: true}
+  - {en: Medication-induced cognitive impairment, ko: 약물 유발 인지장애}
+  - {en: Alcohol-related dementia, ko: 알코올성 치매}
+  - {en: Wernicke-Korsakoff syndrome, ko: 베르니케-코르사코프 증후군}
+  - {en: Neurosyphilis, ko: 신경매독}
+tests:
+  - {name: "Cognitive screening (K-MMSE-2 or MoCA-K; CIST in the national programme)", for: [Mild cognitive impairment, Alzheimer disease, Vascular dementia, Dementia with Lewy bodies, Frontotemporal dementia], why: "인지기능 저하 확인"}
+  - {name: "Neuropsychological testing (SNSB)", for: [Mild cognitive impairment, Alzheimer disease, Frontotemporal dementia, Dementia with Lewy bodies], why: "인지 영역별 손상 양상 확인"}
+  - {name: "CBC, electrolytes, calcium, glucose, liver and renal function", for: [Delirium], why: "대사성 원인 확인"}
+  - {name: "Confusion Assessment Method", for: [Delirium], why: "섬망 선별"}
+  - {name: "TSH", for: [Hypothyroidism], why: "갑상선 기능 확인"}
+  - {name: "Vitamin B12, folate", for: [Vitamin B12 deficiency, Alcohol-related dementia], why: "비타민 결핍 확인"}
+  - {name: "Syphilis serology (VDRL or RPR)", for: [Neurosyphilis], why: "신경매독 선별"}
+  - {name: "Brain MRI (or CT)", for: [Vascular dementia, Normal pressure hydrocephalus, Chronic subdural hematoma, Alzheimer disease, Frontotemporal dementia], why: "혈관 병변·수두증·혈종·위축 확인"}
+  - {name: "PHQ-9 or Korean Geriatric Depression Scale", for: ["Depression (pseudodementia)"], why: "우울 선별"}
+  - {name: "Medication review (anticholinergic and sedative drugs)", for: [Medication-induced cognitive impairment], why: "인지 저하 유발 약물 확인"}
+  - {name: "Liver function tests, GGT; thiamine if alcohol use", for: [Alcohol-related dementia, Wernicke-Korsakoff syndrome], why: "알코올 관련 원인 확인"}
+  - {name: "Dopamine transporter scan (suspected Lewy body dementia)", for: [Dementia with Lewy bodies], why: "루이소체 치매 지지 소견"}
+  - {name: "12-lead ECG (before cholinesterase inhibitors)", for: [safety], why: "서맥·전도 장애 확인"}
+plan:
+  treatment:
+    - "가역적 원인(갑상선·비타민 B12·약물·우울·혈종) 확인 후 교정"
+    - "알츠하이머·루이소체·혈관성 치매 확인 시 콜린분해효소억제제 시작(심전도로 서맥 확인 후)"
+    - "운동·인지 활동·혈관 위험인자 조절, 보호자 교육과 치매안심센터 연계"
+  disposition: "외래 평가(인지검사·MRI·혈액검사); 갑자기 악화하거나 의식이 변동하면 섬망·경막하 혈종 감별 위해 당일 평가"
+  follow_up:
+    - "4주 안에 검사 결과로 진단과 치료 계획 설명"
+    - "6-12개월마다 인지기능과 일상생활 능력 재평가"
+  red_flags: ["갑자기 정신이 흐려짐", "두통이나 한쪽 마비", "넘어진 뒤 악화", "길을 잃고 집을 못 찾음"]
+education:
+  - "기억력 검사와 뇌 MRI를 할게요."
+  - "보호자분도 다음에 같이 와 주세요."
+  - "혼자 운전이나 외출은 조심하세요."
+  - "갑자기 나빠지면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-17423.md
+  - US_StatPearls/statpearls_article-20325.md
+  - KR_EuropePMC/europepmc_PMC8811204.md
+notes: >
+  v0.8.0 (evidence review 2026-10): an informant item was added at p1 (informant-reported decline predicted later
+  dementia, self-report did not; Carr, Neurology 2000); when a guardian is present, direct the course, IADL and
+  personality questions to the guardian. Fluctuation raised to p2 (CAM feature 1 for delirium, a can't-miss; also a
+  core feature of Lewy body dementia). Pronator drift replaces facial strength (subtle hemiparesis of chronic subdural
+  hematoma or a vascular lesion). Repetition, basic ADL, stove safety, falls, new drugs and family history (covered by
+  recent memory, IADL, gait and the standard questions) moved to p3. Gradual progression with early recent-memory loss
+  = Alzheimer type; stepwise with vascular risk = vascular; fluctuations, visual hallucinations and parkinsonism = Lewy
+  body; gait apraxia, incontinence and dementia = normal pressure hydrocephalus. Korean tools: MoCA-K cutoff 22/23 for
+  MCI (sensitivity 89%, specificity 84%; Lee 2008); K-MMSE-2; the national programme uses the CIST (Kwon 2026); SNSB for
+  detailed testing; Korean dementia guideline 2021 (KR_EuropePMC PMC8811204). Interpret scores by education level.

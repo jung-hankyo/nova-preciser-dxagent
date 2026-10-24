@@ -1,0 +1,110 @@
+id: hematochezia
+title: {ko: 혈변, en: Hematochezia}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [혈변, 변에 피, 대변에 피, 항문에서 피, 변을 보면 피, 변 볼 때 피, 변볼 때 피, 변을 볼 때 피, 휴지에 피, 피똥, 검붉은 변, 피가 섞인 변, 변기에 피, 변 볼 때 하혈, 변볼 때 하혈, 대변 볼 때 하혈, 항문으로 피]
+  not: [소변에 피, 가래에 피, 소변 볼 때, 소변볼 때, 소변을 볼 때]
+history:
+  - {id: onset, q: "언제부터 피가 나왔어요?", item: Onset, p: 1}
+  - {id: color, q: "피는 무슨 색인가요?", item: Color, p: 1}
+  - {id: mixed, q: "피가 변에 섞여 나오나요?", item: Mixed with stool, p: 1}
+  - {id: paper, q: "휴지에만 피가 묻나요?", item: Blood on paper only, p: 1}
+  - {id: amount, q: "피의 양은 어느 정도인가요?", item: Amount, p: 1}
+  - {id: habit, q: "변 보는 습관이 달라졌나요?", item: Bowel habit change, p: 1}
+  - {id: caliber, q: "변이 가늘어졌나요?", item: Stool caliber, p: 1}
+  - {id: anal_pain, q: "변볼 때 항문이 아프세요?", item: Anal pain, p: 1}
+  - {id: tenesmus, q: "변을 봐도 덜 본 느낌인가요?", item: Tenesmus, p: 2}
+  - {id: diarrhea, q: "설사를 하시나요?", item: Diarrhea, p: 2}
+  - {id: constipation, q: "변비가 있으세요?", item: Constipation, p: 2}
+  - {id: prolapse, q: "항문에 뭔가 튀어나오나요?", item: Anal protrusion, p: 2}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, p: 2}
+  - {id: frequency, q: "얼마나 자주 피가 나오나요?", item: Frequency, p: 3}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 1
+    then:
+      - {id: kg, q: "몇 킬로그램 빠졌나요?", item: Weight loss (kg), known: "킬로|kg|키로"}
+      - {id: period, q: "얼마 동안 빠졌나요?", item: Weight loss period, known: "(\\d+|한|두|세|석|네|다섯|여섯|몇|여러)\\s*(주|달|개월|일|년|해)|일 ?년|일주일|며칠|보름|반년|작년|올해"}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 2}
+  - {id: dizzy, q: "어지러우세요?", item: Dizziness, sec: ros, p: 2}
+  - {id: fatigue, q: "쉽게 피곤하세요?", item: Fatigue, sec: ros, p: 3}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 3}
+  - {id: colonoscopy, q: "대장내시경을 받아 보셨나요?", item: Colonoscopy, sec: pmh, p: 1}
+  - {id: hemorrhoid_dx, q: "치질이 있다고 들으셨어요?", item: Hemorrhoids, sec: pmh, p: 3}
+  - {id: bowel_dx, q: "장 질환을 앓은 적 있나요?", item: Bowel disease, sec: pmh, p: 3}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 1}
+  - {id: aspirin, q: "아스피린을 드시나요?", item: Aspirin, sec: meds, p: 2}
+  - id: fh_crc
+    q: "가족 중 대장암 걸린 분 있나요?"
+    item: "FHx: colorectal cancer"
+    sec: fhx
+    p: 1
+    then:
+      - {id: age_dx, q: "그분은 몇 살에 진단받았나요?", item: Age at relative's diagnosis, known: "살|세|대에|\\d"}
+exams:
+  - {name: 복부 시진, item: Abdomen, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 항문 시진, item: Rectal, p: 1}
+  - {name: 직장수지검사, item: Rectal, p: 1}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 기립성 혈압 측정, item: V/S, p: 2}
+differential:
+  - {en: Hemorrhoids, ko: 치핵}
+  - {en: Anal fissure, ko: 치열}
+  - {en: Colorectal cancer, ko: 대장암, cant_miss: true}
+  - {en: Diverticular bleeding, ko: 게실 출혈}
+  - {en: Ulcerative colitis, ko: 궤양성 대장염}
+  - {en: Crohn's disease or intestinal tuberculosis, ko: 크론병·장결핵}
+  - {en: Infectious colitis, ko: 감염성 대장염}
+  - {en: Ischemic colitis, ko: 허혈성 대장염}
+  - {en: Colonic polyp, ko: 대장 용종}
+  - {en: Angiodysplasia, ko: 혈관이형성증}
+  - {en: Brisk upper gastrointestinal bleeding, ko: 다량의 상부위장관 출혈, cant_miss: true}
+tests:
+  - {name: "CBC, PT/aPTT", for: [Colorectal cancer, Diverticular bleeding, Angiodysplasia, safety], why: "빈혈·출혈 경향 확인(내시경 전)"}
+  - {name: "BUN, creatinine", for: [Brisk upper gastrointestinal bleeding], why: "BUN/Cr 30 초과면 상부 출혈 시사"}
+  - {name: "Anoscopy", for: [Hemorrhoids, Anal fissure], why: "치핵·치열 확인"}
+  - {name: "Colonoscopy (age 45 or more, alarm features, family history, or bleeding not explained by an anal lesion)", for: [Colorectal cancer, Colonic polyp, Diverticular bleeding, Ulcerative colitis, Crohn's disease or intestinal tuberculosis, Ischemic colitis, Angiodysplasia], why: "출혈원·종양·염증 확인"}
+  - {name: "Stool culture or PCR (with diarrhea and fever)", for: [Infectious colitis], why: "원인균 확인"}
+  - {name: "Upper endoscopy (hemodynamic instability or BUN/Cr over 30)", for: [Brisk upper gastrointestinal bleeding], why: "상부 출혈원 확인"}
+  - {name: "CT angiography (ongoing brisk bleeding)", for: [Diverticular bleeding, Angiodysplasia], why: "활동성 출혈 위치 확인"}
+  - {name: "Chest X-ray and interferon-gamma release assay (suspected intestinal TB)", for: [Crohn's disease or intestinal tuberculosis], why: "결핵 감염 확인"}
+  - {name: "Blood type and cross-match (large bleeding)", for: [safety], why: "수혈 대비"}
+plan:
+  treatment:
+    - "치핵·치열: 좌욕, 식이섬유·수분, 국소 연고"
+    - "만성 치열은 국소 칼슘통로차단제 또는 질산염 연고"
+    - "대장내시경 결과에 따라 용종 절제·조직검사, 염증성 장질환은 전문 치료"
+    - "다량 출혈은 수액·수혈 후 응급 내시경 또는 혈관조영"
+  disposition: "소량 선홍색 출혈과 항문 병변이 보이면 외래; 다량 출혈·어지럼·빈맥은 응급실, 45세 이상·경고 증상은 대장내시경 의뢰"
+  follow_up:
+    - "2주 내 혈액검사·대장내시경 결과 확인"
+    - "치핵·치열은 4~6주 후 증상 재평가"
+    - "조직검사 결과에 따라 감시 내시경 간격 결정"
+  red_flags: ["피가 많이 나거나 덩어리로 나옴", "어지러움이나 실신", "검은 변", "심한 복통"]
+education:
+  - "대장내시경 검사를 받아 보세요."
+  - "변비가 생기지 않게 물을 드세요."
+  - "피가 많이 나거나 어지러우면 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC11082542.md
+  - KR_EuropePMC/europepmc_PMC13382552.md
+  - US_StatPearls/statpearls_article-22103.md
+  - US_StatPearls/statpearls_article-22760.md
+notes: >
+  v0.8.0: anal inspection (항문 시진) replaces liver and spleen palpation: a fissure is diagnosed by gentle inspection
+  and a rectal exam may be too painful (ASCRS 2023; 90-99% of fissures are posterior midline, a lateral fissure
+  suggests Crohn's disease, TB or malignancy). Crohn's disease or intestinal TB added (Korean pair, Lee 2006).
+  Frequency, fatigue and a prior hemorrhoid label moved to priority 3 (a hemorrhoid label anchors the patient and the
+  doctor); weight-loss and family-age follow-ups added. Bright red blood on the paper with anal pain suggests
+  fissure; painless bright red blood after stool suggests hemorrhoids. Dark red blood mixed in stool, change in bowel
+  habit or caliber, weight loss, anemia, age 45 or more (Korean CRC screening guideline 2025 revision: 45-74 years;
+  national FIT from 50) or family history require colonoscopy, as does bleeding in a younger patient not explained by
+  a seen anal lesion. Clots argue against an upper source (LR 0.05); BUN/creatinine over 30 favours one (LR 7.5,
+  Srygley 2012). ACG 2023: stable patients may have colonoscopy electively; an Oakland score identifies low risk.

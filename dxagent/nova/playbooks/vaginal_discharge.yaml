@@ -1,0 +1,103 @@
+id: vaginal_discharge
+title: {ko: 질 분비물, en: Vaginal discharge}
+status: draft
+reviewer: ""
+population: female
+pain: false
+match:
+  any: [질 분비물, 냉이, 분비물이 많, 분비물이 늘, 질이 가려, 외음부가 가려, 아래가 가려, 질에서 냄새, 냉 냄새, 냉이 많, 밑이 가려, 밑이 가렵, 아래가 가렵, 질이 가렵, 외음부가 가렵, 분비물에서 냄새, 밑에서 냄새, 하얀 분비물, 누런 분비물]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: color, q: "분비물은 무슨 색인가요?", item: Color, p: 1}
+  - {id: texture, q: "분비물이 어떤 모양인가요?", item: Consistency, p: 1}
+  - {id: odor, q: "냄새가 나나요?", item: Odor, p: 1}
+  - {id: itch, q: "가려우세요?", item: Pruritus, p: 1}
+  - {id: abd_pain, q: "아랫배도 아프세요?", item: Lower abdominal pain, p: 1}
+  - id: sexual
+    q: "성관계를 하신 적 있나요?"
+    item: Sexual activity
+    p: 1
+    only: adult
+    gate: sexual
+    then:
+      - {id: new_partner, q: "최근 새로운 성 파트너가 있나요?", item: New sexual partner}
+      - {id: partner_sx, q: "상대방도 증상이 있나요?", item: Partner symptoms}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, p: 1, only: adult}
+  - {id: ped_object, q: "아이가 생식기에 뭘 넣은 적 있나요?", item: Vaginal foreign body, p: 1, only: child}
+  - {id: ped_itch_night, q: "아이가 밤에 엉덩이를 자주 긁나요?", item: Nocturnal perianal itch (pinworm), p: 2, only: child}
+  - {id: ped_hygiene, q: "아이가 혼자 뒤처리를 하나요?", item: Toilet hygiene, p: 3, only: child}
+  - {id: dysuria, q: "소변볼 때 따가우세요?", item: Dysuria, p: 2}
+  - {id: dyspareunia, q: "성관계할 때 아픈가요?", item: Dyspareunia, p: 2, only: adult}
+  - {id: postcoital, q: "성관계 후 피가 비치나요?", item: Postcoital bleeding, p: 2, only: adult}
+  - {id: intermenstrual, q: "생리 아닐 때 피가 비치나요?", item: Intermenstrual bleeding, p: 2, only: adult}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 2}
+  - {id: lesion, q: "외음부에 물집이 생겼나요?", item: Vulvar vesicles, p: 3}
+  - {id: antibiotics, q: "최근 항생제를 드셨나요?", item: Recent antibiotics, sec: meds, p: 1}
+  - {id: steroid, q: "스테로이드를 드신 적 있나요?", item: Steroid use, sec: meds, p: 3}
+  - {id: pap, q: "자궁경부암 검사는 언제 하셨어요?", item: Last Pap smear, sec: pmh, p: 2, only: adult}
+  - {id: sti_hx, q: "성병을 앓은 적 있나요?", item: STI history, sec: pmh, p: 3, only: adult}
+  - {id: menopause, q: "폐경은 되셨나요?", item: Menopausal status, sec: ob, p: 2, only: adult}
+  - {id: condom, q: "콘돔을 사용하시나요?", item: Condom use, sec: shx, p: 3, only: adult}
+  - {id: douching, q: "질 세정제를 자주 쓰세요?", item: Douching, sec: shx, p: 3, only: adult}
+  - {id: tampon, q: "탐폰을 사용하시나요?", item: Tampon use, sec: shx, p: 3, only: adult}
+exams:
+  - {name: 외음부 시진, item: GU, p: 1}
+  - {name: 질경 검사, item: GU, p: 1, only: sexually_active}
+  - {name: 양손 골반 내진, item: GU, p: 1, only: sexually_active}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 자궁경부 운동 압통 확인, item: GU, p: 2, only: sexually_active}
+  - {name: 서혜부 림프절 촉진, item: Lymph nodes, p: 3}
+differential:
+  - {en: Bacterial vaginosis, ko: 세균성 질염}
+  - {en: Vulvovaginal candidiasis, ko: 외음질 칸디다증}
+  - {en: Trichomoniasis, ko: 트리코모나스 질염}
+  - {en: Chlamydial or gonococcal cervicitis, ko: 클라미디아·임균 자궁경부염}
+  - {en: Pelvic inflammatory disease, ko: 골반염, cant_miss: true}
+  - {en: Genital herpes, ko: 생식기 포진}
+  - {en: Physiologic discharge, ko: 생리적 분비물}
+  - {en: Atrophic vaginitis, ko: 위축성 질염}
+  - {en: "Retained foreign body (tampon)", ko: 이물(잔류 탐폰)}
+  - {en: Cervical cancer, ko: 자궁경부암, cant_miss: true}
+  - {en: Prepubertal vulvovaginitis or vaginal foreign body, ko: 사춘기 전 외음질염·질 이물}
+  - {en: "Child sexual abuse (STI in a prepubertal child)", ko: 아동 성학대(사춘기 전 성매개감염), cant_miss: true}
+tests:
+  - {name: "Vaginal pH, wet mount, KOH, whiff test", for: [Bacterial vaginosis, Vulvovaginal candidiasis, Trichomoniasis, Physiologic discharge, Atrophic vaginitis], why: "질염 원인 감별(Amsel 기준, pH 4.5 초과)"}
+  - {name: "NAAT for chlamydia, gonorrhea, trichomonas", for: [Chlamydial or gonococcal cervicitis, Trichomoniasis, Pelvic inflammatory disease, "Child sexual abuse (STI in a prepubertal child)"], why: "성매개감염 확인(습식 도말보다 민감)"}
+  - {name: "Urine hCG", for: [Pelvic inflammatory disease, safety], why: "임신 배제(약물 선택·자궁외 임신 감별)"}
+  - {name: "HSV PCR", for: [Genital herpes], why: "물집·궤양에서 포진 확인"}
+  - {name: "Pap smear or HPV test", for: [Cervical cancer], why: "검진 시기이거나 성교 후 출혈 시"}
+  - {name: "Fungal culture", for: [Vulvovaginal candidiasis], why: "재발·치료 실패 시 비알비칸스 확인"}
+  - {name: "Transvaginal ultrasound", for: [Pelvic inflammatory disease], why: "심한 통증·종괴 시 난관난소농양 확인"}
+  - {name: "HIV and syphilis serology", for: [Chlamydial or gonococcal cervicitis, Trichomoniasis, Genital herpes], why: "동반 성매개감염 선별"}
+  - {name: "Vaginal culture, perianal tape test", for: [Prepubertal vulvovaginitis or vaginal foreign body], why: "사춘기 전 외음질염 원인(A군 연쇄상구균·요충) 확인"}
+plan:
+  treatment:
+    - "습식 도말·pH 확인 후 원인별 치료: 세균성 질염·트리코모나스는 메트로니다졸, 칸디다는 아졸계 항진균제."
+    - "클라미디아·임균 양성이면 항생제로 치료하고 성 파트너도 함께 치료합니다."
+    - "골반염 최소 기준(자궁경부 운동 압통 등)을 만족하면 경험적 항생제를 시작합니다."
+    - "질 세정을 중단하고 치료가 끝날 때까지 성관계를 피합니다."
+  disposition: "대부분 외래 치료; 고열·구토로 경구 치료가 어렵거나 난관난소농양 의심, 임신 중 골반염은 입원."
+  follow_up:
+    - "1-2주 뒤 증상과 검사 결과를 확인합니다."
+    - "클라미디아·임균·트리코모나스 양성이면 치료 3개월 뒤 재검사합니다."
+  red_flags: ["고열", "심한 아랫배 통증", "생리가 아닌 출혈"]
+education:
+  - "분비물 검사를 해 볼게요."
+  - "질 세정제는 쓰지 않는 게 좋아요."
+  - "열이나 아랫배 통증이 생기면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-30950.md
+  - US_StatPearls/statpearls_article-30951.md
+  - US_StatPearls/statpearls_article-30586.md
+notes: >
+  v0.8.0 (evidence review): speculum, bimanual and cervical-motion exams limited to sexually active patients;
+  sexual-history items to adults (new partner and partner symptoms as follow-ups of the sexual-activity item); never
+  had intercourse: no speculum or bimanual; transabdominal ultrasound; rectal exam only if a mass is suspected.
+  Vulvar inspection replaces the general skin inspection (erythema, satellite lesions, vesicles, ulcers, atrophy).
+  Menopause item added because the engine asks LMP only to age 55 and atrophic vaginitis is listed. Girls under 13:
+  foreign body, pinworm and hygiene asked; external inspection only; a sexually transmitted infection in a
+  prepubertal child means abuse until proven otherwise (mandatory report to 112 in Korea). CDC STI Treatment
+  Guidelines 2021: BV by Amsel (3 of 4: thin homogeneous discharge, clue cells, pH over 4.5, positive whiff test);
+  trichomonas by NAAT; empiric PID treatment in a sexually active woman with pelvic pain and cervical motion, uterine
+  or adnexal tenderness; retest chlamydia, gonorrhea and trichomonas 3 months after treatment.

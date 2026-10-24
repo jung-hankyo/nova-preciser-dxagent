@@ -11,9 +11,12 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from dotenv import load_dotenv
+try:  # optional: the competition runtime (dxagent.nova) installs only pydantic and pyyaml
+    from dotenv import load_dotenv
 
-load_dotenv()
+    load_dotenv()
+except ImportError:  # pragma: no cover
+    pass
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = PACKAGE_DIR.parent
@@ -200,6 +203,10 @@ class Settings:
     stall_turns: int = field(default_factory=lambda: _envi("DX_STALL_TURNS", 3))  # commit after this many turns with no worthwhile option
     max_batch_history: int = field(default_factory=lambda: _envi("DX_MAX_BATCH_HISTORY", 3))
     max_batch_tests: int = field(default_factory=lambda: _envi("DX_MAX_BATCH_TESTS", 3))
+    # v0.5: action types the environment accepts. The N.O.V.A preliminary round has no TEST action, so the planner
+    # there may only ask (history) or examine (exam); tests are still scored for the plan, never ordered.
+    allowed_action_types: tuple[str, ...] = field(default_factory=lambda: tuple(
+        t.strip() for t in _env("DX_ALLOWED_ACTIONS", ",".join(ACTION_TYPES)).split(",") if t.strip()))
 
     # D1: build a turn's batch greedily by marginal value given the actions already chosen, scoring joint
     # outcomes with the same cluster pooling the belief update applies.

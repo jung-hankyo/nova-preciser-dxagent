@@ -1,0 +1,125 @@
+id: weakness_numbness
+title: {ko: 근력 약화·감각 이상, en: Focal weakness or numbness}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [힘이 빠, 마비, 저려, 저리, 감각이 없, 감각이 이상, 감각이 둔, 말이 어눌, 얼굴이 마비, 손이 저, 발이 저, 팔에 힘이, 다리에 힘이, 입이 돌아, 얼굴이 돌아, 발음이, 말이 안 나, 말이 잘 안 나]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: sudden, q: "갑자기 생겼나요?", item: Sudden onset, p: 1}
+  - {id: last_well, q: "마지막으로 괜찮았던 게 언제예요?", item: Last known well, p: 1}
+  - {id: location, q: "어디가 불편하세요?", item: Location, p: 1}
+  - {id: one_side, q: "한쪽만 그런가요?", item: Laterality, p: 1}
+  - {id: weakness, q: "힘이 빠지는 느낌인가요?", item: Weakness, p: 1}
+  - {id: sensory, q: "감각이 둔한가요?", item: Sensory loss, p: 1}
+  - id: face
+    q: "얼굴 한쪽이 처졌나요?"
+    item: Facial droop
+    p: 1
+    then:
+      - {id: vesicle, q: "귀 주위에 물집이 생겼나요?", item: Ear vesicles, known: "물집|수포"}
+  - {id: speech, q: "말이 어눌해졌나요?", item: Dysarthria, p: 1}
+  - {id: course, q: "점점 심해지고 있나요?", item: Course, p: 1}
+  - {id: field, q: "한쪽 시야가 가려 보이나요?", item: Visual field loss, p: 2}
+  - {id: fluctuate, q: "좋아졌다 나빠졌다 하나요?", item: Fluctuation, p: 2}
+  - {id: glove, q: "양쪽 손발 끝이 저린가요?", item: Stocking-glove distribution, p: 2}
+  - {id: night_hand, q: "밤에 손이 저려서 깨나요?", item: Nocturnal hand paresthesia, p: 2}
+  - {id: spine_pain, q: "목이나 허리가 아프세요?", item: Neck or back pain, p: 2}
+  - id: ascending
+    q: "증상이 다리에서 위로 올라오나요?"
+    item: Ascending weakness
+    p: 2
+    then:
+      - {id: infection, q: "최근 설사를 한 적 있나요?", item: Recent diarrhea, known: "설사"}
+      - {id: uri, q: "최근 감기를 앓았나요?", item: Recent URI, known: "감기|기침|목이 아|열이"}
+  - {id: bladder, q: "소변보기가 힘드세요?", item: Urinary retention, p: 2}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 2}
+  - {id: diplopia, q: "물체가 겹쳐 보이나요?", item: Diplopia, p: 3}
+  - {id: mono_vision, q: "한쪽 눈이 안 보인 적 있나요?", item: Monocular visual loss, p: 3}
+  - {id: dizzy, q: "어지러우세요?", item: Dizziness, p: 3}
+  - {id: swallow, q: "음식을 삼키기 힘드세요?", item: Dysphagia, p: 3}
+  - {id: tpp_trigger, q: "과식이나 운동 뒤에 힘이 빠졌나요?", item: Periodic paralysis trigger, p: 3}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 1}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 3}
+  - {id: lipid, q: "콜레스테롤이 높다고 들으셨어요?", item: dyslipidemia, sec: pmh, p: 3}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 2}
+  - {id: fh_stroke, q: "가족 중 뇌졸중 있는 분 있나요?", item: "FHx: stroke", sec: fhx, p: 3}
+exams:
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 안면 근력 검사, item: Neuro, p: 1}
+  - {name: 회내근 표류 검사, item: Neuro, p: 1}
+  - {name: 구음장애 확인, item: Neuro, p: 1}
+  - {name: 촉각 검사, item: Neuro, p: 1}
+  - {name: 심부건반사, item: Neuro, p: 2}
+  - {name: 소뇌 협조운동 검사, item: Neuro, p: 2}
+  - {name: 요골동맥 맥박 촉진, item: V/S, p: 2}
+differential:
+  - {en: Ischemic stroke, ko: 허혈성 뇌졸중, cant_miss: true}
+  - {en: Transient ischemic attack, ko: 일과성 허혈발작, cant_miss: true}
+  - {en: Intracerebral hemorrhage, ko: 뇌내출혈, cant_miss: true}
+  - {en: Bell palsy, ko: 벨 마비}
+  - {en: Carpal tunnel syndrome, ko: 손목굴 증후군}
+  - {en: Cervical or lumbar radiculopathy, ko: 경추·요추 신경근병증}
+  - {en: Diabetic or alcoholic polyneuropathy, ko: 당뇨병성·알코올성 다발신경병증}
+  - {en: Guillain-Barre syndrome, ko: 길랭-바레 증후군, cant_miss: true}
+  - {en: Spinal cord compression, ko: 척수 압박, cant_miss: true}
+  - {en: Multiple sclerosis, ko: 다발성 경화증}
+  - {en: Myasthenia gravis, ko: 중증근무력증}
+  - {en: "Hypoglycemia (stroke mimic)", ko: 저혈당(뇌졸중 유사 증상), cant_miss: true}
+  - {en: Ramsay Hunt syndrome, ko: 람세이헌트 증후군}
+  - {en: "Hypokalemic (thyrotoxic) periodic paralysis", ko: 저칼륨(갑상샘중독성) 주기마비, cant_miss: true}
+  - {en: Chronic subdural hematoma, ko: 만성 경막하 혈종, cant_miss: true}
+  - {en: Todd paralysis, ko: 토드 마비}
+  - {en: Brain tumor, ko: 뇌종양}
+tests:
+  - {name: "Point-of-care glucose (first)", for: ["Hypoglycemia (stroke mimic)"], why: "저혈당 배제"}
+  - {name: "Urgent brain CT with CT angiography, or MRI (acute focal deficit)", for: [Ischemic stroke, Transient ischemic attack, Intracerebral hemorrhage, Chronic subdural hematoma, Brain tumor], why: "출혈·경색·대혈관 폐색 확인"}
+  - {name: "CBC, platelets, PT/INR (before thrombolysis)", for: [safety], why: "혈전용해·항응고 전 출혈 위험 확인"}
+  - {name: "12-lead ECG", for: [Ischemic stroke, Transient ischemic attack], why: "심방세동 확인"}
+  - {name: "Carotid duplex ultrasound or CT angiography", for: [Transient ischemic attack, Ischemic stroke], why: "경동맥 협착 확인"}
+  - {name: "Electrolytes with potassium, TSH, free T4", for: ["Hypokalemic (thyrotoxic) periodic paralysis"], why: "저칼륨·갑상샘중독 확인"}
+  - {name: "HbA1c, vitamin B12, TSH (distal symmetric pattern)", for: [Diabetic or alcoholic polyneuropathy], why: "다발신경병증 원인 확인"}
+  - {name: "Nerve conduction study and EMG", for: [Carpal tunnel syndrome, Cervical or lumbar radiculopathy, Diabetic or alcoholic polyneuropathy, Guillain-Barre syndrome], why: "말초신경 병변 위치 확인"}
+  - {name: "Spine MRI (radiculopathy or cord signs)", for: [Cervical or lumbar radiculopathy, Spinal cord compression], why: "신경근·척수 압박 확인"}
+  - {name: "Brain MRI with contrast (relapsing or subacute deficits)", for: [Multiple sclerosis, Brain tumor], why: "탈수초·종양 확인"}
+  - {name: "Forced vital capacity (suspected Guillain-Barre syndrome or myasthenia gravis)", for: [Guillain-Barre syndrome, Myasthenia gravis], why: "호흡근 약화 확인"}
+  - {name: "Acetylcholine receptor antibody", for: [Myasthenia gravis], why: "중증근무력증 확인"}
+  - {name: "Lumbar puncture (suspected Guillain-Barre syndrome)", for: [Guillain-Barre syndrome], why: "단백-세포 해리 확인"}
+  - {name: "EEG (deficit after a seizure)", for: [Todd paralysis], why: "발작 후 마비 확인"}
+  - {name: "No routine labs or imaging for typical Bell palsy; audiometry if hearing loss", for: [Bell palsy, Ramsay Hunt syndrome], why: "전형적 말초 안면마비는 진찰로 진단"}
+plan:
+  treatment:
+    - "급성 허혈성 뇌졸중: 혈당·뇌 영상 후 발병 4.5시간 이내면 정맥 혈전용해술, 대혈관 폐색은 혈관내 치료"
+    - "TIA·뇌경색은 원인 확인 후 항혈소판제와 스타틴, 심방세동이면 항응고제"
+    - "벨 마비: 72시간 이내 경구 스테로이드와 눈 보호"
+    - "손목굴 증후군: 야간 손목 부목, 호전 없으면 신경전도검사 후 주사·수술 상의"
+  disposition: "24시간 안에 생긴 급성 국소 결손은 즉시 응급실(뇌졸중 센터, 119); 서서히 생긴 말초성 양상은 외래 검사"
+  follow_up:
+    - "TIA는 48시간 안에 혈관 평가를 마치고 1-3개월 뒤 위험인자 조절 확인"
+    - "말초 신경병증은 2-4주 뒤 혈액검사·신경전도검사 결과로 재평가"
+  red_flags: ["얼굴 처짐이나 말 어눌함", "한쪽 팔다리 마비", "갑자기 안 보이거나 걷지 못함", "다리 힘이 점점 빠지고 소변을 못 봄"]
+education:
+  - "갑자기 생긴 마비면 바로 응급실로 가세요."
+  - "다시 힘이 빠지면 즉시 119를 부르세요."
+  - "검사 결과를 보고 치료를 정할게요."
+guidelines:
+  - US_StatPearls/statpearls_article-30475.md
+  - US_StatPearls/statpearls_article-29573.md
+  - US_StatPearls/statpearls_article-18195.md
+  - US_StatPearls/statpearls_article-18982.md
+notes: >
+  v0.8.0 (evidence review 2026-10): the speech exam (dysarthria) returns at p1 in place of the Babinski sign, because
+  facial paresis, arm drift or abnormal speech (any one LR 5.5, none LR 0.39 for stroke; Goldstein & Simel, JAMA 2005)
+  are the highest-yield findings and an exam table answers only what is requested. BE-FAST: a visual field item was
+  added (14.1% of ischemic strokes had no FAST symptom; Aroor, Stroke 2017); balance is asked through weakness and gait.
+  The first closing line now sends an acute deficit to the emergency room (the old lines promised outpatient tests).
+  Ramsay Hunt vesicles and the Guillain-Barre triggers are asked only after a positive facial-droop or
+  ascending-weakness answer; neck and back pain were merged; diplopia, monocular loss, dizziness, heart disease and
+  lipids moved to p3 for the budget. Sudden unilateral face-arm-leg weakness or speech disturbance is a stroke until
+  proven otherwise; time last known well decides reperfusion (IV thrombolysis within 4.5 hours; AHA/ASA 2026 guideline;
+  Korean prehospital stroke guideline 2026). Bell palsy involves the forehead; central facial palsy spares it.
+  Distal symmetric sensory loss = polyneuropathy (monofilament LR+ 11-16; vibration is not in the exam vocabulary);
+  dermatomal pain with weakness = radiculopathy; bladder dysfunction with leg weakness = cord.

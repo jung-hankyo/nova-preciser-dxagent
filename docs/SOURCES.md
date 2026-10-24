@@ -1,9 +1,10 @@
 # Source documents to download (v0.4.1)
 
-For the knowledge compiler. Put files under `sources/docs/` (gitignored) and list each in `sources/manifest.yaml`
-(template: `docs/sources_manifest.template.yaml`). Ontologies and HPO annotations come from `dxagent kb fetch`.
-Licences: keep subscription material out of the repository; do not bulk-crawl sites (NCBI Bookshelf allows automated
-download only through the NLM LitArch FTP for its open-access subset).
+For the knowledge compiler of the research core (`docs/CORE.md`); the contest runtime uses none of it. Put files under
+`sources/docs/` (gitignored) and list each in `sources/manifest.yaml` (template:
+`docs/sources_manifest.template.yaml`). Ontologies and HPO annotations come from `dxagent kb fetch`. Licences: keep
+subscription material out of the repository; do not bulk-crawl sites (NCBI Bookshelf allows automated download only
+through the NLM LitArch FTP for its open-access subset).
 
 ## Must
 

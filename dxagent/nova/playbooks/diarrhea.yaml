@@ -1,0 +1,107 @@
+id: diarrhea
+title: {ko: 설사, en: Diarrhea}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [설사, 묽은 변, 물 같은 변, 변이 묽, 물똥, 배탈, 장염]
+  not: []
+history:
+  - {id: onset, q: "언제부터 설사를 하셨어요?", item: Onset, p: 1}
+  - {id: frequency, q: "하루에 몇 번 설사하세요?", item: Frequency, p: 1}
+  - {id: watery, q: "변이 물처럼 나오나요?", item: Watery stool, p: 1}
+  - {id: blood, q: "변에 피가 섞여 나오나요?", item: Bloody stool, p: 1}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 1}
+  - {id: food, q: "최근 상한 음식을 드셨나요?", item: Suspicious food, p: 1}
+  - {id: contacts, q: "같이 먹은 사람도 아픈가요?", item: Sick contacts, p: 1}
+  - {id: urine, q: "소변은 평소만큼 보세요?", item: Urine output, p: 1}
+  - {id: mucus, q: "변에 점액이 섞여 나오나요?", item: Mucus, p: 2}
+  - {id: tenesmus, q: "변을 봐도 덜 본 느낌인가요?", item: Tenesmus, p: 2}
+  - {id: nocturnal, q: "자다가 설사하러 깨시나요?", item: Nocturnal diarrhea, p: 2}
+  - {id: travel, q: "최근 해외여행을 다녀오셨나요?", item: Travel, p: 2}
+  - {id: raw_food, q: "회 같은 날음식을 드셨나요?", item: Raw seafood, sec: shx, p: 2}
+  - {id: intake, q: "물은 마실 수 있나요?", item: Oral intake, p: 2}
+  - {id: orthostatic, q: "일어설 때 어지러우세요?", item: Orthostatic dizziness, p: 2}
+  - {id: milk, q: "우유를 마시면 설사하나요?", item: Lactose, p: 3}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 2
+    then:
+      - {id: kg, q: "몇 킬로그램 빠졌나요?", item: Weight loss (kg), known: "킬로|kg|키로"}
+      - {id: period, q: "얼마 동안 빠졌나요?", item: Weight loss period, known: "(\\d+|한|두|세|석|네|다섯|여섯|몇|여러)\\s*(주|달|개월|일|년|해)|일 ?년|일주일|며칠|보름|반년|작년|올해"}
+  - {id: alternating, q: "변비와 설사가 번갈아 생기나요?", item: Alternating bowel habit, sec: ros, p: 3}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 3}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 3}
+  - {id: antibiotics, q: "최근 항생제를 드셨나요?", item: Recent antibiotics, sec: meds, p: 1}
+  - {id: immuno, q: "면역억제제를 드시나요?", item: Immunosuppression, sec: meds, p: 2}
+  - {id: bowel_dx, q: "장 질환을 앓은 적 있나요?", item: Bowel disease, sec: pmh, p: 3}
+  - {id: fh_bowel, q: "가족 중 장 질환 있는 분 있나요?", item: "FHx: bowel disease", sec: fhx, p: 3}
+exams:
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 복부 시진, item: Abdomen, p: 1}
+  - {name: 장음 청진, item: Abdomen, p: 1}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 기립성 혈압 측정, item: V/S, p: 2}
+  - {name: 피부 긴장도 확인, item: Skin, p: 3}
+  - {name: 직장수지검사, item: Rectal, p: 3}
+differential:
+  - {en: Viral gastroenteritis, ko: 바이러스성 위장관염}
+  - {en: Bacterial gastroenteritis or food poisoning, ko: 세균성 위장관염·식중독}
+  - {en: "Inflammatory (bloody) bacterial colitis (Shigella, Campylobacter, Salmonella, EHEC)", ko: 혈성 세균성 대장염}
+  - {en: Clostridioides difficile infection, ko: 클로스트리디오이데스 디피실 감염}
+  - {en: Parasitic infection (Giardia or amebiasis), ko: 기생충 감염(지아르디아·아메바)}
+  - {en: Irritable bowel syndrome, ko: 과민성 장증후군}
+  - {en: Inflammatory bowel disease, ko: 염증성 장질환}
+  - {en: Intestinal tuberculosis, ko: 장결핵}
+  - {en: Hyperthyroidism, ko: 갑상샘항진증}
+  - {en: Lactose intolerance, ko: 유당불내증}
+  - {en: Colorectal cancer, ko: 대장암, cant_miss: true}
+  - {en: Severe dehydration, ko: 중증 탈수, cant_miss: true}
+tests:
+  - {name: "Electrolytes, BUN, creatinine", for: [Severe dehydration, Viral gastroenteritis], why: "탈수·전해질·신기능 확인"}
+  - {name: "CBC, CRP", for: ["Inflammatory (bloody) bacterial colitis (Shigella, Campylobacter, Salmonella, EHEC)", Inflammatory bowel disease, Clostridioides difficile infection], why: "염증 반응 확인"}
+  - {name: "Stool culture or multiplex PCR (fever, bloody or mucoid stool, severe pain, sepsis, immunosuppression, over 7 days)", for: [Bacterial gastroenteritis or food poisoning, "Inflammatory (bloody) bacterial colitis (Shigella, Campylobacter, Salmonella, EHEC)"], why: "원인균 확인(IDSA 2017 기준)"}
+  - {name: "Clostridioides difficile toxin or PCR (antibiotics within 3 months, 3 or more loose stools a day)", for: [Clostridioides difficile infection], why: "C. difficile 확인"}
+  - {name: "Stool ova and parasites or antigen (travel, persistent over 2 weeks)", for: [Parasitic infection (Giardia or amebiasis)], why: "기생충 확인"}
+  - {name: "Fecal calprotectin (chronic diarrhea)", for: [Irritable bowel syndrome, Inflammatory bowel disease], why: "기능성과 염증성 구분"}
+  - {name: "Colonoscopy with biopsy (chronic, bloody or alarm features, age 45 or more)", for: [Inflammatory bowel disease, Intestinal tuberculosis, Colorectal cancer], why: "염증성 장질환·장결핵·대장암 확인"}
+  - {name: "Chest X-ray and interferon-gamma release assay (suspected intestinal TB)", for: [Intestinal tuberculosis], why: "결핵 감염 확인"}
+  - {name: "TSH (chronic diarrhea)", for: [Hyperthyroidism], why: "갑상샘항진증 확인"}
+  - {name: "Lactose hydrogen breath test or 2-week lactose-free trial", for: [Lactose intolerance], why: "유당불내증 확인"}
+plan:
+  treatment:
+    - "경구수액(ORS)으로 수분 보충, 중등도 이상 탈수는 정맥 수액"
+    - "대부분 항생제 불필요; 고열 동반 혈변, 패혈증, 면역저하는 대변 검사 후 경험적 항생제"
+    - "장출혈성 대장균 의심(혈변, 열 없음) 시 항생제·지사제 피함"
+    - "C. difficile은 원인 항생제 중단 후 경구 반코마이신 또는 피닥소마이신"
+  disposition: "경구 섭취 가능하고 탈수 경미하면 외래; 중등도 이상 탈수, 고열 동반 혈변, 노인·면역저하 중증은 입원"
+  follow_up:
+    - "48~72시간 내 증상과 소변량 재확인"
+    - "2주 이상 지속되면 기생충·대변 염증 표지자, 4주 이상이면 대장내시경"
+  red_flags: ["소변이 줄거나 어지러움", "피가 섞인 설사", "38도 이상의 고열", "심한 복통"]
+education:
+  - "물과 이온음료를 충분히 드세요."
+  - "피가 섞이거나 열이 나면 오세요."
+  - "손을 자주 깨끗이 씻으세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC6609748.md
+  - US_StatPearls/statpearls_article-20483.md
+  - US_StatPearls/statpearls_article-19525.md
+  - US_StatPearls/statpearls_article-23774.md
+notes: >
+  v0.8.0: stool occult blood removed (a colorectal screening test with no role in acute diarrhea); stool culture or
+  multiplex PCR is ordered on the IDSA 2017 triggers (fever, bloody or mucoid stool, severe cramping or tenderness,
+  sepsis; consider in the elderly and immunocompromised), and oral rehydration is given whether or not tested.
+  Immunosuppression added (an IDSA testing trigger that widens the differential: CMV, Cryptosporidium); intestinal
+  TB added (the classic Korean mimic of Crohn's disease: fever, night sweats, weight loss, prior or family TB; Lee
+  2006); skin turgor moved to priority 3 (no proven value in adults, McGee 1999). Acute under 2 weeks (mostly
+  infectious), persistent 2-4 weeks (parasites such as Giardia, C. difficile), chronic over 4 weeks (IBS by Rome V
+  2026 criteria, IBD, intestinal TB, malabsorption, hyperthyroidism, cancer). Dysentery (blood, fever, tenesmus)
+  suggests invasive bacteria; antibiotics within 3 months suggest C. difficile (IDSA/SHEA). Avoid antimotility drugs
+  and antibiotics in suspected Shiga toxin-producing E. coli.

@@ -1,0 +1,104 @@
+id: ped_cough
+title: {ko: 소아 기침·쌕쌕거림, en: Cough or wheeze in a child}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [기침, 쌕쌕, 숨소리가, 컹컹, 가래, 숨을 헐떡, 숨을 가쁘게, 숨이 차, 숨쉬기 힘들, 숨쉬기가 힘들, 숨 쉬기 힘들, 그르렁]
+  not: []
+history:
+  - {id: onset, q: "아이가 언제부터 기침을 했나요?", item: Onset, p: 1}
+  - {id: sound, q: "기침 소리가 어떤가요?", item: Cough character, p: 1}
+  - {id: night, q: "밤에 기침이 심해지나요?", item: Nocturnal cough, p: 1}
+  - {id: fever, q: "아이가 열이 나나요?", item: Fever, p: 1}
+  - {id: rhinorrhea, q: "아이가 콧물이 나나요?", item: Rhinorrhea, p: 1}
+  - {id: wheeze, q: "숨쉴 때 쌕쌕 소리가 나나요?", item: Wheezing, p: 1}
+  - {id: stridor, q: "숨 들이쉴 때 거친 소리가 나나요?", item: Stridor, p: 1}
+  - {id: distress, q: "아이가 숨쉬기 힘들어하나요?", item: Respiratory distress, p: 1}
+  - {id: cyanosis, q: "아이 입술이 파래진 적 있나요?", item: Cyanosis, p: 1}
+  - {id: feeding, q: "아이가 잘 먹나요?", item: Feeding, p: 1}
+  - {id: choking, q: "뭔가 삼키다 사레들린 적 있나요?", item: Choking episode, p: 1}
+  - {id: contacts, q: "주변에 기침하는 사람이 있나요?", item: Sick contacts, p: 1}
+  - id: paroxysm
+    q: "기침을 몰아서 하나요?"
+    item: Paroxysmal cough
+    p: 1
+    then:
+      - {id: post_tussive, q: "기침하다가 토하나요?", item: Post-tussive vomiting, known: "토|구토|게워"}
+      - {id: whoop, q: "기침이 끝날 때 '훕' 소리가 나나요?", item: Inspiratory whoop, known: "훕|흡|들이쉬"}
+  - {id: apnea, q: "아이가 숨을 멈춘 적 있나요?", item: Apnea, p: 2}
+  - {id: wet, q: "기침할 때 가래 끓는 소리가 나나요?", item: Wet cough, p: 2}
+  - {id: lethargy, q: "아이가 축 처지나요?", item: Lethargy, p: 2}
+  - {id: drooling, q: "아이가 침을 많이 흘리나요?", item: Drooling, p: 2}
+  - {id: exercise, q: "뛰면 기침이 심해지나요?", item: Exercise-induced cough, p: 3}
+  - {id: trigger, q: "찬 공기나 먼지에 심해지나요?", item: Triggers, p: 3}
+  - {id: prior_wheeze, q: "전에도 쌕쌕거린 적 있나요?", item: Prior wheezing, sec: pmh, p: 2}
+  - {id: atopy, q: "아이가 아토피나 비염이 있나요?", item: Atopy, sec: pmh, p: 2}
+  - {id: smoke, q: "집에서 담배를 피우는 분이 있나요?", item: Secondhand smoke, sec: shx, p: 2}
+  - {id: daycare, q: "어린이집에 다니나요?", item: Daycare, sec: shx, p: 3}
+  - {id: fh_asthma, q: "가족 중 천식이 있는 분 있나요?", item: "FHx: asthma", sec: fhx, p: 2}
+  - {id: tb_contact, q: "가족 중 결핵을 앓은 분이 있나요?", item: TB contact, sec: fhx, p: 3}
+exams:
+  - {name: 전반적 외관 시진, item: General, p: 1}
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 흉곽 시진, item: Chest, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 이경 검사, item: H/E/E/N/T, p: 2}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 비강 시진, item: H/E/E/N/T, p: 3}
+  - {name: 심음 청진, item: Heart, p: 3}
+differential:
+  - {en: Viral upper respiratory infection, ko: 바이러스 상기도 감염}
+  - {en: Acute bronchiolitis, ko: 급성 세기관지염}
+  - {en: Croup, ko: 크룹}
+  - {en: Asthma, ko: 천식}
+  - {en: "Pneumonia (including Mycoplasma pneumonia)", ko: 폐렴(마이코플라스마 폐렴 포함)}
+  - {en: Pertussis, ko: 백일해, cant_miss: true}
+  - {en: Foreign body aspiration, ko: 기도 이물, cant_miss: true}
+  - {en: Epiglottitis, ko: 후두개염, cant_miss: true}
+  - {en: Allergic rhinitis with postnasal drip, ko: 후비루를 동반한 알레르기 비염}
+  - {en: Protracted bacterial bronchitis, ko: 지속성 세균성 기관지염}
+  - {en: Pulmonary tuberculosis, ko: 폐결핵, cant_miss: true}
+tests:
+  - {name: "Pulse oximetry", for: [Acute bronchiolitis, "Pneumonia (including Mycoplasma pneumonia)", Asthma, Croup], why: "저산소증 확인(입원 결정)"}
+  - {name: "Chest X-ray", for: ["Pneumonia (including Mycoplasma pneumonia)", Foreign body aspiration, Protracted bacterial bronchitis, Pulmonary tuberculosis], why: "폐렴·이물 의심, 4주 넘는 기침"}
+  - {name: "Rigid bronchoscopy", for: [Foreign body aspiration], why: "사레 병력이 있으면 흉부 X선이 정상이어도 시행"}
+  - {name: "Pertussis PCR", for: [Pertussis], why: "발작성 기침·기침 후 구토·무호흡 시 비인두 검체"}
+  - {name: "Mycoplasma PCR or IgM", for: ["Pneumonia (including Mycoplasma pneumonia)"], why: "학령기 폐렴의 원인 확인"}
+  - {name: "Respiratory viral PCR", for: [Viral upper respiratory infection, Acute bronchiolitis, Croup], why: "입원했거나 진단이 불확실할 때만"}
+  - {name: "Spirometry with bronchodilator", for: [Asthma], why: "5세 이상 가역적 기류 제한 확인"}
+  - {name: "IGRA or tuberculin skin test", for: [Pulmonary tuberculosis], why: "결핵 접촉이나 4주 넘는 기침"}
+  - {name: "Laryngoscopy with airway secured", for: [Epiglottitis], why: "후두개염 의심 시 기도 확보 후(설압자 진찰 금지)"}
+  - {name: "Skin prick test or specific IgE", for: [Allergic rhinitis with postnasal drip, Asthma], why: "지속 비염·반복 쌕쌕거림의 알레르기 확인"}
+plan:
+  treatment:
+    - "바이러스 감염·세기관지염은 수분 섭취와 코 흡인 등 대증 치료(기관지확장제·스테로이드는 일상적으로 쓰지 않음), 돌이 지났으면 꿀."
+    - "크룹은 경구 덱사메타손, 중등도 이상이면 에피네프린 흡입."
+    - "천식 악화는 속효성 흡입 기관지확장제와 전신 스테로이드."
+    - "백일해·마이코플라스마는 PCR 확인 후 마크롤라이드, 백일해는 가족 예방 투약; 4주 넘는 습성 기침은 흉부 X선 후 항생제 2주(지속성 세균성 기관지염)."
+  disposition: "대부분 외래 대증 치료; 함몰호흡·저산소증·무호흡·청색증·수유 곤란, 3개월 미만 백일해 의심은 입원."
+  follow_up:
+    - "2-3일 뒤 호흡 상태와 수유량을 재평가합니다."
+    - "기침이 4주 넘으면 흉부 X선과 결핵 접촉을 확인합니다."
+  red_flags: ["숨쉴 때 갈비뼈 사이가 들어감", "입술이 파래짐", "숨을 멈춤", "먹지 못하고 축 처짐"]
+education:
+  - "물을 자주 먹여 주세요."
+  - "돌이 지났으면 꿀이 기침에 도움이 돼요."
+  - "집 안에서는 담배를 피우지 마세요."
+  - "숨쉬기 힘들어하면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-26822.md
+  - US_StatPearls/statpearls_article-20142.md
+  - US_StatPearls/statpearls_article-17921.md
+notes: >
+  v0.8.0 (evidence review): paroxysmal cough raised to p1 with post-tussive vomiting and whoop as its follow-ups
+  (Korea's 2024 pertussis epidemic: 48,048 cases, mostly ages 7-19, and an infant death under 2 months); apnea added
+  (young infants with pertussis or RSV); wet cough replaces sputum (young children do not expectorate); chronic cough
+  branch (CHEST 2017, over 4 weeks: chest X-ray, wet cough suggests protracted bacterial bronchitis, ask TB contact;
+  Korea's TB notification rate is about 35 per 100,000); exercise and triggers demoted. Humidification removed from
+  the closing lines (no proven benefit, including croup); honey for children over 12 months (Cochrane 2018; never
+  under 12 months). Bronchiolitis is a clinical diagnosis (AAP 2014, ages 1-23 months). Barking cough with stridor =
+  croup; first wheeze under 2 with rhinorrhea = bronchiolitis; recurrent wheeze with atopy and triggers = asthma;
+  sudden choking then cough or unilateral wheeze = foreign body. If epiglottitis is suspected (drooling, toxic
+  appearance, stridor), do not examine the throat with a tongue depressor.

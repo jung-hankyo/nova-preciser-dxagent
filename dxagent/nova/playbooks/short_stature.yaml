@@ -1,0 +1,104 @@
+id: short_stature
+title: {ko: 작은 키, en: Short stature}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [키가 작, 키가 안 커, 키가 안 자, 키가 잘 안 커, 성장이 느, 또래보다 작, 키 때문에, 키가 크지 않]
+  not: []
+history:
+  - {id: since, q: "언제부터 키가 작다고 느끼셨나요?", item: Onset, p: 1}
+  - {id: velocity, q: "작년보다 키가 얼마나 컸나요?", item: Growth velocity, p: 1}
+  - {id: always_small, q: "어릴 때부터 작은 편이었나요?", item: Growth pattern, p: 1}
+  - {id: appetite, q: "아이가 밥은 잘 먹나요?", item: Appetite, p: 1}
+  - {id: chronic, q: "아이가 자주 아픈 편인가요?", item: Chronic illness, p: 1}
+  - id: headache
+    q: "아이가 머리 아프다고 하나요?"
+    item: Headache
+    p: 1
+    then:
+      - {id: headache_vomit, q: "머리 아플 때 토하기도 하나요?", item: Headache with vomiting, known: "토|구토", safety: true}
+  - {id: puberty, q: "몸에 털이 나기 시작했나요?", item: Pubertal signs, p: 1}
+  - {id: breast, q: "아이 가슴이 나오기 시작했나요?", item: Thelarche, p: 1, only: female}
+  - {id: diarrhea, q: "아이가 설사를 자주 하나요?", item: Diarrhea, p: 2}
+  - {id: vision, q: "아이가 잘 안 보인다고 하나요?", item: Visual disturbance, p: 2}
+  - {id: constipation, q: "아이가 변비가 있나요?", item: Constipation, p: 2}
+  - {id: sleep, q: "아이가 잠은 잘 자나요?", item: Sleep, p: 2}
+  - {id: thirst, q: "아이가 물을 많이 마시나요?", item: Polydipsia, p: 3}
+  - {id: abd_pain, q: "아이가 배가 자주 아프다고 하나요?", item: Abdominal pain, p: 3}
+  - {id: fatigue, q: "아이가 쉽게 피곤해하나요?", item: Fatigue, p: 3}
+  - {id: lymphedema, q: "태어날 때 손발이 부어 있었나요?", item: Congenital lymphedema, sec: pmh, p: 3, only: female}
+  - id: steroid
+    q: "아이가 스테로이드를 먹은 적 있나요?"
+    item: Glucocorticoid use
+    sec: meds
+    p: 2
+    then:
+      - {id: steroid_duration, q: "얼마나 오래 먹었나요?", item: Glucocorticoid duration, known: "달|개월|년|주|일"}
+  - {id: parents_ht, q: "부모님 키는 어떻게 되세요?", item: 부모 키, sec: fhx, p: 1}
+  - {id: parents_puberty, q: "부모님 사춘기는 늦은 편이었나요?", item: Parental puberty timing, sec: fhx, p: 1}
+  - {id: sibling, q: "형제자매의 키는 어떤가요?", item: Sibling height, sec: fhx, p: 3}
+  - {id: social, q: "아이가 또래와 잘 어울리나요?", item: Psychosocial, sec: shx, p: 3}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 성장도표 백분위수 확인, item: General, p: 1}
+  - {name: 성장 속도·중간부모키 산출, item: General, p: 1}
+  - {name: 신체 비율 평가, item: General, p: 1}
+  - {name: 사춘기 성숙도 평가, item: GU, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 2}
+  - {name: 안면 기형 소견 시진, item: H/E/E/N/T, p: 2}
+  - {name: 대면 시야 검사, item: Neuro, p: 3}
+differential:
+  - {en: Familial short stature, ko: 가족성 저신장}
+  - {en: Constitutional delay of growth and puberty, ko: 체질성 성장 지연}
+  - {en: Growth hormone deficiency, ko: 성장호르몬 결핍증}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Turner syndrome, ko: 터너 증후군}
+  - {en: "Chronic disease (celiac disease, inflammatory bowel disease, renal disease)", ko: 만성 질환(셀리악병·염증성 장질환·신질환)}
+  - {en: Craniopharyngioma or other brain tumor, ko: 두개인두종 등 뇌종양, cant_miss: true}
+  - {en: Small for gestational age without catch-up growth, ko: 따라잡기 성장이 없는 부당경량아}
+  - {en: Glucocorticoid excess, ko: 당질코르티코이드 과다}
+  - {en: Skeletal dysplasia, ko: 골격 이형성증}
+  - {en: Precocious puberty, ko: 성조숙증}
+tests:
+  - {name: "Bone age (left hand and wrist X-ray)", for: [Familial short stature, Constitutional delay of growth and puberty, Growth hormone deficiency, Hypothyroidism, Precocious puberty], why: "뼈 나이로 가족성(정상)·체질성(지연)·성조숙(앞섬) 구분"}
+  - {name: "TSH, free T4", for: [Hypothyroidism], why: "갑상샘저하증 확인"}
+  - {name: "IGF-1, IGFBP-3", for: [Growth hormone deficiency], why: "성장호르몬 결핍 선별"}
+  - {name: "CBC, ESR, electrolytes, creatinine, LFT, albumin, urinalysis", for: ["Chronic disease (celiac disease, inflammatory bowel disease, renal disease)"], why: "만성 질환·영양 상태 선별"}
+  - {name: "Karyotype", for: [Turner syndrome], why: "원인 불명 저신장 여아 모두"}
+  - {name: "Growth hormone stimulation test", for: [Growth hormone deficiency], why: "IGF-1 저하와 성장 속도 저하 시 두 가지 자극제로"}
+  - {name: "Brain MRI", for: [Craniopharyngioma or other brain tumor, Growth hormone deficiency], why: "성장호르몬 결핍, 두통·구토·시야 이상 시"}
+  - {name: "Tissue transglutaminase IgA", for: ["Chronic disease (celiac disease, inflammatory bowel disease, renal disease)"], why: "만성 위장 증상 동반 시(한국에서 드묾)"}
+  - {name: "Skeletal survey", for: [Skeletal dysplasia], why: "신체 비율 이상 시"}
+  - {name: "LH, FSH, estradiol or testosterone", for: [Precocious puberty, Constitutional delay of growth and puberty], why: "사춘기 시작 시기 이상 확인"}
+  - {name: "Late-night salivary or 24-hour urine cortisol", for: [Glucocorticoid excess], why: "체중 증가와 성장 정지 동반 시"}
+plan:
+  treatment:
+    - "가족성 저신장·체질성 성장 지연은 정기 성장 추적과 안심 설명이 치료입니다."
+    - "성장호르몬 결핍·터너 증후군·따라잡기 없는 부당경량아는 검사 확인 후 성장호르몬 치료를 검토합니다."
+    - "갑상샘저하증은 갑상샘호르몬을 보충하고, 만성 질환은 원인 질환을 치료합니다."
+    - "균형 잡힌 식사, 충분한 수면과 운동을 권합니다."
+  disposition: "외래 검사; 성장 속도 저하나 중간부모키 범위를 크게 벗어나면 소아내분비 의뢰, 두통·구토·시야 이상은 즉시 영상검사."
+  follow_up:
+    - "4-6개월 간격으로 같은 방법으로 키·체중을 재서 성장 속도를 확인합니다."
+    - "검사 결과를 확인한 뒤 소아내분비 상담을 정합니다."
+  red_flags: ["아침 두통과 구토", "시야가 좁아짐", "키 성장이 멈춤", "체중은 늘고 키는 안 큼"]
+education:
+  - "손 X선으로 뼈 나이를 볼게요."
+  - "골고루 먹고 충분히 재워 주세요."
+  - "6개월마다 키를 재서 확인해요."
+guidelines:
+  - US_StatPearls/statpearls_article-87579.md
+  - KR_EuropePMC/europepmc_PMC7386113.md
+  - US_StatPearls/statpearls_article-21616.md
+notes: >
+  v0.8.0 (evidence review): short stature = height under the 3rd percentile (or 2 SD below the mean) on the 2017
+  Korean National Growth Charts (WHO 2006 standards under 36 months, Korean data from 3 to 18 years; Kim 2018).
+  Mid-parental height = (father + mother + 13) / 2 cm for boys, (father + mother - 13) / 2 cm for girls, target range
+  about plus or minus 8.5 cm. Weight-for-height separates the causes: endocrine causes (growth hormone deficiency,
+  hypothyroidism, cortisol excess) keep it normal or high; chronic disease and undernutrition lower it. Follow-ups
+  added for headache with vomiting (craniopharyngioma) and glucocorticoid duration; congenital lymphedema asked in
+  girls (Turner; karyotype stays decisive). Normal growth velocity with height consistent with mid-parental height
+  suggests familial short stature; delayed bone age with a family history of late puberty suggests constitutional
+  delay; crossing percentiles downward (poor velocity) needs evaluation.

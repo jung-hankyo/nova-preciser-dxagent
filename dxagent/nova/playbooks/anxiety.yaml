@@ -1,0 +1,103 @@
+id: anxiety
+title: {ko: 불안, en: Anxiety}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [불안, 초조, 걱정이 많, 긴장이 되, 공황]
+  not: [불안정, 하지불안]
+history:
+  - {id: onset, q: "언제부터 불안하셨어요?", item: Onset, p: 1}
+  - {id: trigger, q: "계기가 된 일이 있나요?", item: Precipitating event, p: 1}
+  - id: attacks
+    q: "불안이 갑자기 몰려오나요?"
+    item: Panic attacks
+    p: 1
+    then:
+      - {id: unexpected, q: "아무 이유 없이 불안이 몰려오나요?", item: Unexpected attacks, known: "이유 없이|아무 때나|갑자기 아무"}
+      - {id: attack_duration, q: "한 번 그러면 얼마나 가나요?", item: Attack duration, known: "분 정도|분쯤|분 만에|몇 분|시간|몇 초|초 만에"}
+      - {id: anticipatory, q: "또 그럴까 봐 걱정되나요?", item: Anticipatory anxiety, known: "또 그럴까|다시 올까"}
+  - {id: worry, q: "여러 일을 늘 걱정하시나요?", item: Generalized worry, p: 1}
+  - {id: control, q: "걱정을 멈추기 어려우세요?", item: Uncontrollable worry, p: 1}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, p: 1}
+  - {id: smothering, q: "숨이 막히는 느낌이 드나요?", item: Dyspnea or smothering, p: 1}
+  - {id: sleep, q: "잠은 잘 주무세요?", item: Sleep, p: 1}
+  - {id: mood, q: "기분이 우울하세요?", item: Depressed mood, p: 1}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, p: 2}
+  - {id: avoidance, q: "피하게 되는 장소가 있나요?", item: Avoidance, p: 2}
+  - {id: social, q: "사람들 앞에 서는 게 두려우세요?", item: Social fear, p: 2}
+  - {id: trauma, q: "충격적인 일을 겪은 적 있나요?", item: Trauma exposure, p: 2}
+  - {id: function, q: "일상생활이 힘드세요?", item: Functional impairment, p: 2}
+  - {id: si, q: "죽고 싶다는 생각이 드시나요?", item: Suicidal ideation, p: 2}
+  - {id: tremor, q: "손이 떨리세요?", item: Tremor, p: 3}
+  - {id: sweating, q: "땀이 많이 나나요?", item: Sweating, p: 3}
+  - {id: dizzy, q: "어지러우세요?", item: Dizziness, p: 3}
+  - {id: fear_dying, q: "죽을 것 같은 공포를 느끼나요?", item: Fear of dying, p: 3}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 2}
+  - {id: paresthesia, q: "손발이 저리세요?", item: Paresthesia, sec: ros, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 3}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: psych, q: "정신과 진료를 받은 적 있나요?", item: Psychiatric history, sec: pmh, p: 2}
+  - {id: diet_pill, q: "다이어트 약을 드시나요?", item: Diet pill (sympathomimetic), sec: meds, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 3}
+  - {id: sedative, q: "신경안정제를 드시나요?", item: Anxiolytic use, sec: meds, p: 3}
+  - {id: caffeine, q: "커피는 하루 몇 잔 드세요?", item: Caffeine, sec: shx, p: 1}
+  - {id: fh_psych, q: "가족 중 불안이 심한 분 있나요?", item: "FHx: anxiety", sec: fhx, p: 3}
+exams:
+  - {name: 요골동맥 맥박 촉진, item: V/S, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 자세성 떨림, item: Neuro, p: 1}
+  - {name: 정동 평가, item: Mental status, p: 1}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 의식·지남력 평가, item: General, p: 3}
+  - {name: 피부 온도·발한 촉진, item: Skin, p: 3}
+differential:
+  - {en: Generalized anxiety disorder, ko: 범불안장애}
+  - {en: Panic disorder, ko: 공황장애}
+  - {en: Social anxiety disorder, ko: 사회불안장애}
+  - {en: Adjustment disorder with anxiety, ko: 불안을 동반한 적응장애}
+  - {en: Major depressive disorder with anxious distress, ko: 불안증을 동반한 주요우울장애}
+  - {en: Hyperthyroidism, ko: 갑상샘항진증}
+  - {en: Cardiac arrhythmia, ko: 부정맥, cant_miss: true}
+  - {en: "Substance-induced anxiety (caffeine, stimulants, withdrawal)", ko: 물질 유발 불안(카페인·자극제·금단)}
+  - {en: Post-traumatic stress disorder, ko: 외상후 스트레스장애}
+tests:
+  - {name: "GAD-7", for: [Generalized anxiety disorder, Adjustment disorder with anxiety], why: "불안 심각도 평가"}
+  - {name: "Panic Disorder Severity Scale", for: [Panic disorder], why: "공황 증상 평가"}
+  - {name: "Mini-SPIN", for: [Social anxiety disorder], why: "사회불안 선별"}
+  - {name: "PC-PTSD-5", for: [Post-traumatic stress disorder], why: "외상후 스트레스 선별"}
+  - {name: "PHQ-9", for: [Major depressive disorder with anxious distress], why: "동반 우울 평가"}
+  - {name: "TSH, free T4", for: [Hyperthyroidism], why: "갑상선 기능 확인"}
+  - {name: "12-lead ECG", for: [Cardiac arrhythmia, safety], why: "부정맥·QT 확인(약물 전)"}
+  - {name: "Holter monitoring (episodic palpitation)", for: [Cardiac arrhythmia], why: "발작성 부정맥 포착"}
+  - {name: "Glucose, electrolytes; urine drug screen if stimulant use", for: ["Substance-induced anxiety (caffeine, stimulants, withdrawal)"], why: "대사·약물 원인 확인"}
+plan:
+  treatment:
+    - "공황장애·범불안장애: SSRI 또는 SNRI와 인지행동치료가 일차 치료"
+    - "벤조디아제핀은 단기간·필요 시에만 사용(의존 위험)"
+    - "카페인·다이어트약·알코올 줄이기, 규칙적 운동과 호흡 훈련"
+    - "갑상선 기능·심전도에서 신체 원인이 확인되면 원인 치료"
+  disposition: "신체 원인을 배제한 뒤 외래 치료; 자살 사고나 일상 기능 붕괴는 정신건강의학과 의뢰"
+  follow_up:
+    - "SSRI 시작 2-4주 뒤 부작용과 초기 불안 악화 확인"
+    - "8-12주 뒤 GAD-7로 치료 반응 평가"
+  red_flags: ["운동 중 흉통이나 실신", "죽고 싶은 생각", "숨이 차고 입술이 파래짐", "의식이 흐려짐"]
+education:
+  - "심전도와 피검사를 해 볼게요."
+  - "커피와 술은 줄이는 게 좋아요."
+  - "가슴이 아프거나 숨이 차면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-22130.md
+  - US_StatPearls/statpearls_article-26587.md
+notes: >
+  v0.8.0 (evidence review 2026-10): the second GAD-2 core item, uncontrollable worry (also DSM GAD criterion B), was
+  added at p1 (GAD-7 and GAD-2 AUC 0.80-0.91 for GAD, panic, social anxiety and PTSD; Kroenke, Ann Intern Med 2007).
+  Panic attacks are characterised only after a positive answer (unexpected, minutes to peak, anticipatory concern:
+  the persistent concern separates panic disorder from isolated attacks). Diet pills (sympathomimetics, common in
+  Korea) added at p2. Tremor (examined), fear of dying, new drugs (standard medicines question) moved to p3, and
+  orientation to p3. Exclude medical mimics (hyperthyroidism, arrhythmia, hypoglycemia, stimulants and withdrawal)
+  before a primary anxiety diagnosis; hypoglycemia relies on the standard diabetes question. Panic attacks peak within
+  minutes; panic disorder needs recurrent unexpected attacks with a month of worry or avoidance; generalized anxiety
+  disorder = excessive, hard-to-control worry most days for 6 months.

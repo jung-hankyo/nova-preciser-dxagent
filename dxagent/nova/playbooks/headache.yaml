@@ -1,0 +1,135 @@
+id: headache
+title: {ko: 두통, en: Headache}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [머리가 아파, 머리가 아프, 두통, 머리가 깨질, 머리가 지끈, 머리가 욱신, 편두통, 머리가 무거, 머리가 띵, 머리 아파, 머리 아프]
+  not: []
+history:
+  - {id: onset, q: "언제부터 머리가 아프셨어요?", item: Onset, p: 1}
+  - id: thunderclap
+    q: "갑자기 심하게 아프기 시작했나요?"
+    item: Sudden onset
+    p: 1
+    then:
+      - {id: peak, q: "가장 심해질 때까지 얼마나 걸렸나요?", item: Time to peak, known: "초 만에|몇 초|분 만에|몇 분|순간|바로|즉시|금방"}
+      - {id: loc_onset, q: "그때 정신을 잃었나요?", item: Loss of consciousness at onset, known: "기절|쓰러|정신을 잃|의식을 잃"}
+  - {id: worst, q: "평생 가장 심한 두통인가요?", item: Worst headache, p: 1}
+  - {id: location, q: "머리 어느 부위가 아프세요?", item: Location, p: 1}
+  - {id: character, q: "어떤 느낌으로 아프세요?", item: Character, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: duration, q: "한 번 아프면 얼마나 가나요?", item: Duration, p: 1}
+  - {id: frequency, q: "얼마나 자주 아프세요?", item: Frequency, p: 1}
+  - {id: course, q: "두통이 점점 심해지고 있나요?", item: Course, p: 1}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 1}
+  - {id: photophobia, q: "밝은 빛이 괴로우세요?", item: Photophobia, p: 1}
+  - {id: disabling, q: "아플 때 일상생활을 못 할 정도인가요?", item: Disability, p: 1}
+  - {id: aura, q: "두통 전에 눈앞에 뭔가 보이나요?", item: Aura, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: neck_stiff, q: "목이 뻣뻣하세요?", item: Neck stiffness, p: 1}
+  - {id: weakness, q: "팔다리에 힘이 빠지나요?", item: Focal weakness, p: 1}
+  - {id: trauma, q: "최근 머리를 다친 적 있나요?", item: Head trauma, p: 1}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 2}
+  - {id: exertion, q: "힘을 쓰다가 아프기 시작했나요?", item: Onset during exertion, p: 2}
+  - {id: phonophobia, q: "시끄러운 소리가 괴로우세요?", item: Phonophobia, p: 2}
+  - {id: timing, q: "하루 중 언제 심해지나요?", item: Diurnal pattern, p: 3}
+  - {id: wake, q: "자다가 두통 때문에 깨세요?", item: Nocturnal awakening, p: 3}
+  - {id: positional, q: "누우면 두통이 달라지나요?", item: Positional headache, p: 3}
+  - {id: cough_worse, q: "기침하면 두통이 심해지나요?", item: Valsalva aggravation, p: 3}
+  - {id: movement, q: "움직이면 더 아프세요?", item: Aggravated by activity, p: 3}
+  - {id: relieving, q: "어떻게 하면 좋아지나요?", item: Relieving, p: 2}
+  - {id: speech, q: "말이 어눌해졌나요?", item: Dysarthria, p: 3}
+  - {id: diplopia, q: "물체가 겹쳐 보이나요?", item: Diplopia, p: 3}
+  - {id: vision, q: "눈이 흐려 보이나요?", item: Visual disturbance, p: 3}
+  - {id: autonomic, q: "아플 때 눈물이 나나요?", item: Lacrimation, p: 3}
+  - {id: jaw, q: "음식을 씹을 때 턱이 아프세요?", item: Jaw claudication, p: 3}
+  - {id: menses, q: "생리 때 두통이 심해지나요?", item: Menstrual relation, sec: ob, p: 3, only: female}
+  - id: analgesic
+    q: "진통제를 한 달에 며칠 드세요?"
+    item: Analgesic days per month
+    sec: meds
+    p: 1
+    then:
+      - {id: an_type, q: "어떤 진통제를 드세요?", item: Analgesic type, known: "타이레놀|아세트아미노펜|이부프로펜|부루펜|애드빌|나프록센|아스피린|게보린|펜잘|사리돈|트립탄|복합"}
+      - {id: an_months, q: "그렇게 드신 지 몇 달 됐나요?", item: Duration of analgesic overuse, known: "개월|달째|달 전|달 넘|년|주째"}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 3}
+  - {id: ocp, q: "피임약을 드시나요?", item: OCP, sec: meds, p: 3, only: female}
+  - {id: co_cohab, q: "같이 사는 분도 머리가 아프세요?", item: "Cohabitant symptoms (CO)", sec: shx, p: 2}
+  - {id: stress, q: "요즘 스트레스가 많으세요?", item: Stress, sec: shx, p: 3}
+  - {id: sleep, q: "잠은 잘 주무세요?", item: Sleep, sec: shx, p: 3}
+  - {id: caffeine, q: "커피는 하루 몇 잔 드세요?", item: Caffeine, sec: shx, p: 3}
+  - {id: fh_headache, q: "가족 중 두통이 심한 분 있나요?", item: "FHx: migraine", sec: fhx, p: 3}
+exams:
+  - {name: 경부 강직, item: Neuro, p: 1}
+  - {name: 외안근 운동, item: Neuro, p: 1}
+  - {name: 안저 검사, item: H/E/E/N/T, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 동공 반사, item: Neuro, p: 2}
+  - {name: 회내근 표류 검사, item: Neuro, p: 2}
+  - {name: 소뇌 협조운동 검사, item: Neuro, p: 3}
+  - {name: 측두동맥 촉진, item: H/E/E/N/T, p: 3}
+differential:
+  - {en: Tension-type headache, ko: 긴장형 두통}
+  - {en: Migraine, ko: 편두통}
+  - {en: Medication-overuse headache, ko: 약물과용 두통}
+  - {en: Cluster headache, ko: 군발두통}
+  - {en: Subarachnoid hemorrhage, ko: 지주막하 출혈, cant_miss: true}
+  - {en: Meningitis or encephalitis, ko: 수막염·뇌염, cant_miss: true}
+  - {en: Brain tumor or other mass lesion, ko: 뇌종양 등 공간점유 병변, cant_miss: true}
+  - {en: Subdural hematoma, ko: 경막하 혈종, cant_miss: true}
+  - {en: Giant cell arteritis, ko: 거대세포 동맥염, cant_miss: true}
+  - {en: Carbon monoxide poisoning, ko: 일산화탄소 중독, cant_miss: true}
+  - {en: Acute sinusitis, ko: 급성 부비동염}
+  - {en: Idiopathic intracranial hypertension, ko: 특발성 두개내압 상승}
+  - {en: Acute angle-closure glaucoma, ko: 급성 폐쇄각 녹내장, cant_miss: true}
+  - {en: Cerebral venous thrombosis, ko: 뇌정맥동 혈전증, cant_miss: true}
+  - {en: Hypertensive emergency, ko: 고혈압 응급, cant_miss: true}
+tests:
+  - {name: "Brain CT without contrast (thunderclap, trauma, focal deficit, papilledema)", for: [Subarachnoid hemorrhage, Subdural hematoma, Brain tumor or other mass lesion], why: "출혈·종괴 확인"}
+  - {name: "Lumbar puncture (CT negative but done more than 6 hours after onset, or suspected meningitis)", for: [Subarachnoid hemorrhage, Meningitis or encephalitis, Idiopathic intracranial hypertension], why: "황색변색·세포 수·개방압 확인"}
+  - {name: "Brain MRI with MR venography (progressive, positional or atypical headache)", for: [Brain tumor or other mass lesion, Cerebral venous thrombosis, Idiopathic intracranial hypertension, Cluster headache], why: "종괴·정맥동 혈전 확인"}
+  - {name: "ESR, CRP (age 50 or more)", for: [Giant cell arteritis], why: "거대세포 동맥염 선별"}
+  - {name: "Carboxyhemoglobin (possible carbon monoxide exposure)", for: [Carbon monoxide poisoning], why: "일산화탄소 노출 확인"}
+  - {name: "Intraocular pressure (red painful eye, halos)", for: [Acute angle-closure glaucoma], why: "안압 상승 확인"}
+  - {name: "Creatinine, urinalysis, ECG (BP 180/120 or more)", for: [Hypertensive emergency], why: "표적장기 손상 확인"}
+  - {name: "Headache diary", for: [Migraine, Tension-type headache, Medication-overuse headache], why: "빈도·진통제 사용일 기록"}
+  - {name: "Paranasal sinus CT (suspected complication only)", for: [Acute sinusitis], why: "부비동염 합병증 확인"}
+  - {name: "Urine β-hCG (women 12-55)", for: [safety], why: "임신 확인(영상·예방약 전)"}
+plan:
+  treatment:
+    - "편두통: 아세트아미노펜·NSAID, 중등도 이상은 트립탄으로 급성기 치료"
+    - "발작이 잦거나 생활 지장이 크면 예방약 시작(임신 가능성 확인 후)"
+    - "약물과용 두통: 과용 진통제 중단·감량과 예방약 병행"
+    - "긴장형 두통: 단순 진통제와 스트레칭·수면·스트레스 관리"
+  disposition: "적신호와 신경학적 이상이 없으면 외래 치료; 벼락두통, 발열과 목 경직, 국소 결손, 의식 변화는 즉시 응급실(CT)"
+  follow_up:
+    - "2-4주 뒤 두통 일기로 빈도와 진통제 사용일 확인"
+    - "예방약은 2-3개월 사용 후 효과와 부작용 평가"
+  red_flags: ["갑자기 생긴 극심한 두통", "발열과 목 경직", "팔다리 마비나 말 어눌함", "의식 저하나 경련"]
+education:
+  - "두통 일기를 써 보세요."
+  - "진통제는 한 달에 열흘을 넘기지 마세요."
+  - "갑자기 심하게 아프면 바로 응급실로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-22615.md
+  - US_StatPearls/statpearls_article-22614.md
+  - US_StatPearls/statpearls_article-29607.md
+  - US_NCBI-Bookshelf/bookshelf_NBK544082.md
+notes: >
+  v0.8.0 (evidence review 2026-10): Ottawa SAH Rule items added (Perry, JAMA 2013; 100% sensitive in alert patients
+  with headache peaking within 1 hour): onset during exertion (p2, replaces the vague trigger item) and loss of
+  consciousness at onset (asked after a positive sudden-onset answer, with the time to peak); age 40 or more, neck
+  stiffness and limited neck flexion are already covered. POUND (Detsky, JAMA 2006; 4 of 5 features LR 24 for migraine):
+  disabling and nausea raised to p1. Pronator drift replaces deep tendon reflexes (abnormal neurological exam LR 5.3 for
+  a serious cause). Lumbar puncture only if CT is negative and was done more than 6 hours after onset (third-generation
+  CT within 6 hours 100% sensitive, Perry BMJ 2011). Vomiting (LR 1.8), speech, diplopia, relieving, stress, sleep and
+  family history moved down for the 40-turn budget; positional and Valsalva items (SNNOOP10, Do 2019) are p3 for the
+  focus call. Red flags (SNOOP): fever, deficit, thunderclap, onset after 50 (kept for giant cell arteritis; SNNOOP10
+  uses 65), progression, positional or Valsalva aggravation, papilledema, trauma, anticoagulation, pregnancy.
+  Medication overuse (ICHD-3 8.2): simple analgesics on 15 or more days a month, or triptans, opioids and combination
+  analgesics (most Korean OTC headache drugs contain caffeine) on 10 or more days a month, for more than 3 months.
+  Hypertensive emergency: BP 180/120 or more with organ damage (office hypertension 140/90, KSH 2022).
+  v0.8.0 (integration): relieving factors back at p2, a standard pain-history item; the plan cap may cut it,
+  and the backfill after the time-out asks it when turns remain.

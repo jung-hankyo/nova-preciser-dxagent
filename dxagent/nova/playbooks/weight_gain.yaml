@@ -1,0 +1,103 @@
+id: weight_gain
+title: {ko: 체중 증가, en: Weight gain}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [살이 쪄, 살이 찌, 체중이 늘, 체중 증가, 몸무게가 늘, 살이 많이 쪄, 살이 쪘, 살이 찐, 체중이 증가, 몸무게가 증가]
+  not: []
+history:
+  - {id: onset, q: "언제부터 살이 찌셨어요?", item: Onset, p: 1}
+  - {id: amount, q: "몇 킬로그램 정도 늘었나요?", item: Amount, p: 1}
+  - {id: intake, q: "먹는 양이 늘었나요?", item: Food intake, p: 1}
+  - {id: activity, q: "활동량이 줄었나요?", item: Physical activity, p: 1}
+  - {id: edema, q: "몸이 붓나요?", item: Edema, p: 1}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, p: 1}
+  - {id: striae, q: "피부에 자주색 줄이 생겼나요?", item: Purple striae, p: 2}
+  - {id: bruise, q: "멍이 잘 드는 편인가요?", item: Easy bruising, p: 2}
+  - {id: proximal, q: "쪼그려 앉았다 일어나기 힘드세요?", item: Proximal weakness, p: 2}
+  - {id: constipation, q: "변비가 있으세요?", item: Constipation, p: 2}
+  - {id: fatigue, q: "쉽게 피곤하세요?", item: Fatigue, p: 2}
+  - {id: mood, q: "기분이 우울하세요?", item: Depressed mood, p: 2}
+  - id: snoring
+    q: "코를 심하게 고세요?"
+    item: Snoring
+    p: 2
+    then:
+      - {id: apnea, q: "자다가 숨을 멈춘다는 말을 들었나요?", item: Witnessed apnea, known: "멈|무호흡|숨을 안"}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 2}
+  - {id: moon_face, q: "얼굴이 동그래졌나요?", item: Moon face, p: 3}
+  - {id: plethora, q: "얼굴이 붉어졌나요?", item: Facial plethora, p: 3}
+  - {id: menses, q: "생리 주기가 불규칙한가요?", item: Menstrual irregularity, sec: ob, p: 1, only: female}
+  - {id: hirsutism, q: "털이 많이 나는 편인가요?", item: Hirsutism, sec: ros, p: 2, only: female}
+  - id: steroid
+    q: "스테로이드를 드신 적 있나요?"
+    item: Steroid use
+    sec: meds
+    p: 1
+    then:
+      - {id: steroid_duration, q: "얼마나 오래 드셨어요?", item: Steroid duration, known: "달|개월|년|주"}
+  - {id: injection, q: "관절 주사를 맞은 적 있나요?", item: Steroid injection, sec: meds, p: 2}
+  - {id: psych_drug, q: "정신과 약을 드시나요?", item: Psychotropic drug, sec: meds, p: 2}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: quit_smoking, q: "최근 담배를 끊으셨나요?", item: Smoking cessation, sec: shx, p: 3}
+  - {id: night_eating, q: "밤늦게 드시는 편인가요?", item: Night eating, sec: shx, p: 3}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 자주색 선조 시진, item: Skin, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 1}
+  - {name: 흑색가시세포증 시진, item: Skin, p: 2}
+  - {name: 전반적 외관 시진, item: General, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 2}
+  - {name: 다모증 평가, item: Skin, p: 3, only: female}
+differential:
+  - {en: Obesity from excess intake and low activity, ko: 섭취 과다·활동 부족에 의한 비만}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Cushing syndrome, ko: 쿠싱 증후군}
+  - {en: Polycystic ovary syndrome, ko: 다낭성 난소 증후군}
+  - {en: "Drug-induced weight gain (glucocorticoids, antipsychotics, insulin)", ko: 약물 유발 체중 증가}
+  - {en: "Fluid retention (heart failure, nephrotic syndrome, cirrhosis)", ko: 체액 저류(심부전·신증후군·간경변)}
+  - {en: Depression or binge eating disorder, ko: 우울증·폭식장애}
+  - {en: Pregnancy, ko: 임신}
+tests:
+  - {name: "TSH, free T4", for: [Hypothyroidism], why: "갑상샘 기능 확인"}
+  - {name: "Urine hCG (women 12-55)", for: [Pregnancy, safety], why: "임신 확인(약물 전)"}
+  - {name: "Fasting glucose or HbA1c, lipid profile", for: [Obesity from excess intake and low activity, "Drug-induced weight gain (glucocorticoids, antipsychotics, insulin)", Polycystic ovary syndrome], why: "대사 합병증 확인"}
+  - {name: "Liver function tests", for: [Obesity from excess intake and low activity, safety], why: "지방간·간기능 확인(약물 전)"}
+  - {name: "Overnight 1 mg dexamethasone suppression test or late-night salivary cortisol (Cushing features)", for: [Cushing syndrome], why: "쿠싱 증후군 선별"}
+  - {name: "Creatinine, urinalysis, albumin (edema)", for: ["Fluid retention (heart failure, nephrotic syndrome, cirrhosis)"], why: "신증후군·간질환 확인"}
+  - {name: "BNP or NT-proBNP (dyspnea or edema)", for: ["Fluid retention (heart failure, nephrotic syndrome, cirrhosis)"], why: "심부전 확인"}
+  - {name: "Prolactin, total testosterone, LH, FSH (irregular menses or hirsutism)", for: [Polycystic ovary syndrome], why: "다낭성 난소 증후군 감별"}
+  - {name: "Depression screening (PHQ-9)", for: [Depression or binge eating disorder], why: "우울증 확인"}
+plan:
+  treatment:
+    - "원인 질환 확인 후 치료(갑상샘저하증은 갑상샘호르몬 보충)"
+    - "식사량 조절, 규칙적인 유산소·근력 운동, 행동 치료"
+    - "BMI 25 이상에서 생활요법으로 부족하면 비만 약물치료 고려(KSSO)"
+    - "체중을 늘리는 약물은 대체 약물로 변경 검토"
+  disposition: "외래 관리, 숨참·부종 등 체액 저류나 쿠싱 증후군 의심 소견이면 정밀검사 의뢰"
+  follow_up:
+    - "2주 후 호르몬·대사 검사 결과 확인"
+    - "1-3개월마다 체중·허리둘레·혈압·대사 지표 점검"
+  red_flags:
+    - "숨이 차거나 누우면 숨이 막힘"
+    - "얼굴·다리가 심하게 부음"
+    - "다리 힘이 빠져 일어서기 힘듦"
+education:
+  - "피검사로 호르몬을 확인할게요."
+  - "식사와 운동 습관을 함께 볼게요."
+  - "검사 결과를 보고 다시 설명할게요."
+guidelines:
+  - US_StatPearls/statpearls_article-23304.md
+  - US_StatPearls/statpearls_article-23170.md
+  - US_StatPearls/statpearls_article-150570.md
+notes: >
+  v0.8.0. Cushing items reordered by discriminating value (Endocrine Society, Nieman 2008): easy bruising raised to
+  p2, moon face (common, nonspecific) lowered to p3, facial plethora added at p3; steroid use stays p1 with its
+  duration as a follow-up (exclude exogenous glucocorticoids first; test patients with several discriminating
+  features: easy bruising, facial plethora, proximal myopathy, reddish-purple striae over 1 cm). Witnessed apnea is a
+  follow-up of snoring. Korean thresholds (KSSO 2022, Haam 2023): overweight BMI 23 or more, obesity 25 or more;
+  abdominal obesity waist 90 cm or more in men, 85 cm or more in women; drug therapy is considered from BMI 25 when
+  lifestyle measures fail. First separate fat gain from fluid (edema, dyspnea). Always review drugs.

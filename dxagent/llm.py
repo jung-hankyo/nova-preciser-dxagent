@@ -26,7 +26,6 @@ import re
 import time
 from typing import Any, Callable, Protocol, TypeVar
 
-from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel
 
 from dxagent import usage  # noqa: E402
@@ -120,6 +119,8 @@ class LLM:
                 delay *= 2
 
     def structured(self, schema: type[T], system: str, user: str) -> T:
+        from langchain_core.messages import HumanMessage, SystemMessage  # v0.5: LangChain only when this class is used
+
         if schema not in self._structured_cache:
             kw = {"method": self._method} if self._method else {}
             self._structured_cache[schema] = self._model.with_structured_output(schema, include_raw=True, **kw)
@@ -144,6 +145,8 @@ class LLM:
         return self._with_retries(call)
 
     def text(self, system: str, user: str) -> str:
+        from langchain_core.messages import HumanMessage, SystemMessage
+
         msgs = [SystemMessage(content=system), HumanMessage(content=user)]
 
         def call():

@@ -1,0 +1,108 @@
+id: polyuria
+title: {ko: 다음·다뇨, en: Polydipsia and polyuria}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [혈당이 높, 목이 자주 마르, 목이 마르, 갈증, 물을 많이 마, 소변량이 많, 소변을 많이, 소변 양이 많, 목이 말라, 물을 마시고, 입이 말라, 입이 마르, 소변량이 늘, 소변 양이 늘]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: water, q: "물을 하루에 얼마나 드세요?", item: Fluid intake, p: 1}
+  - {id: volume, q: "소변 양이 많아졌나요?", item: Urine volume, p: 1}
+  - {id: frequency, q: "하루에 소변을 몇 번 보세요?", item: Urinary frequency, p: 1}
+  - {id: nocturia, q: "밤에 소변 보러 깨세요?", item: Nocturia, p: 1}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    p: 1
+    then:
+      - {id: weight_kg, q: "몇 킬로그램 빠지셨어요?", item: Weight loss amount, known: "킬로|키로|kg"}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 1}
+  - {id: hunger, q: "배가 자주 고프세요?", item: Polyphagia, p: 2}
+  - {id: abd_pain, q: "배도 아프세요?", item: Abdominal pain, p: 2}
+  - {id: fatigue, q: "쉽게 피곤하세요?", item: Fatigue, p: 2}
+  - {id: vision, q: "눈이 침침해졌나요?", item: Blurred vision, p: 2}
+  - {id: numbness, q: "발이 저리세요?", item: Paresthesia, p: 2}
+  - {id: dysuria, q: "소변볼 때 아프세요?", item: Dysuria, p: 2}
+  - {id: wound, q: "상처가 잘 안 낫나요?", item: Poor wound healing, sec: ros, p: 3}
+  - {id: vaginal_itch, q: "질 부위가 가려우세요?", item: Vulvovaginal pruritus, sec: ros, p: 3, only: female}
+  - id: glucose_hx
+    q: "혈당이 높다고 들은 적 있나요?"
+    item: Hyperglycemia history
+    sec: pmh
+    p: 1
+    then:
+      - {id: glucose_value, q: "혈당이 얼마로 나왔나요?", item: Glucose or HbA1c value, known: "\\d|백|십|당화"}
+      - {id: dm_drug, q: "드시는 당뇨약 이름을 아세요?", item: "Antidiabetic drug (SGLT2 inhibitor?)", known: "포시가|자디앙|슈글렛|스테글라트로|직듀오|엠파|다파|이프라|에르투|메트포르민|다이아벡스|글리메|아마릴|인슐린|안 먹|없"}
+  - {id: head_injury, q: "머리를 다친 적 있나요?", item: Head injury, sec: pmh, p: 3}
+  - {id: stone, q: "요로결석을 앓은 적 있나요?", item: Nephrolithiasis, sec: pmh, p: 3}
+  - {id: diuretic, q: "이뇨제를 드시나요?", item: Diuretic, sec: meds, p: 2}
+  - {id: psych_drug, q: "정신과 약을 드시나요?", item: Lithium or psychotropic, sec: meds, p: 2}
+  - {id: steroid, q: "스테로이드를 드신 적 있나요?", item: Steroid use, sec: meds, p: 3}
+  - {id: fh_dm, q: "가족 중 당뇨 있는 분 있나요?", item: "FHx: DM", sec: fhx, p: 1}
+  - {id: sugary, q: "단 음료를 자주 드세요?", item: Sugary drinks, sec: shx, p: 2}
+  - {id: exercise, q: "운동은 얼마나 하세요?", item: Exercise, sec: shx, p: 3}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 단섬유 감각 검사, item: Neuro, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 흑색가시세포증 시진, item: Skin, p: 2}
+  - {name: 안저 검사, item: H/E/E/N/T, p: 2}
+  - {name: 피부 긴장도 확인, item: Skin, p: 3}
+  - {name: 의식·지남력 평가, item: General, p: 3}
+differential:
+  - {en: Type 2 diabetes mellitus, ko: 제2형 당뇨병}
+  - {en: Type 1 diabetes mellitus, ko: 제1형 당뇨병}
+  - {en: Diabetic ketoacidosis or hyperosmolar hyperglycemic state, ko: 당뇨병케톤산증·고삼투압 고혈당 상태, cant_miss: true}
+  - {en: Arginine vasopressin deficiency or resistance (diabetes insipidus), ko: 바소프레신 결핍·저항(요붕증)}
+  - {en: Primary polydipsia, ko: 일차성 다음증}
+  - {en: Hypercalcemia, ko: 고칼슘혈증}
+  - {en: "Drug-induced (SGLT2 inhibitor, lithium, diuretic)", ko: 약물(SGLT2 억제제·리튬·이뇨제)}
+  - {en: Chronic kidney disease, ko: 만성 콩팥병}
+tests:
+  - {name: "Fasting plasma glucose, HbA1c, random glucose", for: [Type 2 diabetes mellitus, Type 1 diabetes mellitus, Diabetic ketoacidosis or hyperosmolar hyperglycemic state], why: "당뇨병 진단(KDA 기준)"}
+  - {name: "Urinalysis (glucose, ketones, specific gravity)", for: [Type 2 diabetes mellitus, Diabetic ketoacidosis or hyperosmolar hyperglycemic state, "Drug-induced (SGLT2 inhibitor, lithium, diuretic)", Arginine vasopressin deficiency or resistance (diabetes insipidus)], why: "요당·케톤·요비중 확인"}
+  - {name: "Serum ketones, venous blood gas, osmolality (vomiting or drowsiness)", for: [Diabetic ketoacidosis or hyperosmolar hyperglycemic state], why: "케톤산증·고삼투압 상태 확인"}
+  - {name: "C-peptide, GAD antibody (young, lean or ketotic)", for: [Type 1 diabetes mellitus], why: "제1형 당뇨병 확인"}
+  - {name: "Electrolytes (sodium), calcium, creatinine", for: [Hypercalcemia, Chronic kidney disease, Arginine vasopressin deficiency or resistance (diabetes insipidus), Primary polydipsia, safety], why: "고칼슘·고나트륨·신기능 확인(약물 전)"}
+  - {name: "Serum and urine osmolality (glucose normal)", for: [Arginine vasopressin deficiency or resistance (diabetes insipidus), Primary polydipsia], why: "수분 이뇨·용질 이뇨 감별"}
+  - {name: "24-hour urine volume (true polyuria: over 3 L a day)", for: [Arginine vasopressin deficiency or resistance (diabetes insipidus), Primary polydipsia], why: "진성 다뇨 확인"}
+  - {name: "Water deprivation test or copeptin (suspected AVP deficiency or resistance)", for: [Arginine vasopressin deficiency or resistance (diabetes insipidus), Primary polydipsia], why: "바소프레신 결핍·저항 확인"}
+  - {name: "Serum lithium level (lithium users)", for: ["Drug-induced (SGLT2 inhibitor, lithium, diuretic)"], why: "리튬 농도 확인"}
+plan:
+  treatment:
+    - "혈당 확인 후 당뇨병이면 생활요법과 메트포르민 등 약물 시작(KDA)"
+    - "케톤산증·고삼투압 상태 의심 시 수액·인슐린 치료 위해 응급 이송"
+    - "고혈당이 없으면 삼투압·수분 제한 검사로 바소프레신 결핍·저항과 일차성 다음증 감별"
+    - "원인 약물(SGLT2 억제제·리튬·이뇨제) 확인 후 조정"
+  disposition: "대부분 외래, 반복 구토·의식 저하·심한 탈수나 케톤 동반 고혈당이면 응급실"
+  follow_up:
+    - "1주 내 검사 결과 확인"
+    - "당뇨병이면 3개월마다 HbA1c, 매년 눈·콩팥·발 합병증 검사"
+  red_flags:
+    - "반복되는 구토"
+    - "숨이 가쁘고 깊어짐"
+    - "의식이 흐려짐"
+    - "심한 복통"
+education:
+  - "혈당과 소변검사를 할게요."
+  - "단 음료는 줄이는 게 좋아요."
+  - "토하거나 기운이 없으면 바로 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC12270580.md
+  - US_StatPearls/statpearls_article-36052.md
+  - US_StatPearls/statpearls_article-20428.md
+notes: >
+  v0.8.0. Korean diabetes criteria (KDA 2025, Rec. 1.1): HbA1c 6.5% or more, fasting plasma glucose 126 mg/dL or
+  more, 2-hour 75 g OGTT 200 or more, or random glucose 200 or more with classic symptoms; confirm on another day
+  unless two criteria are met in one sample. Prediabetes: FPG 100-125, 2-hour 140-199, HbA1c 5.7-6.4%. KDA screens
+  from age 35, or from 19 with risk factors. Diabetes insipidus is now arginine vasopressin deficiency (AVP-D,
+  central) or resistance (AVP-R, nephrogenic) (2022 international consensus; Korean rendering not verified). SGLT2
+  inhibitors cause glycosuria and polyuria without hyperglycemia and can cause euglycemic ketoacidosis: the drug name
+  and the glucose value are follow-ups of a known high glucose. Kilograms lost is a follow-up (weight loss with
+  ketosis suggests insulin deficiency). Nephrolithiasis at p3 (hypercalcemia clue); mental status maneuver at p3 for
+  suspected HHS or DKA. Distinguish true polyuria (over 3 L a day) from frequency with small volumes (urinary tract
+  causes). Hyperglycemia is by far the most common cause.

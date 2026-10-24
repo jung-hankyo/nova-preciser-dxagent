@@ -4,23 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dxagent"
-version = "0.4.2"
-description = "Knowledge-first multi-turn diagnostic agent built on LangGraph and LangChain"
+version = "0.8.1"
+description = "Knowledge-first multi-turn diagnostic agent: deterministic Bayesian core, N.O.V.A competition runtime"
 readme = "README.md"
 requires-python = ">=3.10"
+# v0.5: the competition runtime (dxagent.nova, run.py) needs only these two.
 dependencies = [
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# The LangGraph graph, terminal chat, AgentClinic bench and knowledge compiler (`dxagent` CLI).
+graph = [
     "langgraph>=1.0",
     "langchain>=1.0",
     "langchain-core>=1.0",
     "langchain-anthropic>=1.0",
-    "langchain-openai>=1.0",  # v0.4.2: OpenAI and DeepSeek (OpenAI-compatible endpoint)
-    "pydantic>=2.7",
-    "pyyaml>=6.0",
+    "langchain-openai>=1.0",
     "python-dotenv>=1.0",
 ]
-
-[project.optional-dependencies]
-openai = ["langchain-openai>=1.0"]  # kept for compatibility; now a core dependency
+openai = ["langchain-openai>=1.0"]  # kept for compatibility (part of `graph`)
 pdf = ["pdfplumber>=0.11"]  # v0.4: PDF sources for the knowledge compiler
 dev = ["pytest>=8.0"]
 
@@ -32,6 +36,7 @@ include = ["dxagent*"]
 
 [tool.setuptools.package-data]
 "dxagent.knowledge" = ["registry/*.yaml", "registry/_*.yaml", "fixtures/*/*.yaml", "fixtures/*/README.md"]
+"dxagent.nova" = ["cases/*.json", "cards/*.yaml", "cards/README.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

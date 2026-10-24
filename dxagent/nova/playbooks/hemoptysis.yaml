@@ -1,0 +1,110 @@
+id: hemoptysis
+title: {ko: 객혈, en: Hemoptysis}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [객혈, 가래에 피, 피가 섞인 가래, 피 섞인 가래, 기침할 때 피, 기침하면 피, 기침에 피, 기침하다가 피, 기침하다 피, 기침을 하는데 피, 기침하는데 피, 기침을 하면 피, 가래에서 피, 피를 뱉, 피가래, 침에 피, 침에서 피]
+  not: []
+history:
+  - {id: onset, q: "언제부터 피가 나왔어요?", item: Onset, p: 1}
+  - {id: amount, q: "피의 양은 어느 정도인가요?", item: Amount, p: 1}
+  - {id: with_cough, q: "기침할 때 피가 나오나요?", item: With cough, p: 1}
+  - {id: mixed, q: "피가 가래에 섞여 나오나요?", item: Mixed with sputum, p: 1}
+  - {id: frequency, q: "피가 얼마나 자주 나오나요?", item: Frequency, p: 1}
+  - {id: color, q: "피는 무슨 색인가요?", item: Color, p: 2}
+  - {id: chronic_sputum, q: "평소에 가래가 많은 편인가요?", item: Chronic sputum, p: 2}
+  - {id: vomiting, q: "토할 때 피가 나왔나요?", item: With vomiting, p: 2}
+  - {id: epistaxis, q: "코피가 났나요?", item: Epistaxis, p: 2}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, p: 2}
+  - {id: unilateral_leg, q: "한쪽 다리만 부은 적 있나요?", item: Unilateral leg swelling, p: 2}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 1}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 1
+    then:
+      - {id: weight_kg, q: "몇 킬로그램 빠지셨어요?", item: Weight loss amount, known: "킬로|키로|kg"}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 1}
+  - {id: hematuria, q: "소변에 피가 섞여 나오나요?", item: Hematuria, sec: ros, p: 3}
+  - {id: bruise, q: "멍이 잘 드는 편인가요?", item: Easy bruising, sec: ros, p: 3}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: tb_contact, q: "결핵 환자와 접촉한 적 있나요?", item: TB contact, sec: pmh, p: 2}
+  - {id: lung_dx, q: "폐 질환을 앓은 적 있나요?", item: lung disease, sec: pmh, p: 2}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 3}
+  - id: anticoag
+    q: "피를 묽게 하는 약을 드세요?"
+    item: Anticoagulant
+    sec: meds
+    p: 1
+    then:
+      - {id: anticoag_name, q: "그 약 이름을 아세요?", item: Anticoagulant name, known: "와파린|아스피린|클로피|플라빅스|엘리퀴스|자렐토|릭시아나|프라닥사|아픽사|리바록|에독사|다비가"}
+  - {id: exposure, q: "일하면서 먼지에 노출되나요?", item: Occupational exposure, sec: shx, p: 3}
+  - {id: fh_cancer, q: "가족 중 폐암 걸린 분 있나요?", item: "FHx: lung cancer", sec: fhx, p: 3}
+exams:
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 비강 시진, item: H/E/E/N/T, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 2}
+  - {name: 흉부 타진, item: Chest, p: 2}
+  - {name: 곤봉지 확인, item: Extremities, p: 2}
+  - {name: 하지 말초 진찰, item: Extremities, p: 2}
+  - {name: 심음 청진, item: Heart, p: 3}
+differential:
+  - {en: Acute bronchitis, ko: 급성 기관지염}
+  - {en: Bronchiectasis, ko: 기관지확장증}
+  - {en: "Post-tuberculous sequelae (bronchiectasis, aspergilloma)", ko: 결핵 후유증(기관지확장증·아스페르길루스종)}
+  - {en: Pulmonary tuberculosis, ko: 폐결핵, cant_miss: true}
+  - {en: Nontuberculous mycobacterial pulmonary disease, ko: 비결핵항산균 폐질환}
+  - {en: Lung cancer, ko: 폐암, cant_miss: true}
+  - {en: Pneumonia, ko: 폐렴}
+  - {en: Pulmonary embolism, ko: 폐색전증, cant_miss: true}
+  - {en: Mitral stenosis or heart failure, ko: 승모판 협착·심부전}
+  - {en: Granulomatosis with polyangiitis, ko: 다발혈관염 육아종증}
+  - {en: Pseudohemoptysis (epistaxis or upper GI bleeding), ko: 가성 객혈(코피·상부위장관 출혈)}
+tests:
+  - {name: "Chest X-ray", for: [Acute bronchitis, Pneumonia, Pulmonary tuberculosis, Lung cancer, Bronchiectasis, "Post-tuberculous sequelae (bronchiectasis, aspergilloma)", Mitral stenosis or heart failure], why: "폐렴·결핵·종양·울혈 확인"}
+  - {name: "Chest CT", for: [Bronchiectasis, "Post-tuberculous sequelae (bronchiectasis, aspergilloma)", Nontuberculous mycobacterial pulmonary disease, Lung cancer, Pulmonary tuberculosis], why: "기관지확장증·공동·진균구·종양 확인"}
+  - {name: "CT pulmonary angiography (suspected PE)", for: [Pulmonary embolism], why: "폐색전증 확인"}
+  - {name: "Sputum AFB smear, culture and TB PCR", for: [Pulmonary tuberculosis, Nontuberculous mycobacterial pulmonary disease], why: "결핵·비결핵항산균 확인"}
+  - {name: "Sputum cytology", for: [Lung cancer], why: "악성 세포 확인"}
+  - {name: "Bronchoscopy", for: [Lung cancer, Bronchiectasis], why: "출혈 부위·병변 조직 확인"}
+  - {name: "Urinalysis, creatinine, ANCA", for: [Granulomatosis with polyangiitis], why: "폐신 증후군·혈관염 확인"}
+  - {name: "Echocardiography", for: [Mitral stenosis or heart failure], why: "승모판 협착·심기능 확인"}
+  - {name: "Nasopharyngoscopy or upper endoscopy (blood from nose or stomach)", for: [Pseudohemoptysis (epistaxis or upper GI bleeding)], why: "코·위장관 출혈 확인"}
+  - {name: "CBC, PT/aPTT", for: [safety], why: "빈혈·출혈 경향 확인"}
+plan:
+  treatment:
+    - "흉부 사진·CT·객담 검사로 원인 확인 후 원인별 치료"
+    - "결핵 확인 시 표준 항결핵제, 보건소 신고와 접촉자 검진"
+    - "항응고제 복용 시 중단 여부를 처방의와 결정"
+    - "대량 객혈: 기도 확보 후 기관지동맥 색전술 의뢰"
+  disposition: "소량·안정적이면 외래 검사, 다량 객혈이나 호흡곤란·저산소증이 있으면 응급실"
+  follow_up:
+    - "1주 후 객담·CT 결과 확인"
+    - "결핵·비결핵항산균이면 치료 중 정기 객담 검사"
+  red_flags:
+    - "피를 한 컵 가까이 뱉음"
+    - "숨이 참"
+    - "어지럽거나 쓰러질 것 같음"
+education:
+  - "흉부 사진과 가래 검사를 할게요."
+  - "결과가 나올 때까지 마스크를 쓰세요."
+  - "피가 많이 나오면 바로 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC6082761.md
+  - US_StatPearls/statpearls_article-30653.md
+  - US_StatPearls/statpearls_article-18639.md
+  - US_StatPearls/statpearls_article-24489.md
+notes: >
+  v0.8.0. Past TB raised to p1 through the standard "Tbc / hepatitis" item and TB contact lowered to p2: in a Korean
+  tertiary series (Chonnam 2005-2010, n = 221) bronchiectasis (32.6%, often post-TB), active TB (18.5%) and fungus
+  ball (10.8%) caused about 60% of hemoptysis; lung cancer 5.9% (Tuberc Respir Dis 73(2)). Post-tuberculous sequelae
+  (bronchiectasis, aspergilloma) and NTM lung disease (hemoptysis in 42.6% of a Korean NTM cohort) added to the
+  differential. Smoking years for pack-years are asked by the engine after a positive smoking answer; follow-ups ask the anticoagulant's name and kilograms lost.
+  First confirm the blood comes from the airway (with cough, frothy, mixed with sputum) rather than the nose or the
+  stomach. Massive hemoptysis or any hemoptysis with dyspnea or hypoxemia is an emergency. In Korea bronchiectasis
+  (often post-TB), active TB, aspergilloma, NTM and lung cancer lead.

@@ -1,0 +1,113 @@
+id: ear_symptoms
+title: {ko: 귀 통증·청력 저하, en: Ear pain or hearing loss}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [귀가 아파, 귀가 아프, 귀에서 고름, 귀에서 진물, 귀에서 물, 귀가 먹먹, 귀가 잘 안 들, 이명, 귀에서 소리, 청력이, 이통, 소리가 잘 안 들, 안 들려, 안 들리, 귀가 울, 삐 소리, 귀가 가려, 귀에서 분비물]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: side, q: "어느 쪽 귀가 불편하세요?", item: Laterality, p: 1}
+  - {id: pain, q: "귀가 아프세요?", item: Otalgia, p: 1}
+  - id: discharge
+    q: "귀에서 진물이 나오나요?"
+    item: Otorrhea
+    p: 1
+    then:
+      - {id: discharge_duration, q: "진물이 나온 지 얼마나 됐나요?", item: Otorrhea duration, known: "일째|일 전|며칠|주째|주 전|주일|달|개월|년|어제|오늘"}
+  - id: hearing
+    q: "귀가 잘 안 들리세요?"
+    item: Hearing loss
+    p: 1
+    then:
+      - {id: sudden, q: "갑자기 안 들리게 됐나요?", item: Sudden hearing loss, known: "갑자기|어느 날|자고 일어나|순간"}
+  - {id: tinnitus, q: "귀에서 소리가 나나요?", item: Tinnitus, p: 1}
+  - {id: vertigo, q: "어지러우세요?", item: Vertigo, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: uri, q: "최근 감기를 앓았나요?", item: Recent URI, p: 1}
+  - {id: mastoid, q: "귀 뒤가 부어 있나요?", item: Postauricular swelling, p: 2}
+  - {id: fullness, q: "귀가 먹먹하세요?", item: Aural fullness, p: 2}
+  - {id: swim, q: "최근 수영을 하셨나요?", item: Water exposure, p: 2}
+  - {id: picking, q: "귀를 자주 후비시나요?", item: Ear manipulation, p: 2}
+  - {id: itch, q: "귀가 가려우세요?", item: Ear itching, p: 2}
+  - {id: noise, q: "시끄러운 곳에서 일하세요?", item: Noise exposure, p: 2}
+  - {id: facial, q: "얼굴 한쪽이 처졌나요?", item: Facial weakness, p: 2}
+  - {id: vesicles, q: "귀 주위에 물집이 생겼나요?", item: Vesicles, p: 2}
+  - {id: flight, q: "최근 비행기를 타셨나요?", item: Recent air travel, p: 3}
+  - {id: pulsatile, q: "맥박처럼 뛰는 소리가 나나요?", item: Pulsatile tinnitus, p: 3}
+  - {id: jaw, q: "턱을 움직일 때 아프세요?", item: Temporomandibular pain, sec: ros, p: 3}
+  - {id: throat, q: "목도 아프세요?", item: Sore throat, sec: ros, p: 3}
+  - {id: ototoxic, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 3}
+  - {id: fh_hearing, q: "가족 중 귀가 어두운 분 있나요?", item: "FHx: hearing loss", sec: fhx, p: 3}
+exams:
+  - {name: 이경 검사, item: H/E/E/N/T, p: 1}
+  - {name: 웨버 검사, item: H/E/E/N/T, p: 1}
+  - {name: 린네 검사, item: H/E/E/N/T, p: 2}
+  - {name: 속삭임 청력 검사, item: H/E/E/N/T, p: 2}
+  - {name: 이주 압통 확인, item: H/E/E/N/T, p: 2}
+  - {name: 유양돌기 압통 확인, item: H/E/E/N/T, p: 2}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 안면 근력 검사, item: Neuro, p: 2}
+differential:
+  - {en: Acute otitis media, ko: 급성 중이염}
+  - {en: Otitis media with effusion, ko: 삼출성 중이염}
+  - {en: Otitis externa, ko: 외이도염}
+  - {en: Cerumen impaction, ko: 귀지 막힘}
+  - {en: Sudden sensorineural hearing loss, ko: 돌발성 감각신경성 난청, cant_miss: true}
+  - {en: Eustachian tube dysfunction, ko: 이관 기능장애}
+  - {en: "Referred otalgia (temporomandibular joint, dental, pharyngeal)", ko: 연관 이통(턱관절·치아·인두)}
+  - {en: "Herpes zoster oticus (Ramsay Hunt syndrome)", ko: 이성 대상포진(람세이 헌트 증후군)}
+  - {en: Cholesteatoma, ko: 진주종}
+  - {en: Necrotizing otitis externa, ko: 괴사성 외이도염, cant_miss: true}
+  - {en: Noise-induced or age-related hearing loss, ko: 소음성·노인성 난청}
+  - {en: Acute mastoiditis, ko: 급성 유양돌기염, cant_miss: true}
+  - {en: Meniere disease, ko: 메니에르병}
+  - {en: Vestibular schwannoma, ko: 청신경초종}
+  - {en: "Nasopharyngeal carcinoma (adult unilateral middle-ear effusion)", ko: 비인두암(성인 일측 삼출성 중이염), cant_miss: true}
+tests:
+  - {name: "Otoscopy (pneumatic or microscopic)", for: [Acute otitis media, Otitis media with effusion, Otitis externa, Cerumen impaction, Cholesteatoma], why: "고막·외이도 확인"}
+  - {name: "Pure-tone audiometry (same day if sudden)", for: [Sudden sensorineural hearing loss, Noise-induced or age-related hearing loss, Meniere disease, Vestibular schwannoma, "Herpes zoster oticus (Ramsay Hunt syndrome)"], why: "난청의 유형과 정도 확인"}
+  - {name: "Tympanometry", for: [Otitis media with effusion, Eustachian tube dysfunction], why: "중이 삼출·이관 기능 확인"}
+  - {name: "Ear discharge culture", for: [Otitis externa, Necrotizing otitis externa], why: "원인균 확인"}
+  - {name: "Glucose, HbA1c, ESR (severe otitis externa in diabetes or older age)", for: [Necrotizing otitis externa], why: "괴사성 외이도염 위험 평가"}
+  - {name: "Temporal bone CT", for: [Acute mastoiditis, Cholesteatoma, Necrotizing otitis externa], why: "골 파괴·농양 확인"}
+  - {name: "MRI of internal auditory canals (asymmetric sensorineural hearing loss)", for: [Vestibular schwannoma, Sudden sensorineural hearing loss], why: "후미로성 병변 확인"}
+  - {name: "Nasopharyngoscopy (adult unilateral middle-ear effusion or referred pain)", for: ["Nasopharyngeal carcinoma (adult unilateral middle-ear effusion)", "Referred otalgia (temporomandibular joint, dental, pharyngeal)"], why: "비인두·인두 병변 확인"}
+  - {name: "Blood glucose (before systemic steroids)", for: [safety], why: "스테로이드 전 혈당 확인"}
+plan:
+  treatment:
+    - "급성 중이염: 진통제와 48-72시간 경과 관찰, 중증·지속 시 아목시실린"
+    - "외이도염: 귀 청결 유지와 항생제 점이액(고막 천공 시 이독성 없는 약)"
+    - "돌발성 난청: 순음청력검사로 확인 후 2주 이내 스테로이드(전신 또는 고막 내)"
+    - "귀지 막힘: 귀지 용해제 후 제거"
+  disposition: "대부분 외래; 돌발성 난청은 당일 이비인후과 청력검사, 유양돌기 부종·안면마비·당뇨 환자의 심한 외이도염은 즉시 의뢰"
+  follow_up:
+    - "중이염은 48-72시간 뒤 호전 없으면 재평가, 삼출액은 3개월 추적"
+    - "돌발성 난청은 치료 후 청력검사를 다시 시행"
+  red_flags: ["갑자기 한쪽 귀가 안 들림", "귀 뒤가 붓고 빨개짐", "얼굴 한쪽이 처짐", "심한 어지럼이나 두통"]
+education:
+  - "귀를 후비지 마세요."
+  - "갑자기 안 들리면 그날 바로 오세요."
+  - "귀 뒤가 붓거나 얼굴이 처지면 바로 오세요."
+  - "청력 검사를 해 볼게요."
+guidelines:
+  - US_StatPearls/statpearls_article-17163.md
+  - US_StatPearls/statpearls_article-26422.md
+  - US_StatPearls/statpearls_article-28881.md
+  - KR_EuropePMC/europepmc_PMC3410229.md
+notes: >
+  v0.8.0 (evidence review 2026-10): Rinne moved to p2 and the whispered voice test added at p2 in place of the pharynx
+  inspection: the whispered voice is the best bedside detector of hearing loss (not perceived LR 6.1, perceived LR
+  0.03), while tuning forks characterise rather than detect a loss (abnormal Weber LR 1.6; Bagai, JAMA 2006). Otoscopy
+  and Weber stay p1 (cerumen, effusion and otitis; side and type of loss). A positive hearing answer is followed by
+  whether it was sudden, and otorrhea by its duration (chronic discharge: chronic otitis media or cholesteatoma);
+  pulsatile tinnitus added at p3. Sudden sensorineural hearing loss (AAO-HNS 2019): separate sensorineural from
+  conductive loss at once, audiometry as soon as possible (within 14 days), no routine CT or labs, MRI or ABR for
+  retrocochlear causes, steroids an option within 2 weeks of onset and intratympanic salvage at 2-6 weeks. In a sudden
+  loss Weber lateralises to the better ear and Rinne stays positive; in a severe unilateral loss Rinne may be falsely
+  negative by cross-hearing, so Weber with a normal otoscopy is the decisive pair. Facial strength (CN VII: Ramsay
+  Hunt, cholesteatoma, necrotizing otitis externa) stays p2; when vertigo is yes the focus call should add nystagmus.
+  A diabetic or older patient with severe otitis externa pain: consider necrotizing otitis externa. An adult with a
+  unilateral middle-ear effusion needs nasopharyngoscopy (nasopharyngeal carcinoma).

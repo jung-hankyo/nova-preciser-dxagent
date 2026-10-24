@@ -1,0 +1,129 @@
+id: fatigue
+title: {ko: 피로, en: Fatigue}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [피곤, 피로, 기운이 없, 기력이 없, 무기력, 몸이 처지, 쉽게 지치, 쉽게 지쳐, 몸에 힘이 없]
+  not: []
+history:
+  - {id: onset, q: "언제부터 피곤하셨어요?", item: Onset, p: 1}
+  - {id: rest, q: "쉬면 나아지나요?", item: Relief with rest, p: 1}
+  - {id: daily, q: "일상생활이 힘들 정도인가요?", item: Functional impact, p: 1}
+  - id: sleep
+    q: "잠은 잘 주무세요?"
+    item: Sleep
+    p: 1
+    then:
+      - {id: sleep_hours, q: "하루에 몇 시간 주무세요?", item: Sleep hours, known: "시간"}
+  - id: mood
+    q: "기분이 우울하세요?"
+    item: Depressed mood
+    p: 1
+    then:
+      - {id: suicidal, q: "죽고 싶다는 생각이 드시나요?", item: Suicidal ideation, known: "죽고|자살", safety: true}
+  - id: anhedonia
+    q: "즐겁던 일이 재미없어졌나요?"
+    item: Anhedonia
+    p: 1
+    then:
+      - {id: suicidal, q: "죽고 싶다는 생각이 드시나요?", item: Suicidal ideation, known: "죽고|자살", safety: true}
+  - {id: weight, q: "몸무게가 변했나요?", item: Weight change, p: 1}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, p: 1}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, p: 1}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, p: 1}
+  - {id: menorrhagia, q: "생리량이 많은 편인가요?", item: Menorrhagia, sec: ob, p: 1, only: female}
+  - id: snoring
+    q: "코를 심하게 고세요?"
+    item: Snoring
+    p: 2
+    then:
+      - {id: apnea, q: "자다가 숨을 멈춘다는 말을 들었나요?", item: Witnessed apnea, known: "멈|무호흡|숨을 안"}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 2}
+  - {id: weakness, q: "근육에 힘이 빠지나요?", item: Muscle weakness, p: 2}
+  - {id: stress, q: "요즘 스트레스를 받는 일이 있나요?", item: Psychosocial stress, p: 2}
+  - {id: timing, q: "하루 중 언제 가장 피곤하세요?", item: Diurnal pattern, p: 3}
+  - {id: sleepy, q: "낮에 졸음이 쏟아지나요?", item: Daytime sleepiness, p: 3}
+  - {id: appetite, q: "입맛은 어떠세요?", item: Appetite, p: 3}
+  - {id: polyuria, q: "소변을 자주 보세요?", item: Polyuria, p: 3}
+  - {id: overwork, q: "요즘 무리하신 일이 있나요?", item: Overwork, p: 3}
+  - {id: pem, q: "활동한 다음 날 더 피곤하세요?", item: Post-exertional malaise, p: 3}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 2}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 2}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 3}
+  - {id: bowel, q: "대변 보는 게 달라졌나요?", item: Bowel habit change, sec: ros, p: 3}
+  - {id: jaundice, q: "눈이 노랗게 변했나요?", item: Jaundice, sec: ros, p: 3}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: hep_b, q: "B형 간염이 있다고 들은 적 있나요?", item: Hepatitis B, sec: pmh, p: 2}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: caffeine, q: "커피는 하루 몇 잔 드세요?", item: Caffeine, sec: shx, p: 3}
+exams:
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 1}
+  - {name: 전반적 외관 시진, item: General, p: 2}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 간·비장 촉진, item: Abdomen, p: 2}
+  - {name: 정동 평가, item: Mental status, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 3}
+differential:
+  - {en: Iron-deficiency anemia, ko: 철결핍빈혈}
+  - {en: Hypothyroidism, ko: 갑상샘저하증}
+  - {en: Depression, ko: 우울증}
+  - {en: Diabetes mellitus, ko: 당뇨병}
+  - {en: Obstructive sleep apnea or insufficient sleep, ko: 폐쇄성 수면무호흡·수면 부족}
+  - {en: Chronic hepatitis or liver disease, ko: 만성 간염·간질환}
+  - {en: Chronic kidney disease, ko: 만성 콩팥병}
+  - {en: Malignancy, ko: 악성종양, cant_miss: true}
+  - {en: Heart failure, ko: 심부전}
+  - {en: Adrenal insufficiency, ko: 부신기능저하증}
+  - {en: Medication side effect, ko: 약물 부작용}
+  - {en: Myalgic encephalomyelitis/chronic fatigue syndrome (ME/CFS), ko: 근육통성 뇌척수염/만성피로증후군}
+tests:
+  - {name: "CBC, ferritin", for: [Iron-deficiency anemia, Malignancy], why: "빈혈·철결핍 확인"}
+  - {name: "TSH", for: [Hypothyroidism, Myalgic encephalomyelitis/chronic fatigue syndrome (ME/CFS)], why: "갑상샘 기능 확인"}
+  - {name: "Fasting glucose or HbA1c", for: [Diabetes mellitus], why: "당뇨병 확인"}
+  - {name: "Liver function tests, creatinine, electrolytes", for: [Chronic hepatitis or liver disease, Chronic kidney disease, Adrenal insufficiency, Medication side effect], why: "간·신기능·전해질(저나트륨·고칼륨) 확인"}
+  - {name: "HBsAg, anti-HCV", for: [Chronic hepatitis or liver disease], why: "B·C형 간염 선별(병력 부정과 무관하게)"}
+  - {name: "ESR or CRP", for: [Malignancy, Myalgic encephalomyelitis/chronic fatigue syndrome (ME/CFS)], why: "염증·전신 질환 선별"}
+  - {name: "Urinalysis", for: [Chronic kidney disease, Diabetes mellitus], why: "단백뇨·당뇨 확인"}
+  - {name: "Depression screening (PHQ-9)", for: [Depression], why: "우울증 중증도·자살 사고 확인"}
+  - {name: "Morning serum cortisol", for: [Adrenal insufficiency], why: "부신기능저하 선별"}
+  - {name: "BNP or NT-proBNP (dyspnea or edema)", for: [Heart failure], why: "심부전 확인"}
+  - {name: "Home sleep apnea test or polysomnography (snoring, witnessed apnea)", for: [Obstructive sleep apnea or insufficient sleep], why: "수면무호흡 확인"}
+  - {name: "Age-appropriate cancer screening (national program)", for: [Malignancy], why: "연령별 암 선별"}
+plan:
+  treatment:
+    - "혈액검사로 빈혈·갑상샘·혈당·간·신기능 확인 후 원인 치료"
+    - "원인 질환이 없으면 수면 위생, 규칙적 생활과 활동량 조절"
+    - "우울 선별 양성이면 PHQ-9 평가 후 상담·항우울제 고려, 자살 위험 시 즉시 정신건강의학과 연계"
+  disposition: "대부분 외래 검사, 자살 생각·체중 감소·발열·출혈 등 경고 소견이 있으면 당일 평가나 의뢰"
+  follow_up:
+    - "1-2주 후 혈액검사 결과 확인"
+    - "원인 불명이면 4-6주 후 증상 재평가"
+  red_flags:
+    - "죽고 싶은 생각"
+    - "의도하지 않은 체중 감소"
+    - "검은 변"
+    - "지속되는 발열·식은땀"
+education:
+  - "피검사로 원인을 찾아볼게요."
+  - "규칙적으로 자고 일어나세요."
+  - "검사 결과를 보고 다시 설명할게요."
+guidelines:
+  - US_StatPearls/statpearls_article-21640.md
+  - US_StatPearls/statpearls_article-23304.md
+  - US_StatPearls/statpearls_article-20367.md
+notes: >
+  v0.8.0. Safety: a positive mood or anhedonia answer is followed by the suicide question (the playbook screened mood
+  but never asked about suicide); anhedonia raised to p1 so both PHQ-2 items are always asked. Hepatitis: HBsAg
+  prevalence about 2.9% in Korea and 77.8% of carriers unaware (KNHANES), so the standard TB/hepatitis item is raised
+  to p1, the direct "B형 간염" question is added at p2, and HBsAg/anti-HCV are tested whatever the history says. Sleep
+  hours and witnessed apnea are follow-ups. Demoted to p3 to stay within turns: timing, overwork, daytime sleepiness,
+  appetite, polyuria (thirst at p1 covers diabetes). ME/CFS replaces "chronic fatigue syndrome" (IOM 2015: more than
+  6 months of substantially reduced activity with fatigue not relieved by rest, post-exertional malaise, unrefreshing
+  sleep, plus cognitive impairment or orthostatic intolerance; PEM item at p3). Separate fatigue from sleepiness and
+  from weakness. Most outpatient fatigue is explained by sleep, mood, anemia, thyroid, diabetes, drugs. Red flags:
+  weight loss, fever, night sweats, bleeding, lymphadenopathy, suicidal thoughts.

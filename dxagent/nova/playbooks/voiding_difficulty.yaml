@@ -1,0 +1,115 @@
+id: voiding_difficulty
+title: {ko: 배뇨 곤란·요실금, en: Lower urinary tract symptoms and incontinence}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [소변이 잘 안 나, 소변 줄기, 소변보기가 힘들, 소변보기 힘들, 소변이 안 나와, 소변을 지려, 소변이 새, 요실금, 소변을 참기 힘들, 소변이 시원하지, 오줌이 새, 밤에 소변, 기침할 때 소변, 기침하면 소변, 재채기할 때 소변, 재채기하면 소변, 잔뇨, 소변이 시원하게 안, 소변을 봐도 시원, 소변을 보기 힘들, 소변 보기가 힘들, 소변 보기 힘들, 소변이 찔끔, 밤에 화장실, 소변을 못 참, 소변을 잘 못 보, 소변을 잘 못 봐, 마려우면 못 참, 소변이 마려, 소변이 급]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: weak_stream, q: "소변 줄기가 약해졌나요?", item: Weak stream, p: 1}
+  - {id: hesitancy, q: "소변이 나오기까지 오래 걸리나요?", item: Hesitancy, p: 1}
+  - {id: incomplete, q: "소변을 봐도 남은 느낌이 드나요?", item: Incomplete emptying, p: 1}
+  - {id: frequency, q: "하루에 소변을 몇 번 보세요?", item: Frequency, p: 1}
+  - {id: nocturia, q: "밤에 소변 보러 몇 번 깨세요?", item: Nocturia, p: 1}
+  - {id: urgency, q: "소변을 참기 힘드세요?", item: Urgency, p: 1}
+  - id: urge_inc
+    q: "참지 못하고 지린 적 있나요?"
+    item: Urge incontinence
+    p: 1
+    then:
+      - {id: pads, q: "패드를 하루에 몇 개 쓰세요?", item: Pad use, known: "개|장|패드|기저귀|안 써|안 해"}
+  - id: stress_inc
+    q: "기침할 때 소변이 새나요?"
+    item: Stress incontinence
+    p: 1
+    then:
+      - {id: pads, q: "패드를 하루에 몇 개 쓰세요?", item: Pad use, known: "개|장|패드|기저귀|안 써|안 해"}
+  - {id: hematuria, q: "소변에 피가 섞여 나오나요?", item: Hematuria, p: 1}
+  - {id: intermittency, q: "소변이 끊겼다 나왔다 하나요?", item: Intermittency, p: 2}
+  - {id: straining, q: "소변볼 때 힘을 줘야 하나요?", item: Straining, p: 2}
+  - {id: retention, q: "소변이 전혀 안 나온 적 있나요?", item: Retention, p: 2}
+  - {id: dysuria, q: "소변볼 때 아프세요?", item: Dysuria, p: 2}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 2}
+  - {id: caffeine, q: "커피를 하루에 몇 잔 드세요?", item: Caffeine intake, sec: shx, p: 2}
+  - {id: fluids, q: "물은 하루에 얼마나 드세요?", item: Fluid intake, sec: shx, p: 3}
+  - {id: thirst, q: "목이 자주 마르세요?", item: Polydipsia, sec: ros, p: 3}
+  - {id: back_pain, q: "허리가 아프세요?", item: Back pain, sec: ros, p: 2}
+  - {id: leg_neuro, q: "다리가 저리세요?", item: Leg numbness, sec: ros, p: 2}
+  - {id: saddle, q: "엉덩이 주변 감각이 둔해졌나요?", item: Saddle anesthesia, sec: ros, p: 2}
+  - {id: constipation, q: "변비가 있으세요?", item: Constipation, sec: ros, p: 3}
+  - {id: deliveries, q: "자연분만을 몇 번 하셨나요?", item: Vaginal deliveries, sec: ob, p: 2, only: female}
+  - {id: prolapse, q: "질에서 뭔가 빠지는 느낌이 있나요?", item: Prolapse symptoms, sec: ob, p: 2, only: female}
+  - {id: menopause, q: "폐경은 되셨나요?", item: Menopause, sec: ob, p: 3, only: female}
+  - {id: cold_med, q: "최근 감기약을 드셨나요?", item: Antihistamine or decongestant, sec: meds, p: 1}
+  - {id: diuretic, q: "이뇨제를 드시나요?", item: Diuretic, sec: meds, p: 2}
+  - {id: pelvic_surgery, q: "골반 쪽 수술을 받은 적 있나요?", item: Pelvic surgery, sec: pmh, p: 3}
+  - {id: fh_prostate, q: "가족 중 전립선암 있는 분 있나요?", item: "FHx: prostate cancer", sec: fhx, p: 3, only: male}
+exams:
+  - {name: 방광 촉진, item: Abdomen, p: 1}
+  - {name: 전립선 촉진, item: GU, p: 1, only: male}
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 양손 골반 내진, item: GU, p: 2, only: [female, sexually_active]}
+  - {name: 기침 스트레스 검사, item: GU, p: 2, only: female}
+  - {name: 회음부 감각 검사, item: Neuro, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 3}
+  - {name: 항문 괄약근 긴장도 확인, item: Neuro, p: 3}
+differential:
+  - {en: Benign prostatic hyperplasia, ko: 양성 전립선 비대증}
+  - {en: Overactive bladder, ko: 과민성 방광}
+  - {en: Stress urinary incontinence, ko: 복압성 요실금}
+  - {en: Pelvic organ prolapse, ko: 골반장기탈출증}
+  - {en: Urinary tract infection, ko: 요로감염}
+  - {en: Prostate cancer, ko: 전립선암, cant_miss: true}
+  - {en: Bladder cancer or carcinoma in situ, ko: 방광암·상피내암, cant_miss: true}
+  - {en: Chronic prostatitis, ko: 만성 전립선염}
+  - {en: Urethral stricture, ko: 요도 협착}
+  - {en: "Neurogenic bladder (diabetes, spinal cord disease)", ko: 신경인성 방광(당뇨·척수 질환)}
+  - {en: Drug-induced urinary retention, ko: 약물 유발 요폐}
+  - {en: Acute urinary retention, ko: 급성 요폐, cant_miss: true}
+  - {en: Cauda equina syndrome or spinal cord compression, ko: 마미 증후군·척수 압박, cant_miss: true}
+  - {en: Diabetes mellitus (polyuria), ko: 당뇨병(다뇨)}
+tests:
+  - {name: "Urinalysis, urine culture", for: [Urinary tract infection, Chronic prostatitis, Bladder cancer or carcinoma in situ, Diabetes mellitus (polyuria)], why: "감염·혈뇨·당뇨 확인"}
+  - {name: "Post-void residual (bladder ultrasound)", for: [Acute urinary retention, Benign prostatic hyperplasia, "Neurogenic bladder (diabetes, spinal cord disease)", Drug-induced urinary retention, Pelvic organ prolapse], why: "잔뇨·요폐 확인"}
+  - {name: "PSA (men, after shared decision)", for: [Prostate cancer, Benign prostatic hyperplasia], why: "전립선암 선별·전립선 크기 추정"}
+  - {name: "Creatinine (retention, high residual or suspected renal impairment)", for: [Acute urinary retention], why: "폐쇄성 신기능 저하 확인"}
+  - {name: "Frequency-volume chart (voiding diary)", for: [Overactive bladder, Diabetes mellitus (polyuria)], why: "다뇨·야간다뇨와 방광 용량 구분"}
+  - {name: "Uroflowmetry, IPSS questionnaire", for: [Benign prostatic hyperplasia, Urethral stricture], why: "배출 장애 정도 평가"}
+  - {name: "Glucose or HbA1c", for: [Diabetes mellitus (polyuria), "Neurogenic bladder (diabetes, spinal cord disease)"], why: "당뇨 확인"}
+  - {name: "Urodynamic study (before surgery or unclear mixed symptoms)", for: [Stress urinary incontinence, "Neurogenic bladder (diabetes, spinal cord disease)"], why: "요실금 유형·방광 기능 확인"}
+  - {name: "Emergency lumbar spine MRI (saddle anesthesia, new retention with back pain or leg weakness)", for: [Cauda equina syndrome or spinal cord compression], why: "마미 증후군 확인"}
+  - {name: "Cystoscopy and urine cytology (hematuria)", for: [Bladder cancer or carcinoma in situ], why: "방광암 확인"}
+plan:
+  treatment:
+    - "전립선비대증: 알파차단제, 전립선이 크면 5알파환원효소억제제 병용"
+    - "과민성 방광: 방광 훈련·카페인 줄이기, 부족하면 항무스카린제 또는 베타3 작용제"
+    - "복압성 요실금: 골반저근 운동, 효과 없으면 수술 상담"
+    - "급성 요폐는 즉시 도뇨, 원인 약물(감기약 등) 중단"
+  disposition: "대부분 외래 치료; 소변이 전혀 안 나오면 응급 도뇨, 회음부 감각 저하나 다리 근력 저하는 응급 MRI(마미 증후군)"
+  follow_up:
+    - "약물 시작 4~12주 후 증상 점수·잔뇨로 반응 평가"
+    - "PSA 이상, 혈뇨, 직장수지검사 이상은 비뇨의학과 의뢰"
+  red_flags: ["소변이 전혀 안 나옴", "엉덩이 주변 감각 저하", "다리에 힘이 빠짐", "열과 옆구리 통증"]
+education:
+  - "배뇨 일기를 써 보세요."
+  - "자기 전에는 물을 줄여 보세요."
+  - "소변이 전혀 안 나오면 바로 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC4778754.md
+  - US_StatPearls/statpearls_article-18212.md
+  - US_StatPearls/statpearls_article-30850.md
+  - KR_Journals/kr_journal_10.32587_jnic.2019.00136.md
+notes: >
+  v0.8.0: back pain added (the usual anchor symptom of cauda equina syndrome; saddle anesthesia and leg numbness are
+  asked); a cough stress test for women replaces the leg exam (observed leakage on coughing confirms stress
+  incontinence, AUA/SUFU SUI guideline 2017, amended 2023); bladder cancer or carcinoma in situ added as can't-miss
+  (hematuria and irritative storage symptoms in a smoker); creatinine only for retention, a high residual or renal
+  concern (AUA BPH 2021/2023 initial evaluation: history, exam with DRE, IPSS, urinalysis); fluid intake and thirst
+  moved to priority 3; pad-count follow-ups quantify incontinence. The bimanual exam is limited to sexually active
+  women: never had intercourse, no speculum or bimanual; transabdominal ultrasound; rectal exam only if a mass is
+  suspected. Separate voiding (weak stream, hesitancy, straining) from storage symptoms (frequency, urgency, nocturia)
+  and type incontinence (stress versus urge). Cold medicines with antihistamines or decongestants commonly
+  precipitate retention in men with BPH.

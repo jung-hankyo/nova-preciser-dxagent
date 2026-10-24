@@ -1,0 +1,111 @@
+id: palpitation
+title: {ko: 가슴 두근거림, en: Palpitations}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [두근, 가슴이 뛰, 심장이 빨리, 심장이 뛰, 심장이 쿵쾅, 가슴이 쿵쾅, 맥이 불규칙, 맥박이 빨, 가슴이 떨, 가슴이 벌렁, 심장이 벌렁, 맥박이 불규칙, 심장이 덜컹]
+  not: []
+history:
+  - {id: onset, q: "언제부터 두근거리셨어요?", item: Onset, p: 1}
+  - id: abrupt
+    q: "두근거림이 갑자기 시작되나요?"
+    item: Abrupt onset
+    p: 1
+    then:
+      - {id: abrupt_end, q: "두근거림이 갑자기 멈추나요?", item: Abrupt termination, known: "멈|끝나|사라|뚝|그쳐"}
+  - {id: regular, q: "심장이 규칙적으로 뛰나요?", item: Regularity, p: 1}
+  - {id: duration, q: "한 번 두근거리면 얼마나 가나요?", item: Duration, p: 1}
+  - {id: frequency, q: "얼마나 자주 두근거리세요?", item: Frequency, p: 1}
+  - {id: trigger, q: "어떤 상황에서 주로 두근거리나요?", item: Trigger, p: 1}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, p: 1}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: syncope, q: "정신을 잃은 적이 있나요?", item: Syncope, p: 1}
+  - {id: exertion, q: "운동할 때 두근거리나요?", item: Exertional, p: 1}
+  - {id: neck_pound, q: "목에서 쿵쾅거리는 느낌이 드나요?", item: Neck pounding (AVNRT), p: 2}
+  - {id: dizzy, q: "어지러우세요?", item: Dizziness, p: 2}
+  - {id: anxiety, q: "불안하거나 초조한 편이세요?", item: Anxiety, p: 2}
+  - {id: rate, q: "맥이 얼마나 빠르게 뛰나요?", item: Rate, p: 3}
+  - {id: vagal, q: "배에 힘을 주면 두근거림이 멈추나요?", item: Vagal termination, p: 3}
+  - {id: sleep, q: "자다가 두근거려 깬 적 있나요?", item: Palpitations at night, p: 3}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 1}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 2}
+  - {id: tremor, q: "손이 떨리세요?", item: Tremor, sec: ros, p: 3}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, sec: ros, p: 3}
+  - {id: menorrhagia, q: "생리량이 많은 편인가요?", item: Menorrhagia, sec: ros, p: 3, only: female}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 1}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 2}
+  - {id: diet_pill, q: "살 빼는 약을 드신 적 있나요?", item: Diet pills, sec: meds, p: 2}
+  - {id: caffeine, q: "커피는 하루 몇 잔 드세요?", item: Caffeine, sec: shx, p: 1}
+  - {id: energy_drink, q: "에너지 음료를 자주 드세요?", item: Energy drink, sec: shx, p: 3}
+  - id: fh_sudden
+    q: "가족 중 갑자기 사망한 분 있나요?"
+    item: "FHx: sudden death"
+    sec: fhx
+    p: 1
+    then:
+      - {id: fh_age, q: "그분이 몇 살에 돌아가셨나요?", item: Age at sudden death, known: "살|세|대에|대 때"}
+exams:
+  - {name: 요골동맥 맥박 촉진, item: V/S, p: 1}
+  - {name: 심음 청진, item: Heart, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 자세성 떨림, item: Extremities / Neuro, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 경정맥압 측정, item: Neck, p: 3}
+  - {name: 하지 말초 진찰, item: Extremities, p: 3}
+differential:
+  - {en: Atrial fibrillation, ko: 심방세동}
+  - {en: Paroxysmal supraventricular tachycardia, ko: 발작성 상심실성 빈맥}
+  - {en: Premature atrial or ventricular contractions, ko: 심방 또는 심실 조기수축}
+  - {en: Ventricular tachycardia, ko: 심실빈맥, cant_miss: true}
+  - {en: Atrial flutter or pre-excitation (WPW), ko: 심방조동·조기흥분증후군}
+  - {en: Hyperthyroidism, ko: 갑상샘항진증}
+  - {en: Panic disorder, ko: 공황장애}
+  - {en: Anemia, ko: 빈혈}
+  - {en: Hypoglycemia, ko: 저혈당}
+  - {en: Sinus tachycardia due to caffeine or drugs, ko: 카페인·약물에 의한 동성빈맥}
+tests:
+  - {name: "12-lead ECG", for: [Atrial fibrillation, Paroxysmal supraventricular tachycardia, Premature atrial or ventricular contractions, Ventricular tachycardia, Atrial flutter or pre-excitation (WPW), Sinus tachycardia due to caffeine or drugs], why: "리듬·델타파·QT 확인"}
+  - {name: "24-hour Holter monitoring or event recorder", for: [Atrial fibrillation, Paroxysmal supraventricular tachycardia, Premature atrial or ventricular contractions, Ventricular tachycardia, Panic disorder], why: "증상 시 리듬 포착"}
+  - {name: "TSH, free T4", for: [Hyperthyroidism, Atrial fibrillation], why: "갑상샘 기능 확인"}
+  - {name: "CBC", for: [Anemia], why: "빈혈 확인"}
+  - {name: "Blood glucose", for: [Hypoglycemia], why: "저혈당 확인"}
+  - {name: "Electrolytes (potassium, magnesium)", for: [Ventricular tachycardia, Premature atrial or ventricular contractions], why: "부정맥 유발 전해질 확인"}
+  - {name: "Echocardiography", for: [Ventricular tachycardia, Atrial fibrillation], why: "구조적 심질환 확인"}
+plan:
+  treatment:
+    - "심전도·홀터로 리듬 확인 후 원인별 치료"
+    - "발작성 상심실성 빈맥: 발작 시 미주신경 자극법, 반복되면 전극도자절제술 의뢰"
+    - "심방세동: 뇌졸중 위험도(CHA2DS2-VASc) 평가 후 항응고·심박수 조절"
+    - "카페인·에너지 음료·음주 줄이기, 원인 약물 중단"
+  disposition: "실신·흉통·호흡곤란 동반이나 지속되는 빈맥이면 응급실, 그 외 외래 심전도·홀터 검사"
+  follow_up:
+    - "1-2주 후 홀터·혈액검사 결과 확인"
+    - "재발 시 증상 시각과 맥박을 기록해 재방문"
+  red_flags:
+    - "두근거림 중 실신"
+    - "가슴 통증 동반"
+    - "숨이 차는 두근거림"
+    - "운동 중 두근거림"
+education:
+  - "심전도 검사를 먼저 할게요."
+  - "필요하면 24시간 심전도를 달게요."
+  - "어지럽거나 쓰러지면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-26551.md
+  - US_StatPearls/statpearls_article-17962.md
+  - US_StatPearls/statpearls_article-29754.md
+  - US_StatPearls/statpearls_article-31088.md
+notes: >
+  v0.8.0. Added the regular rapid pounding in the neck (LR+ 177 for AVNRT, LR- 0.07 when absent; Thavendiranathan
+  2009 JAMA RCE) at p2; family history of sudden death raised to p1 (ESC: young sudden cardiac death in the family is a
+  high-risk feature), with the age at death as a follow-up. Abrupt termination is a follow-up of abrupt onset. The
+  vagal question now describes a Valsalva strain, not breath-holding; nocturnal palpitations (LR 2.29) at p3. Demoted
+  to p3: rate (patients rarely know it) and tremor (the postural tremor maneuver covers it). Atrial flutter and WPW
+  added. Other likelihood ratios (same RCE): known cardiac disease 2.03, episodes under 5 minutes 0.38, panic disorder
+  history 0.26; the examination cannot exclude a significant arrhythmia, ambulatory ECG is needed. Abrupt onset and
+  offset with a regular fast rhythm suggests PSVT; irregularly irregular suggests atrial fibrillation. Red flags:
+  syncope, exertional palpitations, chest pain, structural heart disease, family history of sudden death.

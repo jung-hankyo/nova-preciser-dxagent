@@ -288,8 +288,9 @@ def candidate_actions(
         ids = [d["disease_id"] for d in differential[: settings.top_k_load]]
         ids += [d["disease_id"] for d in differential if d["cant_miss"] and d["prob"] >= settings.cant_miss_floor]
     out = []
+    allowed = set(getattr(settings, "allowed_action_types", ()) or ())
     for a in store.actions_for(list(dict.fromkeys(ids)), getattr(settings, "planner_max_codes", 0)):
-        if a.id in done_ids:
+        if a.id in done_ids or (allowed and a.type not in allowed):
             continue
         if a.test:
             if a.test in observed:

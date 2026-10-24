@@ -1,0 +1,109 @@
+id: neck_mass
+title: {ko: 목 덩이, en: Neck mass}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [목에 혹, 목에 멍울, 목에 덩어리, 목 앞이 부, 목에 뭐가 만져, 갑상선에 혹, 목에 몽우리, 목에 뭔가 만져, 목 옆이 부, 목 옆에 혹, 목 옆에 멍울, 목에 뭐가 났, 목 앞쪽에 혹, 갑상선 결절]
+  not: []
+history:
+  - {id: onset, q: "언제부터 혹이 만져졌나요?", item: Onset, p: 1}
+  - {id: location, q: "혹이 목 어디에 있나요?", item: Location, p: 1}
+  - {id: size, q: "혹 크기가 어느 정도인가요?", item: Size, p: 1}
+  - id: growth
+    q: "혹이 점점 커지고 있나요?"
+    item: Growth
+    p: 1
+    then:
+      - {id: growth_rate, q: "얼마 만에 커졌나요?", item: Growth rate, known: "주|달|개월|일|년|빨리|금방"}
+  - {id: tender, q: "혹을 누르면 아프세요?", item: Tenderness, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - {id: uri, q: "최근 목감기를 앓았나요?", item: Recent URI, p: 1}
+  - {id: dysphagia, q: "음식을 삼키기 힘드세요?", item: Dysphagia, p: 1}
+  - {id: hoarse, q: "목소리가 변했나요?", item: Hoarseness, p: 1}
+  - {id: multiple, q: "혹이 여러 개인가요?", item: Multiple, p: 2}
+  - {id: sore_throat, q: "목도 아프세요?", item: Sore throat, p: 2}
+  - {id: dyspnea, q: "숨쉬기 힘드세요?", item: Dyspnea, p: 2}
+  - {id: oral_ulcer, q: "입 안에 헌 곳이 있나요?", item: Oral ulcer, p: 2}
+  - {id: ear_full, q: "귀가 먹먹하세요?", item: Unilateral ear fullness, p: 3}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 1
+    then:
+      - {id: weight_kg, q: "몇 킬로그램 빠지셨어요?", item: Weight loss amount, known: "킬로|키로|kg"}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 1}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 2}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, sec: ros, p: 2}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, sec: ros, p: 3}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: tb_contact, q: "결핵 환자와 접촉한 적 있나요?", item: TB contact, sec: pmh, p: 2}
+  - {id: radiation, q: "목에 방사선 치료를 받은 적 있나요?", item: Neck irradiation, sec: pmh, p: 2}
+  - {id: fh_thyroid_ca, q: "가족 중 갑상선암 걸린 분 있나요?", item: "FHx: thyroid cancer", sec: fhx, p: 2}
+exams:
+  - {name: 경부 림프절 촉진, item: Neck, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 구강 점막 시진, item: H/E/E/N/T, p: 1}
+  - {name: 침샘 촉진, item: H/E/E/N/T, p: 2}
+  - {name: 겨드랑이 림프절 촉진, item: Lymph nodes, p: 2}
+  - {name: 간·비장 촉진, item: Abdomen, p: 2}
+  - {name: 이경 검사, item: H/E/E/N/T, p: 3}
+differential:
+  - {en: Reactive lymphadenitis, ko: 반응성 림프절염}
+  - {en: Thyroid nodule or goiter, ko: 갑상샘 결절·갑상샘종}
+  - {en: Thyroid cancer, ko: 갑상샘암, cant_miss: true}
+  - {en: Tuberculous lymphadenitis, ko: 결핵성 림프절염}
+  - {en: Lymphoma, ko: 림프종, cant_miss: true}
+  - {en: Metastatic head and neck cancer, ko: 두경부암 전이, cant_miss: true}
+  - {en: Histiocytic necrotizing lymphadenitis (Kikuchi disease), ko: 조직구 괴사성 림프절염(기쿠치병)}
+  - {en: Thyroglossal duct cyst or branchial cleft cyst, ko: 갑상설관 낭종·새열 낭종}
+  - {en: Subacute thyroiditis, ko: 아급성 갑상샘염}
+  - {en: Infectious mononucleosis, ko: 전염성 단핵구증}
+  - {en: "Salivary gland disease (sialadenitis, salivary tumor)", ko: 침샘 질환(침샘염·침샘 종양)}
+tests:
+  - {name: "Neck ultrasound", for: [Thyroid nodule or goiter, Thyroid cancer, Reactive lymphadenitis, Tuberculous lymphadenitis, Thyroglossal duct cyst or branchial cleft cyst, "Salivary gland disease (sialadenitis, salivary tumor)", Subacute thyroiditis], why: "결절·림프절·낭종 성상 확인(K-TIRADS)"}
+  - {name: "Fine-needle aspiration (with AFB stain, culture and TB PCR for nodes)", for: [Thyroid cancer, Metastatic head and neck cancer, Tuberculous lymphadenitis, Thyroid nodule or goiter], why: "세포 진단·결핵 확인"}
+  - {name: "Thyroid function tests", for: [Thyroid nodule or goiter, Subacute thyroiditis], why: "갑상샘 기능 확인"}
+  - {name: "CBC, ESR or CRP", for: [Reactive lymphadenitis, Subacute thyroiditis, Histiocytic necrotizing lymphadenitis (Kikuchi disease), Infectious mononucleosis, Lymphoma], why: "염증·혈구 이상 확인"}
+  - {name: "EBV serology (VCA IgM) or heterophile antibody", for: [Infectious mononucleosis], why: "전염성 단핵구증 확인"}
+  - {name: "Contrast-enhanced neck CT (persistent mass)", for: [Metastatic head and neck cancer, Lymphoma, Tuberculous lymphadenitis], why: "병변 범위·원발 부위 확인"}
+  - {name: "Laryngoscopy and nasopharyngoscopy (adult persistent mass)", for: [Metastatic head and neck cancer], why: "두경부 원발암 확인"}
+  - {name: "Chest X-ray", for: [Tuberculous lymphadenitis, Lymphoma], why: "폐결핵·종격동 림프절 확인"}
+  - {name: "Excisional or core biopsy (FNA nondiagnostic or lymphoma suspected)", for: [Lymphoma, Histiocytic necrotizing lymphadenitis (Kikuchi disease)], why: "조직 진단"}
+plan:
+  treatment:
+    - "세균 감염 소견 없이 2주 넘게 지속되면 항생제 대신 영상·세침검사(AAO-HNS 2017)"
+    - "갑상샘 결절: 초음파 K-TIRADS 분류에 따라 세침흡인 또는 경과 관찰"
+    - "결핵성 림프절염 확인 시 표준 항결핵제"
+    - "악성 의심 시 이비인후과·갑상샘외과·혈액종양내과 의뢰"
+  disposition: "대부분 외래 검사, 숨쉬기·삼키기 곤란이나 빠르게 커지는 혹이면 당일 의뢰"
+  follow_up:
+    - "1-2주 후 초음파·세침검사 결과 확인"
+    - "양성 결절은 K-TIRADS에 따라 정기 초음파 추적"
+  red_flags:
+    - "숨쉬기 힘듦"
+    - "삼키기 힘듦"
+    - "빠르게 커지는 혹"
+    - "목소리 변화"
+education:
+  - "목 초음파 검사를 해 볼게요."
+  - "필요하면 세침검사를 할게요."
+  - "숨쉬기나 삼키기 힘들면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-40409.md
+  - US_StatPearls/statpearls_article-30147.md
+  - US_EuropePMC/europepmc_PMC9422615.md
+notes: >
+  v0.8.0. Past TB raised to p1 through the standard "Tbc / hepatitis" item (TB lymphadenitis is common in Korea).
+  Growth rate and kilograms lost are follow-ups; unilateral ear fullness at p3 (nasopharyngeal carcinoma, with
+  otoscopy). AAO-HNS 2017: do not routinely give antibiotics for a neck mass without signs of bacterial infection (KAS
+  1); a mass without an infectious history present 2 weeks or more without fluctuation, or of uncertain duration, is at
+  increased risk of malignancy (KAS 2a): order contrast CT or MRI, FNA before open biopsy, examine the upper
+  aerodigestive tract. K-TIRADS 2021 FNA size thresholds (Ultrasonography supplementary table): K-TIRADS 5 over 1 cm
+  (selectively over 0.5 cm), K-TIRADS 4 over 1-1.5 cm, K-TIRADS 3 over 2 cm, K-TIRADS 2 no routine FNA; this avoids
+  advising FNA for sub-centimetre nodules (Korean overdiagnosis). Concerning features: age over 40, hard fixed or
+  growing mass, size over 1.5 to 2 cm persisting beyond 2 weeks, smoking and alcohol, dysphagia, hoarseness, weight
+  loss, night sweats. A midline mass moving with swallowing is thyroid or thyroglossal.

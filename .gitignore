@@ -23,3 +23,15 @@ cards_drafted/
 # benchmark runs and summaries
 runs/
 dxagent_live_summary.json
+
+# v0.5 submission builds
+dist/
+
+# contest material kept local: the starter package's SDK and the guideline library (licence: no redistribution)
+nova_sdk.py
+guidelines/
+# the starter's sample runner, copied to the root so that it imports this run.py (docs/LIVE_RUNS.md)
+/sample.py
+
+# generated playbook review sheet: python -m dxagent.nova.playbooks --sheet docs/PLAYBOOKS.md
+/docs/PLAYBOOKS.md

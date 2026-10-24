@@ -1,0 +1,119 @@
+id: neck_pain
+title: {ko: 목 통증, en: Neck pain}
+status: draft
+reviewer: ""
+population: adult
+pain: true
+match:
+  any: [뒷목, 목 뒤, 목덜미, 목이 뻐근, 목이 뻣뻣, 목이 결리, 목이 결려, 목에 담, 담이 걸, 담 걸렸, 고개를 돌리, 고개를 못, 고개가 안 돌, 고개가 잘 안 돌, 목을 돌리, 목을 못 돌, 목이 안 돌아, 목 디스크, 목디스크, 목 통증, 경추, 거북목, 일자목, 목을 삐, 목을 다쳐, 목을 다친, 사고 후 목, 사고로 목, 사고 뒤 목, 사고 나서 목, 다친 뒤 목, 목과 어깨, 목하고 어깨, 목이랑 어깨, 어깨까지]
+  not: []
+history:
+  - {id: onset, q: "언제부터 목이 아프셨어요?", item: Onset, p: 1}
+  - {id: trigger, q: "아프게 된 계기가 있나요?", item: Precipitating event, p: 1}
+  - id: trauma
+    q: "최근 사고로 목을 다쳤나요?"
+    item: Neck trauma
+    p: 1
+    then:
+      - {id: mechanism, q: "어떤 사고였나요?", item: Mechanism of injury, known: "교통|차|넘어|떨어|추락|다이빙|부딪|운동"}
+  - {id: location, q: "목 어디가 아프세요?", item: Location, p: 1}
+  - id: radiation
+    q: "팔로 뻗치는 통증이 있나요?"
+    item: Radiation to arm
+    p: 1
+    then:
+      - {id: finger, q: "어느 손가락까지 저리나요?", item: Dermatomal distribution, known: "엄지|검지|중지|약지|새끼|손가락"}
+  - {id: weakness, q: "팔에 힘이 빠지나요?", item: Arm weakness, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 1}
+  - id: headache
+    q: "머리도 아프세요?"
+    item: Headache
+    p: 1
+    then:
+      - {id: hd_sudden, q: "갑자기 심하게 아프기 시작했나요?", item: Thunderclap headache, known: "갑자기|벼락|순간"}
+  - {id: posture, q: "어떤 자세에서 더 아프세요?", item: Aggravating posture, p: 2}
+  - {id: night, q: "밤에 누워 있어도 아프세요?", item: Night or rest pain, p: 2}
+  - {id: hand_clumsy, q: "단추 잠그기가 힘들어졌나요?", item: Hand clumsiness, p: 2}
+  - {id: gait, q: "걸을 때 휘청거리나요?", item: Gait imbalance, p: 2}
+  - {id: bladder, q: "소변보기가 힘드세요?", item: Urinary dysfunction, p: 2}
+  - {id: girdle, q: "아침에 어깨가 뻣뻣하세요?", item: Shoulder girdle stiffness, p: 2}
+  - {id: manipulation, q: "최근 목 교정 치료를 받았나요?", item: Recent neck manipulation, p: 2}
+  - {id: both_hands, q: "양손이 다 저리세요?", item: Bilateral hand numbness, p: 3}
+  - {id: diplopia, q: "물체가 겹쳐 보이나요?", item: Diplopia, p: 3}
+  - {id: ptosis, q: "한쪽 눈꺼풀이 처졌나요?", item: Ptosis (Horner), p: 3}
+  - {id: exertion, q: "힘쓸 때 목이나 턱이 조이나요?", item: Exertional neck or jaw pain, p: 3}
+  - {id: swallow, q: "음식을 삼키기 힘드세요?", item: Dysphagia, p: 3}
+  - {id: weight, q: "최근 살이 빠지셨나요?", item: Weight loss, sec: ros, p: 2}
+  - id: cancer
+    q: "암을 앓은 적 있나요?"
+    item: Malignancy history
+    sec: pmh
+    p: 2
+    then:
+      - {id: cancer_type, q: "어떤 암이었나요?", item: Cancer type, known: "암|종양|림프종|골수종"}
+  - {id: steroid, q: "스테로이드를 드신 적 있나요?", item: Steroid use, sec: meds, p: 3}
+  - {id: desk, q: "고개를 숙이고 오래 일하세요?", item: Sustained neck flexion at work, sec: shx, p: 2}
+  - {id: stress, q: "요즘 스트레스가 많으세요?", item: Stress, sec: shx, p: 3}
+exams:
+  - {name: 척추 압통 촉진, item: Back, p: 1}
+  - {name: 경부 운동 범위 검사, item: Neck, p: 1}
+  - {name: 스펄링 검사, item: Neuro, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 심부건반사, item: Neuro, p: 1}
+  - {name: 촉각 검사, item: Neuro, p: 2}
+  - {name: 경부 강직, item: Neuro, p: 2}
+  - {name: 바빈스키 징후, item: Neuro, p: 3}
+differential:
+  - {en: "Nonspecific mechanical neck pain (cervical strain, myofascial pain)", ko: 비특이적 기계적 목 통증(경부 염좌·근막통)}
+  - {en: "Cervical radiculopathy (disc herniation, foraminal stenosis)", ko: 경추 신경근병증(추간판 탈출·추간공 협착)}
+  - {en: Cervical spondylotic myelopathy, ko: 경추 척수병증, cant_miss: true}
+  - {en: Whiplash injury or cervical spine fracture, ko: 편타 손상·경추 골절, cant_miss: true}
+  - {en: Cervical artery dissection, ko: 경부 동맥 박리, cant_miss: true}
+  - {en: Meningitis or subarachnoid hemorrhage, ko: 수막염·지주막하 출혈, cant_miss: true}
+  - {en: Spinal infection or metastasis, ko: 척추 감염·전이암, cant_miss: true}
+  - {en: Polymyalgia rheumatica, ko: 류마티스 다발근통}
+tests:
+  - {name: "No imaging for acute neck pain without red flags", for: ["Nonspecific mechanical neck pain (cervical strain, myofascial pain)"], why: "적신호 없으면 영상 불필요"}
+  - {name: "Cervical spine CT or X-ray (Canadian C-spine rule positive)", for: [Whiplash injury or cervical spine fracture], why: "외상성 골절 확인"}
+  - {name: "Cervical spine MRI (deficit, myelopathy signs, red flags, or radiculopathy beyond 6 weeks)", for: ["Cervical radiculopathy (disc herniation, foraminal stenosis)", Cervical spondylotic myelopathy, Spinal infection or metastasis], why: "신경근·척수 압박·감염·종양 확인"}
+  - {name: "Nerve conduction study and EMG", for: ["Cervical radiculopathy (disc herniation, foraminal stenosis)"], why: "신경근병증과 말초 포착 신경병증 감별"}
+  - {name: "CBC, ESR, CRP", for: [Spinal infection or metastasis, Polymyalgia rheumatica], why: "감염·염증·종양 선별"}
+  - {name: "CT angiography or MR angiography of the neck vessels", for: [Cervical artery dissection], why: "경동맥·추골동맥 박리 확인"}
+  - {name: "Brain CT, then lumbar puncture (fever with neck stiffness, or thunderclap headache)", for: [Meningitis or subarachnoid hemorrhage], why: "수막염·지주막하 출혈 확인"}
+  - {name: "Serum creatinine (before NSAIDs in older adults)", for: [safety], why: "신기능 확인(NSAID 전)"}
+  - {name: "Urine β-hCG (women 12-55, before X-ray or CT)", for: [safety], why: "임신 확인(방사선 전)"}
+plan:
+  treatment:
+    - "적신호 없는 목 통증: 활동 유지, 온찜질·스트레칭, 아세트아미노펜 또는 NSAID 단기 사용"
+    - "신경근병증: 6-12주 보존 치료, 진행성 근력 저하나 척수 증상이면 MRI 후 수술 상의"
+    - "류마티스 다발근통 의심: ESR·CRP 확인 후 저용량 스테로이드"
+  disposition: "대부분 외래 보존 치료; 손놀림 저하·보행 장애·배뇨 장애, 발열과 목 경직, 벼락두통, 외상 후 신경 증상은 즉시 응급 평가"
+  follow_up:
+    - "2-4주 뒤 통증과 기능 재평가"
+    - "6주 넘게 지속되거나 신경 증상이 있으면 MRI와 척추 전문의 의뢰"
+  red_flags: ["팔다리 힘이 빠지거나 걷기 불안정", "소변 장애", "열과 목이 뻣뻣함", "갑자기 생긴 심한 두통"]
+education:
+  - "통증이 허락하는 만큼 목을 움직이세요."
+  - "오래 고개를 숙이는 자세는 피하세요."
+  - "팔다리에 힘이 빠지면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-19257.md
+  - US_StatPearls/statpearls_article-19244.md
+  - US_StatPearls/statpearls_article-25450.md
+  - US_StatPearls/statpearls_article-20605.md
+notes: >
+  New in v0.8.0 (official presentation 목 통증; evidence review 2026-10). Most neck pain is mechanical (strain,
+  myofascial, spondylosis) and needs no imaging without red flags. Trauma: the Canadian C-spine rule (Stiell, JAMA
+  2001; 100% sensitive, 42.5% specific): image if age 65 or more, a dangerous mechanism or paresthesias in the limbs,
+  or if the patient cannot rotate the neck 45 degrees; the mechanism is asked after a positive trauma answer, and
+  midline tenderness is examined at p1. Radiculopathy: radiation with the finger distribution (C6 thumb, C7 middle,
+  C8 little finger) and the Spurling test (low to moderate sensitivity, high specificity; Rubinstein, Eur Spine J
+  2007). Myelopathy is a can't-miss: hand clumsiness, gait imbalance and bladder items at p2, reflexes at p1 (the
+  Hoffmann sign is not in the exam vocabulary; Babinski is p3). Cervical artery dissection: neck pain with headache,
+  Horner signs or diplopia, often after minor trauma or neck manipulation (association with cervical manipulative
+  therapy; AHA/ASA statement, Biller, Stroke 2014); 추나 and 도수치료 are common in Korea. Fever with neck stiffness or a
+  thunderclap headache = meningitis or subarachnoid hemorrhage (a positive headache answer is followed by sudden
+  onset). Fever, cancer history, night pain, weight loss or steroid use = infection or metastasis. Age over 50 with
+  bilateral shoulder-girdle stiffness = polymyalgia rheumatica. Exertional neck or jaw tightness may be angina (p3). A
+  bare "목이 아파요" routes to sore throat; this playbook takes 뒷목, 목덜미, 뻐근, 고개 and 어깨 openings.

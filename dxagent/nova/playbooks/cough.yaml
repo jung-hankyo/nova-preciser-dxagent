@@ -1,0 +1,111 @@
+id: cough
+title: {ko: 기침, en: Cough}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [기침, 콜록, 가래가]
+  not: [가래에 피, 피가 섞인 가래, 피 섞인 가래, 기침할 때 피]
+history:
+  - {id: onset, q: "언제부터 기침을 하셨어요?", item: Onset, p: 1}
+  - {id: sputum, q: "가래가 나오나요?", item: Sputum, p: 1}
+  - {id: sputum_color, q: "가래는 무슨 색인가요?", item: Sputum color, p: 1}
+  - id: hemoptysis
+    q: "가래에 피가 섞여 나오나요?"
+    item: Hemoptysis
+    p: 1
+    then:
+      - {id: blood_amount, q: "피는 얼마나 나오나요?", item: Amount of blood, known: "숟가락|컵|조금|약간|실처럼|핏줄|많이|ml|cc"}
+  - {id: timing, q: "기침이 주로 언제 심해지나요?", item: Timing, p: 1}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: wheeze, q: "숨쉴 때 쌕쌕 소리가 나나요?", item: Wheezing, p: 1}
+  - {id: postnasal, q: "콧물이 목 뒤로 넘어가나요?", item: Postnasal drip, p: 1}
+  - {id: reflux, q: "신물이 넘어오나요?", item: Acid regurgitation, p: 1}
+  - {id: course, q: "기침이 점점 심해지고 있나요?", item: Course, p: 2}
+  - {id: rhinorrhea, q: "콧물이 나오나요?", item: Rhinorrhea, p: 2}
+  - {id: sore_throat, q: "목도 아프세요?", item: Sore throat, p: 2}
+  - {id: chest_pain, q: "기침할 때 가슴이 아프세요?", item: Chest pain, p: 2}
+  - {id: paroxysm, q: "기침이 발작적으로 몰아쳐 나오나요?", item: Paroxysmal cough, p: 3}
+  - {id: posttussive, q: "기침 끝에 토한 적 있나요?", item: Post-tussive vomiting, p: 3}
+  - {id: hoarse, q: "목소리가 변했나요?", item: Hoarseness, p: 3}
+  - {id: fever, q: "열이 나세요?", item: Fever, sec: ros, p: 1}
+  - id: weight
+    q: "최근 살이 빠지셨나요?"
+    item: Weight loss
+    sec: ros
+    p: 1
+    then:
+      - {id: weight_kg, q: "몇 킬로그램 빠지셨어요?", item: Weight loss amount, known: "킬로|키로|kg"}
+  - {id: night_sweat, q: "밤에 식은땀이 나세요?", item: Night sweats, sec: ros, p: 1}
+  - {id: contacts, q: "주변에 기침하는 사람이 있나요?", item: Sick contacts, sec: ros, p: 3}
+  - {id: tbc, q: "결핵이나 간염을 앓은 적 있나요?", item: "Tbc / hepatitis", sec: pmh, p: 1}
+  - {id: tb_contact, q: "결핵 환자와 접촉한 적 있나요?", item: TB contact, sec: pmh, p: 2}
+  - {id: asthma_dx, q: "천식을 진단받은 적 있나요?", item: asthma, sec: pmh, p: 2}
+  - {id: allergy_dz, q: "비염 같은 알레르기 질환이 있나요?", item: Allergic disease, sec: pmh, p: 2}
+  - {id: flu_vax, q: "독감 예방접종을 하셨나요?", item: Influenza vaccine, sec: pmh, p: 3}
+  - {id: bp_drug, q: "드시는 혈압약 이름을 아세요?", item: "Antihypertensive (ACE inhibitor?)", sec: meds, p: 2}
+  - {id: exposure, q: "일하면서 먼지에 노출되나요?", item: Occupational exposure, sec: shx, p: 3}
+exams:
+  - {name: 폐 청진, item: Chest, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 흉부 타진, item: Chest, p: 2}
+  - {name: 비강 시진, item: H/E/E/N/T, p: 2}
+  - {name: 심음 청진, item: Heart, p: 2}
+  - {name: 부비동 압통 확인, item: H/E/E/N/T, p: 3}
+  - {name: 촉각진탕, item: Chest, p: 3}
+differential:
+  - {en: Acute bronchitis or viral upper respiratory infection, ko: 급성 기관지염·바이러스 상기도 감염}
+  - {en: Community-acquired pneumonia, ko: 지역사회획득 폐렴}
+  - {en: Upper airway cough syndrome, ko: 상기도 기침 증후군(후비루)}
+  - {en: Asthma or cough-variant asthma, ko: 천식·기침 이형 천식}
+  - {en: Gastroesophageal reflux disease, ko: 위식도역류질환}
+  - {en: ACE inhibitor-induced cough, ko: ACE 억제제에 의한 기침}
+  - {en: Chronic obstructive pulmonary disease, ko: 만성 폐쇄성 폐질환}
+  - {en: Pulmonary tuberculosis, ko: 폐결핵, cant_miss: true}
+  - {en: Lung cancer, ko: 폐암, cant_miss: true}
+  - {en: Pertussis, ko: 백일해}
+tests:
+  - {name: "Chest X-ray", for: [Community-acquired pneumonia, Pulmonary tuberculosis, Lung cancer, Chronic obstructive pulmonary disease, Acute bronchitis or viral upper respiratory infection, Upper airway cough syndrome, Gastroesophageal reflux disease, ACE inhibitor-induced cough], why: "폐렴·결핵·종양 배제(3주 이상 기침의 기본 검사)"}
+  - {name: "CBC, CRP", for: [Community-acquired pneumonia], why: "세균 감염 확인"}
+  - {name: "Sputum Gram stain and culture", for: [Community-acquired pneumonia], why: "원인균 확인(입원·중증 시)"}
+  - {name: "Sputum AFB smear, culture and TB PCR", for: [Pulmonary tuberculosis], why: "결핵 확인(2주 이상 기침·X선 이상)"}
+  - {name: "Spirometry with bronchodilator test", for: [Asthma or cough-variant asthma, Chronic obstructive pulmonary disease], why: "기류 제한·가역성 확인"}
+  - {name: "Methacholine challenge or FeNO (normal spirometry)", for: [Asthma or cough-variant asthma], why: "기침 이형 천식 확인"}
+  - {name: "Nasopharyngeal pertussis PCR (paroxysmal cough under 3 weeks)", for: [Pertussis], why: "백일해 확인"}
+  - {name: "Chest CT (abnormal X-ray, hemoptysis or heavy smoking)", for: [Lung cancer, Pulmonary tuberculosis], why: "종양·결핵 병변 확인"}
+plan:
+  treatment:
+    - "급성 기침: 수분 섭취와 대증요법, 항생제는 세균성 폐렴 소견이 있을 때만"
+    - "흉부 사진에서 폐렴이면 중증도 평가 후 경험적 항생제"
+    - "만성 기침: 후비루·천식·역류 순으로 경험적 치료(항히스타민·흡입 스테로이드·양성자펌프억제제)"
+    - "ACE 억제제 복용 중이면 다른 계열 혈압약으로 변경"
+  disposition: "대부분 외래 치료, 저산소증·호흡곤란·다량 객혈이면 응급실, 결핵 의심 시 결과까지 마스크 착용"
+  follow_up:
+    - "1-2주 후 증상과 검사 결과 확인"
+    - "8주 넘게 지속되면 만성 기침으로 재평가(흉부 CT·폐기능)"
+  red_flags:
+    - "피 섞인 가래"
+    - "숨이 참"
+    - "체중 감소·밤에 식은땀"
+    - "고열이 계속됨"
+education:
+  - "흉부 사진을 찍어 볼게요."
+  - "검사 결과를 보고 치료를 정할게요."
+  - "숨이 차거나 피가 나오면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20073.md
+  - KR_EuropePMC/europepmc_PMC6182199.md
+  - US_StatPearls/statpearls_article-20074.md
+  - US_StatPearls/statpearls_article-30653.md
+notes: >
+  v0.8.0. Past TB raised to p1 through the standard "Tbc / hepatitis" item: Korea's TB notification rate was about
+  35.2/100,000 in 2024, second in the OECD, and past TB matters for chronic cough, hemoptysis and weight loss. KDCA
+  advises TB testing for a cough of 2 weeks or more (chest X-ray, sputum AFB smear, culture and PCR). Smoking years for
+  pack-years (COPD, lung cancer) are asked by the engine after a positive smoking answer; sick contacts demoted to p3 to stay within the turn plan. Follow-ups
+  quantify blood in sputum and kilograms lost. Pertussis (paroxysms) and hoarseness (lung cancer) at p3. Pneumonia
+  cannot be ruled in by any single finding; normal vital signs and normal chest auscultation lower its likelihood
+  (Metlay 1997 JAMA RCE), so lung auscultation and vitals are the core. Duration classifies cough: acute under 3
+  weeks, subacute 3 to 8 weeks, chronic over 8 weeks. Weight loss, night sweats, hemoptysis and smoking raise
+  tuberculosis and lung cancer.

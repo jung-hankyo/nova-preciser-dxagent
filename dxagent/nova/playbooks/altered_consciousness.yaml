@@ -1,0 +1,111 @@
+id: altered_consciousness
+title: {ko: 의식 변화, en: Altered mental status}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [의식이 흐려, 의식이 떨어, 정신이 오락가락, 헛소리, 횡설수설, 깨워도 잘 안, 의식 저하, 엉뚱한 말, 사람을 못 알아, 의식이 없어, 정신이 이상, 이상한 말, 이상한 행동, 잠만 자, 잠만 주무]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: sudden, q: "갑자기 그렇게 되셨나요?", item: Sudden onset, p: 1}
+  - {id: baseline, q: "평소에는 정신이 맑으셨나요?", item: Baseline cognition, p: 1}
+  - {id: fluctuate, q: "정신이 맑았다 흐렸다 하나요?", item: Fluctuation, p: 1}
+  - {id: fever, q: "열이 났나요?", item: Fever, p: 1}
+  - {id: headache, q: "머리가 아프다고 하셨나요?", item: Headache, p: 1}
+  - {id: weakness, q: "한쪽 팔다리에 힘이 빠졌나요?", item: Focal weakness, p: 1}
+  - {id: seizure, q: "경련을 하신 적 있나요?", item: Seizure, p: 1}
+  - {id: trauma, q: "최근 넘어지거나 머리를 다쳤나요?", item: Head trauma, p: 1}
+  - {id: intake, q: "식사는 제대로 하셨나요?", item: Oral intake, p: 1}
+  - {id: vomiting, q: "토하신 적 있나요?", item: Vomiting, p: 2}
+  - {id: dysuria, q: "소변볼 때 아파하셨나요?", item: Dysuria, p: 2}
+  - {id: cough, q: "기침을 하셨나요?", item: Cough, p: 2}
+  - {id: urine, q: "소변 양이 줄었나요?", item: Urine output, p: 3}
+  - {id: sleep, q: "밤낮이 바뀌었나요?", item: Sleep-wake reversal, p: 3}
+  - {id: hallucination, q: "헛것을 보시나요?", item: Hallucination, p: 3}
+  - id: alcohol_stop
+    q: "술을 갑자기 끊으셨나요?"
+    item: Alcohol cessation
+    p: 2
+    then:
+      - {id: last_drink, q: "마지막으로 술을 드신 게 언제인가요?", item: Time since last drink, known: "시간|어제|그제|그저께|일 전|며칠"}
+  - {id: co, q: "같이 있던 분도 머리가 아프세요?", item: "Co-exposed symptoms (CO)", sec: shx, p: 2}
+  - {id: dm_drug, q: "당뇨약이나 인슐린을 쓰시나요?", item: Hypoglycemic agent, sec: meds, p: 1}
+  - {id: sedative, q: "수면제를 드시나요?", item: Sedative use, sec: meds, p: 1}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 1}
+  - {id: anticoag, q: "피를 묽게 하는 약을 드세요?", item: Anticoagulant, sec: meds, p: 2}
+  - {id: overdose, q: "약을 많이 드셨을 가능성이 있나요?", item: Possible overdose, sec: meds, p: 2}
+  - {id: liver_dx, q: "간 질환이 있으세요?", item: liver disease, sec: pmh, p: 3}
+  - {id: kidney_dx, q: "콩팥 질환이 있으세요?", item: kidney disease, sec: pmh, p: 3}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 3}
+  - {id: dementia, q: "치매 진단을 받은 적 있나요?", item: Dementia, sec: pmh, p: 3}
+exams:
+  - {name: 의식·지남력 평가, item: General, p: 1}
+  - {name: 주의력 검사, item: Mental status, p: 1}
+  - {name: 동공 반사, item: Neuro, p: 1}
+  - {name: 경부 강직, item: Neuro, p: 1}
+  - {name: 사지 근력 검사, item: Neuro, p: 1}
+  - {name: 퍼덕떨림 확인, item: Neuro, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 피부 시진, item: Skin, p: 2}
+differential:
+  - {en: "Delirium due to infection (urinary tract infection, pneumonia)", ko: 감염(요로감염·폐렴)에 의한 섬망}
+  - {en: Hypoglycemia, ko: 저혈당, cant_miss: true}
+  - {en: Stroke or intracranial hemorrhage, ko: 뇌졸중·뇌출혈, cant_miss: true}
+  - {en: Meningitis or encephalitis, ko: 수막염·뇌염, cant_miss: true}
+  - {en: "Electrolyte disorder (hyponatremia, hypercalcemia)", ko: 전해질 이상(저나트륨혈증·고칼슘혈증)}
+  - {en: Drug intoxication or adverse drug effect, ko: 약물 중독·부작용, cant_miss: true}
+  - {en: Hepatic encephalopathy, ko: 간성 뇌병증}
+  - {en: Uremia, ko: 요독증}
+  - {en: Postictal state or nonconvulsive status epilepticus, ko: 발작 후 상태·비경련성 뇌전증지속상태, cant_miss: true}
+  - {en: Chronic subdural hematoma, ko: 만성 경막하 혈종, cant_miss: true}
+  - {en: Carbon monoxide poisoning, ko: 일산화탄소 중독, cant_miss: true}
+  - {en: "Hyperglycemic crisis (DKA, HHS)", ko: 고혈당 위기(당뇨병케톤산증·고삼투질 고혈당 상태), cant_miss: true}
+  - {en: Myxedema coma, ko: 점액부종 혼수}
+  - {en: Alcohol withdrawal delirium or Wernicke encephalopathy, ko: 알코올 금단 섬망·베르니케 뇌병증, cant_miss: true}
+  - {en: Hypercapnic or hypoxic encephalopathy, ko: 고탄산혈증·저산소 뇌병증}
+tests:
+  - {name: "Point-of-care glucose (first)", for: [Hypoglycemia, "Hyperglycemic crisis (DKA, HHS)"], why: "저혈당·고혈당 즉시 확인"}
+  - {name: "Electrolytes (sodium, calcium), BUN, creatinine, serum osmolality, ketones", for: ["Electrolyte disorder (hyponatremia, hypercalcemia)", Uremia, "Hyperglycemic crisis (DKA, HHS)"], why: "대사 이상 확인"}
+  - {name: "Liver function tests, ammonia", for: [Hepatic encephalopathy], why: "간성 뇌병증 확인"}
+  - {name: "CBC, CRP, blood cultures", for: ["Delirium due to infection (urinary tract infection, pneumonia)", Meningitis or encephalitis], why: "감염 확인"}
+  - {name: "Urinalysis and urine culture, chest X-ray", for: ["Delirium due to infection (urinary tract infection, pneumonia)"], why: "요로감염·폐렴 확인"}
+  - {name: "Arterial blood gas, carboxyhemoglobin", for: [Carbon monoxide poisoning, Hypercapnic or hypoxic encephalopathy], why: "저산소·고탄산·일산화탄소 확인"}
+  - {name: "Brain CT (MRI if CT negative and suspicion remains)", for: [Stroke or intracranial hemorrhage, Chronic subdural hematoma], why: "출혈·경색·혈종 확인"}
+  - {name: "PT/INR (on anticoagulants)", for: [Chronic subdural hematoma, safety], why: "항응고 정도 확인(출혈·시술 전)"}
+  - {name: "Lumbar puncture (fever or meningism, after CT)", for: [Meningitis or encephalitis], why: "뇌척수액 감염 확인"}
+  - {name: "EEG (suspected nonconvulsive status)", for: [Postictal state or nonconvulsive status epilepticus], why: "비경련성 발작 확인"}
+  - {name: "Toxicology screen, drug levels", for: [Drug intoxication or adverse drug effect], why: "약물 중독 확인"}
+  - {name: "12-lead ECG", for: [Drug intoxication or adverse drug effect, safety], why: "QT·부정맥 확인(중독·항정신병약 전)"}
+  - {name: "TSH, free T4", for: [Myxedema coma], why: "갑상샘저하 확인"}
+  - {name: "Blood alcohol; thiamine before glucose in alcohol use", for: [Alcohol withdrawal delirium or Wernicke encephalopathy], why: "알코올 관련 원인 확인"}
+plan:
+  treatment:
+    - "혈당을 먼저 확인하고 저혈당이면 포도당 투여(알코올 의존이면 티아민 먼저)"
+    - "확인된 원인(감염·약물·전해질·저산소) 교정과 유발 약물 중단"
+    - "섬망은 가족 동반·수면 리듬·안경과 보청기 등 비약물 조치 우선"
+    - "위험한 초조에만 항정신병약 단기간(심전도 QT 확인 후)"
+  disposition: "급성 의식 변화는 원인이 확인될 때까지 응급실 평가와 입원; 국소 결손, 발열과 목 경직, 호흡 이상은 즉시"
+  follow_up:
+    - "원인 교정 후 24-48시간 동안 의식과 주의력 반복 평가"
+    - "회복 후 1-3개월에 인지기능 재평가(섬망 뒤 치매 위험)"
+  red_flags: ["깨우기 어려움", "경련", "한쪽 팔다리 마비", "고열과 목 경직"]
+education:
+  - "피검사와 뇌 영상 검사를 할게요."
+  - "곁에서 계속 지켜봐 주세요."
+  - "깨우기 힘들어지면 바로 119를 부르세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20325.md
+  - US_StatPearls/statpearls_article-19750.md
+  - US_StatPearls/statpearls_article-23267.md
+notes: >
+  v0.8.0 (evidence review 2026-10): an attention test (months of the year backward) replaces the Babinski sign at p1,
+  because the CAM algorithm requires inattention (feature 2) and orientation is not attention (Inouye, Ann Intern Med
+  1990; 4AT pooled sensitivity and specificity 0.88, Tieges, Age Ageing 2021); limb power still covers lateralising
+  signs. If the examiner refuses the attention test, ask "열두 달을 거꾸로 말해 보세요." as a question. Anticoagulant use
+  added at p2 (chronic subdural hematoma after a trivial fall). Liver, kidney and stroke history (covered by the
+  standard "other illness" question), urine output, sleep reversal, hallucinations and dementia moved to p3 for the
+  budget. Check glucose first. Acute onset with fluctuating attention = delirium: look for infection, drugs and
+  metabolic causes; focal signs suggest stroke or hemorrhage; fever with neck stiffness suggests CNS infection.
+  Delirium tremens typically starts 48-96 hours after the last drink. The guardian usually gives the history.

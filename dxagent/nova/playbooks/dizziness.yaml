@@ -1,0 +1,105 @@
+id: dizziness
+title: {ko: 어지럼, en: Dizziness}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [어지러, 어지럼, 현기증, 빙빙, 핑 돌, 세상이 돌, 머리가 핑, 천장이 돌, 어지럽]
+  not: []
+history:
+  - {id: onset, q: "언제부터 어지러우셨어요?", item: Onset, p: 1}
+  - {id: continuous, q: "어지러움이 계속 이어지나요?", item: Continuous vs episodic, p: 1}
+  - {id: spinning, q: "주변이 빙빙 도는 느낌인가요?", item: Vertigo, p: 1}
+  - {id: positional, q: "누워서 돌아누울 때 어지러우세요?", item: Positional, p: 1}
+  - {id: standing, q: "일어설 때 어지러우세요?", item: Orthostatic, p: 1}
+  - {id: duration, q: "한 번 어지러우면 얼마나 가나요?", item: Duration, p: 1}
+  - id: hearing
+    q: "귀가 잘 안 들리세요?"
+    item: Hearing loss
+    p: 1
+    then:
+      - {id: hl_side, q: "한쪽 귀만 안 들리나요?", item: Unilateral hearing loss, known: "한쪽|왼|오른|양쪽|둘 다"}
+      - {id: hl_sudden, q: "갑자기 안 들리게 됐나요?", item: Sudden hearing loss, known: "갑자기|어느 날|자고 일어나|순간"}
+  - {id: tinnitus, q: "귀에서 소리가 나나요?", item: Tinnitus, p: 1}
+  - {id: diplopia, q: "물체가 겹쳐 보이나요?", item: Diplopia, p: 1}
+  - {id: speech, q: "말이 어눌해졌나요?", item: Dysarthria, p: 1}
+  - {id: weakness, q: "팔다리에 힘이 빠지나요?", item: Focal weakness, p: 1}
+  - {id: gait, q: "똑바로 걷기가 힘드세요?", item: Gait instability, p: 1}
+  - {id: type, q: "어떻게 어지러우세요?", item: Type, p: 2}
+  - {id: frequency, q: "얼마나 자주 어지러우세요?", item: Frequency, p: 2}
+  - {id: fullness, q: "귀가 먹먹하세요?", item: Aural fullness, p: 2}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 2}
+  - {id: syncope, q: "정신을 잃은 적이 있나요?", item: Syncope, p: 2}
+  - {id: palpitation, q: "가슴이 두근거리세요?", item: Palpitation, p: 2}
+  - {id: uri, q: "최근 감기를 앓았나요?", item: Recent URI, p: 2}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 3}
+  - {id: melena, q: "변이 검게 나온 적 있나요?", item: Melena, sec: ros, p: 3}
+  - {id: trauma, q: "머리를 다친 적 있나요?", item: Head trauma, sec: ros, p: 3}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 3}
+  - {id: migraine_hx, q: "평소 두통이 자주 있으세요?", item: Migraine history, sec: pmh, p: 3}
+  - {id: bp_drug, q: "혈압약을 드시나요?", item: Antihypertensives, sec: meds, p: 2}
+  - {id: new_drug, q: "최근 새로 먹기 시작한 약이 있나요?", item: New medication, sec: meds, p: 3}
+exams:
+  - {name: 안구진탕 확인, item: Neuro, p: 1}
+  - {name: 딕스-홀파이크 검사, item: Neuro, p: 1}
+  - {name: 두부 충동 검사, item: Neuro, p: 1}
+  - {name: 소뇌 협조운동 검사, item: Neuro, p: 1}
+  - {name: 롬베르그 검사, item: Neuro, p: 1}
+  - {name: 기립성 혈압 측정, item: V/S, p: 1}
+  - {name: 앙와위 회전 검사, item: Neuro, p: 2}
+  - {name: 속삭임 청력 검사, item: H/E/E/N/T, p: 2}
+differential:
+  - {en: Benign paroxysmal positional vertigo, ko: 양성 돌발성 두위현훈}
+  - {en: Vestibular neuritis, ko: 전정신경염}
+  - {en: Meniere disease, ko: 메니에르병}
+  - {en: Vestibular migraine, ko: 전정 편두통}
+  - {en: Orthostatic hypotension, ko: 기립성 저혈압}
+  - {en: "Posterior circulation stroke, TIA or cerebellar hemorrhage", ko: 후순환 뇌졸중·일과성 허혈발작·소뇌 출혈, cant_miss: true}
+  - {en: Cardiac arrhythmia, ko: 부정맥, cant_miss: true}
+  - {en: Anemia, ko: 빈혈}
+  - {en: Hypoglycemia, ko: 저혈당}
+  - {en: Medication side effect, ko: 약물 부작용}
+  - {en: Anxiety, ko: 불안}
+  - {en: Labyrinthitis or sudden sensorineural hearing loss, ko: 미로염·돌발성 난청}
+tests:
+  - {name: "Orthostatic vital signs", for: [Orthostatic hypotension, Medication side effect], why: "기립 시 혈압 저하 확인"}
+  - {name: "12-lead ECG", for: [Cardiac arrhythmia], why: "부정맥·전도 장애 확인"}
+  - {name: "Holter monitoring (episodes with palpitation or syncope)", for: [Cardiac arrhythmia], why: "간헐적 부정맥 포착"}
+  - {name: "CBC, glucose", for: [Anemia, Hypoglycemia, safety], why: "빈혈·저혈당 확인(스테로이드 전 혈당)"}
+  - {name: "Brain MRI with diffusion (central signs, HINTS central pattern or vascular risk)", for: ["Posterior circulation stroke, TIA or cerebellar hemorrhage"], why: "후순환 뇌경색·소뇌 출혈 확인"}
+  - {name: "Pure-tone audiometry (hearing symptoms)", for: [Meniere disease, Labyrinthitis or sudden sensorineural hearing loss], why: "감각신경성 난청 확인"}
+  - {name: "Videonystagmography and caloric test", for: [Vestibular neuritis, Benign paroxysmal positional vertigo], why: "말초 전정 기능 확인"}
+  - {name: "Headache and dizziness diary", for: [Vestibular migraine], why: "두통과 어지럼 연관 기록"}
+  - {name: "GAD-7 (no vestibular or cardiac cause found)", for: [Anxiety], why: "불안 선별"}
+plan:
+  treatment:
+    - "후반고리관 BPPV는 에플리 정복술, 수평반고리관 BPPV는 바비큐 회전법"
+    - "전정신경염: 단기간 전정억제제와 조기 전정재활 운동"
+    - "기립성 저혈압: 원인 약 조정, 수분 섭취, 천천히 일어나기"
+  disposition: "말초성 소견이면 외래 치료; 복시·구음장애·보행 불능·HINTS 중추형·새로 생긴 난청은 즉시 응급실 MRI"
+  follow_up:
+    - "1-2주 뒤 증상과 두위 변환 검사 재확인"
+    - "재발하거나 난청이 동반되면 청력검사와 전정기능검사"
+  red_flags: ["말이 어눌하거나 물체가 겹쳐 보임", "혼자 서거나 걷지 못함", "갑자기 생긴 한쪽 난청", "실신이나 가슴 두근거림"]
+education:
+  - "일어날 때는 천천히 일어나세요."
+  - "검사 결과를 보고 치료를 정할게요."
+  - "말이 어눌하거나 힘이 빠지면 바로 응급실로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-31130.md
+  - US_StatPearls/statpearls_article-38044.md
+  - US_StatPearls/statpearls_article-24956.md
+notes: >
+  v0.8.0 (evidence review 2026-10): timing and triggers lead (TiTrATE/ATTEST): a continuous-vs-episodic item was added
+  at p1 and the "type" question moved to p2, because 52% of patients chose a different descriptor six minutes later
+  while timing and triggers were reliable (Newman-Toker, Mayo Clin Proc 2007). The supine roll test replaces
+  extraocular movements (AAO-HNS BPPV guideline 2017: roll test when the history fits BPPV and Dix-Hallpike is negative
+  or horizontal; gaze-evoked nystagmus is already in the nystagmus exam). Hearing loss is characterised (one ear,
+  sudden): acute vertigo with new unilateral hearing loss may be labyrinthitis, sudden hearing loss or AICA stroke.
+  Nausea (near-universal), heart disease and new drugs (covered by the standard questions) moved to p3. Seconds and
+  positional = BPPV; days of continuous vertigo with nystagmus after a viral illness = vestibular neuritis; hours with
+  hearing loss, tinnitus and fullness = Meniere. Interpret the head impulse test only in continuous vertigo with
+  spontaneous nystagmus: there a normal test is a central sign (HINTS 100% sensitive, Kattah 2009; untrained HINTS is
+  inaccurate, GRACE-3 2023). A positive Romberg does not separate central from peripheral causes; inability to stand
+  or walk unaided (truncal ataxia) is the central sign. The test of skew is not in the exam vocabulary.

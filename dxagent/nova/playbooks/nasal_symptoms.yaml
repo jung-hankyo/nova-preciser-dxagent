@@ -1,0 +1,113 @@
+id: nasal_symptoms
+title: {ko: 콧물·코막힘, en: Rhinorrhea or nasal congestion}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [콧물, 코가 막, 코막힘, 코가 답답, 재채기, 코가 맹맹, 코맹맹, 코를 훌쩍, 코가 간지, 코가 가려, 비염, 축농증, 부비동염, 냄새를 못 맡, 냄새를 잘 못 맡, 후각, 코감기]
+  not: []
+history:
+  - {id: onset, q: "언제부터 그러셨어요?", item: Onset, p: 1}
+  - {id: course, q: "좋아지다가 다시 나빠졌나요?", item: Double worsening, p: 1}
+  - {id: discharge, q: "콧물 색깔은 어떤가요?", item: Discharge character, p: 1}
+  - {id: side, q: "한쪽 코만 그런가요?", item: Unilateral symptoms, p: 1}
+  - {id: sneeze, q: "재채기가 자주 나나요?", item: Sneezing, p: 1}
+  - {id: facial, q: "얼굴이 눌리듯 아프세요?", item: Facial pain or pressure, p: 1}
+  - {id: smell, q: "냄새를 잘 못 맡으세요?", item: Hyposmia, p: 1}
+  - id: fever
+    q: "열이 나세요?"
+    item: Fever
+    p: 1
+    then:
+      - {id: fever_temp, q: "몇 도까지 올랐나요?", item: Maximum temperature, known: "\\d\\s*도|십.{0,3}도|℃"}
+  - {id: trigger, q: "심해지는 계절이나 장소가 있나요?", item: Allergen triggers, p: 1}
+  - {id: periorbital, q: "눈 주위가 붓고 빨개졌나요?", item: Periorbital swelling, p: 1}
+  - {id: obstruction, q: "코가 막히세요?", item: Nasal obstruction, p: 2}
+  - {id: eye_itch, q: "눈이 가려우세요?", item: Ocular itching, p: 2}
+  - {id: pnd, q: "콧물이 목 뒤로 넘어가나요?", item: Postnasal drip, p: 2}
+  - {id: epistaxis, q: "코피가 난 적 있나요?", item: Epistaxis, p: 2}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 2}
+  - {id: diplopia, q: "물체가 겹쳐 보이나요?", item: Diplopia, p: 2}
+  - {id: snore, q: "주무실 때 코를 고세요?", item: Snoring, p: 3}
+  - {id: ear, q: "귀가 먹먹하세요?", item: Aural fullness, p: 3}
+  - {id: dental, q: "윗니가 아프세요?", item: Upper dental pain, p: 3}
+  - {id: trauma, q: "코를 다친 적 있나요?", item: Nasal trauma, sec: pmh, p: 3}
+  - {id: asthma, q: "천식이 있으세요?", item: Asthma, sec: pmh, p: 2}
+  - {id: aspirin, q: "진통제를 먹고 숨이 찬 적 있나요?", item: NSAID-exacerbated respiratory disease, sec: pmh, p: 3}
+  - id: spray
+    q: "코에 뿌리는 약을 쓰시나요?"
+    item: Nasal spray use
+    sec: meds
+    p: 1
+    then:
+      - {id: spray_kind, q: "뿌리면 바로 뚫리는 약인가요?", item: Topical decongestant, known: "바로|금방|즉시|스테로이드"}
+      - {id: spray_duration, q: "그 약을 얼마나 오래 쓰셨나요?", item: Spray duration, known: "일째|일 전|일 동안|며칠|주째|주 전|주일|달|개월|년"}
+  - {id: immuno, q: "면역력을 떨어뜨리는 약을 드시나요?", item: Immunosuppression, sec: meds, p: 3}
+  - {id: pets, q: "집에서 동물을 키우세요?", item: Pets, sec: shx, p: 2}
+  - {id: job, q: "일하는 곳에 먼지가 많나요?", item: Occupational exposure, sec: shx, p: 3}
+  - {id: fh_allergy, q: "가족 중 알레르기 질환이 있나요?", item: "FHx: atopy", sec: fhx, p: 3}
+exams:
+  - {name: 비강 시진, item: H/E/E/N/T, p: 1}
+  - {name: 부비동 압통 확인, item: H/E/E/N/T, p: 1}
+  - {name: 인두 시진, item: H/E/E/N/T, p: 1}
+  - {name: 이경 검사, item: H/E/E/N/T, p: 2}
+  - {name: 경부 림프절 촉진, item: Neck, p: 2}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 폐 청진, item: Chest, p: 2}
+  - {name: 외안근 운동, item: Neuro, p: 3}
+differential:
+  - {en: "Acute viral rhinosinusitis (common cold)", ko: 급성 바이러스성 비부비동염(감기)}
+  - {en: Allergic rhinitis, ko: 알레르기 비염}
+  - {en: Acute bacterial rhinosinusitis, ko: 급성 세균성 비부비동염}
+  - {en: Chronic rhinosinusitis with or without nasal polyps, ko: 만성 비부비동염(비용종 동반 여부)}
+  - {en: "Nonallergic or drug-induced rhinitis (decongestant spray overuse)", ko: 비알레르기성·약물성 비염(비충혈제거제 남용)}
+  - {en: Nasal septal deviation, ko: 비중격 만곡증}
+  - {en: "Complicated sinusitis (orbital, intracranial or invasive fungal)", ko: 합병 부비동염(안와·두개내 침범·침습성 진균), cant_miss: true}
+  - {en: Sinonasal or nasopharyngeal tumor, ko: 비강·비인두 종양, cant_miss: true}
+tests:
+  - {name: "No imaging for uncomplicated acute rhinosinusitis", for: ["Acute viral rhinosinusitis (common cold)", Acute bacterial rhinosinusitis], why: "임상 진단(10일 이상 지속·이중 악화·고열 기준)"}
+  - {name: "Skin prick test or serum specific IgE", for: [Allergic rhinitis, "Nonallergic or drug-induced rhinitis (decongestant spray overuse)"], why: "알레르기 원인 확인(음성이면 비알레르기성)"}
+  - {name: "Nasal endoscopy", for: [Chronic rhinosinusitis with or without nasal polyps, Nasal septal deviation, Sinonasal or nasopharyngeal tumor], why: "비용종·구조 이상·종물 확인"}
+  - {name: "Paranasal sinus CT (chronic disease after failed treatment)", for: [Chronic rhinosinusitis with or without nasal polyps], why: "만성 부비동염 범위 확인"}
+  - {name: "Contrast-enhanced CT or MRI of sinuses, orbits and brain (red flags)", for: ["Complicated sinusitis (orbital, intracranial or invasive fungal)"], why: "안와·두개내 합병증 확인"}
+  - {name: "CBC, CRP, glucose (red flags, diabetes or immunosuppression)", for: ["Complicated sinusitis (orbital, intracranial or invasive fungal)", Acute bacterial rhinosinusitis], why: "중증 감염·위험인자 확인"}
+  - {name: "Nasopharyngoscopy with biopsy, EBV serology (unilateral obstruction, bleeding, adult middle-ear effusion)", for: [Sinonasal or nasopharyngeal tumor], why: "비강·비인두 종양 확인"}
+  - {name: "Blood pressure and glucose (before oral decongestants or systemic steroids)", for: [safety], why: "고혈압·당뇨 확인(약물 전)"}
+plan:
+  treatment:
+    - "감기·급성 바이러스성: 생리식염수 세척과 대증 치료, 항생제는 불필요"
+    - "알레르기 비염: 비강 스테로이드 분무가 일차, 필요 시 2세대 항히스타민제와 원인 회피"
+    - "급성 세균성 부비동염(10일 이상 지속·이중 악화·고열): 경과 관찰 또는 아목시실린(±클라불란산)"
+    - "약물성 비염: 비충혈제거제를 끊고 비강 스테로이드로 대체"
+  disposition: "대부분 외래 치료; 눈 주위 부종·시력 저하·복시·심한 두통·의식 변화는 즉시 응급실(합병 부비동염), 한쪽 코막힘이나 반복 코피는 이비인후과 내시경 의뢰"
+  follow_up:
+    - "급성은 7일 뒤 호전이 없거나 악화하면 재평가"
+    - "만성·알레르기 비염은 4-8주 치료 후 증상과 분무 방법 확인"
+  red_flags: ["눈 주위가 붓고 빨개짐", "물체가 겹쳐 보이거나 시력 저하", "심한 두통이나 목 경직", "한쪽 코에서 피가 반복됨"]
+education:
+  - "생리식염수로 코를 자주 씻으세요."
+  - "코 뚫는 스프레이는 사흘 넘게 쓰지 마세요."
+  - "눈 주위가 붓거나 겹쳐 보이면 바로 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC9880301.md
+  - US_StatPearls/statpearls_article-29065.md
+  - US_StatPearls/statpearls_article-17370.md
+  - KR_EuropePMC/europepmc_PMC8901942.md
+notes: >
+  New in v0.8.0 (official presentation 콧물/코막힘; evidence review 2026-10). Duration and course separate the causes:
+  under 10 days and improving = viral; acute bacterial rhinosinusitis when symptoms persist 10 days or more without
+  improvement or worsen after initial improvement (double worsening), or with severe onset (39 °C or more with purulent
+  discharge or facial pain for 3-4 days; IDSA 2012, Chow); no imaging for uncomplicated acute rhinosinusitis; watchful
+  waiting or amoxicillin with or without clavulanate (AAO-HNS adult sinusitis guideline 2015, Rosenfeld). Chronic
+  rhinosinusitis: 12 weeks or more with two of obstruction, discharge, facial pain and smell loss (one being
+  obstruction or discharge), confirmed by endoscopy or CT (EPOS 2020, Fokkens). Allergic rhinitis: sneezing, itch,
+  watery discharge, seasonal or perennial triggers (house dust mite is the leading allergen in Korea); intranasal
+  corticosteroid first (KAAACI allergic rhinitis guideline 2023). A positive nasal-spray answer is characterised
+  (immediate relief = decongestant, and for how long): rebound congestion after more than a few days of use. Red flags
+  (EPOS 2020): periorbital oedema or erythema, displaced globe, diplopia or ophthalmoplegia, reduced vision, severe
+  headache, frontal swelling, meningism, neurological signs = complicated sinusitis; unilateral obstruction, bleeding,
+  crusting or cacosmia = tumor (nasopharyngeal carcinoma in Korea: also an adult unilateral middle-ear effusion).
+  Diabetes or immunosuppression with facial pain and black crusts = invasive fungal sinusitis. Adults only: children's
+  nasal openings stay with the pediatric playbooks (a unilateral foul discharge in a child = foreign body). Openings
+  that start with cough or throat pain route to those playbooks; this one takes openings that start with the nose.

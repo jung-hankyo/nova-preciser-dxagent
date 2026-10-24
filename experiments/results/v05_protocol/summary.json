@@ -1,0 +1,94 @@
+{
+ "cov100/shipped": {
+  "top1": 0.8875,
+  "brier": 0.0913,
+  "turns": 5.6045,
+  "cost": 397.8725,
+  "llm_calls": 19.6415,
+  "cm_missed": 0.2688,
+  "n": 2000,
+  "in_list": 0.987,
+  "share_leader_below_0.8": 0.1615,
+  "top1_when_leader_below_0.8": 0.6811
+ },
+ "cov100/single": {
+  "top1": 0.879,
+  "brier": 0.1025,
+  "turns": 6.806,
+  "cost": 441.3925,
+  "llm_calls": 21.9725,
+  "cm_missed": 0.2742,
+  "n": 2000,
+  "in_list": 0.9845,
+  "share_leader_below_0.8": 0.139,
+  "top1_when_leader_below_0.8": 0.6978,
+  "paired_dtop1_vs_shipped": [
+   -0.0085,
+   -0.0204,
+   0.0034
+  ]
+ },
+ "cov100/prelim": {
+  "top1": 0.699,
+  "brier": 0.1808,
+  "turns": 7.199,
+  "cost": 10.41,
+  "llm_calls": 22.481,
+  "cm_missed": 0.5161,
+  "n": 2000,
+  "in_list": 0.9815,
+  "share_leader_below_0.8": 0.4945,
+  "top1_when_leader_below_0.8": 0.5238,
+  "paired_dtop1_vs_shipped": [
+   -0.1885,
+   -0.2083,
+   -0.1687
+  ]
+ },
+ "known/shipped": {
+  "top1": 0.7805,
+  "brier": 0.1463,
+  "turns": 5.862,
+  "cost": 424.59,
+  "llm_calls": 20.1515,
+  "cm_missed": 0.3763,
+  "n": 2000,
+  "in_list": 0.9505,
+  "share_leader_below_0.8": 0.2865,
+  "top1_when_leader_below_0.8": 0.5515
+ },
+ "known/single": {
+  "top1": 0.771,
+  "brier": 0.1553,
+  "turns": 7.264,
+  "cost": 462.635,
+  "llm_calls": 23.0915,
+  "cm_missed": 0.3763,
+  "n": 2000,
+  "in_list": 0.95,
+  "share_leader_below_0.8": 0.267,
+  "top1_when_leader_below_0.8": 0.5337,
+  "paired_dtop1_vs_shipped": [
+   -0.0095,
+   -0.0217,
+   0.0027
+  ]
+ },
+ "known/prelim": {
+  "top1": 0.6265,
+  "brier": 0.2064,
+  "turns": 7.0275,
+  "cost": 10.1125,
+  "llm_calls": 21.9335,
+  "cm_missed": 0.5753,
+  "n": 2000,
+  "in_list": 0.946,
+  "share_leader_below_0.8": 0.5525,
+  "top1_when_leader_below_0.8": 0.4751,
+  "paired_dtop1_vs_shipped": [
+   -0.154,
+   -0.1734,
+   -0.1346
+  ]
+ }
+}

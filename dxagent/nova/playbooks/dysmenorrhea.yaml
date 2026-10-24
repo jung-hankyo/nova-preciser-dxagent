@@ -1,0 +1,106 @@
+id: dysmenorrhea
+title: {ko: 월경통, en: Dysmenorrhea}
+status: draft
+reviewer: ""
+population: female
+pain: true
+match:
+  any: [생리통, 월경통, 생리할 때 배가 아, 생리 때 배가 아, 생리할 때 아, 생리 때 아파, 생리 때마다 아, 생리 기간에 배, 생리를 할 때 배, 생리를 할 때 아, 생리 시작하면 배, 생리 시작하면 아, 생리하면 배, 생리 중에 배, 생리 전에 배, 생리할 때마다 배, 생리할 때마다 아, 생리 때마다 배]
+  not: []
+history:
+  - {id: since, q: "언제부터 생리통이 있었나요?", item: Onset, p: 1}
+  - {id: course, q: "생리통이 점점 심해지나요?", item: Course, p: 1}
+  - {id: timing, q: "생리 시작 전후 언제부터 아프세요?", item: Timing, p: 1}
+  - {id: duration, q: "통증은 며칠 동안 가나요?", item: Duration, p: 1}
+  - {id: location, q: "어디가 아프세요?", item: Location, p: 1}
+  - {id: severity, q: "통증은 10점 중 몇 점인가요?", item: NRS, p: 1}
+  - {id: function, q: "학교나 일을 쉴 정도인가요?", item: Functional impact, p: 1}
+  - {id: analgesic, q: "진통제를 드시면 좋아지나요?", item: Analgesic response, p: 1}
+  - id: heavy
+    q: "생리량이 많은 편인가요?"
+    item: Menorrhagia
+    p: 1
+    then:
+      - {id: pads, q: "패드를 하루에 몇 개 쓰세요?", item: Pads per day, known: "개|장"}
+  - {id: lmp, q: "마지막 생리는 언제였나요?", item: LMP, p: 1}
+  - {id: character, q: "어떤 느낌으로 아프세요?", item: Character, p: 2}
+  - {id: radiation, q: "허리나 다리로 통증이 퍼지나요?", item: Radiation, p: 3}
+  - {id: clots, q: "생리 때 핏덩어리가 나오나요?", item: Clots, p: 2}
+  - {id: regular, q: "생리 주기는 규칙적인가요?", item: Cycle regularity, p: 2}
+  - {id: intermenstrual, q: "생리 아닐 때 피가 비치나요?", item: Intermenstrual bleeding, p: 2}
+  - {id: noncyclic, q: "생리 때가 아닐 때도 아프세요?", item: Noncyclic pelvic pain, p: 2}
+  - {id: discharge, q: "질 분비물이 늘었나요?", item: Vaginal discharge, p: 2}
+  - {id: fever, q: "열이 나세요?", item: Fever, p: 2}
+  - {id: dyschezia, q: "생리 중에 대변 볼 때 아프세요?", item: Dyschezia, p: 2}
+  - {id: dysuria_cyclic, q: "생리 때 소변볼 때 아프세요?", item: Cyclic dysuria, p: 3}
+  - {id: nausea, q: "생리 때 속이 메스껍나요?", item: Nausea, sec: ros, p: 3}
+  - {id: iud, q: "루프 같은 피임기구를 하셨나요?", item: Intrauterine device, sec: pmh, p: 2, only: adult}
+  - id: sexual
+    q: "성관계를 하신 적 있나요?"
+    item: Sexual activity
+    sec: ob
+    p: 1
+    only: adult
+    gate: sexual
+    then:
+      - {id: dyspareunia, q: "성관계할 때 아픈가요?", item: Dyspareunia}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, sec: ob, p: 1, only: adult}
+  - {id: menarche, q: "초경은 몇 살에 하셨어요?", item: Menarche, sec: ob, p: 2}
+  - {id: infertility, q: "임신을 시도해 보셨나요?", item: Infertility, sec: ob, p: 3, only: adult}
+  - {id: fh_dysmen, q: "어머니도 생리통이 심하셨나요?", item: "FHx: dysmenorrhea or endometriosis", sec: fhx, p: 3}
+exams:
+  - {name: 복부 촉진, item: Abdomen, p: 1}
+  - {name: 양손 골반 내진, item: GU, p: 1, only: sexually_active}
+  - {name: 질경 검사, item: GU, p: 2, only: sexually_active}
+  - {name: 결막·공막 시진, item: H/E/E/N/T, p: 2}
+  - {name: 외음부 시진, item: GU, p: 3}
+  - {name: 직장수지검사, item: Rectal, p: 3}
+differential:
+  - {en: Primary dysmenorrhea, ko: 원발성 월경통}
+  - {en: Endometriosis, ko: 자궁내막증}
+  - {en: Adenomyosis, ko: 자궁선근증}
+  - {en: Uterine leiomyoma, ko: 자궁근종}
+  - {en: Pelvic inflammatory disease, ko: 골반염, cant_miss: true}
+  - {en: Ectopic pregnancy, ko: 자궁외 임신, cant_miss: true}
+  - {en: Ovarian cyst, ko: 난소 낭종}
+  - {en: Intrauterine device-related pain, ko: 자궁 내 장치 관련 통증}
+  - {en: Obstructive Mullerian anomaly, ko: 폐쇄성 뮐러관 기형}
+tests:
+  - {name: "Urine hCG", for: [Ectopic pregnancy, safety], why: "임신 배제(성경험 있으면, 호르몬제·영상 전)"}
+  - {name: "Pelvic ultrasound", for: [Primary dysmenorrhea, Endometriosis, Adenomyosis, Uterine leiomyoma, Ovarian cyst, Intrauterine device-related pain, Ectopic pregnancy, Obstructive Mullerian anomaly], why: "이차 원인 확인(경질, 성경험 없으면 경복부·경직장)"}
+  - {name: "Pelvic MRI", for: [Obstructive Mullerian anomaly, Endometriosis, Adenomyosis], why: "뮐러관 기형·심부 자궁내막증 의심 시"}
+  - {name: "CBC, CRP", for: [Pelvic inflammatory disease], why: "염증·빈혈 확인(발열이나 과다 출혈)"}
+  - {name: "NAAT for chlamydia and gonorrhea", for: [Pelvic inflammatory disease], why: "골반염 원인균 확인(성경험 있으면)"}
+  - {name: "Diagnostic laparoscopy", for: [Endometriosis], why: "영상 음성이고 경험적 치료에 실패할 때만"}
+plan:
+  treatment:
+    - "NSAID를 생리 시작 1-2일 전이나 통증 시작 즉시 규칙적으로 복용합니다."
+    - "효과가 부족하면 임신 배제 후 복합 경구피임약 등 호르몬 치료를 더합니다."
+    - "온찜질과 규칙적인 운동을 함께 권합니다."
+    - "3-6개월 치료에도 지속되면 자궁내막증 등 이차 원인을 평가합니다."
+  disposition: "전형적인 원발성 월경통은 외래 경험적 치료; 발열, 생리와 무관한 심한 통증, 임신 양성은 당일 평가(응급실)."
+  follow_up:
+    - "3개월 뒤 통증 점수와 결석·결근 일수로 치료 반응을 확인합니다."
+    - "반응이 없으면 초음파 재평가 후 부인과에 의뢰합니다."
+  red_flags: ["열과 아랫배 통증", "생리 지연 뒤 복통이나 질 출혈", "갑자기 생긴 심한 한쪽 아랫배 통증"]
+education:
+  - "통증 시작 전에 진통제를 드세요."
+  - "배를 따뜻하게 하면 도움이 돼요."
+  - "필요하면 초음파 검사를 할게요."
+  - "열이 나거나 통증이 심하면 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20798.md
+  - KR_EuropePMC/europepmc_PMC11788693.md
+  - US_StatPearls/statpearls_article-21734.md
+notes: >
+  v0.8.0 (evidence review): speculum and bimanual limited to sexually active patients, sexual-history items to adults
+  (dyspareunia as a follow-up of the sexual-activity item). Never had intercourse: no speculum or bimanual;
+  transabdominal ultrasound; rectal exam only if a mass is suspected; external genital inspection for hymenal patency
+  when severe pain dates from menarche. A typical primary dysmenorrhea history in an adolescent who is not sexually
+  active needs no pelvic exam (ACOG CO 754, 2018; ACOG CO 760, 2018: empiric NSAID or hormonal treatment, look for
+  secondary causes after 3-6 months without response). Obstructive Mullerian anomaly added for adolescents with
+  severe pain from menarche unresponsive to NSAIDs; cyclic dysuria and dyschezia support endometriosis (ESHRE 2022,
+  which also no longer requires laparoscopy for the diagnosis). Radiation demoted (common in primary dysmenorrhea,
+  likelihood ratio near 1). Primary: starts within 1-2 years of menarche, crampy, first 1-3 days; secondary: new or
+  worsening after years, dyspareunia, heavy or intermenstrual bleeding, infertility, noncyclic pain. SOGC 345 (2017):
+  NSAIDs and hormonal contraception first line.

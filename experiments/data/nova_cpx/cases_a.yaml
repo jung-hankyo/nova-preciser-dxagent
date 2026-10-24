@@ -1,0 +1,268 @@
+# Local CPX-style practice cases, written for this project in a CPX case format (case.json fields:
+# case_id, start_information, patient_script, exam_results). The text is original; it imitates the samples' form,
+# not their content. `key` is our own answer key for offline measurement (not the contest's checklist, which is not
+# published): `history` names generic items (see experiments/nova_cpx_check.py) or gives {id: regex} for
+# case-specific items, matched against the doctor's SAY lines; `exams` are result-table rows that matter.
+
+- case_id: L01
+  opening: 이름은 정민호이고, 나는 쉰여덟 살 남자이다. 두 달 전부터 계단을 오르면 가슴이 답답해서 병원에 왔다.
+  vital_signs: "혈압 : 148/92 mmHg\n맥박 : 78 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    두 달 전부터 계단을 두 층 정도 오르거나 빨리 걸으면 가슴 한가운데가 묵직하게 누르는 것처럼 답답해진다. 아픈 정도는 열 중에 오 정도이다. 가끔은 왼쪽 어깨와 팔 안쪽으로 뻐근하게 퍼진다.
+    멈춰서 쉬면 삼에서 오 분 안에 좋아진다. 가만히 있을 때나 자다가 아픈 적은 없다. 요즘은 처음보다 조금 덜 걸어도 생기는 것 같다. 가슴이 답답할 때 숨이 약간 차고 식은땀이 날 때도 있다.
+    누르면 아픈 곳은 없고, 숨을 들이쉬거나 자세를 바꿔도 통증은 달라지지 않는다. 기침, 가래, 열은 없다. 가슴이 두근거리거나 쓰러진 적은 없다. 다리가 붓지는 않는다.
+    십 년 전에 고혈압을 진단받아 암로디핀을 먹고 있다. 삼 년 전 건강검진에서 콜레스테롤이 높다고 들었지만 약은 먹지 않았다. 당뇨는 없다. 수술이나 입원한 적은 없다. 약 알레르기는 없다.
+    아버지가 예순 살에 심근경색으로 돌아가셨다.
+    담배는 하루 한 갑씩 삼십 년째 피우고 있다. 술은 일주일에 두 번, 소주 한 병 정도 마신다. 회사에서 관리직으로 일하고 운동은 거의 하지 않는다. 혹시 심장에 큰 문제가 있는 건 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 과체중
+    활력징후 측정 (Vital signs): 148/92mmHg, 78회/분, 16회/분, 36.6°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    경정맥 확인 (Jugular venous pressure): 경정맥 확장(-)
+    경동맥 잡음 청진 (Carotid bruit): 잡음(-/-)
+    흉곽 시진 (Chest inspection): 대칭, 보조호흡근 사용(-)
+    흉벽 압통 촉진 (Chest wall tenderness): 압통(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-), 천명음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, S4(+), 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    하지 말초 진찰 (Peripheral pulse and edema): 족배동맥 맥박 정상(+/+), 부종(-/-)
+  key:
+    diagnosis: Stable angina pectoris
+    history: [onset, character, location, radiation, severity, timing, aggravating, relieving, pmh, meds, fh, smoking, alcohol,
+              {exertion: "(계단|걸을|운동|움직일|힘든 일)", rest_pain: "(가만히|쉴 때|자다가|안정)", dyspnea: "숨",
+               diaphoresis: "(식은땀|땀)", lipid: "(콜레스테롤|고지혈)", diabetes: "당뇨"}]
+    exams: [심음 청진 (Heart auscultation), 폐 청진 (Lung auscultation), 경정맥 확인 (Jugular venous pressure),
+            하지 말초 진찰 (Peripheral pulse and edema)]
+
+- case_id: L02
+  opening: 이름은 한순자이고, 나는 일흔두 살 여자이다. 한 달 전부터 숨이 차서 병원에 왔다.
+  vital_signs: "혈압 : 152/88 mmHg\n맥박 : 96 회/분\n호흡 : 22 회/분\n체온 : 36.5°C"
+  script: |
+    한 달 전부터 조금만 걸어도 숨이 차다. 처음에는 언덕을 오를 때만 그랬는데, 요즘은 집 앞 슈퍼까지 백 미터만 걸어도 쉬어야 한다. 점점 심해지고 있다.
+    밤에 누우면 숨이 더 차서 베개를 두 개 겹쳐 베고 잔다. 일주일에 두세 번은 자다가 숨이 막혀서 깨고, 일어나 앉아 있으면 나아진다. 마른기침이 조금 있지만 가래는 없다. 열은 없다.
+    양쪽 발목과 정강이가 부어서 신발이 꽉 낀다. 저녁에 더 붓는다. 한 달 사이에 몸무게가 삼 키로그람 늘었다. 가슴 통증은 없고, 가끔 가슴이 두근거린다. 소변은 밤에 두세 번 본다.
+    오 년 전에 심근경색으로 스텐트 시술을 받았다. 고혈압도 있다. 아스피린, 혈압약, 이뇨제를 받았는데 두 달 전부터 약을 자주 빠뜨렸다. 당뇨는 없다. 약 알레르기는 없다.
+    남편과 둘이 산다. 담배는 피운 적이 없고 술도 마시지 않는다. 음식은 짜게 먹는 편이다. 가족 중에 심장병은 없다.
+  exams:
+    전반적 외관 시진 (General appearance): 경도 호흡곤란, 앉은 자세 선호
+    활력징후 측정 (Vital signs): 152/88mmHg, 96회/분, 22회/분, 36.5°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    경정맥 확인 (Jugular venous pressure): 경정맥 확장(+), 45도에서 흉골각 위 6cm
+    간경정맥 역류 검사 (Hepatojugular reflux): 양성(+)
+    흉곽 시진 (Chest inspection): 대칭, 보조호흡근 사용(-)
+    흉부 타진 (Chest percussion): 양측 하부 둔탁음(+/+)
+    폐 청진 (Lung auscultation): 양측 하부 수포음(+/+), 천명음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, S3(+), 심첨부 수축기 심잡음 Gr.2/6
+    복부 촉진 (Abdominal palpation): 압통(-), 간 비대 2횡지
+    하지 말초 진찰 (Peripheral pulse and edema): 함요부종 양측 정강이까지(2+/2+)
+  key:
+    diagnosis: Heart failure (acute decompensated)
+    history: [onset, severity, timing, pmh, meds, smoking, alcohol, fh,
+              {orthopnea: "누우", pnd: "(자다가|밤에.*깨)", edema: "(붓|부종|부어)", weight: "(몸무게|체중)",
+               chest_pain: "(가슴.*아프|흉통|가슴 통증)", cough: "기침", adherence: "(빠뜨|거르|잘 드시|중단|꾸준)", salt: "(짜게|소금|싱겁)"}]
+    exams: [경정맥 확인 (Jugular venous pressure), 폐 청진 (Lung auscultation), 심음 청진 (Heart auscultation),
+            하지 말초 진찰 (Peripheral pulse and edema)]
+
+- case_id: L03
+  opening: 이름은 오준석이고, 나는 마흔다섯 살 남자이다. 나흘 전부터 기침이 나고 열이 나서 병원에 왔다.
+  vital_signs: "혈압 : 124/78 mmHg\n맥박 : 108 회/분\n호흡 : 24 회/분\n체온 : 38.9°C"
+  script: |
+    나흘 전에 오한이 들면서 열이 나기 시작했다. 집에서 재 보니 삼십구 도까지 올랐다. 해열제를 먹으면 잠깐 떨어졌다가 다시 오른다.
+    기침을 하면 누런 가래가 나오고, 이틀 전부터는 가래에 녹슨 색이 섞여 나온다. 오른쪽 가슴 아래쪽이 숨을 깊이 들이쉬거나 기침할 때 콕콕 찌르듯 아프다. 계단을 오르면 숨이 찬다.
+    입맛이 없고 몸살처럼 온몸이 쑤신다. 콧물이나 목 통증은 거의 없었다. 구토나 설사는 없다.
+    최근에 해외여행을 다녀온 적은 없다. 주변에 비슷하게 아픈 사람은 모르겠다. 결핵을 앓은 적은 없다. 지병은 없고 먹는 약도 없다. 약 알레르기는 없다. 독감이나 폐렴 예방접종은 맞지 않았다.
+    담배는 하루 한 갑씩 이십 년 피웠다. 술은 거의 매일 소주 한 병을 마신다. 건설 현장에서 일한다. 아버지는 고혈압이 있다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(+), 오한(+)
+    활력징후 측정 (Vital signs): 124/78mmHg, 108회/분, 24회/분, 38.9°C
+    인두 시진 (Pharynx inspection): 발적(-), 편도 비대(-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    흉곽 시진 (Chest inspection): 대칭, 보조호흡근 사용(-)
+    흉부 타진 (Chest percussion): 우하부 둔탁음(+)
+    촉각진탕 (Tactile fremitus): 우하부 증가(+)
+    폐 청진 (Lung auscultation): 우하부 수포음(+), 기관지 호흡음(+), 천명음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적 빈맥, 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-)
+    하지 말초 진찰 (Peripheral pulse and edema): 부종(-/-)
+  key:
+    diagnosis: Community-acquired pneumonia
+    history: [onset, character, severity, pmh, meds, smoking, alcohol, job,
+              {fever: "(열|체온|오한)", sputum: "가래", sputum_color: "(색|피)", dyspnea: "숨",
+               chest_pain: "(가슴|흉통)", contacts: "(주변|여행|접촉|비슷하게)", tb: "결핵", vaccine: "(예방접종|백신)"}]
+    exams: [폐 청진 (Lung auscultation), 흉부 타진 (Chest percussion), 촉각진탕 (Tactile fremitus),
+            활력징후 측정 (Vital signs)]
+
+- case_id: L04
+  opening: 이름은 윤서연이고, 나는 스물두 살 여자이다. 어제 저녁부터 배가 아파서 병원에 왔다.
+  vital_signs: "혈압 : 118/72 mmHg\n맥박 : 96 회/분\n호흡 : 18 회/분\n체온 : 37.9°C"
+  script: |
+    어제 저녁 일곱 시쯤 배꼽 주위가 은근하게 아프기 시작했다. 오늘 아침부터는 통증이 오른쪽 아랫배로 옮겨 가서 그 자리가 계속 아프다. 아픈 정도는 열 중에 칠이다.
+    걸을 때나 차가 덜컹거릴 때 더 아프고, 무릎을 구부리고 누워 있으면 조금 낫다. 밤새 속이 메스꺼웠고 오늘 새벽에 한 번 토했다. 입맛이 전혀 없다. 몸에 열감이 있다.
+    마지막 대변은 어제 아침에 정상적으로 봤다. 설사는 없다. 소변볼 때 아프거나 자주 마려운 증상은 없다. 질 분비물이나 질 출혈은 없다.
+    생리는 규칙적이고 마지막 생리는 이 주 전에 시작했다. 남자 친구가 있고 피임은 콘돔으로 한다. 임신 가능성은 없다고 생각한다.
+    지병이나 수술한 적은 없다. 먹는 약도 없다. 약 알레르기는 없다. 담배는 안 피우고 술은 가끔 마신다. 대학생이다. 가족 중에 특별한 병은 없다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(+), 움직임 시 통증 호소
+    활력징후 측정 (Vital signs): 118/72mmHg, 96회/분, 18회/분, 37.9°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 시진 (Abdominal inspection): 편평, 팽만(-)
+    장음 청진 (Bowel sound auscultation): 감소 4회/분
+    복부 촉진 (Abdominal palpation): 우하복부 압통(+), 맥버니점 압통(+), 근성방어(+)
+    반발압통 (Rebound tenderness): 우하복부(+)
+    로브싱 징후 (Rovsing sign): 양성(+)
+    요근 징후 (Psoas sign): 양성(+)
+    폐쇄근 징후 (Obturator sign): 음성(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+  key:
+    diagnosis: Acute appendicitis
+    history: [onset, location, character, severity, aggravating, relieving, pmh, meds, surgery, lmp, pregnancy,
+              {migration: "(처음|어디부터|옮겨|바뀌|이동)", nausea: "(메스꺼|구역|토)", appetite: "(입맛|식욕)",
+               fever: "(열|체온)", bowel: "(대변|설사|변)", urinary: "소변", discharge: "(분비물|냉|질)"}]
+    exams: [복부 촉진 (Abdominal palpation), 반발압통 (Rebound tenderness), 로브싱 징후 (Rovsing sign),
+            요근 징후 (Psoas sign), 늑골척추각 압통 (Costovertebral angle tenderness)]
+
+- case_id: L05
+  opening: 이름은 이수진이고, 나는 서른네 살 여자이다. 머리가 자주 아파서 병원에 왔다.
+  vital_signs: "혈압 : 116/74 mmHg\n맥박 : 72 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    오 년 전부터 두통이 가끔 있었는데, 석 달 전부터 한 달에 네다섯 번으로 잦아졌다. 왼쪽 관자놀이가 맥박 뛰듯 욱신욱신 아프다. 한 번 아프면 반나절에서 하루 종일 간다. 아픈 정도는 열 중에 팔이다.
+    두통이 오기 이십 분쯤 전에 눈앞에 지그재그 모양의 반짝이는 빛이 보였다가 사라진다. 아플 때는 속이 메스껍고 가끔 토한다. 밝은 빛과 시끄러운 소리가 괴롭다. 움직이면 더 아파서 어두운 방에 누워 있어야 한다. 자고 나면 좋아진다.
+    생리 직전이나 잠을 못 잔 다음 날 잘 생긴다. 회사 일이 바빠 스트레스가 많다. 약국에서 산 진통제를 한 달에 열흘 정도 먹는다. 피임약은 먹지 않는다.
+    열이나 목이 뻣뻣한 증상은 없다. 팔다리에 힘이 빠지거나 말이 어눌해진 적은 없다. 머리를 다친 적은 없다. 자다가 두통 때문에 깬 적은 없다.
+    지병은 없다. 어머니도 젊을 때 편두통이 심했다. 담배는 안 피우고 술은 거의 안 마신다. 커피는 하루 세 잔 마신다. 마지막 생리는 삼 주 전이다. 사무직으로 일한다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    의식·지남력 평가 (Mental status): 명료, 지남력 3/3점
+    활력징후 측정 (Vital signs): 116/74mmHg, 72회/분, 16회/분, 36.6°C
+    동공 반사 (Pupillary reflex): 동공 크기 3mm/3mm, 대광반사(+/+)
+    안저 검사 (Fundoscopy): 유두부종(-/-)
+    뇌신경 검사 (Cranial nerve examination): 이상 소견(-)
+    경부 강직 (Neck stiffness): 강직(-), 케르니그 징후(-)
+    사지 근력 검사 (Limb muscle power): 상하지 근력 5/5
+    소뇌 협조운동 검사 (Cerebellar coordination): 손가락-코 검사 정상
+    심부건반사 (Deep tendon reflex): 정상(2+), 바빈스키 징후(-/-)
+    측두동맥 촉진 (Temporal artery palpation): 압통(-/-)
+  key:
+    diagnosis: Migraine with aura
+    history: [onset, location, character, severity, timing, aggravating, relieving, meds, fh, lmp, job,
+              {nausea: "(메스꺼|구역|토)", photophobia: "(빛|눈부)", phonophobia: "소리", aura: "(전에|조짐|번쩍|빛이 보|시야)",
+               trigger: "(생리|잠|스트레스|유발)", red_flag: "(열|뻣뻣|힘이 빠|말이|어눌)", analgesic: "진통제", trauma: "(다친|부딪)"}]
+    exams: [경부 강직 (Neck stiffness), 안저 검사 (Fundoscopy), 뇌신경 검사 (Cranial nerve examination),
+            사지 근력 검사 (Limb muscle power)]
+
+- case_id: L06
+  opening: 이름은 장미경이고, 나는 예순세 살 여자이다. 사흘 전부터 어지러워서 병원에 왔다.
+  vital_signs: "혈압 : 136/82 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
+  script: |
+    사흘 전 아침에 일어나려고 고개를 돌리는데 천장이 빙빙 돌았다. 그 뒤로 침대에서 오른쪽으로 돌아눕거나, 고개를 들어 높은 곳을 볼 때 세상이 도는 것처럼 어지럽다.
+    한 번 어지러우면 삼십 초 정도 지나 저절로 멈춘다. 가만히 있으면 괜찮다. 어지러울 때 속이 메스껍지만 토하지는 않았다.
+    귀가 먹먹하거나 잘 안 들리지는 않는다. 귀에서 소리가 나지도 않는다. 두통은 없다. 팔다리에 힘이 빠지거나 저리지 않고, 말이 어눌하거나 물체가 두 개로 보인 적도 없다. 쓰러지거나 정신을 잃은 적은 없다.
+    이 년 전에도 비슷하게 어지러웠는데 일주일쯤 지나 저절로 좋아졌다. 최근 감기를 앓지는 않았다. 머리를 다친 적은 없다.
+    고혈압이 있어 약을 먹고 있다. 당뇨는 없다. 약 알레르기는 없다. 담배는 안 피우고 술도 안 마신다. 가족 중에 뇌졸중을 앓은 사람은 없다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    의식·지남력 평가 (Mental status): 명료, 지남력 3/3점
+    활력징후 측정 (Vital signs): 136/82mmHg, 74회/분, 16회/분, 36.4°C
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 136/82, 선 자세 132/80, 맥박 변화 4회/분
+    안구진탕 확인 (Nystagmus): 자발 안구진탕(-), 주시유발 안구진탕(-)
+    두부 충동 검사 (Head impulse test): 정상(-/-)
+    딕스-홀파이크 검사 (Dix-Hallpike test): 우측 양성(+), 잠복기 5초 후 회선성 상향 안구진탕 20초, 좌측 음성(-)
+    청력 선별검사 (Hearing screening): 손가락 비비기 정상(+/+)
+    소뇌 협조운동 검사 (Cerebellar coordination): 손가락-코 검사 정상, 교대운동 정상
+    롬베르그 검사 (Romberg test): 음성(-)
+    보행 관찰 (Gait): 정상
+    사지 근력 검사 (Limb muscle power): 상하지 근력 5/5
+  key:
+    diagnosis: Benign paroxysmal positional vertigo
+    history: [onset, timing, prior, pmh, meds, smoking, alcohol, fh,
+              {vertigo_type: "(빙빙|돌|어떻게 어지)", positional: "(자세|고개|누울|돌아|일어날)", duration: "(얼마나 오래|몇 초|몇 분|지속)",
+               hearing: "(귀|청력|들리)", tinnitus: "(이명|소리)", neuro: "(힘이 빠|저리|말이|둘로|두 개로|겹쳐)", nausea: "(메스꺼|구역|토)",
+               headache: "(두통|머리가 아프)", syncope: "(쓰러|정신을 잃|기절)"}]
+    exams: [딕스-홀파이크 검사 (Dix-Hallpike test), 안구진탕 확인 (Nystagmus), 소뇌 협조운동 검사 (Cerebellar coordination),
+            롬베르그 검사 (Romberg test)]
+
+- case_id: L07
+  opening: 이름은 박성훈이고, 나는 마흔두 살 남자이다. 일주일 전부터 허리가 아프고 왼쪽 다리가 저려서 병원에 왔다.
+  vital_signs: "혈압 : 128/80 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    일주일 전에 택배 상자를 들다가 허리가 뜨끔했다. 그날부터 허리 아래쪽이 아프고, 이틀 뒤부터는 왼쪽 엉덩이에서 허벅지 뒤, 종아리 바깥쪽을 따라 발등까지 찌릿하게 뻗친다. 아픈 정도는 열 중에 칠이다.
+    오래 앉아 있거나 기침, 재채기를 하면 다리 쪽이 더 아프다. 누워서 무릎을 구부리면 조금 낫다. 왼쪽 발등이 저리고 감각이 둔하다. 왼쪽 엄지발가락에 힘이 조금 빠진 것 같다.
+    소변이나 대변을 보는 데 문제는 없다. 항문 주위 감각이 이상하지 않다. 열은 없고 살이 빠지지도 않았다. 밤에 아파서 깨지는 않는다.
+    전에도 허리가 가끔 뻐근했지만 이렇게 다리까지 아픈 건 처음이다. 진통제를 먹어도 별로 좋아지지 않았다. 지병은 없다. 약 알레르기는 없다.
+    택배 기사로 일해서 무거운 물건을 자주 든다. 담배는 하루 반 갑 피운다. 술은 주말에 맥주를 마신다. 가족 중에 특별한 병은 없다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 허리를 굽힌 자세
+    활력징후 측정 (Vital signs): 128/80mmHg, 76회/분, 16회/분, 36.5°C
+    척추 시진·압통 (Spine inspection and tenderness): 요추 측만(-), 요천추부 근육 압통(+), 극돌기 압통(-)
+    요추 운동 범위 (Lumbar range of motion): 전굴 시 통증으로 제한(+)
+    하지직거상 검사 (Straight leg raise): 좌측 40도에서 양성(+), 우측 음성(-)
+    사지 근력 검사 (Limb muscle power): 좌측 엄지발가락 신전 4/5, 그 외 5/5
+    감각 검사 (Sensory examination): 좌측 발등 감각 저하(+)
+    심부건반사 (Deep tendon reflex): 슬개건 2+/2+, 아킬레스건 2+/2+
+    보행 관찰 (Gait): 좌측 하지 통증으로 절뚝임, 발뒤꿈치 보행 약간 어려움(좌)
+    복부 촉진 (Abdominal palpation): 압통(-)
+    하지 말초 진찰 (Peripheral pulse and edema): 족배동맥 맥박 정상(+/+), 부종(-/-)
+  key:
+    diagnosis: Lumbar disc herniation with L5 radiculopathy
+    history: [onset, location, radiation, severity, aggravating, relieving, prior, pmh, meds, smoking, job,
+              {trigger: "(무거운|들다가|다치|계기)", numbness: "(저리|감각)", weakness: "(힘이 빠|약해)",
+               bladder_bowel: "(소변|대변|항문)", red_flag: "(열|살이 빠|체중|밤에)"}]
+    exams: [하지직거상 검사 (Straight leg raise), 감각 검사 (Sensory examination), 사지 근력 검사 (Limb muscle power),
+            심부건반사 (Deep tendon reflex)]
+
+- case_id: L08
+  opening: 이름은 강동원이고, 나는 예순여섯 살 남자이다. 이 주 전부터 가슴이 자주 두근거려서 병원에 왔다.
+  vital_signs: "혈압 : 142/86 mmHg\n맥박 : 112 회/분 불규칙\n호흡 : 18 회/분\n체온 : 36.6°C"
+  script: |
+    이 주 전부터 가슴이 두근거리는 일이 자주 생긴다. 한 번 시작하면 몇 시간씩 가고, 지금도 조금 두근거린다. 심장이 빨랐다 느렸다 제멋대로 뛰는 느낌이다.
+    두근거릴 때 계단을 오르면 숨이 조금 차다. 가슴이 아프지는 않다. 어지럽거나 쓰러진 적은 없다. 지난 주말에 술을 많이 마신 다음 날 특히 심했다. 커피는 하루 한 잔 마신다.
+    더위를 타거나 살이 빠지지는 않았다. 손이 떨리지 않는다. 한쪽 팔다리에 힘이 빠지거나 말이 어눌해진 적은 없다. 다리가 붓지는 않는다.
+    고혈압이 있어서 약을 먹고 있다. 당뇨는 없다. 심장병을 진단받은 적은 없다. 약 알레르기는 없다. 아버지가 뇌졸중을 앓으셨다.
+    담배는 십 년 전에 끊었다. 술은 일주일에 서너 번, 한 번에 소주 한 병 이상 마신다. 은퇴하고 집에 있다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 142/86mmHg, 112회/분 불규칙, 18회/분, 36.6°C
+    요골동맥 맥박 촉진 (Radial pulse palpation): 112회/분, 불규칙하게 불규칙함
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    경정맥 확인 (Jugular venous pressure): 경정맥 확장(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): 불규칙한 리듬, 심첨-요골 맥박 결손 10회/분, 심잡음(-)
+    자세성 떨림 (Postural tremor): 떨림(-/-)
+    하지 말초 진찰 (Peripheral pulse and edema): 부종(-/-)
+  key:
+    diagnosis: Atrial fibrillation
+    history: [onset, timing, pmh, meds, smoking, alcohol, fh,
+              {regularity: "(규칙|불규칙|제멋대로)", duration: "(얼마나 오래|몇 시간|몇 분|지속)", trigger: "(술|커피|카페인|유발)",
+               syncope: "(쓰러|정신을 잃|기절|어지)", chest_pain: "(가슴.*아프|흉통)", dyspnea: "숨",
+               thyroid: "(더위|살이 빠|체중|떨리)", stroke: "(힘이 빠|말이|어눌)"}]
+    exams: [요골동맥 맥박 촉진 (Radial pulse palpation), 심음 청진 (Heart auscultation), 갑상선 촉진 (Thyroid palpation)]
+
+- case_id: L09
+  opening: 이름은 문지혜이고, 나는 마흔여섯 살 여자이다. 반년 전부터 너무 피곤해서 병원에 왔다.
+  vital_signs: "혈압 : 128/86 mmHg\n맥박 : 56 회/분\n호흡 : 16 회/분\n체온 : 36.1°C"
+  script: |
+    반년 전부터 늘 피곤하다. 밤에 아홉 시간을 자도 아침에 일어나기 힘들고 낮에도 졸리다. 머리가 멍하고 깜빡깜빡 잊는다. 쉬어도 피로가 풀리지 않는다.
+    남들보다 추위를 많이 타서 여름에도 긴소매를 입는다. 먹는 양은 그대로인데 반년 사이에 몸무게가 오 키로그람 늘었다. 변비가 생겨서 사흘에 한 번 본다. 피부가 건조해지고 머리카락이 많이 빠진다. 목소리가 조금 쉬었다.
+    생리량이 예전보다 많아지고 기간도 길어졌다. 마지막 생리는 이 주 전이다. 기분이 조금 처지지만 즐거운 일에 흥미가 없어진 정도는 아니다. 코를 골거나 자다가 숨이 멎는다는 말은 들은 적 없다.
+    열이나 식은땀은 없다. 숨이 차거나 가슴이 두근거리지 않는다. 지병은 없고 먹는 약도 없다. 약 알레르기는 없다. 어머니가 갑상선 약을 드신다.
+    담배는 안 피우고 술은 가끔 한 잔 마신다. 초등학교 교사로 일한다.
+  exams:
+    전반적 외관 시진 (General appearance): 얼굴 부석함(+), 무표정
+    활력징후 측정 (Vital signs): 128/86mmHg, 56회/분, 16회/분, 36.1°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    갑상선 촉진 (Thyroid palpation): 양측 미만성 비대(+), 단단함, 결절(-), 압통(-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    피부 온도·발한 촉진 (Skin temperature and diaphoresis): 차고 건조함(+)
+    심음 청진 (Heart auscultation): S1·S2 규칙적 서맥 56회/분, 심잡음(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심부건반사 (Deep tendon reflex): 이완기 지연(+/+)
+    하지 말초 진찰 (Peripheral pulse and edema): 비함요부종(+/+)
+  key:
+    diagnosis: Hypothyroidism (Hashimoto thyroiditis)
+    history: [onset, severity, pmh, meds, fh, lmp, smoking, alcohol,
+              {sleep: "(잠|수면|졸리)", mood: "(기분|우울|흥미)", weight: "(몸무게|체중|살)", cold: "추위",
+               bowel: "(변|변비)", skin_hair: "(피부|머리카락|털)", voice: "목소리", menses: "(생리량|생리|월경)"}]
+    exams: [갑상선 촉진 (Thyroid palpation), 심부건반사 (Deep tendon reflex),
+            피부 온도·발한 촉진 (Skin temperature and diaphoresis), 하지 말초 진찰 (Peripheral pulse and edema)]

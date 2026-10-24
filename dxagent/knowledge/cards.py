@@ -115,6 +115,11 @@ class FindingDef(BaseModel):
     xrefs: list[str] = Field(default_factory=list)
     background_source: Literal["registry", "claim", "derived", "default", "contrast"] = "registry"
     synonyms: list[str] = Field(default_factory=list)  # v0.4: free-text names (ontology synonyms) for lexical retrieval
+    # v0.5 (N.O.V.A, Korean encounters): lay Korean terms for lexical retrieval over Korean replies, and ONE Korean
+    # utterance that reveals this finding (a question of at most 30 characters for history findings, a single
+    # maneuver request for exam findings). Empty: the runtime phrases it with the LLM.
+    ko: list[str] = Field(default_factory=list)
+    ask_ko: str = ""
 
     @model_validator(mode="after")
     def _fill(self) -> "FindingDef":
@@ -134,6 +139,8 @@ class TestDef(BaseModel):
     risk: Optional[float] = None
     rules: list[NumericRule] = Field(default_factory=list)
     aliases: list[str] = Field(default_factory=list)  # v0.4: names used to verify that a cited quote is about this test
+    ko: str = ""  # v0.5: Korean name of the test (plan section of the SOAP note)
+    ask_ko: str = ""  # v0.5: one Korean sentence ordering this single test (final round TEST action)
 
     @model_validator(mode="after")
     def _fill(self) -> "TestDef":
@@ -668,7 +675,8 @@ class CardStore:
         with self._lock:
             if self._lexicon is None:
                 self._lexicon = Lexicon(
-                    (c, fd.label, list(fd.aliases) + list(fd.synonyms)) for c, fd in self._findings.items() if c not in self._canon
+                    (c, fd.label, list(fd.aliases) + list(fd.synonyms) + list(fd.ko))
+                    for c, fd in self._findings.items() if c not in self._canon
                 )
             return self._lexicon
 

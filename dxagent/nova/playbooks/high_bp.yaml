@@ -1,0 +1,116 @@
+id: high_bp
+title: {ko: 고혈압, en: Elevated blood pressure}
+status: draft
+reviewer: ""
+population: adult
+pain: false
+match:
+  any: [혈압이 높, 고혈압, 혈압이 올라, 혈압이 나왔, 혈압이 나와, 혈압이 안 떨어, 혈압이 안 잡]
+  not: []
+history:
+  - {id: onset, q: "언제 혈압이 높다고 들으셨어요?", item: Onset, p: 1}
+  - {id: readings, q: "혈압이 얼마나 나왔나요?", item: BP readings, p: 1}
+  - id: home_bp
+    q: "집에서 혈압을 재 보셨나요?"
+    item: Home BP
+    p: 1
+    then:
+      - {id: home_value, q: "집에서는 얼마나 나오나요?", item: Home BP readings, known: "\\d|백|십|이상|정상"}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 1}
+  - {id: chest_pain, q: "가슴도 아프세요?", item: Chest pain, p: 1}
+  - {id: dyspnea, q: "숨이 차세요?", item: Dyspnea, p: 1}
+  - {id: vision, q: "눈이 침침해졌나요?", item: Visual change, p: 2}
+  - id: snoring
+    q: "코를 심하게 고세요?"
+    item: Snoring
+    p: 2
+    then:
+      - {id: apnea, q: "자다가 숨을 멈춘다는 말을 들었나요?", item: Witnessed apnea, known: "멈|무호흡|숨을 안"}
+  - {id: edema, q: "다리가 붓나요?", item: Edema, p: 2}
+  - {id: weakness, q: "근육에 힘이 빠지나요?", item: Muscle weakness, p: 3}
+  - {id: spells, q: "갑자기 땀이 쏟아질 때가 있나요?", item: Paroxysmal sweating, p: 3}
+  - {id: lipid, q: "콜레스테롤이 높다고 들으셨어요?", item: dyslipidemia, sec: pmh, p: 1}
+  - {id: kidney_dx, q: "콩팥 질환이 있으세요?", item: kidney disease, sec: pmh, p: 2}
+  - {id: heart_dx, q: "심장병을 진단받은 적 있나요?", item: heart disease, sec: pmh, p: 2}
+  - {id: stroke, q: "뇌졸중을 앓은 적 있나요?", item: previous stroke, sec: pmh, p: 2}
+  - {id: nsaid, q: "진통제를 자주 드세요?", item: NSAID, sec: meds, p: 2}
+  - {id: adherence, q: "혈압약을 잘 챙겨 드세요?", item: Adherence, sec: meds, p: 3}
+  - {id: herbal, q: "한약을 드시나요?", item: Herbal medicine (licorice), sec: meds, p: 3}
+  - {id: ocp, q: "피임약을 드시나요?", item: Oral contraceptive, sec: meds, p: 3, only: female}
+  - {id: fh_htn, q: "가족 중 고혈압 있는 분 있나요?", item: "FHx: HTN", sec: fhx, p: 1}
+  - {id: salt, q: "음식을 짜게 드시는 편인가요?", item: Salt intake, sec: shx, p: 1}
+  - {id: exercise, q: "운동은 얼마나 하세요?", item: Exercise, sec: shx, p: 2}
+  - {id: stress, q: "요즘 스트레스가 많으세요?", item: Stress, sec: shx, p: 3}
+exams:
+  - {name: 양팔 혈압 비교, item: V/S, p: 1}
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 심음 청진, item: Heart, p: 1}
+  - {name: 하지 말초 진찰, item: Extremities, p: 1}
+  - {name: 안저 검사, item: H/E/E/N/T, p: 2}
+  - {name: 경동맥 잡음 청진, item: Neck, p: 2}
+  - {name: 복부 잡음 청진, item: Abdomen, p: 2}
+  - {name: 복부 촉진, item: Abdomen, p: 3}
+differential:
+  - {en: Essential hypertension, ko: 본태성 고혈압}
+  - {en: White coat hypertension, ko: 백의 고혈압}
+  - {en: Primary aldosteronism, ko: 일차성 알도스테론증}
+  - {en: Renovascular hypertension, ko: 신혈관성 고혈압}
+  - {en: Chronic kidney disease, ko: 만성 콩팥병}
+  - {en: Obstructive sleep apnea, ko: 폐쇄성 수면무호흡}
+  - {en: Pheochromocytoma, ko: 갈색세포종}
+  - {en: Cushing syndrome, ko: 쿠싱 증후군}
+  - {en: Thyroid dysfunction, ko: 갑상샘 기능 이상}
+  - {en: Coarctation of the aorta, ko: 대동맥 축착}
+  - {en: "Drug-induced hypertension (NSAID, decongestant, oral contraceptive, licorice)", ko: 약물 유발 고혈압}
+  - {en: Hypertensive emergency, ko: 고혈압 응급, cant_miss: true}
+tests:
+  - {name: "Repeat office BP, home or 24-hour ambulatory BP monitoring", for: [Essential hypertension, White coat hypertension, "Drug-induced hypertension (NSAID, decongestant, oral contraceptive, licorice)"], why: "진료실 밖 혈압으로 확진"}
+  - {name: "Urinalysis, urine albumin/creatinine ratio", for: [Chronic kidney disease, Essential hypertension, Hypertensive emergency], why: "단백뇨·신장 손상 확인"}
+  - {name: "Creatinine/eGFR, electrolytes (potassium)", for: [Chronic kidney disease, Primary aldosteronism, Hypertensive emergency, safety], why: "신기능·저칼륨혈증 확인(ACEi·ARB·이뇨제 전)"}
+  - {name: "Plasma aldosterone, renin and aldosterone/renin ratio (all newly diagnosed hypertension)", for: [Primary aldosteronism], why: "일차성 알도스테론증 선별"}
+  - {name: "Fasting glucose or HbA1c, lipid profile", for: [Essential hypertension], why: "심혈관 위험도 평가"}
+  - {name: "CBC, uric acid", for: [Essential hypertension], why: "기저 상태·요산 확인"}
+  - {name: "12-lead ECG", for: [Essential hypertension, Hypertensive emergency], why: "좌심실비대·허혈 확인"}
+  - {name: "Plasma free metanephrines (paroxysmal symptoms)", for: [Pheochromocytoma], why: "갈색세포종 선별"}
+  - {name: "Overnight 1 mg dexamethasone suppression test (Cushing features)", for: [Cushing syndrome], why: "쿠싱 증후군 선별"}
+  - {name: "TSH", for: [Thyroid dysfunction], why: "갑상샘 기능 확인"}
+  - {name: "Renal artery duplex ultrasound or CT angiography (abdominal bruit, resistant hypertension)", for: [Renovascular hypertension], why: "신동맥 협착 확인"}
+  - {name: "Home sleep apnea test or polysomnography (snoring, witnessed apnea)", for: [Obstructive sleep apnea], why: "수면무호흡 확인"}
+  - {name: "Echocardiography (murmur, young onset, or LVH)", for: [Coarctation of the aorta, Essential hypertension], why: "대동맥 축착·좌심실비대 확인"}
+plan:
+  treatment:
+    - "모든 환자 생활요법: 저염식, 체중 감량, 절주, 금연, 규칙적 운동"
+    - "진료실 밖 혈압으로 확진 후 위험도에 따라 약물(ACEi·ARB, CCB, 이뇨제) 시작"
+    - "160/100 이상이거나 고위험군이면 생활요법과 함께 바로 약물 시작"
+    - "이차성 원인(알도스테론·신혈관·약물) 확인 시 원인별 치료"
+  disposition: "외래 관리, 180/120 이상이면서 흉통·호흡곤란·신경학적 증상 등 표적장기 손상이 있으면 응급실"
+  follow_up:
+    - "가정혈압을 기록해 2-4주 후 재방문"
+    - "ACEi·ARB·이뇨제 시작 후 1-2주 내 칼륨·크레아티닌 확인"
+    - "목표 도달 후 3-6개월마다 혈압·합병증 점검"
+  red_flags:
+    - "심한 두통"
+    - "가슴 통증"
+    - "시야 이상"
+    - "한쪽 팔다리 마비"
+education:
+  - "집에서 혈압을 재서 기록해 주세요."
+  - "음식을 싱겁게 드세요."
+  - "머리가 심하게 아프면 바로 오세요."
+guidelines:
+  - KR_EuropePMC/europepmc_PMC13197191.md
+  - US_StatPearls/statpearls_article-21370.md
+  - US_StatPearls/statpearls_article-28819.md
+  - KR_EuropePMC/europepmc_PMC9526300.md
+notes: >
+  v0.8.0. Korean thresholds (KSH 2022 focused update, Clin Hypertens 2023;29:11): office BP 140/90 mmHg or more is
+  hypertension; 24-hour ambulatory 130/80 or more (home 135/85 or more, to verify); target below 130/80 for high-risk
+  patients (3 or more risk factors, diabetes with a risk factor, organ damage, coronary or vascular disease, heart
+  failure, CKD with proteinuria, lacunar infarction), otherwise below 140/90. ACC/AHA uses 130/80 for stage 1; a Korean
+  chart should state 140/90. Primary aldosteronism screening (aldosterone, renin, ARR) is now suggested for every adult
+  with hypertension (Endocrine Society 2025; PA in 5-14% of primary-care hypertension), not only when secondary
+  hypertension is suspected. Follow-ups: home readings, witnessed apnea after snoring. Licorice in herbal medicine
+  (pseudo-hyperaldosteronism) and adherence added at p3. Fundoscopy kept as a maneuver, removed from the tests.
+  Clues to secondary hypertension: onset under 30 or resistant hypertension, hypokalemia, paroxysmal
+  headache-sweating-palpitations, snoring, kidney disease, drugs. Hypertensive emergency = severe elevation
+  (usually 180/120 or more) with acute target-organ damage (chest pain, dyspnea, neurologic signs, visual loss).

@@ -1,7 +1,7 @@
 # Experiments
 
-Simulation studies of the reasoning core. Raw paired analyses are in `results/`; `patches/` holds two scenario patches
-for the v0.3.1 harness.
+Simulation studies of the research core (`docs/CORE.md`) and the local checks of the contest runtime. Raw paired analyses
+are in `results/`; `patches/` holds two scenario patches for the v0.3.1 harness.
 
 ## Simulation studies of the core
 
@@ -21,6 +21,7 @@ findings, so absolute numbers do not transfer.
 | v0.3 fixes (`v03_sim.py`, `v03_batch.py`, `v03_pairs.py`, `v03_analyze.py`, `v03_lexicon_eval.py`) | Primary-complaint prior (A1), lexical retrieval and canonical codes (A2, A3), card prevalence (C3), structured veto (D2), report dissent as objection (E1) | Held-out, all together: top-1 0.887 to 0.930, Brier -0.047, ECE -0.026, turns -0.46, cost -$27. A1 +1.4 pp; A2+A3 +0.7 pp (ECE +0.006, accepted); C3 +1.0 pp (missed can't-miss +2.2 pp); E1 +3.0 pp over letting the report LLM's name win; D2 contains a stubborn critic (-$96 per case at -0.3 pp). Retrieval offers the right code in 79% of held-out paraphrases. Screened out: background-rate pass, evidence-ratio admission, discovery prompts, open-world re-prompt, conditional batches, shadow list |
 | v0.3.1 prior context (`p1_analyze.py`) | Does conditioning the prior on S only help? | Neutral on top-1, Brier, ECE and log loss when the generator obeys (+5.5 calls per case); slightly worse against a fully leaking one (Brier +0.004, +$11). The prior decides the leader in under 2% of cases and the agent is underconfident (0.900 vs 0.930), so double counting is nearly harmless here. Adopted for the structural guarantee (decision 20); `results/p1/`. The harness was made deterministic (serial thread pools) |
 | v0.4 compiled knowledge (`v04_sim.py`, `v04_analyze.py`) | Compiled cards on the v0.3 held-out benchmark | The v0.4 code with v0.3's knowledge reproduces v0.3.1 in 5,000/5,000 cases, so every difference is knowledge: compiled 75% coverage 0.782 (0.830 with the fallback); full coverage 0.890 / 0.913 / 0.938 when 70% / 85% / 100% of entries are stated by a source; against live drafting with systematic errors, +4.7 pp with 2.8 pp fewer confident errors. Performance is set by coverage and the stated share. `results/v04_heldout/` |
+| N.O.V.A protocol cost (`v05_protocol_sim.py`) | What the contest's action rules cost the unchanged core | One action per turn -0.9 pp top-1 (n.s.); no tests -18.9 pp (decisions 38-49 in `docs/decisions/v0.5-simple-approach.md`). `results/v05_protocol/` |
 
 Commands (outputs go under `runs/`, git-ignored):
 
@@ -34,3 +35,36 @@ python experiments/p1_analyze.py runs/p1_heldout --base v0.3 --arms v0.3+P1 --ta
 python experiments/v04_sim.py --arms v0.4 v0.4+fallback v0.4+cov100 v0.4+v3know --out V04
 python experiments/v04_analyze.py BASE V04 OUT.json
 ```
+
+## Contest runtime: local CPX-style cases
+
+`data/nova_cpx/*.yaml` holds 18 practice cases written for this project in the development kit's case format (opening,
+vital signs, patient script, exam table), each with our own answer key: history items, matched by regex against the
+doctor's SAY lines, and the exam rows that matter. `nova_cpx_check.py` writes them as `case.json` folders and plays them
+through the development kit's simulator with the scripted patient and examiner of `nova_devkit_check.py`. The agent runs
+offline, so the scores are the visit's deterministic floor (the focus call and the time-out add nothing). Cases L01-L11
+fall within the old complaint groups, L12-L18 do not (urination, joints, mood, memory, amenorrhea, edema, rectal
+bleeding). The cases and the playbooks have the same author, so the gains partly measure agreement with that author's
+idea of each checklist.
+
+```bash
+NOVA_OFFLINE=1 python -B experiments/nova_cpx_check.py --devkit <dev kit> --label mylabel
+NOVA_OFFLINE=1 python -B experiments/nova_devkit_check.py --devkit <dev kit> --samples <sample cases> --audit
+python -B experiments/nova_live_report.py runs/live/<version>      # per-case reports from live-run logs (docs/LIVE_RUNS.md)
+```
+
+| Version | History coverage | Key exams | Unlisted maneuvers | Refused | Turns (range) |
+|---|---|---|---|---|---|
+| 0.5.2, no playbooks (fixture cards on: 0.56 / 0.41 / 32.9) | 0.55 (in-group 0.61, out 0.46) | 0.36 | 37 | - | 28.7 |
+| 0.6.0, playbooks | 0.85 (0.84 / 0.86) | 0.86 | 16 | - | 44.9 |
+| 0.7.0, cut at 40 | 0.82 | 0.89 | 15 | - | 39.3 |
+| 0.7.1, 40 an aim, cap 46 | 0.85 | 0.89 | 15 | 0 | 42.2 (34-49) |
+| 0.7.2, one-action maneuvers | 0.85 | 0.86 | 18 | 0 | 42.2 |
+| 0.8.0, evidence review (and 0.8.1) | 0.84 | 0.83 | 23 | 0 | 42.5 (35-48) |
+
+"Unlisted" is a maneuver answered from outside the case's table. The fixture cards did not improve history coverage on
+unseen cases, and exam coverage collapsed outside the old complaint groups (about 0.1 against 0.5), which motivated the
+playbooks. The 0.7.2 drop in key exams is the stand-in's: the cases' tables use the old maneuver names, which its bigram
+matcher cannot map to the new single-action names. The 0.8.0 misses are items the audits demoted to priority 3 for low
+yield and two maneuvers replaced on the evidence, which a live model can add back. The 40-turn cut lost 10 single history
+items across the 18 cases and gained 3.

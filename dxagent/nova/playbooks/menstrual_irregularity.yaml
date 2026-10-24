@@ -1,0 +1,130 @@
+id: menstrual_irregularity
+title: {ko: 월경 이상(무월경·불규칙 월경), en: Amenorrhea or irregular menses}
+status: draft
+reviewer: ""
+population: female
+pain: false
+match:
+  any: [생리를 안 해, 생리를 안 하, 생리가 없, 생리가 안 나, 무월경, 생리가 불규칙, 생리 주기가 불규칙, 월경이 없, 생리를 건너, 생리가 늦어, 생리가 끊, 생리를 하지 않, 생리가 멈췄, 생리를 거르, 생리를 걸러, 생리를 안 한, 월경을 안, 생리가 안 와, 생리가 안 오, 달째 생리, 개월째 생리]
+  not: []
+history:
+  - {id: lmp, q: "마지막 생리는 언제였나요?", item: LMP, p: 1}
+  - id: sexual
+    q: "성관계를 하신 적 있나요?"
+    item: Sexual activity
+    p: 1
+    only: adult
+    gate: sexual
+    then:
+      - {id: contraception, q: "피임은 어떻게 하세요?", item: Contraception, known: "콘돔|피임약|루프|피임 안|안 해"}
+  - {id: pregnancy, q: "임신 가능성이 있나요?", item: Pregnancy, p: 1, only: adult}
+  - {id: menarche, q: "초경은 몇 살에 하셨어요?", item: Menarche, p: 1}
+  - {id: prior_cycle, q: "원래 생리는 며칠마다 했나요?", item: Previous cycle length and regularity, p: 1}
+  - id: weight
+    q: "최근 체중이 변했나요?"
+    item: Weight change
+    p: 1
+    then:
+      - {id: weight_kg, q: "몇 kg 정도 변했나요?", item: Weight change (kg), known: "kg|킬로|키로"}
+      - {id: weight_period, q: "몇 달 사이에 변했나요?", item: Weight change period, known: "달|개월|주|년"}
+  - {id: diet, q: "최근 식사량을 줄이셨나요?", item: Dieting, p: 1}
+  - {id: exercise, q: "운동을 심하게 하세요?", item: Excessive exercise, p: 1}
+  - {id: hirsutism, q: "몸에 털이 많아졌나요?", item: Hirsutism, p: 1}
+  - {id: galactorrhea, q: "젖꼭지에서 분비물이 나오나요?", item: Galactorrhea, p: 1}
+  - {id: stress, q: "요즘 스트레스가 많으세요?", item: Stress, p: 2}
+  - {id: acne, q: "여드름이 많이 나나요?", item: Acne, p: 2}
+  - {id: headache, q: "머리도 아프세요?", item: Headache, p: 2}
+  - {id: visual, q: "시야가 좁아진 느낌이 있나요?", item: Visual field defect, p: 2}
+  - {id: hot_flush, q: "얼굴이 화끈 달아오르나요?", item: Hot flushes, p: 2}
+  - {id: nausea, q: "속이 메스꺼우세요?", item: Nausea, p: 3}
+  - {id: cyclic_pain, q: "매달 아랫배가 주기적으로 아프세요?", item: Cyclic pelvic pain without bleeding, p: 3}
+  - {id: anosmia, q: "냄새를 잘 맡지 못하나요?", item: Anosmia, p: 3}
+  - {id: cold, q: "추위를 많이 타세요?", item: Cold intolerance, sec: ros, p: 3}
+  - {id: heat, q: "더위를 많이 타세요?", item: Heat intolerance, sec: ros, p: 3}
+  - {id: dryness, q: "질이 건조한 느낌이 있나요?", item: Vaginal dryness, sec: ros, p: 3}
+  - id: postpartum
+    q: "최근에 출산하셨나요?"
+    item: Recent delivery
+    sec: ob
+    p: 2
+    only: adult
+    then:
+      - {id: lactation, q: "모유 수유 중이신가요?", item: Lactation, known: "수유|모유|분유"}
+      - {id: pph, q: "출산 때 피를 많이 흘리셨나요?", item: Postpartum hemorrhage}
+  - {id: uterine_proc, q: "소파수술을 받은 적 있나요?", item: Uterine curettage, sec: pmh, p: 2, only: adult}
+  - {id: thyroid_dx, q: "갑상선 질환이 있으세요?", item: thyroid disease, sec: pmh, p: 2}
+  - {id: prokinetic, q: "위장약이나 소화제를 자주 드시나요?", item: "Prokinetic use (levosulpiride, domperidone, metoclopramide)", sec: meds, p: 2}
+  - {id: psych_drug, q: "정신건강의학과 약을 드시나요?", item: Antipsychotic use, sec: meds, p: 3}
+  - {id: ocp_stop, q: "피임약을 최근에 끊으셨나요?", item: Stopped oral contraceptive, sec: meds, p: 3, only: adult}
+  - {id: fh_menopause, q: "가족 중 폐경이 일찍 온 분 있나요?", item: "FHx: early menopause", sec: fhx, p: 3}
+exams:
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 다모증 평가, item: Skin, p: 1}
+  - {name: 유즙 분비 확인, item: Breast, p: 1}
+  - {name: 갑상선 촉진, item: Neck, p: 1}
+  - {name: 흑색가시세포증 시진, item: Skin, p: 2}
+  - {name: 양손 골반 내진, item: GU, p: 2, only: sexually_active}
+  - {name: 사춘기 성숙도 평가, item: General, p: 3}
+  - {name: 대면 시야 검사, item: Neuro, p: 3}
+differential:
+  - {en: Pregnancy, ko: 임신, cant_miss: true}
+  - {en: Polycystic ovary syndrome, ko: 다낭성 난소 증후군}
+  - {en: Functional hypothalamic amenorrhea, ko: 기능성 시상하부 무월경}
+  - {en: Hyperprolactinemia or prolactinoma, ko: 고프로락틴혈증·프로락틴종}
+  - {en: "Drug-induced hyperprolactinemia (antipsychotics, levosulpiride, domperidone, metoclopramide)", ko: 약물 유발 고프로락틴혈증(항정신병약·위장운동촉진제)}
+  - {en: Thyroid dysfunction, ko: 갑상샘 기능 이상}
+  - {en: Primary ovarian insufficiency, ko: 조기 난소 기능부전}
+  - {en: Asherman syndrome, ko: 아셔만 증후군}
+  - {en: Perimenopause or menopause, ko: 폐경 이행기·폐경}
+  - {en: Lactational amenorrhea, ko: 수유 무월경}
+  - {en: Sheehan syndrome, ko: 쉬한 증후군}
+  - {en: Nonclassic congenital adrenal hyperplasia, ko: 비고전형 선천부신증식증}
+  - {en: Androgen-secreting tumor, ko: 안드로겐 분비 종양, cant_miss: true}
+  - {en: "Turner syndrome or Mullerian agenesis (primary amenorrhea)", ko: 터너 증후군·뮐러관 무형성(원발 무월경)}
+  - {en: "Outflow tract obstruction (imperforate hymen, transverse vaginal septum)", ko: 유출로 폐쇄(처녀막 폐쇄·질 가로막)}
+tests:
+  - {name: "Urine or serum hCG", for: [Pregnancy, Lactational amenorrhea, safety], why: "임신 배제(모든 환자 첫 검사)"}
+  - {name: "TSH, prolactin", for: [Thyroid dysfunction, Hyperprolactinemia or prolactinoma, "Drug-induced hyperprolactinemia (antipsychotics, levosulpiride, domperidone, metoclopramide)"], why: "갑상샘·프로락틴 확인"}
+  - {name: "FSH, LH, estradiol", for: [Primary ovarian insufficiency, Functional hypothalamic amenorrhea, Perimenopause or menopause, "Turner syndrome or Mullerian agenesis (primary amenorrhea)"], why: "난소부전(FSH 상승)과 시상하부성(저·정상) 구분"}
+  - {name: "Total testosterone, DHEA-S", for: [Polycystic ovary syndrome, Androgen-secreting tumor, Nonclassic congenital adrenal hyperplasia], why: "고안드로겐혈증 확인(종양은 현저히 높음)"}
+  - {name: "Morning 17-hydroxyprogesterone", for: [Nonclassic congenital adrenal hyperplasia], why: "난포기 아침 채혈로 비고전형 CAH 배제"}
+  - {name: "Pelvic ultrasound", for: [Polycystic ovary syndrome, Androgen-secreting tumor, "Turner syndrome or Mullerian agenesis (primary amenorrhea)", "Outflow tract obstruction (imperforate hymen, transverse vaginal septum)"], why: "자궁·난소 구조 확인(성경험 없으면 경복부; 초경 후 8년 이내는 PCOS 진단에 쓰지 않음)"}
+  - {name: "Progestin challenge test", for: [Functional hypothalamic amenorrhea, Asherman syndrome], why: "에스트로겐 상태·유출로 확인(임신 배제 후)"}
+  - {name: "Hysteroscopy", for: [Asherman syndrome], why: "소파술 후 무월경에서 자궁강 유착 확인"}
+  - {name: "Pituitary MRI", for: [Hyperprolactinemia or prolactinoma, Sheehan syndrome], why: "약물 원인 없는 고프로락틴혈증, 두통·시야 결손 시"}
+  - {name: "Morning cortisol, free T4", for: [Sheehan syndrome], why: "산후 출혈 병력 시 뇌하수체 기능 확인"}
+  - {name: "Karyotype", for: ["Turner syndrome or Mullerian agenesis (primary amenorrhea)", Primary ovarian insufficiency], why: "원발 무월경·40세 전 난소부전"}
+  - {name: "75 g OGTT, lipids", for: [Polycystic ovary syndrome], why: "PCOS의 당대사·지질 위험 평가"}
+plan:
+  treatment:
+    - "hCG 음성을 확인한 뒤 원인별로 치료합니다."
+    - "PCOS: 체중 5-10% 감량과 운동, 월경 조절은 복합 경구피임약이나 주기적 프로게스틴."
+    - "기능성 시상하부 무월경: 열량 섭취를 늘리고 과도한 운동을 줄입니다."
+    - "고프로락틴혈증: 원인 약물(위장운동촉진제·항정신병약)을 처방의와 조정하고, 프로락틴종이면 도파민 작용제(카버골린)."
+  disposition: "대부분 외래 검사·치료; 시야 결손이나 심한 두통은 당일 뇌하수체 영상 의뢰, 원발 무월경·40세 전 난소부전·빠른 남성화는 전문의 의뢰."
+  follow_up:
+    - "2주 뒤 호르몬 검사 결과를 확인합니다."
+    - "3개월 뒤 월경과 체중을 재평가하고, PCOS는 매년 대사 위험을 검사합니다."
+  red_flags: ["시야가 좁아짐", "심한 두통", "목소리가 굵어지는 등 빠른 남성화", "임신 양성에 복통·출혈"]
+education:
+  - "먼저 임신 검사를 해 볼게요."
+  - "호르몬 피검사를 할게요."
+  - "검사 결과에 맞춰 치료할게요."
+guidelines:
+  - US_StatPearls/statpearls_article-17441.md
+  - US_EuropePMC/europepmc_PMC5399492.md
+  - US_StatPearls/statpearls_article-23208.md
+notes: >
+  v0.8.0 (evidence review): sexual-activity item added as the pelvic-exam gate (adults only; contraception as its
+  follow-up); never had intercourse: no speculum or bimanual; transabdominal ultrasound; rectal exam only if a mass is
+  suspected; primary amenorrhea in a girl without sexual experience: external genital inspection (외음부 시진) and
+  Tanner staging instead. Regularity and cycle length merged into one question; weight change quantified (kg over
+  months). Prokinetic question added: levosulpiride, domperidone and metoclopramide are D2 antagonists widely
+  prescribed in Korea and raise prolactin (Huh 2019 on the Korean prokinetic cascade). Nausea and cold intolerance
+  demoted (pregnancy and thyroid are settled by hCG and TSH). PCOS (International guideline, Teede 2023): adults need
+  2 of irregular cycles, hyperandrogenism, ultrasound or AMH; adolescents need both irregular cycles and
+  hyperandrogenism, with no ultrasound or AMH within 8 years of menarche. Irregular cycles: 1-3 years after menarche
+  under 21 or over 45 days; more than 3 years after menarche under 21 or over 35 days or fewer than 8 cycles a year;
+  any cycle over 90 days after the first year; primary amenorrhea by 15 or 3 years after thelarche. Secondary
+  amenorrhea: no menses for 3 months with regular cycles (6 months if irregular). Functional hypothalamic amenorrhea is
+  a diagnosis of exclusion; the progestin challenge is accepted (Endocrine Society 2017).

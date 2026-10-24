@@ -1,0 +1,101 @@
+id: developmental_delay
+title: {ko: 발달 지연, en: Developmental delay}
+status: draft
+reviewer: ""
+population: child
+pain: false
+match:
+  any: [발달이 늦, 말이 늦, 걸음마가 늦, 아직 못 걸, 아직 걷지 못, 아직 말을 못, 발달 지연, 또래보다 늦, 고개를 못 가, 목을 못 가, 말이 느, 말을 못, 못 걸어, 걷지 못, 걷지를 못, 눈을 안 맞, 발달이 느]
+  not: []
+history:
+  - {id: concern, q: "어떤 점이 늦다고 느끼셨나요?", item: Area of concern, p: 1}
+  - {id: since, q: "언제부터 늦다고 느끼셨나요?", item: Onset, p: 1}
+  - id: regression
+    q: "할 줄 알던 것을 못 하게 됐나요?"
+    item: Regression
+    p: 1
+    then:
+      - {id: reg_what, q: "어떤 걸 못 하게 됐나요?", item: Regressed skill, known: "말|단어|걷|걸|손|눈|웃"}
+      - {id: reg_when, q: "언제부터 못 하게 됐나요?", item: Age at regression, known: "개월|달|살|주|돌"}
+  - {id: walk, q: "아이가 언제 혼자 걸었나요?", item: Gross motor milestone, p: 1}
+  - {id: words, q: "아이가 몇 단어를 말하나요?", item: Expressive language, p: 1}
+  - {id: understand, q: "아이가 말을 알아듣나요?", item: Receptive language, p: 1}
+  - {id: hearing, q: "아이가 소리에 잘 반응하나요?", item: Hearing, p: 1}
+  - {id: name, q: "이름을 부르면 돌아보나요?", item: Response to name, p: 1}
+  - {id: eye_contact, q: "아이가 눈을 잘 맞추나요?", item: Eye contact, p: 1}
+  - {id: kdst, q: "영유아 검진에서 이상하다고 들었나요?", item: "Infant screening (K-DST)", p: 2}
+  - {id: head, q: "목은 언제 가누었나요?", item: Head control, p: 2}
+  - {id: sit, q: "혼자 앉은 건 언제였나요?", item: Sitting, p: 2}
+  - {id: fine, q: "작은 물건을 손가락으로 집나요?", item: Fine motor, p: 2}
+  - {id: pointing, q: "원하는 것을 손가락으로 가리키나요?", item: Pointing, p: 2}
+  - {id: repetitive, q: "같은 행동을 계속 반복하나요?", item: Repetitive behavior, p: 2}
+  - {id: seizure, q: "아이가 경련을 한 적 있나요?", item: Seizures, p: 2}
+  - {id: size, q: "또래보다 체구가 작은가요?", item: Growth, p: 3}
+  - {id: pregnancy, q: "임신 중 문제가 있었나요?", item: Prenatal history, sec: pmh, p: 1}
+  - {id: birth_cry, q: "태어날 때 바로 울었나요?", item: Perinatal asphyxia, sec: pmh, p: 1}
+  - {id: nicu, q: "태어나서 입원한 적 있나요?", item: Neonatal admission, sec: pmh, p: 2}
+  - {id: nhs, q: "신생아 청각선별검사는 정상이었나요?", item: Newborn hearing screen, sec: pmh, p: 2}
+  - {id: jaundice, q: "신생아 때 황달이 심했나요?", item: Neonatal jaundice, sec: pmh, p: 3}
+  - {id: fh_dev, q: "가족 중 발달이 늦었던 분 있나요?", item: "FHx: developmental delay", sec: fhx, p: 2}
+  - {id: screen, q: "하루에 영상을 얼마나 보나요?", item: Screen time, sec: shx, p: 3}
+exams:
+  - {name: 발달 선별검사, item: Development, p: 1}
+  - {name: 신체 계측, item: General, p: 1}
+  - {name: 근긴장도 평가, item: Neuro, p: 1}
+  - {name: 안면 기형 소견 시진, item: H/E/E/N/T, p: 1}
+  - {name: 소리 반응 관찰, item: H/E/E/N/T, p: 1}
+  - {name: 보행 관찰, item: Neuro, p: 2}
+  - {name: 심부건반사, item: Neuro, p: 2}
+  - {name: 피부 시진, item: Skin, p: 2}
+differential:
+  - {en: Global developmental delay, ko: 전반적 발달 지연}
+  - {en: Autism spectrum disorder, ko: 자폐스펙트럼장애}
+  - {en: Hearing impairment, ko: 청력 장애}
+  - {en: Cerebral palsy, ko: 뇌성마비}
+  - {en: Isolated expressive language delay, ko: 단순 표현언어 지연}
+  - {en: "Neurodegenerative or metabolic disorder (regression)", ko: 퇴행을 동반한 신경퇴행·대사 질환, cant_miss: true}
+  - {en: Intellectual disability, ko: 지적장애}
+  - {en: "Genetic syndrome (Down syndrome, fragile X syndrome)", ko: 유전 증후군(다운 증후군·취약 X 증후군)}
+  - {en: Congenital hypothyroidism, ko: 선천성 갑상샘저하증}
+  - {en: "Neuromuscular disease (muscular dystrophy)", ko: 신경근육질환(근이영양증)}
+  - {en: Psychosocial deprivation, ko: 환경적 자극 결핍}
+tests:
+  - {name: "K-DST and formal developmental assessment", for: [Global developmental delay, Intellectual disability, Isolated expressive language delay, Psychosocial deprivation], why: "영역별 지연 정도 확인(4-71개월 K-DST, 필요 시 Bayley)"}
+  - {name: "M-CHAT-R/F", for: [Autism spectrum disorder], why: "16-30개월 자폐 선별(18·24개월 권고)"}
+  - {name: "Hearing test (ABR or audiometry)", for: [Hearing impairment, Isolated expressive language delay], why: "언어 지연은 모두 청력 확인"}
+  - {name: "Vision assessment", for: [Global developmental delay], why: "시력 이상 배제"}
+  - {name: "Chromosomal microarray, fragile X testing", for: ["Genetic syndrome (Down syndrome, fragile X syndrome)", Global developmental delay, Intellectual disability, Autism spectrum disorder], why: "전반적 지연·지적장애·자폐의 1차 유전 검사"}
+  - {name: "TSH, free T4", for: [Congenital hypothyroidism], why: "갑상샘저하증 배제"}
+  - {name: "Creatine kinase", for: ["Neuromuscular disease (muscular dystrophy)"], why: "근긴장 저하·근력 약화 동반 운동 지연"}
+  - {name: "Brain MRI", for: [Cerebral palsy, "Neurodegenerative or metabolic disorder (regression)"], why: "신경학적 이상, 퇴행, 소두증·대두증"}
+  - {name: "Metabolic screening", for: ["Neurodegenerative or metabolic disorder (regression)"], why: "퇴행·시사 소견 시 대사 질환 확인"}
+plan:
+  treatment:
+    - "확진을 기다리지 말고 조기 중재(언어·물리·작업치료)를 의뢰합니다."
+    - "청력 손실이면 보청기·인공와우 등 청각 재활을 시작합니다."
+    - "자폐스펙트럼장애가 의심되면 소아정신과 평가와 조기 행동 중재를 연결합니다."
+    - "가정에서 상호작용 놀이와 책 읽기를 늘리고 영상 시청을 줄입니다."
+  disposition: "외래에서 선별·청력검사 후 소아신경·발달 전문의 의뢰; 퇴행, 경련, 머리둘레 급변은 신속 평가."
+  follow_up:
+    - "1-3개월 뒤 검사 결과와 중재 반응을 확인합니다."
+    - "영유아 검진(K-DST)마다 발달을 재평가합니다."
+  red_flags: ["할 줄 알던 것을 못 하게 됨", "경련", "머리가 빨리 커지며 토함"]
+education:
+  - "발달 검사와 청력 검사를 할게요."
+  - "아이와 많이 대화하고 놀아 주세요."
+  - "할 줄 알던 걸 못 하면 바로 오세요."
+guidelines:
+  - US_StatPearls/statpearls_article-20414.md
+  - US_StatPearls/statpearls_article-19411.md
+  - KR_EuropePMC/europepmc_PMC10774551.md
+notes: >
+  v0.8.0 (evidence review): gait observation (a sample-table row) replaces the Moro reflex, which has normally
+  disappeared by 4-6 months and separates nothing at the usual age of a delay visit (12-36 months; Zafeiriou 2004);
+  infant under 6 months: ask for 모로 반사 확인 through the time-out, 9-24 months the parachute reaction (낙하산 반사
+  확인). Newborn hearing screen item added (language delay always needs hearing assessment); regression characterised
+  by follow-ups (which skill, at what age: language regression at 15-24 months suggests autism, motor or multiple
+  domains a neurodegenerative or metabolic disorder); body size demoted (신체 계측 measures it). Record head
+  circumference from 신체 계측 (microcephaly or macrocephaly). K-DST (4-71 months, 6 domains; Chung 2020) is the Korean
+  national screen; CDC/AAP 2022 milestones are set where 75% of children achieve them; AAP 2020: developmental
+  screening at 9, 18 and 30 months, autism-specific screening at 18 and 24 months. Separate motor, language, social
+  and global delay; any regression is a red flag; social communication deficits suggest autism.
