@@ -31,7 +31,7 @@ DRUG_CLASSES: dict[str, dict[str, list[str]]] = {
                             "에리스로마이신", "erythromycin", "macrolide"]},
     "조영제": {"allergen": ["조영제", "contrast"], "drugs": []},
 }
-_NO_ALLERGY = re.compile(r"(없어요|없습니다|없었|없음|아니요|아뇨|모르겠|딱히|별로)")
+_NO_ALLERGY = re.compile(r"(없어|없습니다|없었|없음|없다|없고|없네|없는데|아니요|아뇨|아니에요|모르겠|딱히|별로|전혀)")
 _RADIATION = re.compile(r"(CT|X선|x-ray|엑스레이|조영|촬영|씨티)", re.I)
 _ADMIT = re.compile(r"(입원|응급|중환자|ICU|전원|집중\s*관찰|모니터링)", re.I)
 

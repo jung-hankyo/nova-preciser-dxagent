@@ -1,0 +1,269 @@
+# Simulated CPX cases M30-M37 (women's health and pediatrics), written for offline measurement in the format of
+# cases_a.yaml. Original text; `key` is our own answer key (see experiments/case_check.py for the format).
+
+- case_id: M30
+  playbook: abnormal_uterine_bleeding
+  opening: 이름은 최은숙이고, 나는 쉰아홉 살 여자이다. 폐경된 지 사 년이 지났는데 한 달 전부터 질에서 피가 비쳐서 병원에 왔다.
+  vital_signs: "혈압 : 142/86 mmHg\n맥박 : 78 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    한 달 전에 처음으로 속옷에 갈색 피가 묻어 나왔다. 피가 계속 나오지는 않고 사나흘씩 비쳤다가 멈추기를 세 번 했다. 요즘은 피 색깔이 선홍색이다. 피의 양은 하루에 패드를 두세 번 갈 정도이다. 핏덩어리는 없다. 피가 없을 때도 분홍빛 물 같은 냉이 나온다. 폐경 뒤에 이런 적은 이번이 처음이다.
+    배는 아프지 않고 가끔 아랫배가 묵직하다. 냉에서 냄새는 나지 않는다. 성관계 뒤에 피가 난 적은 없다. 질이 마르거나 따갑지는 않다. 열이 나지는 않는다. 소변이나 대변에 피가 섞이지는 않는다. 코피나 멍이 잘 생기지는 않는다. 어지러운 적은 없다. 피곤하거나 입맛이 떨어지지는 않았다. 체중 변화는 없다.
+    마지막 생리는 사 년 전, 쉰다섯 살 때였다. 초경은 열세 살에 했다. 젊을 때부터 생리 주기가 두세 달에 한 번으로 불규칙했다. 아이가 생기지 않아서 임신이나 출산 경험은 없다. 폐경이 돼서 임신 가능성은 없다. 피임은 하지 않는다. 남편과 성관계는 두세 달에 한 번 한다. 여성호르몬제는 먹은 적이 없다.
+    앓고 있는 병은 당뇨와 고혈압이다. 당뇨는 십 년 전, 고혈압은 칠 년 전에 진단받았다. 먹는 약이 있는데 메트포르민과 암로디핀이다. 아스피린은 먹지 않는다. 유방암을 앓은 적은 없다. 수술 받은 적은 없다. 입원한 적도 없다. 약 알레르기는 없다. 자궁경부암 검사는 오 년 전에 받았고 정상이었다.
+    키는 백오십오 센티미터이고 몸무게는 칠십오 키로그람이다. 운동은 거의 하지 않는다. 가족 중에는 어머니가 대장암 수술을 받았다. 담배는 피운 적이 없다. 술은 마시지 않는다. 남편과 둘이 사는 주부이다. 혹시 암이 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 비만 (키 155cm, 몸무게 75kg, BMI 31.2)
+    활력징후 측정 (Vital signs): 142/86mmHg, 78회/분, 16회/분, 36.6°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    점상출혈 확인 (Petechiae and purpura): 점상출혈(-), 멍(-)
+    쇄골상 림프절 촉진 (Supraclavicular lymph node palpation): 촉지(-/-)
+    복부 시진 (Abdominal inspection): 비만형 복부, 팽만(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    서혜부 림프절 촉진 (Inguinal lymph node palpation): 촉지(-/-)
+    외음부 시진 (Vulvar inspection): 위축(-), 병변(-)
+    질경 검사 (Speculum examination): 질 점막 분홍색, 위축(-), 질 병변(-); 자궁경부 외관 정상, 종괴(-); 자궁경부 입구에서 검붉은 혈액이 소량 흘러나옴(+)
+    양손 골반 내진 (Bimanual pelvic examination): 비만으로 촉진 제한적; 자궁 약간 커짐, 부드러움, 압통(-), 가동성 정상; 부속기 종괴(-/-)
+    하지 말초 진찰 (Peripheral pulse and edema): 부종(-/-)
+  key:
+    diagnosis: Endometrial cancer
+    differential: [Endometrial hyperplasia, Endometrial polyp, Atrophic endometritis or vaginitis, Cervical cancer]
+    history: [onset, timing, prior, pmh, meds, surgery, fh, smoking, alcohol, lmp, pregnancy,
+              {color: "(색|선홍|검붉|갈색)", amount: "(피의 양|양이 많|양은|패드|얼마나 많|덩어리)", pain: "(아프|통증|복통)",
+               discharge: "(냉|분비물)", postcoital: "(성관계.*(피|출혈)|관계 (후|뒤))", hormone: "(호르몬|갱년기)",
+               parity: "(출산|분만|아이|자녀)", menarche_cycle: "(초경|처음 생리|주기|규칙)",
+               pap: "(자궁경부암|세포 ?검사|자궁암 검사|검진)", weight: "(체중|몸무게|살이)", bleeding_tendency: "(멍|잇몸|코피|피가 잘)"}]
+    exams: [질경 검사 (Speculum examination), 양손 골반 내진 (Bimanual pelvic examination), 복부 촉진 (Abdominal palpation),
+            전반적 외관 시진 (General appearance)]
+
+- case_id: M31
+  playbook: breast_mass
+  opening: 이름은 김선영이고, 나는 마흔네 살 여자이다. 한 달 전부터 오른쪽 가슴에 멍울이 만져져서 병원에 왔다.
+  vital_signs: "혈압 : 118/76 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    한 달 전에 샤워하다가 오른쪽 가슴 바깥쪽 위에서 멍울을 처음 만졌다. 크기는 엄지손톱 정도이다. 크기가 처음에 비해 조금 커진 것 같다. 돌처럼 딱딱하고 울퉁불퉁하다. 밀어도 잘 움직이지 않는다. 누르거나 만져도 아프지 않다. 생리 주기에 따라 크기나 아픈 정도가 변하지는 않는다.
+    유방 자가검진은 따로 해 본 적이 없다. 피부에 변화가 생긴 건 일주일 전이고, 팔을 들면 멍울 근처가 쏙 들어간다. 피부가 빨갛거나 뜨겁지는 않다. 유두에서 피나 진물이 나오지는 않는다. 유두가 안으로 들어가지는 않았다. 겨드랑이에 멍울이 있는지는 잘 모르겠다. 왼쪽 가슴은 괜찮다. 가슴을 다친 적은 없다. 열이 나지는 않는다. 체중이 줄거나 늘지는 않았다. 뼈가 아프거나 기침이 나지는 않는다.
+    마지막 생리는 열흘 전에 시작했다. 생리 주기는 이십팔 일로 규칙적이다. 초경은 열한 살에 했다. 출산 경험은 한 번이고 서른다섯 살에 첫아이를 낳았다. 모유 수유는 한 달만 했다. 남편과 한 달에 두세 번 성관계를 한다. 남편이 정관수술을 해서 피임은 따로 하지 않는다. 임신 가능성은 없다. 피임약이나 여성호르몬제는 먹은 적이 없다.
+    이 년 전 건강검진 유방촬영에서 치밀유방이라는 말만 들었다. 전에 유방 혹으로 검사나 수술을 받은 적은 없다. 앓고 있는 병은 없다. 먹는 약은 없다. 약 알레르기는 없다. 가족 중에는 어머니가 쉰 살에 유방암 수술을 받았다. 이모나 언니 중에 유방암이나 난소암은 없다. 담배는 피우지 않는다. 술은 일주일에 두세 번 맥주 두 캔 정도 마신다. 직업은 은행원이다. 엄마처럼 유방암일까 봐 무섭다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 118/76mmHg, 76회/분, 16회/분, 36.5°C
+    유방 시진 (Breast inspection): 우측 외상부 피부 함몰(+) (팔을 올릴 때 뚜렷), 유두 함몰(-), 귤껍질 피부(-), 발적(-); 좌측 정상
+    유방 촉진 (Breast palpation): 우측 10시 방향 유두에서 4cm, 2.5cm 크기의 단단하고 경계가 불규칙한 종괴, 압통(-), 주변 조직에 고정되어 잘 움직이지 않음; 좌측 종괴(-)
+    유즙 분비 확인 (Galactorrhea): 유두 분비물(-/-)
+    겨드랑이 림프절 촉진 (Axillary lymph node palpation): 우측 1cm 단단한 림프절 1개 촉지(+), 가동성 있음; 좌측 촉지(-)
+    쇄골상 림프절 촉진 (Supraclavicular lymph node palpation): 촉지(-/-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    척추 압통 촉진 (Spinal tenderness): 압통(-)
+  key:
+    diagnosis: Breast cancer (right)
+    differential: [Fibroadenoma, Fibrocystic change or breast cyst, Fat necrosis, Phyllodes tumor]
+    history: [onset, location, prior, pmh, meds, fh, smoking, alcohol, lmp, pregnancy,
+              {size: "(크기|커지|커졌|자라)", consistency: "(딱딱|단단|말랑|움직|어떤 느낌|만져지)", pain: "(아프|통증)",
+               cyclic: "(생리.*(변화|달라|크기|커지|변하)|생리 전)", skin: "(피부|함몰|빨갛|붉)", nipple: "(유두|젖꼭지|분비물|진물)",
+               axilla: "(겨드랑이|림프)", trauma: "(다친|부딪|외상)", menarche: "(초경|처음 생리)", parity_breastfeeding: "(출산|아이|낳|분만|모유|수유)",
+               hormone: "(호르몬|피임약)", screening: "(유방촬영|촬영|검진|초음파|맘모)"}]
+    exams: [유방 촉진 (Breast palpation), 유방 시진 (Breast inspection), 겨드랑이 림프절 촉진 (Axillary lymph node palpation),
+            쇄골상 림프절 촉진 (Supraclavicular lymph node palpation)]
+
+- case_id: M32
+  playbook: dysmenorrhea
+  opening: 이름은 정다은이고, 나는 스무 살 여자이다. 몇 년 전부터 생리할 때마다 배가 너무 아파서 병원에 왔다. 생리통 약을 처방받고 싶다.
+  vital_signs: "혈압 : 108/68 mmHg\n맥박 : 86 회/분\n호흡 : 16 회/분\n체온 : 36.7°C"
+  script: |
+    생리통은 중학교 이 학년 무렵부터 있었다. 초경은 열세 살에 했다. 오늘 아침 생리가 시작되면서 또 아프다. 아랫배 가운데가 아프다. 쥐어짜듯이 아프다. 아픈 정도는 열 중에 팔 정도이다. 통증이 허리와 허벅지 안쪽으로 퍼진다.
+    생리 시작 몇 시간 전부터 아프기 시작한다. 첫째 날과 둘째 날이 가장 심하고 사흘째부터는 거의 안 아프다. 생리 때가 아니면 배가 아프지 않다. 몇 년째 아픈 정도는 비슷하고 점점 심해지지는 않았다. 아플 때 구역질이 나고 가끔 구토도 한다. 아플 때 설사를 하기도 한다. 생리할 때 두통도 조금 있다. 배를 따뜻하게 하면 좀 좋아진다. 웅크리고 누워 있으면 덜 아프다. 진통제를 먹어 본 건 타이레놀뿐이고 한 알 먹으면 조금 덜 아프다. 생리통 때문에 학교 수업을 빠진 적이 몇 번 있다. 시험 기간에는 더 아픈 것 같다.
+    생리 주기는 이십팔 일에서 삼십 일로 규칙적이다. 생리는 닷새 동안 하고 양은 보통이다. 핏덩어리는 많지 않다. 생리 때가 아닌데 피가 비친 적은 없다. 냉이 늘거나 냄새가 나지는 않는다. 열이 나지는 않는다. 소변이나 대변을 볼 때 아프지 않다.
+    성관계는 한 번도 한 적이 없다. 남자 친구는 없다. 임신 가능성은 없다. 피임약을 먹어 본 적은 없다. 다이어트를 하거나 체중이 변하지는 않았다. 마지막 생리는 오늘 아침에 시작했다. 앓고 있는 병은 없다. 먹는 약은 없다. 약 알레르기는 없다. 수술이나 입원한 적은 없다.
+    가족 중에는 엄마가 젊을 때 생리통이 심했다. 담배는 피우지 않는다. 술은 한 달에 한두 번 마신다. 대학생이고 기숙사에 산다. 생리통에 잘 듣는 약을 처방받고 싶다.
+  exams:
+    전반적 외관 시진 (General appearance): 통증으로 약간 웅크린 자세, 급성 병색(-)
+    활력징후 측정 (Vital signs): 108/68mmHg, 86회/분, 16회/분, 36.7°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    복부 시진 (Abdominal inspection): 편평, 팽만(-)
+    장음 청진 (Bowel sound auscultation): 정상
+    복부 촉진 (Abdominal palpation): 치골상부 경미한 압통(+), 종괴(-), 근육 강직(-)
+    반발압통 (Rebound tenderness): (-)
+    맥버니점 압통 (McBurney point tenderness): (-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    외음부 시진 (Vulvar inspection): 정상, 생리혈 소량
+    직장수지검사 (Digital rectal examination): 자궁 정상 크기, 압통(-); 자궁천골인대 결절(-); 부속기 종괴(-/-)
+  key:
+    diagnosis: Primary dysmenorrhea
+    differential: [Endometriosis, Obstructive Müllerian anomaly, Ovarian cyst (endometrioma), Pelvic inflammatory disease]
+    history: [onset, character, location, radiation, severity, timing, relieving, pmh, meds, fh, lmp, pregnancy,
+              {menarche: "(초경|처음 생리)", cycle: "(주기|규칙)", amount: "(양은|양이 많|덩어리|패드)", progression: "(점점|갈수록|예전보다|심해지)",
+               noncyclic: "(생리.*(아닐|없을|외)|평소에도|생리 때가 아닌)", gi: "(메스|구역|토하|구토|설사|대변|변비)", sexual: "(성관계|성경험|성생활|남자 ?친구)",
+               discharge: "(냉|분비물)", painkiller: "(진통제|타이레놀|이부프로펜|약을)", daily_life: "(학교|수업|결석|빠진|일상)"}]
+    exams: [복부 촉진 (Abdominal palpation), 반발압통 (Rebound tenderness), 직장수지검사 (Digital rectal examination)]
+
+- case_id: M33
+  playbook: vaginal_discharge
+  opening: 이름은 윤수정이고, 나는 서른한 살 여자이다. 이 주 전부터 냉이 많아지고 냄새가 나서 병원에 왔다.
+  vital_signs: "혈압 : 116/74 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    이 주 전부터 냉이 많아져서 팬티라이너를 매일 한다. 냉 색깔은 회색빛이 도는 흰색이다. 냉은 물처럼 묽다. 생선 비린내 같은 냄새가 난다. 냄새는 성관계 뒤나 생리가 끝난 뒤에 더 심하다. 덩어리지거나 거품이 있지는 않다. 가렵지는 않다. 외음부가 따갑거나 붓지는 않는다.
+    소변볼 때 아프지 않다. 성관계할 때 아프지 않다. 성관계 뒤에 피가 비친 적은 없다. 생리 기간이 아닐 때 피가 비친 적은 없다. 아랫배는 아프지 않다. 열이 나지는 않는다. 외음부에 물집이나 혹은 없다.
+    일 년 전에도 비슷한 냄새가 나서 산부인과에서 질정을 넣고 나았다. 한 달 전부터 질 세정제로 질 안쪽까지 매일 씻는다. 최근에 항생제를 먹은 적은 없다.
+    마지막 생리는 열이틀 전에 시작했다. 생리 주기는 삼십 일로 규칙적이다. 성관계 파트너는 석 달 전에 새로 사귄 남자 친구 한 명이다. 성관계는 일주일에 한두 번 한다. 피임은 콘돔을 사용하는데 안 쓸 때도 있다. 생리를 제때 해서 임신 가능성은 낮은 것 같다. 남자 친구는 아무 증상이 없다고 한다. 임신이나 출산을 한 적은 없다. 성병 검사를 받아 본 적은 없다.
+    앓고 있는 병은 없다. 당뇨는 없다. 먹는 약은 없다. 약 알레르기는 없다. 작년 자궁경부암 검진은 정상이었다. 담배는 하루 다섯 개비씩 팔 년째 피운다. 술은 주말에 맥주를 마신다. 직업은 회사 사무직이다. 회사에서 냄새가 날까 봐 신경이 쓰인다. 혹시 성병은 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 116/74mmHg, 74회/분, 16회/분, 36.6°C
+    복부 시진 (Abdominal inspection): 편평, 팽만(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    반발압통 (Rebound tenderness): (-)
+    서혜부 림프절 촉진 (Inguinal lymph node palpation): 촉지(-/-)
+    외음부 시진 (Vulvar inspection): 발적(-), 부종(-), 궤양(-), 사마귀(-)
+    질경 검사 (Speculum examination): 질벽을 얇고 고르게 덮은 회백색 묽은 분비물 다량(+), 비린 냄새(+), 거품(-), 덩어리(-); 질벽 발적(-); 자궁경부 발적(-), 점상출혈(-), 점액농성 분비물(-), 접촉출혈(-)
+    자궁경부 운동 압통 확인 (Cervical motion tenderness): 압통(-)
+    양손 골반 내진 (Bimanual pelvic examination): 자궁 정상 크기, 압통(-); 부속기 압통(-/-), 종괴(-/-)
+    피부 시진 (Skin inspection): 발진(-)
+  key:
+    diagnosis: Bacterial vaginosis
+    differential: [Vulvovaginal candidiasis, Trichomoniasis, Chlamydial or gonococcal cervicitis, Pelvic inflammatory disease]
+    history: [onset, prior, pmh, meds, smoking, lmp, pregnancy,
+              {color: "(색|어떤 냉|모양|묽|끈적)", odor: "(냄새|비린)", itching: "(가려|가렵|따갑|화끈)", dysuria: "소변",
+               dyspareunia: "(성관계.*아프|관계할 때|성교통)", postcoital: "(성관계.*피|관계 (후|뒤))", pelvic_pain: "(아랫배|복통|배가 아프|골반)",
+               fever: "(열|오한)", partner: "(파트너|남자 ?친구|상대|새로)", condom: "(콘돔|피임)", douching: "(세정|씻|청결제|뒷물)", antibiotics: "항생제"}]
+    exams: [질경 검사 (Speculum examination), 외음부 시진 (Vulvar inspection), 자궁경부 운동 압통 확인 (Cervical motion tenderness),
+            양손 골반 내진 (Bimanual pelvic examination)]
+
+- case_id: M34
+  playbook: developmental_delay
+  opening: 이름은 윤도윤이고, 두 살 남자아이이다. 엄마 김지은, 서른네 살이 보호자로 함께 왔다. 엄마는 도윤이가 또래보다 말이 늦어서 병원에 데려왔다.
+  vital_signs: "혈압 : 측정 안 함\n맥박 : 110 회/분\n호흡 : 26 회/분\n체온 : 36.7°C"
+  script: |
+    엄마가 대답한다. 도윤이는 지금 이십팔 개월이다. 할 줄 아는 단어는 엄마, 아빠, 물, 까까, 빠빠 다섯 개 정도이다. 두 단어를 이어서 말하지는 못한다. 첫 단어는 돌 지나고 두 달쯤 엄마라고 했다. 아기 때 옹알이는 잘했다. 하던 말을 잊어버리거나 못 하게 된 적은 없다.
+    말은 잘 알아듣는다. 신발 가져와서 아빠 주라는 심부름도 한다. 코가 어디 있냐고 물으면 손가락으로 가리킨다. 원하는 게 있으면 손가락으로 가리키고 엄마를 쳐다본다. 이름을 부르면 바로 돌아본다. 눈을 잘 맞춘다. 엄마가 웃으면 따라 웃는다. 인형에게 밥 먹이는 흉내를 내며 논다. 같은 행동을 반복하거나 장난감을 줄 세우지는 않는다. 손을 퍼덕이지 않는다. 빠이빠이 하며 손을 흔들고 싫으면 고개를 젓는다. 엄마 말을 따라 하려고 입을 움직인다.
+    작은 소리에도 잘 돌아본다. 눈은 잘 보는 것 같다. 신생아 청력 선별검사는 양쪽 모두 통과했다. 중이염은 돌 때 한 번 앓았다. 돌 무렵에 걸었고 지금은 잘 뛴다. 숟가락질을 하고 블록을 여섯 개 쌓는다. 경련을 한 적은 없다.
+    임신 중에 특별한 문제는 없었다. 삼십구 주에 자연분만으로 태어났다. 예방접종은 모두 맞았다. 잘 먹고 키와 몸무게는 또래만큼 큰다. 큰 병이나 입원한 적은 없다. 먹는 약은 없다.
+    맞벌이라서 두 돌까지 할머니가 아이를 돌봐 주셨다. 할머니가 휴대폰으로 동영상을 자주 보여 줬다. 동영상을 보는 시간은 하루에 서너 시간이었다. 엄마 아빠는 퇴근이 늦어서 책을 읽어 주거나 말을 걸어 줄 시간이 적었다. 넉 달 전부터 어린이집에 다니고 친구들과 잘 어울린다. 영유아 검진에서 언어 발달은 심화평가가 필요하다고 들었다. 가족 중에는 아빠가 어릴 때 말이 늦었던 것 말고는 발달 문제가 없다. 혹시 자폐일까 봐 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 활발함, 엄마와 눈맞춤 및 상호작용 양호
+    활력징후 측정 (Vital signs): 110회/분, 26회/분, 36.7°C
+    신체 계측 (Anthropometry): 키 90cm, 몸무게 13kg, 머리둘레 48.5cm
+    성장도표 백분위수 확인 (Growth chart percentile): 키·몸무게·머리둘레 모두 50백분위수 부근
+    안면 기형 소견 시진 (Dysmorphic features): 이형성 소견(-)
+    피부 시진 (Skin inspection): 카페오레 반점(-), 저색소반(-)
+    이경 검사 (Otoscopy): 양측 고막 정상, 삼출액(-/-)
+    소리 반응 관찰 (Response to sound (child)): 뒤에서 작은 소리로 이름을 불러도 바로 돌아봄(+)
+    혀 시진 (Tongue inspection): 설소대 단축(-), 혀 움직임 정상
+    근긴장도 평가 (Muscle tone): 정상
+    심부건반사 (Deep tendon reflex): 정상, 좌우 대칭
+    보행 관찰 (Gait): 정상, 달리기 가능
+    발달 선별검사 (Developmental screening): K-DST 언어 영역 심화평가 권고 (표현 어휘 약 5개, 두 단어 조합 불가, 두 단계 지시 수행 가능); 대근육·소근육·인지·사회성·자조 영역 또래 수준
+  key:
+    diagnosis: Isolated expressive language delay (developmental language disorder) with excessive screen exposure
+    differential: [Hearing loss, Autism spectrum disorder, Global developmental delay or intellectual disability, Psychosocial deprivation]
+    history: [onset, pmh, meds, fh,
+              {words: "(단어|몇 개|어떤 말|문장)", receptive: "(알아듣|이해|지시|심부름)", regression: "(퇴행|잊어버|하던 말|했던 말|못 하게)",
+               eye_name: "(눈.*맞|눈맞춤|이름을 부르|부르면)", pointing: "(가리키|손가락)", play_repetitive: "(놀이|흉내|노는|놀아|반복|줄 세|퍼덕|집착)",
+               hearing: "(청력|소리|잘 듣|귀)", motor: "(걷|뛰|앉|기어|숟가락|블록|운동)", birth: "(태어|출생|분만|임신 중|몇 주)",
+               screen: "(동영상|영상|티브이|TV|휴대폰|스마트폰|미디어)", caregiver: "(누가 돌|키우|키웠|돌봐|양육|어린이집|할머니)", seizure: "경련"}]
+    exams: [소리 반응 관찰 (Response to sound (child)), 발달 선별검사 (Developmental screening), 신체 계측 (Anthropometry),
+            이경 검사 (Otoscopy)]
+
+- case_id: M35
+  playbook: ped_cough
+  opening: 이름은 강서윤이고, 여덟 살 여자아이이다. 엄마 오수진, 서른여덟 살이 보호자로 함께 왔다. 엄마는 서윤이가 삼 주 전부터 밤마다 기침을 해서 병원에 데려왔다.
+  vital_signs: "혈압 : 102/64 mmHg\n맥박 : 98 회/분\n호흡 : 22 회/분\n체온 : 36.8°C\n산소포화도 : 96%"
+  script: |
+    엄마가 대답한다. 기침은 삼 주 전부터 시작됐다. 처음에는 콧물과 미열이 있는 감기를 앓았다. 감기는 나았는데 기침이 계속된다. 기침은 밤에 잘 때와 새벽에 심한 편이다. 일주일에 서너 번은 기침 때문에 자다가 깬다. 낮에는 기침이 덜하다. 기침은 마른기침이다. 가래는 거의 나오지 않는다. 기침이 심할 때는 숨에서 쌕쌕거리는 소리가 난다.
+    체육 시간에 뛰거나 운동을 하면 기침이 심해지고 숨이 찬다. 찬 바람을 쐬면 기침이 심해진다. 먼지가 많은 곳에 가도 기침이 심해진다. 할머니 댁 고양이 옆에 가면 재채기와 기침이 심해진다. 지금 가만히 있을 때는 숨이 차지 않는다. 지금은 열이 나지 않는다. 가슴이 아프다고 하지는 않는다. 기침 끝에 토하거나 흡 하는 소리를 내지는 않는다. 음식을 먹다가 사레들린 적은 없다. 결핵 환자와 접촉한 적은 없다. 밥은 잘 먹고 체중이 줄지는 않았다.
+    전에도 이런 적이 일 년에 두세 번 있었다. 다섯 살 때부터 감기에 걸리면 기침이 오래가고 쌕쌕거렸다. 그럴 때면 동네 의원에서 네뷸라이저 치료를 받은 적이 있다. 의사에게 기관지가 예민하다는 말을 들었다. 아침에 일어나면 재채기와 맑은 콧물이 난다. 아기 때 아토피 피부염이 있었다. 먹은 약은 집에 있던 기침 시럽인데 효과가 없었다. 입원한 적은 없다. 약 알레르기는 없다.
+    예방접종은 모두 맞았다. 만삭에 태어났고 발달은 정상이다. 가족 중에는 아빠가 어릴 때 천식을 앓았고 지금도 비염이 있다. 집에서 담배 피우는 사람은 아빠이고 베란다에서 피운다. 집에서 키우는 애완동물은 없다. 초등학교 이 학년이다. 기침 때문에 잠을 설쳐서 수업 시간에 졸려 한다. 기침이 너무 오래가서 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 호흡곤란(-), 문장으로 대화 가능, 간간이 마른기침
+    활력징후 측정 (Vital signs): 102/64mmHg, 98회/분, 22회/분, 36.8°C, 산소포화도 96%
+    비강 시진 (Nasal inspection): 하비갑개 창백·부종(+/+), 맑은 콧물(+)
+    인두 시진 (Pharynx inspection): 발적(-), 편도 비대(-), 후비루(-)
+    이경 검사 (Otoscopy): 양측 고막 정상
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    흉곽 시진 (Chest inspection): 대칭, 흉골상·늑간 함몰(-), 보조호흡근 사용(-)
+    흉부 타진 (Chest percussion): 공명음, 둔탁음(-/-)
+    폐 청진 (Lung auscultation): 양측 호기 천명음(+/+), 호기 연장(+), 수포음(-/-), 호흡음 좌우 대칭
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    곤봉지 확인 (Digital clubbing): 곤봉지(-)
+    피부 시진 (Skin inspection): 양측 팔오금 피부 건조(+), 습진(-)
+  key:
+    diagnosis: Bronchial asthma, exacerbation triggered by a viral infection (with allergic rhinitis)
+    differential: [Post-infectious cough, Mycoplasma pneumonia, Pertussis, Foreign body aspiration]
+    history: [onset, timing, aggravating, prior, pmh, meds, fh, smoking,
+              {night: "(밤|새벽|자다가|잘 때)", wheeze: "(쌕쌕|색색|휘파람|천명)", exercise: "(운동|뛰|달리|체육)", sputum: "가래",
+               fever: "(열|체온)", dyspnea: "(숨이|숨 쉬|호흡)", triggers: "(찬 ?바람|먼지|동물|고양이|강아지|꽃가루|애완)",
+               atopy: "(아토피|비염|재채기|알레르기|코를)", choking: "(사레|삼킨|먹다가|이물)", whoop: "(기침 끝|흡 소리|흡 하|토하|구토)", vaccine: "예방접종"}]
+    exams: [폐 청진 (Lung auscultation), 활력징후 측정 (Vital signs), 흉곽 시진 (Chest inspection), 비강 시진 (Nasal inspection)]
+
+- case_id: M36
+  playbook: ped_rash
+  opening: 이름은 이민준이고, 여섯 살 남자아이이다. 엄마 정혜린, 서른여섯 살이 보호자로 함께 왔다. 엄마는 민준이가 사흘 전부터 다리에 붉은 반점이 생겨서 병원에 데려왔다.
+  vital_signs: "혈압 : 104/66 mmHg\n맥박 : 96 회/분\n호흡 : 20 회/분\n체온 : 37.2°C"
+  script: |
+    엄마가 대답한다. 사흘 전 아침에 빨간 점들이 양쪽 발목과 종아리에 생겼다. 지금은 허벅지와 엉덩이로 퍼졌다. 처음에는 좁쌀만 하다가 점점 커졌다. 일부는 서로 붙고 보라색으로 변했다. 만지면 살짝 볼록하게 만져진다. 손가락으로 눌러도 색이 없어지지 않는다. 가렵거나 아프지는 않다. 얼굴이나 가슴, 팔에는 없다.
+    이틀 전부터 양쪽 발목 관절이 아프고 붓는다. 발목이 아파서 잘 걷지 못하고 절뚝거린다. 무릎도 조금 아프다고 한다. 어제부터 배꼽 주위가 아프기 시작했다. 배가 쥐어짜듯 아프다가 괜찮아지기를 반복한다. 한 번 아프면 십 분에서 이십 분 정도 간다. 배가 아플 때는 배를 움켜쥐고 운다. 어제 한 번 토했다. 변에 피가 섞이거나 검은 변을 보지는 않았다. 설사는 없다.
+    소변 색은 평소와 같다. 소변볼 때 아프다고 하지는 않는다. 얼굴이나 눈두덩이 붓지는 않는다. 코피나 잇몸 출혈은 없다. 몸에 멍이 잘 들지는 않는다. 지금은 열이 나지 않는다. 아이가 처지지는 않고 배가 안 아플 때는 잘 논다. 머리가 아프다고 하지는 않는다. 밥은 조금 덜 먹는다. 뼈가 아프다고 하지는 않는다.
+    이 주 전에 목이 아프고 열이 나는 감기를 앓은 적이 있다. 그때 먹은 약은 동네 의원에서 지은 사흘 치 감기약이다. 지금 먹는 약은 없다. 약 알레르기는 없다. 새로 먹은 음식이나 벌레에 물린 일은 없다. 예방접종은 모두 맞았다. 큰 병이나 입원한 적은 없다. 만삭으로 태어났고 발달은 정상이다.
+    가족 중에 피가 잘 안 멈추는 병은 없다. 유치원에 다닌다. 유치원에 비슷한 증상의 아이는 없다. 집에서 담배 피우는 사람은 없다. 점이 계속 번져서 혹시 백혈병일까 봐 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 처짐(-), 발목 통증으로 절뚝거림
+    활력징후 측정 (Vital signs): 104/66mmHg, 96회/분, 20회/분, 37.2°C
+    피부 시진 (Skin inspection): 양측 하지와 엉덩이에 대칭적인 2-10mm 크기의 붉은 보라색 구진성 자반, 일부 융합; 얼굴·체간·상지 병변(-)
+    점상출혈 확인 (Petechiae and purpura): 하지·엉덩이 촉지성 자반(+), 구강 점막 점상출혈(-)
+    유리압진 검사 (Diascopy (blanching)): 눌러도 퇴색하지 않음(비퇴색성)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    발목 관절 촉진 (Ankle joint palpation): 양측 부종(+/+), 압통(+/+), 열감 경미, 발적(-)
+    무릎 관절 촉진 (Knee joint palpation): 경미한 압통(+/+), 부종(-/-), 삼출(-/-)
+    장음 청진 (Bowel sound auscultation): 정상
+    복부 촉진 (Abdominal palpation): 배꼽 주위 경미한 압통(+), 반발압통(-), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    안검 부종 시진 (Eyelid edema): 부종(-)
+    경부 강직 (Neck stiffness): 강직(-)
+  key:
+    diagnosis: IgA vasculitis (Henoch-Schönlein purpura)
+    differential: [Immune thrombocytopenia, Acute leukemia, Meningococcemia]
+    history: [onset, location, timing, pmh, meds, fh,
+              {spread: "(번지|퍼지|퍼졌|넓어)", blanching: "(눌러|누르면|색이 없어)", itch: "(가렵|가려)", joint: "(관절|발목|무릎|절뚝|다리가 붓)",
+               abdominal_pain: "(배가|복통|배꼽)", stool: "(대변|혈변|검은|똥|(?<!소)변(에|은|을|이| 색|색))", urine: "(소변|오줌)", bleeding: "(코피|잇몸|멍|피가 잘)",
+               fever: "(열|체온)", preceding_infection: "(감기|목이 아|최근에 아|전에 아)", activity: "(처지|놀|기운)", exposure: "(음식|벌레|새로 먹)"}]
+    exams: [피부 시진 (Skin inspection), 유리압진 검사 (Diascopy (blanching)), 발목 관절 촉진 (Ankle joint palpation),
+            복부 촉진 (Abdominal palpation)]
+
+- case_id: M37
+  playbook: ped_vomiting_diarrhea
+  opening: 이름은 박서아이고, 한 살 여자아이이다. 엄마 이수민, 서른두 살이 보호자로 함께 왔다. 엄마는 서아가 어제부터 토하고 설사를 해서 병원에 데려왔다.
+  vital_signs: "혈압 : 측정 안 함\n맥박 : 152 회/분\n호흡 : 34 회/분\n체온 : 37.9°C"
+  script: |
+    엄마가 대답한다. 서아는 생후 열네 달이다. 어제 아침부터 갑자기 토하기 시작했다. 어제는 먹은 우유와 밥을 여섯 번 토했다. 토한 것은 먹은 음식이었고 초록색 물과 피는 없었다. 어젯밤부터는 설사를 한다. 설사는 물 같은 모양이고 노란색이다. 설사에서 시큼한 냄새가 난다. 설사는 지금까지 여덟 번 했다. 변에 피나 코 같은 점액은 없다. 오늘 아침부터는 토하는 횟수가 줄었다.
+    어제 열이 나서 재 보니 삼십팔 도 이 부였다. 지금은 잘 먹지 않고 물이나 우유도 조금만 먹는다. 소변은 잘 안 보고 양도 적다. 기저귀는 어제저녁 이후로 오늘 아침에 한 번만 조금 젖었다. 울 때 눈물이 적게 나온다. 입술과 입안이 말라 보인다. 아이가 처지고 보채지만 안아 주면 달래진다. 갑자기 자지러지게 울면서 다리를 배 쪽으로 끌어당긴 적은 없다. 배가 불러 보이지는 않는다. 경련은 없었다. 기침이나 콧물은 없다. 몸에 발진은 없다.
+    평소에는 생우유와 유아식을 잘 먹었다. 어린이집 같은 반에 비슷하게 토하고 설사한 아이가 두 명 있었다. 집에서 다른 식구는 괜찮다. 새로 먹인 음식은 없다. 머리를 부딪힌 적은 없다. 보름 전 예방접종 때 잰 몸무게는 십 키로그람이었다. 집에서 보리차를 먹였는데 먹으면 토했다. 따로 먹인 약은 없다.
+    만삭에 자연분만으로 태어났다. 로타바이러스 백신까지 예방접종은 모두 맞았다. 걸음마를 시작했고 발달은 또래와 같다. 큰 병이나 입원한 적은 없다. 약 알레르기는 없다. 가족 중에 특별한 병은 없다. 아이가 기운이 없어서 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 보챔(+), 경도 처짐(+), 안아 주면 달래짐, 의식 명료, 안구 함몰(+)
+    활력징후 측정 (Vital signs): 152회/분, 34회/분, 37.9°C
+    체중 측정 (Body weight): 9.3kg (보름 전 10kg, 약 7% 감소)
+    대천문 촉진 (Anterior fontanelle): 약간 함몰(+)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 안구 함몰(+)
+    구강 점막 시진 (Oral mucosa inspection): 입술·구강 점막 건조(+)
+    피부 긴장도 확인 (Skin turgor): 감소, 집었다 놓으면 천천히 펴짐(약 1-2초)
+    모세혈관 재충전 시간 (Capillary refill time): 2.5초 (지연)
+    이경 검사 (Otoscopy): 양측 고막 정상
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    장음 청진 (Bowel sound auscultation): 항진
+    복부 시진 (Abdominal inspection): 팽만(-)
+    복부 촉진 (Abdominal palpation): 부드러움, 압통(-), 종괴(-)
+    경부 강직 (Neck stiffness): 강직(-)
+    피부 시진 (Skin inspection): 발진(-)
+  key:
+    diagnosis: Acute viral gastroenteritis with moderate dehydration
+    differential: [Intussusception, Bacterial enterocolitis, Urinary tract infection, Sepsis or meningitis]
+    history: [onset, timing, pmh, meds, fh,
+              {vomitus: "(토한 것|토한 건|토한 게|토사물|초록|노란 물|담즙|무엇을 토|뭘 토)", stool: "(설사|대변|(?<!소)변(에|은|을|이| 색|색))",
+               blood_mucus: "(피(가|나|는|도| 섞)|혈변|점액|코 같)", fever: "(열|체온)",
+               intake: "(먹|마시|우유|분유|수유)", urine: "(소변|기저귀|오줌)", tears_mouth: "(눈물|입안|입술|침이)", activity: "(처지|기운|보채|늘어|축)",
+               colic: "(자지러|다리를|발작적|갑자기 울)", contacts: "(어린이집|주변|다른 아이|식구)", weight: "(체중|몸무게)", vaccine: "(예방접종|로타)"}]
+    exams: [피부 긴장도 확인 (Skin turgor), 모세혈관 재충전 시간 (Capillary refill time), 구강 점막 시진 (Oral mucosa inspection),
+            체중 측정 (Body weight), 복부 촉진 (Abdominal palpation)]

@@ -359,6 +359,21 @@ def complaint_sentence(text: str, limit: int = 120) -> str:
     return best[:limit]
 
 
+_TIME_LEAD = re.compile(r"^(?:[가-힣0-9]+\s+){0,3}?(?:전부터|째|동안|부터|무렵부터)\s+|^(?:요즘|최근에?|계속|어제부터|오늘)\s+")
+_VISIT_TAIL = re.compile(r"\s*(?:병원에|진료(?:를)?\s*받(?:으)?러|상담하러)?\s*(?:왔다|왔어요|왔습니다|내원했다|내원했어요|"
+                         r"데려왔다|데려왔어요|찾아왔다)\.?$")
+
+
+def complaint_phrase(text: str, limit: int = 40) -> str:
+    """The presenting problem in a few words, from the opening ("몇 년 전부터 코를 심하게 골아서 병원에 왔다." ->
+    "코를 심하게 골아서 내원"): the diagnosis of last resort when neither a playbook nor any model call gave one."""
+    sent = complaint_sentence(text, 160).strip()
+    core = _VISIT_TAIL.sub("", _TIME_LEAD.sub("", sent)).strip(" ,.")
+    if not core:
+        return sent[:limit] or "주호소 확인 필요"
+    return core[:limit] + (" 내원" if re.search(r"(서|때문에)$", core) else "")
+
+
 # a particle only before a space: "평가하겠습니다" keeps its 가 ("신체 비율 평가"), "부기를 비교하겠습니다" drops 를
 _EXAM_TAIL = re.compile(r"(?:\s*(?:을|를|이|가)\s+|\s*)(확인|비교|측정|시행)?\s*(하겠습니다|해 보겠습니다|보겠습니다|찍겠습니다|합니다)\.?$")
 

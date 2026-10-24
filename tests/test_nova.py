@@ -274,7 +274,7 @@ def test_sdk_101_transport_sends_effort_and_waits_on_the_same_request(monkeypatc
 
 def test_doctor_model_and_output_room():
     """gpt-6-luna (2026-10): the model is never named on the SDK route, temperature is not sent, and every call has
-    room for long reasoning without asking past the case's 100,000 output tokens."""
+    room for long reasoning without asking past the case's output budget."""
     cfg = NovaConfig()
     assert cfg.model == "openai/gpt-6-luna" and cfg.temperature is None
     assert cfg.max_output_tokens < 100_000 and cfg.max_tokens_for("assess") >= 16000
@@ -502,7 +502,7 @@ class RefusingEnv(LocalSimEnv):
 
 
 def test_refused_actions_count_their_turns(store):
-    """EXAM_NOT_SPECIFIC costs a turn since 2026-10-12: the agent's count follows the environment's."""
+    """EXAM_NOT_SPECIFIC costs a turn: the agent's count follows the environment's."""
     agent = NovaAgent(_cfg(), store=store, offline=True)
     env = RefusingEnv(_case("sample_pe"), _cfg())
     rec = agent.run(env)
@@ -874,8 +874,8 @@ def test_package_layout(tmp_path):
     assert check_requirements(req) == [] and "pydantic==" in req
     assert check_requirements("pydantic>=2.7\nfoo @ git+https://x\n# comment\nyaml==6.0") == ["pydantic>=2.7",
                                                                                               "foo @ git+https://x"]
-    info2 = build(tmp_path / "u.zip", sdk=tmp_path / "missing.py")
-    assert not info2["ok"] and any("nova_sdk.py" in p for p in info2["problems"])
+    info2 = build(tmp_path / "u.zip", sdk=tmp_path / "missing.py")  # the server provides its own SDK: a warning only
+    assert info2["ok"] and any("nova_sdk.py" in w for w in info2["warnings"])
     old = tmp_path / "old" / "nova_sdk.py"
     old.parent.mkdir()
     old.write_text("__version__ = '1.0.0'\n", encoding="utf-8")

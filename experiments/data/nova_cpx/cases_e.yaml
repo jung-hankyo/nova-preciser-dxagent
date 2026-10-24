@@ -1,0 +1,309 @@
+# CPX-style practice cases M22-M29 (original text, format of cases_a.yaml): altered consciousness, anxiety, seizure,
+# tremor, weakness/numbness, weight gain, easy bruising, rash.
+
+- case_id: M22
+  playbook: altered_consciousness
+  opening: 이름은 한정숙이고, 나는 쉰일곱 살 여자이다. 남편 김영철, 예순 살이 보호자로 함께 왔다. 남편은 아내가 이틀 전부터 자꾸 졸려 하고 엉뚱한 말을 하더니 오늘은 깨워도 잘 일어나지 못해서 데리고 왔다.
+  vital_signs: "혈압 : 104/62 mmHg\n맥박 : 68 회/분\n호흡 : 18 회/분\n체온 : 36.8°C\n산소포화도 : 97%"
+  script: |
+    남편이 대답한다. 아내는 사흘 전부터 그러기 시작했다. 처음에는 낮에 자꾸 졸고 밤에는 잠을 안 자고 서성였다. 이틀 전부터 말이 느려지고 엉뚱한 소리를 했다. 딸 이름을 헷갈리고 텔레비전 리모컨을 쓸 줄 몰랐다. 어제는 오늘이 며칠인지, 여기가 어디인지 잘 몰랐다. 오늘 아침에는 큰 소리로 불러야 눈을 떴다가 다시 잠든다. 갑자기 그런 게 아니라 며칠 동안 점점 심해졌다.
+    대변은 나흘째 보지 못했다. 마지막으로 대변을 본 것은 나흘 전이다. 약은 잘 챙겨 먹었는데 듀파락 시럽은 설사가 귀찮다고 이 주 전에 끊었다. 열은 없었다. 토하거나 피를 토한 적은 없다. 검은 변이나 피 섞인 변은 보지 않았다. 배가 아프다고 하지는 않았다. 일주일 전부터 눈이 더 노래졌다. 소변은 평소처럼 본다. 이틀 전부터 입맛이 없어서 죽을 조금씩 먹었다.
+    넘어지거나 머리를 다친 적은 없다. 경련을 하지는 않았다. 한쪽 팔다리에 힘이 빠지거나 입이 돌아가지는 않았다. 수면제나 신경안정제는 먹지 않았다.
+    아내가 앓고 있는 간 질환은 간경화이다. 이십 년 전에 B형 간염 보균자라는 말을 들었다. 삼 년 전에 대학병원에서 간경화를 진단받았다. 배에 물이 차서 이뇨제를 먹고 있다. 일 년 전에 식도 정맥이 부풀어서 내시경으로 묶는 시술을 받았다. 여덟 달 전에도 이렇게 정신이 흐려져서 입원했는데 간성혼수라고 들었다. 평소에 먹는 약이 바라크루드, 알닥톤, 라식스, 인데놀 네 가지 있다. 당뇨는 없다. 약 알레르기는 없다. 수술은 받은 적이 없다.
+    술은 마시지 않는다. 담배는 피우지 않는다. 가족 중에 장모님이 간암을 앓다가 돌아가셨다. 마지막 생리는 쉰 살 때였다. 아내는 직업이 없고 집안일을 한다. 나와 함께 둘이 산다. 가장 걱정되는 것은 머리에 큰 문제가 생긴 게 아닐까 하는 것이다.
+  exams:
+    전반적 외관 시진 (General appearance): 기면 상태, 큰 소리에 눈을 뜸, 황달(+), 복부 팽만(+)
+    의식·지남력 평가 (Mental status): 기면, GCS 13점(E3 V4 M6), 시간·장소 지남력 저하(+), 사람 지남력 유지
+    활력징후 측정 (Vital signs): 104/62mmHg, 68회/분, 18회/분, 36.8°C, 산소포화도 97%
+    주의력 검사 (Attention test): 거꾸로 숫자 세기 수행 불가, 주의력 저하(+)
+    퍼덕떨림 확인 (Asterixis): 양측 퍼덕떨림(+/+)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 공막 황달(+/+), 창백(-/-)
+    동공 반사 (Pupillary reflex): 양측 3mm 동일, 대광반사(+/+)
+    경부 강직 (Neck stiffness): 강직(-)
+    피부 시진 (Skin inspection): 앞가슴 거미혈관종(+), 손바닥 홍반(+), 멍(-)
+    복수 이동탁음 확인 (Shifting dullness (ascites)): 이동탁음(+)
+    복부 촉진 (Abdominal palpation): 압통(-), 반발압통(-)
+    간·비장 촉진 (Liver and spleen palpation): 간 촉지(-), 비장 좌늑골하 2횡지 촉지(+)
+    사지 근력 검사 (Limb muscle power): 지시에 느리게 따르나 좌우 대칭, 편측 마비(-)
+    바빈스키 징후 (Babinski sign): (-/-)
+    직장수지검사 (Digital rectal examination): 직장 내 단단한 대변(+), 흑색변(-), 혈변(-)
+    하지 함요부종 확인 (Pitting edema of the legs): 양측 발목 함요부종(1+/1+)
+  key:
+    diagnosis: Hepatic encephalopathy (overt, West Haven grade 3) in hepatitis B liver cirrhosis, precipitated by constipation after stopping lactulose
+    differential: ["Hypoglycemia", "Intracranial hemorrhage (subdural hematoma)", "Spontaneous bacterial peritonitis or other infection",
+                   "Hyponatremia or hypokalemia from diuretics"]
+    history: [onset, prior, pmh, meds, alcohol, fh,
+              {course: "(점점|갑자기|서서히|진행|나빠)", sleep_wake: "(잠을|잠이|수면|낮에|밤에|졸)",
+               liver: "(간염|간경|간 질환|간질환|간암|간 수치|간 기능|복수|배에 물)", stool: "(대변|변비|변을|배변|화장실)",
+               lactulose: "(듀파락|시럽|락툴|끊|중단|빠뜨|거르|거른|잘 (드시|드셨|챙기|챙겨|먹))",
+               gi_bleed: "(검은|짜장|토혈|피를 토|혈변|피가 섞|피 섞)", fever: "(열이|열은|열나|열 나|오한|체온)",
+               head_trauma: "(넘어|머리를 (다치|부딪)|낙상|부딪)", sedatives: "(수면제|안정제|진정제)",
+               focal: "(한쪽|마비|힘이 빠|입이 돌|발음|어눌)", seizure: "(경련|발작)", jaundice: "(노랗|노래|황달)"}]
+    exams: [퍼덕떨림 확인 (Asterixis), 의식·지남력 평가 (Mental status), 복수 이동탁음 확인 (Shifting dullness (ascites)),
+            직장수지검사 (Digital rectal examination), 사지 근력 검사 (Limb muscle power)]
+
+- case_id: M23
+  playbook: anxiety
+  opening: 이름은 윤소희이고, 나는 서른한 살 여자이다. 석 달 전부터 갑자기 죽을 것 같은 불안이 몰려오는 일이 반복돼서 병원에 왔다.
+  vital_signs: "혈압 : 118/74 mmHg\n맥박 : 84 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    석 달 전부터 그러기 시작했다. 처음 시작된 것은 출근길 지하철 안이었다. 갑자기 심장이 터질 듯이 두근거리는 증상이 왔다. 숨이 막히고 가슴이 조였다. 손발이 저리고 식은땀이 났다. 어지럽고 내 몸이 내 것이 아닌 것처럼 멍했다. 죽을 것 같은 느낌이 들어서 무서웠다. 미쳐 버릴 것 같기도 했다. 십 분 안에 가장 심해진다. 한 번 그러면 삼십 분쯤 지속되다가 가라앉는다. 그날 응급실에서 심전도와 피 검사를 했는데 정상이라고 들었다. 전에는 이런 적이 한 번도 없었다.
+    그 뒤로 여덟 번쯤 더 그랬다. 요즘은 일주일에 두 번 정도로 자주 그런다. 특별한 상황에서 생기는 게 아니고 이유 없이 갑자기 생긴다. 집에서 텔레비전을 보다가 생긴 적도 있다. 자다가 그래서 깬 적도 있다. 발작이 없을 때도 또 그럴까 봐 하루 종일 걱정된다. 지하철과 버스는 피하고 택시를 타고 출근한다. 사람이 많은 곳이 무서워서 친구 결혼식에도 가지 않았다.
+    정신을 잃고 쓰러진 적은 없다. 평소에 운동할 때 가슴이 아프거나 숨이 차지는 않다. 더위를 타거나 몸무게가 빠지지는 않았다. 평소에 손이 떨리거나 설사를 하지는 않는다. 두통은 없다.
+    커피는 하루 두 잔 마시다가 요즘 한 잔으로 줄였다. 에너지 음료나 다이어트 약은 먹지 않는다. 술은 얼마 안 마시고 주말에 맥주 한두 캔 정도이다. 담배는 피우지 않는다.
+    요즘 잠은 잘 못 자고 자주 깬다. 기분이 조금 처지기는 하지만 친구를 만나면 즐겁다. 죽고 싶다는 생각은 해 본 적이 없다. 반년 전에 팀장이 되면서 야근이 많아져 스트레스가 심하다. 직업이 회사원이고 마케팅 일을 한다. 함께 사는 사람 없이 혼자 산다.
+    앓고 있는 병이나 지병은 없다. 먹는 약은 따로 없다. 불안할 때 우황청심원을 몇 번 먹었다. 약 알레르기는 없다. 마지막 생리는 열흘 전이었고 생리는 규칙적이다. 임신 가능성은 없다. 가족 중에 어머니가 오래전부터 불안이 심해서 신경정신과 약을 드신다. 가장 걱정되는 것은 심장에 문제가 있을지도 모른다는 것이다. 다시 지하철을 편하게 타고 싶다.
+  exams:
+    전반적 외관 시진 (General appearance): 다소 긴장한 모습, 급성 병색(-)
+    활력징후 측정 (Vital signs): 118/74mmHg, 84회/분, 16회/분, 36.6°C
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    정동 평가 (Affect): 불안한 정동, 사고 흐름 정상, 자살 사고(-)
+    피부 온도·발한 촉진 (Skin temperature and diaphoresis): 피부 온도 정상, 발한(-)
+    갑상선 안징후 검사 (Thyroid eye signs): 안구돌출(-), 눈꺼풀 지연(-)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-), 압통(-)
+    자세성 떨림 (Postural tremor): 떨림(-)
+    요골동맥 맥박 촉진 (Radial pulse palpation): 84회/분, 규칙적
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-), 수축기 클릭(-)
+    폐 청진 (Lung auscultation): 폐포음, 천명음(-/-), 수포음(-/-)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    심부건반사 (Deep tendon reflex): 정상(2+), 대칭
+  key:
+    diagnosis: Panic disorder (with developing agoraphobic avoidance)
+    differential: ["Hyperthyroidism", "Paroxysmal supraventricular tachycardia", "Pheochromocytoma",
+                   "Substance-induced anxiety (caffeine, stimulant diet pills)"]
+    history: [onset, character, timing, aggravating, pmh, meds, fh, alcohol, job, lmp,
+              {fear: "(죽을|미칠|통제|무서)", physical_sx: "(두근|숨이|가슴|저리|땀|어지)",
+               peak_duration: "(몇 분|얼마나 (오래|지속)|가라앉|최고조|가장 심)", trigger: "(계기|유발|어떤 상황|이유|지하철|어디서)",
+               anticipatory: "(또 (그럴|생길|올)|걱정|예기)", avoidance: "(피하|회피|대중교통|버스|사람 많|외출)",
+               workup: "(응급실|검사|심전도)", caffeine: "(커피|카페인|에너지 음료|음료)", diet_pills: "(다이어트|살 빼|식욕 억제|한약|각성)",
+               thyroid: "(갑상선|더위|몸무게|체중|살이 빠)", mood: "(우울|기분|흥미|즐겁)", suicide: "(죽고 싶|자살|자해|해치)"}]
+    exams: [갑상선 촉진 (Thyroid palpation), 심음 청진 (Heart auscultation), 정동 평가 (Affect), 활력징후 측정 (Vital signs)]
+
+- case_id: M24
+  playbook: seizure
+  opening: 이름은 강민재이고, 나는 열아홉 살 남자이다. 어제 아침 기숙사에서 쓰러져 경련을 했다고 해서 병원에 왔다.
+  vital_signs: "혈압 : 122/72 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.7°C"
+  script: |
+    어제 아침 일곱 시쯤 기숙사에서 양치를 하다가 쓰러져 경련을 했다고 한다. 나는 그때 일이 전혀 기억나지 않는다. 같은 방 친구가 봤는데 갑자기 소리를 지르며 쓰러지더니 온몸이 뻣뻣해졌다고 했다. 그다음 양쪽 팔다리를 규칙적으로 떨었다고 했다. 경련은 일이 분 동안 했다고 한다. 눈이 위로 돌아가고 입에서 거품이 나왔다고 했다. 한쪽부터 떨리기 시작하지는 않았다고 했다. 정신이 돌아오는 데 이십 분쯤 걸렸다고 한다. 그동안 멍하게 엉뚱한 말을 했다고 한다. 정신이 들었을 때 바지에 소변을 지려 있었다. 혀를 깨물어서 오른쪽 옆이 지금도 아프다. 그날 온몸이 쑤시고 머리가 무거웠다. 쓰러지기 직전에 이상한 냄새나 느낌 같은 전조는 없었다. 응급실에서 머리 씨티와 피 검사를 받았는데 정상이라고 들었다. 전에는 이렇게 쓰러지거나 경련을 한 적이 없었다.
+    일 년 전부터 아침에 일어나고 얼마 안 돼서 팔이 깜짝 놀라듯 움찔하는 일이 가끔 있다. 그럴 때 핸드폰이나 숟가락을 떨어뜨린 적이 여러 번 있다. 움찔할 때 정신을 잃지는 않는다. 잠을 못 잔 다음 날 아침에 더 자주 그런다. 중간고사 때문에 밤을 새우다시피 해서 잠이 많이 부족했다. 이틀 동안 잠은 잘 못 자고 세 시간밖에 못 잤다. 그동안 에너지 음료를 하루 세 캔씩 마셨다.
+    열이나 두통은 없었다. 최근에 머리를 부딪치거나 다친 적은 없다. 어릴 때 열성경련을 하거나 뇌수막염을 앓은 적은 없다. 태어날 때 문제는 없었고 발달도 정상이었다. 앓고 있는 병이나 지병은 없다. 먹는 약은 따로 없다. 약 알레르기는 없다. 가족 중에 사촌 형이 뇌전증으로 약을 먹고 있다.
+    술은 한 달에 두세 번 맥주 두세 캔 마시는 편이다. 쓰러지기 전날에는 술을 마시지 않았다. 담배는 피우지 않는다. 마약이나 다른 약은 해 본 적이 없다. 직업이 대학생이고 일 학년이다. 기숙사에서 친구와 함께 산다. 운전면허가 있어서 주말에 가끔 아버지 차로 운전을 한다. 가장 걱정되는 것은 또 쓰러지는 것이다. 운전을 계속해도 되는지 궁금하다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 피곤해 보임
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    활력징후 측정 (Vital signs): 122/72mmHg, 76회/분, 16회/분, 36.7°C
+    혀 시진 (Tongue inspection): 혀 우측 가장자리 교상 및 부종(+)
+    경부 강직 (Neck stiffness): 강직(-)
+    동공 반사 (Pupillary reflex): 양측 동일, 대광반사(+/+)
+    안저 검사 (Fundoscopy): 유두부종(-)
+    안면 근력 검사 (Facial muscle strength (CN VII)): 대칭, 마비(-)
+    사지 근력 검사 (Limb muscle power): 상하지 근력 5/5, 좌우 대칭
+    심부건반사 (Deep tendon reflex): 정상(2+), 대칭
+    바빈스키 징후 (Babinski sign): (-/-)
+    손가락-코 검사 (Finger-to-nose test): 정상
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 120/72mmHg, 72회/분 → 선 자세 118/74mmHg, 78회/분
+    피부 시진 (Skin inspection): 밀크커피색 반점(-), 잎사귀 모양 저색소반(-)
+  key:
+    diagnosis: Juvenile myoclonic epilepsy presenting with a first generalized tonic-clonic seizure triggered by sleep deprivation
+    differential: ["Convulsive syncope", "Psychogenic nonepileptic seizure",
+                   "Acute symptomatic seizure (hypoglycemia, electrolyte disturbance, drugs or alcohol)",
+                   "Focal epilepsy from a structural brain lesion"]
+    history: [onset, prior, pmh, meds, fh, alcohol,
+              {witness: "(누가 봤|목격|본 사람|옆에|친구|룸메이트)", pattern: "(뻣뻣|굳|떨|흔들|한쪽|양쪽|눈이)",
+               duration: "(몇 분|얼마나 (오래|동안)|지속)", tongue_bite: "(혀|깨물)", incontinence: "(소변|실금|지렸|오줌)",
+               postictal: "(정신이 (들|돌아)|깨어|멍|헷갈|기억)", aura: "(전조|직전|미리|이상한 (느낌|냄새)|조짐)",
+               myoclonus: "(움찔|깜짝|떨어뜨|놓치|아침에)", sleep: "(잠을|잠이|수면|밤을|밤새)",
+               stimulants: "(커피|카페인|에너지|마약|약물)", trauma_infection: "(머리를 (다치|부딪)|외상|열이|두통|감기)",
+               driving: "(운전|차를)"}]
+    exams: [혀 시진 (Tongue inspection), 의식·지남력 평가 (Mental status), 사지 근력 검사 (Limb muscle power),
+            경부 강직 (Neck stiffness), 심음 청진 (Heart auscultation)]
+
+- case_id: M25
+  playbook: tremor
+  opening: 이름은 박상철이고, 나는 예순일곱 살 남자이다. 일 년 전부터 오른손이 떨려서 병원에 왔다.
+  vital_signs: "혈압 : 134/82 mmHg\n맥박 : 72 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
+  script: |
+    일 년 전부터 그러기 시작했다. 오른손은 일 년 전부터 떨리기 시작했다. 떨리는 쪽은 오른쪽이다. 가만히 무릎 위에 손을 올려놓고 있을 때 떨린다. 엄지와 검지로 알약을 비비듯이 떨린다. 컵 같은 물건을 잡을 때는 오히려 덜 떨린다. 긴장하거나 걸을 때 더 떨린다. 잘 때는 떨리지 않는다. 석 달 전부터는 오른쪽 다리도 가끔 떨린다. 왼손은 떨리지 않는다. 떨림은 조금씩 심해지고 있다.
+    요즘 동작이 느려져서 단추를 잠그는 데 오래 걸린다. 글씨가 점점 작아진다. 걸음걸이가 느려지고 보폭이 좁아졌다고 아내가 말한다. 걸을 때 오른팔을 덜 흔든다. 의자에서 일어나거나 돌아설 때 시간이 걸린다. 넘어진 적은 없다. 아내가 내 얼굴이 무표정해지고 목소리가 작아졌다고 한다.
+    몇 년 전부터 냄새를 잘 맡지 못한다. 오래전부터 변비가 있어서 사나흘에 한 번 대변을 본다. 몇 년 전부터 자다가 잠꼬대로 소리를 지르고 발길질을 한다고 아내가 말한다. 기억력은 괜찮고 헛것이 보이지는 않는다. 일어설 때 어지럽지는 않다. 소변 실수는 없다. 술을 마셔도 떨림은 줄지 않는다. 더위를 타거나 몸무게가 줄지는 않았다.
+    앓고 있는 병은 고혈압이다. 팔 년 전에 고혈압을 진단받았다. 평소에 먹는 약이 혈압약 하나 있다. 위장약이나 소화제, 어지럼증 약, 정신과 약을 오래 먹은 적은 없다. 뇌졸중을 앓거나 머리를 다친 적은 없다. 약 알레르기는 없다. 가족 중에 손이 떨리는 사람은 없다. 담배는 피운 적이 없다. 술은 한 달에 한두 번 막걸리 한 잔 마시는 편이다. 직업이 농부이고 삼십 년 동안 사과 과수원 일을 했다. 과수원에서 농약을 직접 뿌렸다. 아내와 함께 둘이 산다. 가장 걱정되는 것은 큰 병이 아닐까 하는 것이다. 떨리고 느려져서 일상생활이 불편하다.
+  exams:
+    전반적 외관 시진 (General appearance): 표정 감소(+), 눈 깜빡임 감소(+), 목소리 작음
+    활력징후 측정 (Vital signs): 134/82mmHg, 72회/분, 16회/분, 36.4°C
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    떨림·서동 관찰 (Resting tremor and bradykinesia): 우측 손 안정 시 떨림(4-5Hz, 환약말이 양상)(+), 손가락 두드리기 우측에서 느려지고 진폭 감소(+), 좌측 정상
+    자세성 떨림 (Postural tremor): 팔을 뻗으면 수 초 뒤 우측에 다시 나타나는 떨림 경도(+), 좌측(-)
+    근긴장도 평가 (Muscle tone): 우측 손목·팔꿈치 톱니바퀴 경축(+), 좌측 정상
+    보행 관찰 (Gait): 보폭 감소, 우측 팔 흔들림 감소(+), 돌 때 여러 걸음, 동결(-)
+    후방 당김 검사 (Pull test (postural instability)): 한 걸음 물러난 뒤 스스로 회복, 정상
+    손가락-코 검사 (Finger-to-nose test): 정상, 의도 떨림(-)
+    외안근 운동 (Extraocular movement): 정상, 수직 주시 제한(-)
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 136/82mmHg → 선 자세 3분 132/80mmHg, 기립성 저혈압(-)
+    인지기능 선별검사 (Cognitive screening): 간이정신상태검사 28/30
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    심부건반사 (Deep tendon reflex): 정상(2+), 대칭
+    바빈스키 징후 (Babinski sign): (-/-)
+  key:
+    diagnosis: Parkinson disease (idiopathic, early, right-predominant)
+    differential: ["Essential tremor", "Drug-induced parkinsonism (levosulpiride, metoclopramide, flunarizine, antipsychotics)",
+                   "Vascular parkinsonism", "Atypical parkinsonism (multiple system atrophy or progressive supranuclear palsy)"]
+    history: [onset, location, aggravating, pmh, meds, fh, alcohol, job,
+              {rest_action: "(가만히|쉴 때|움직일 때|물건을 (잡|들)|컵|손을 쓸)", side: "(한쪽|양쪽|왼손|오른손|양손|다리도)",
+               progression: "(점점|심해지|진행|나빠)", slowness: "(느려|느리|굼뜨|동작|단추)", handwriting: "글씨",
+               gait_falls: "(걸음|걸을|걷|보폭|넘어)", face_voice: "(표정|목소리|말소리)", smell: "(냄새|후각)",
+               constipation: "(변비|대변)", rbd: "(꿈|잠꼬대|소리를 지르|발길질|자다가)",
+               culprit_drugs: "(위장약|소화제|어지럼증 약|멀미|정신과|안정제)", alcohol_effect: "(술을 (마시|드시)면|술.*(줄|덜|나아))"}]
+    exams: [떨림·서동 관찰 (Resting tremor and bradykinesia), 근긴장도 평가 (Muscle tone), 보행 관찰 (Gait),
+            자세성 떨림 (Postural tremor), 후방 당김 검사 (Pull test (postural instability))]
+
+- case_id: M26
+  playbook: weakness_numbness
+  opening: 이름은 최병욱이고, 나는 예순한 살 남자이다. 한 시간 반 전에 갑자기 왼쪽 팔다리에 힘이 빠져서 병원에 왔다.
+  vital_signs: "혈압 : 172/98 mmHg\n맥박 : 96 회/분\n호흡 : 18 회/분\n체온 : 36.6°C\n산소포화도 : 96%"
+  script: |
+    오늘 아침 일곱 시 반부터 그러기 시작했다. 아침을 먹다가 갑자기 왼손에 힘이 빠져서 숟가락을 떨어뜨렸다. 힘이 빠지기 시작한 것은 지금부터 한 시간 반 전이다. 일어나려는데 왼쪽 다리에도 힘이 없어서 끌렸다. 아내가 내 왼쪽 입꼬리가 처지고 발음이 어눌하다고 했다. 밥을 먹기 직전까지는 멀쩡했다. 한순간에 생겼고 그 뒤로 좋아지지도 나빠지지도 않았다. 지금 왼팔은 겨우 들 수 있고 왼쪽 다리는 부축하면 걸을 수 있다. 왼쪽 팔다리와 얼굴이 남의 살처럼 감각이 둔하다. 발음은 어눌하지만 하고 싶은 말은 할 수 있고 남의 말도 알아듣는다. 물체가 둘로 보이거나 시야가 가려지지는 않는다. 머리는 아프지 않다. 토하거나 어지럽지는 않았다. 정신을 잃거나 경련을 하지는 않았다. 넘어지거나 머리를 부딪치지는 않았다. 물을 마실 때 사레가 들리지는 않는다. 가슴이나 등이 아프지는 않다.
+    이 주 전에도 왼손이 십 분 정도 저리고 힘이 빠졌다가 저절로 좋아진 적이 있다. 몇 달 전부터 가끔 가슴이 불규칙하게 두근거렸다. 작년 건강검진에서 맥박이 불규칙하다는 말을 들었지만 병원에 가지 않았다.
+    앓고 있는 병은 고혈압과 당뇨이다. 십 년 전부터 고혈압약을 먹는데 자주 빠뜨린다. 오 년 전에 당뇨를 진단받아 당뇨약을 먹고 있다. 평소에 먹는 약이 혈압약과 당뇨약 두 가지 있다. 콜레스테롤이 높다는 말을 들었지만 약은 먹지 않는다. 아스피린이나 피를 묽게 하는 약은 먹지 않는다. 최근에 수술을 받거나 피가 잘 안 멎은 적은 없다. 검은 변을 보거나 피를 토한 적은 없다. 예전에 뇌졸중이나 뇌출혈을 앓은 적은 없다. 약 알레르기는 없다. 가족 중에 아버지가 일흔에 중풍으로 돌아가셨다.
+    담배는 사십 년 동안 하루 한 갑씩 피우고 있다. 술은 일주일에 세 번 소주 한 병씩 마시는 편이다. 직업이 택시 기사여서 하루 종일 운전 일을 한다. 아내와 함께 산다. 가장 걱정되는 것은 다시 운전할 수 있을지이다. 갑자기 이렇게 되어서 무섭다.
+  exams:
+    전반적 외관 시진 (General appearance): 왼쪽 입꼬리 처짐(+), 불안해 보임
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    활력징후 측정 (Vital signs): 172/98mmHg, 96회/분, 18회/분, 36.6°C, 산소포화도 96%
+    요골동맥 맥박 촉진 (Radial pulse palpation): 불규칙적으로 불규칙한 맥박(+), 96회/분
+    심음 청진 (Heart auscultation): 리듬 불규칙, S1 세기 변동, 심잡음(-)
+    경동맥 잡음 청진 (Carotid bruit): 잡음(-/-)
+    양팔 혈압 비교 (Blood pressure in both arms): 우측 172/98mmHg, 좌측 170/96mmHg, 차이 없음
+    안면 근력 검사 (Facial muscle strength (CN VII)): 좌측 하부 안면 마비(+), 이마 주름 보존(중추성)
+    구음장애 확인 (Dysarthria): 경도 구음장애(+), 실어증(-)
+    혀 운동 검사 (Tongue movement (CN XII)): 내밀 때 좌측 편위(+)
+    대면 시야 검사 (Visual fields by confrontation): 정상
+    회내근 표류 검사 (Pronator drift): 좌측 회내 표류(+), 우측(-)
+    사지 근력 검사 (Limb muscle power): 좌측 상지 3/5, 좌측 하지 4/5, 우측 상하지 5/5
+    촉각 검사 (Light touch sensation): 좌측 얼굴·상하지 촉각 저하(+)
+    바빈스키 징후 (Babinski sign): 좌측(+), 우측(-)
+    경부 강직 (Neck stiffness): 강직(-)
+  key:
+    diagnosis: Acute ischemic stroke, right middle cerebral artery territory, likely cardioembolic from undiagnosed atrial fibrillation (within the thrombolysis window)
+    differential: ["Intracerebral hemorrhage", "Hypoglycemia (stroke mimic)", "Postictal (Todd) paralysis"]
+    history: [onset, location, timing, prior, pmh, meds, fh, smoking, alcohol, job,
+              {exact_time: "(몇 시|정확|마지막으로 (괜찮|멀쩡|정상))", speech: "(말이|말하는|발음|어눌|언어)", face: "(얼굴|입꼬리|입이)",
+               sensory: "(저리|감각|무감각|둔하)", vision: "(보이|시야|겹쳐|둘로)", headache: "(두통|머리가 아|머리는 아)",
+               vomiting: "(토하|구토|메스)", loc_seizure: "(정신을 잃|의식|경련|발작|쓰러)", palpitation_af: "(두근|부정맥|맥박|심장)",
+               antithrombotic: "(아스피린|피를 묽게|항응고|와파린|혈전)", bleeding_surgery: "(출혈|피가 (잘 )?안 멎|수술|검은 변|피를 토)",
+               trauma: "(넘어|부딪|다치)"}]
+    exams: [사지 근력 검사 (Limb muscle power), 안면 근력 검사 (Facial muscle strength (CN VII)), 회내근 표류 검사 (Pronator drift),
+            요골동맥 맥박 촉진 (Radial pulse palpation), 구음장애 확인 (Dysarthria)]
+
+- case_id: M27
+  playbook: weight_gain
+  opening: 이름은 오말순이고, 나는 예순세 살 여자이다. 넉 달 전부터 살이 많이 쪄서 병원에 왔다.
+  vital_signs: "혈압 : 158/94 mmHg\n맥박 : 82 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    넉 달 전부터 그러기 시작했다. 넉 달 전부터 살이 찌기 시작했다. 체중은 넉 달 사이에 칠 키로그람이 늘었다. 몸무게가 오십팔 키로그람에서 육십오 키로그람으로 늘었다. 주로 배에 살이 찌고 팔다리는 오히려 가늘어졌다. 얼굴이 동그랗게 붓고 붉어져서 이웃들이 달덩이 같다고 한다. 딸이 내 목 뒤가 두툼해졌다고 한다. 요즘 입맛이 좋아서 밥을 많이 먹는다. 식욕이 늘어서 늘 배가 고프다. 배와 허벅지에 보라색 줄무늬가 생겼다. 살갗이 얇아지고 팔에 멍이 잘 든다. 쪼그려 앉았다가 일어나거나 계단을 오를 때 다리에 힘이 없다. 저녁이 되면 발목이 조금 붓는다. 잠은 잘 못 잔다. 신경이 날카로워졌다. 요즘 목이 자주 마르고 소변을 자주 본다. 지난달 보건소 검진에서 혈압과 당이 높다는 말을 처음 들었다. 전에는 살이 이렇게 찐 적이 없었다.
+    추위를 타거나 목소리가 쉬지는 않았다. 변비는 없다. 숨이 차거나 누우면 숨이 막히지는 않는다. 소변에 거품이 많지는 않다. 기분이 우울하지는 않다.
+    앓고 있는 병은 무릎 관절염이다. 오 년 전에 무릎 관절염을 진단받았다. 평소에 먹는 약이 시장에서 산 관절약 하나 있다. 여섯 달 전부터 그 관절약을 하루 두 번 먹고 있다. 그 약은 이웃이 소개해 준 사람에게 시장에서 샀다. 약 이름은 모르고 봉지에 하얀 알약이 들어 있다. 그 약을 먹으면 무릎이 하나도 안 아프다. 병원에서 처방받은 약은 없다. 한약이나 건강식품은 먹지 않는다. 약 알레르기는 없다. 수술이나 입원한 적은 없다. 마지막 생리는 쉰 살 때였다. 가족 중에 어머니가 당뇨를 앓으셨다.
+    담배는 피우지 않고 술도 마시지 않는다. 운동은 따로 하지 않지만 밭일을 한다. 직업이 따로 없고 집안일과 밭일을 한다. 남편과 함께 산다. 가장 걱정되는 것은 살이 계속 찌고 얼굴이 변하는 것이다. 무릎이 안 아픈 그 관절약은 계속 먹고 싶다.
+  exams:
+    전반적 외관 시진 (General appearance): 달덩이 얼굴(+), 안면 홍조(+), 목 뒤 지방 침착(+), 중심성 비만, 사지는 가늚
+    활력징후 측정 (Vital signs): 158/94mmHg, 82회/분, 16회/분, 36.5°C
+    체중 측정 (Body weight): 65kg, 키 154cm, 체질량지수 27.4kg/m²
+    허리둘레 측정 (Waist circumference): 96cm
+    자주색 선조 시진 (Purple striae): 복부·허벅지에 폭 1cm 이상의 자주색 선조(+)
+    피부 시진 (Skin inspection): 피부 얇아짐(+), 양팔 반상출혈(+), 여드름(-)
+    다모증 평가 (Hirsutism): (-)
+    흑색가시세포증 시진 (Acanthosis nigricans): (-)
+    사지 근력 검사 (Limb muscle power): 고관절 굴곡 4/5, 어깨 외전 4/5(근위부 약화), 원위부 5/5
+    하지 함요부종 확인 (Pitting edema of the legs): 양측 발목 함요부종(1+/1+)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    심부건반사 (Deep tendon reflex): 정상(2+), 이완 지연(-)
+    경정맥압 측정 (Jugular venous pressure): 상승(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+  key:
+    diagnosis: Iatrogenic (exogenous glucocorticoid) Cushing syndrome from an unlabeled steroid-containing joint medicine
+    differential: ["Endogenous Cushing syndrome (pituitary or adrenal)", "Hypothyroidism", "Simple obesity with metabolic syndrome",
+                   "Fluid retention from heart failure or nephrotic syndrome"]
+    history: [onset, pmh, meds, fh, smoking, alcohol, lmp,
+              {amount: "(얼마나 (늘|찌|쪘)|몇 (키로|킬로)|체중|몸무게)", distribution: "(배가|배에|얼굴|팔다리|어디가 (찌|쪘)|부위)",
+               appetite: "(입맛|식욕|먹는 양|많이 드|식사)", steroid_source: "(스테로이드|관절약|한약|건강식품|건강 보조|주사|시장|민간|약국)",
+               skin: "(줄무늬|튼살|피부|살갗|멍)", proximal_weakness: "(힘이 (없|빠)|근력|일어서|일어나|계단)",
+               bp_glucose: "(혈압|혈당|당이|당뇨)", polyuria: "(목이 마르|갈증|소변을 자주|소변이 자주)",
+               hypothyroid: "(추위|변비|목소리|갑상선)", edema_hf: "(붓|부종|숨이 차|거품)", mood_sleep: "(잠이|수면|기분|우울|신경)",
+               lifestyle: "(운동|활동|생활 습관)"}]
+    exams: [자주색 선조 시진 (Purple striae), 전반적 외관 시진 (General appearance), 사지 근력 검사 (Limb muscle power),
+            활력징후 측정 (Vital signs), 허리둘레 측정 (Waist circumference)]
+
+- case_id: M28
+  playbook: easy_bruising
+  opening: 이름은 정우진이고, 나는 스물두 살 남자이다. 일주일 전부터 다리에 멍이 잘 들어서 병원에 왔다.
+  vital_signs: "혈압 : 118/72 mmHg\n맥박 : 78 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    일주일 전부터 그러기 시작했다. 일주일 전부터 멍이 들기 시작했다. 일주일 전에 양쪽 정강이와 발목에 깨알 같은 빨간 점이 잔뜩 생긴 것을 처음 봤다. 빨간 점은 가렵거나 아프지 않고 튀어나와 있지 않다. 부딪친 적이 없는데 허벅지와 팔에 손바닥만 한 멍이 여러 개 생겼다. 멍이 드는 곳은 주로 허벅지와 팔이다. 닷새 전부터 양치할 때 잇몸에서 피가 난다. 이번 주에 코피가 두 번 났고 멎는 데 십오 분쯤 걸렸다. 어제 볼 안쪽에 검붉은 피 물집이 생겼다. 소변 색은 평소와 같다. 검은 변이나 피 섞인 변은 본 적이 없다. 피를 토한 적은 없다. 두통은 없고 눈도 잘 보인다. 전에는 이런 적이 없었다.
+    삼 주 전에 목이 아프고 콧물이 나는 감기를 나흘 앓았다. 그때 열이 조금 났다. 지금은 감기가 나았고 열은 없다. 그때 약국에서 종합감기약을 사서 사흘 먹었다. 아스피린이나 소염진통제는 먹지 않았다. 최근에 새로 먹기 시작한 약이나 건강식품은 없다. 최근에 예방접종을 맞은 적은 없다. 몸무게가 빠지거나 밤에 식은땀이 나지는 않는다. 피곤하거나 숨이 차지는 않는다. 뼈가 쑤시지는 않는다. 목이나 겨드랑이에 멍울이 만져지지는 않는다. 관절이 붓거나 아픈 곳은 없다.
+    어릴 때부터 멍이 잘 들거나 코피가 자주 난 적은 없다. 작년에 사랑니를 뺐을 때 피가 금방 멎었다. 앓고 있는 병이나 지병은 없다. 먹는 약은 따로 없다. 약 알레르기는 없다. 간이 안 좋다는 말을 들은 적은 없다. 가족 중에 피가 잘 안 멎는 사람은 없다.
+    술은 한 달에 두 번 맥주 두세 캔 마시는 편이다. 담배는 삼 년째 하루 반 갑씩 피우고 있다. 직업이 대학생이고 삼 학년이다. 부모님과 함께 산다. 운동은 주말마다 친구들과 농구를 한다. 가장 걱정되는 것은 피가 안 멎는 큰 병일까 하는 것이다. 다음 주 농구 대회에 나가도 되는지 궁금하다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 창백(-)
+    활력징후 측정 (Vital signs): 118/72mmHg, 78회/분, 16회/분, 36.6°C
+    점상출혈 확인 (Petechiae and purpura): 양측 정강이·발목에 1-2mm 다발성 점상출혈(+), 촉지되지 않음
+    유리압진 검사 (Diascopy (blanching)): 눌러도 퇴색되지 않음(비창백성)
+    피부 시진 (Skin inspection): 허벅지·팔에 3-6cm 반상출혈 여러 개(+), 촉지성 자반(-)
+    구강 점막 시진 (Oral mucosa inspection): 양측 볼 점막 혈성 수포(+), 잇몸 가장자리 출혈 흔적(+)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-), 결막하 출혈(-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    겨드랑이 림프절 촉진 (Axillary lymph node palpation): 촉지(-/-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    무릎 관절 촉진 (Knee joint palpation): 부종(-), 압통(-)
+    안저 검사 (Fundoscopy): 망막 출혈(-), 유두부종(-)
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+  key:
+    diagnosis: Immune thrombocytopenia (primary ITP after a viral illness) with mucosal bleeding (wet purpura)
+    differential: ["Acute leukemia", "Aplastic anemia", "Drug-induced thrombocytopenia",
+                   "Von Willebrand disease or another coagulation disorder"]
+    history: [onset, location, prior, pmh, meds, fh, alcohol,
+              {trauma: "(부딪|다치|외상|맞은)", petechiae: "(빨간 점|붉은 점|점 같은|반점|깨알)", mucosal: "(잇몸|코피|양치|입안|볼 안)",
+               gu_gi_bleed: "(소변|대변|검은 변|혈뇨|혈변|피를 토)", neuro: "(두통|머리가 아|시야|눈이|보이)",
+               infection: "(감기|열이|바이러스|아팠)", antiplatelet: "(아스피린|진통제|소염|감기약|건강식품|한약|영양제)",
+               systemic_b: "(체중|몸무게|살이|식은땀|피곤|기운|숨이 차|뼈)", lymph: "(멍울|혹|림프)", joint: "(관절|무릎)",
+               surgical_bleeding: "(이를 뽑|발치|사랑니|수술|피가 (잘 )?안 멎|지혈|상처)", vaccine: "(예방접종|백신|주사)"}]
+    exams: [점상출혈 확인 (Petechiae and purpura), 구강 점막 시진 (Oral mucosa inspection), 간·비장 촉진 (Liver and spleen palpation),
+            경부 림프절 촉진 (Cervical lymph node palpation)]
+
+- case_id: M29
+  playbook: rash
+  opening: 이름은 김옥자이고, 나는 일흔한 살 여자이다. 이틀 전부터 오른쪽 등과 옆구리에 물집이 잡혀서 병원에 왔다.
+  vital_signs: "혈압 : 138/82 mmHg\n맥박 : 84 회/분\n호흡 : 16 회/분\n체온 : 37.2°C"
+  script: |
+    닷새 전부터 그러기 시작했다. 아프기 시작한 것은 닷새 전부터이다. 처음에는 오른쪽 등과 옆구리가 화끈거리고 바늘로 찌르듯이 아팠다. 지금은 화끈거리면서 따끔따끔하게 아프다. 처음에는 담이 결린 줄 알고 등에 파스를 붙였다. 물집은 이틀 전에 생겼다. 아픈 자리를 따라 붉은 반점이 생기고 그 위에 좁쌀 같은 물집이 모여서 났다. 물집은 등에서 오른쪽 가슴 밑까지 띠처럼 이어져 있다. 왼쪽에는 아무것도 없다. 물집이 점점 늘어나고 일부는 탁해졌다. 아픈 정도는 열 중에 칠이다. 옷이 스치기만 해도 아프다. 밤에 더 아파서 잠은 잘 못 잔다. 조금 가려운 느낌도 있다. 다른 곳에는 물집이 없다. 얼굴이나 눈에는 이상이 없다.
+    열은 없지만 몸이 조금 으슬으슬하다. 기침이나 숨찬 것은 없다. 걷거나 힘을 쓸 때 가슴이 조이지는 않는다. 밥을 먹은 뒤에 배가 아프지는 않다. 새로 먹은 약이나 음식은 없다. 파스는 이틀 전에 뗐다. 전에도 이런 물집이 생긴 적은 없다. 어릴 때 수두를 앓았다고 들었다. 예방접종은 해마다 독감 주사만 맞는다.
+    앓고 있는 병은 당뇨와 고혈압이다. 팔 년 전부터 당뇨가 있어서 약을 먹고 있다. 고혈압도 있어서 혈압약을 먹는다. 평소에 먹는 약이 당뇨약과 혈압약 두 가지 있다. 스테로이드나 면역을 떨어뜨리는 약은 먹지 않는다. 암을 앓은 적은 없다. 약 알레르기는 없다. 수술이나 입원한 적은 없다. 마지막 생리는 쉰두 살 때였다. 가족 중에 특별한 병은 없다. 담배는 피우지 않고 술도 마시지 않는다.
+    직업이 없고 집안일을 한다. 남편과 함께 산다. 낮에는 열 달 된 손주 아이를 돌봐 준다. 가장 걱정되는 것은 손주에게 옮기는 것이다. 아파서 잠을 못 자겠다.
+  exams:
+    전반적 외관 시진 (General appearance): 통증으로 불편해 보임, 급성 병색(-)
+    활력징후 측정 (Vital signs): 138/82mmHg, 84회/분, 16회/분, 37.2°C
+    피부 시진 (Skin inspection): 우측 T5 피부분절을 따라 등에서 가슴 밑까지 띠 모양 홍반 위 군집성 수포(+), 일부 농포·가피, 정중선 넘지 않음, 다른 부위 수포(-)
+    촉각 검사 (Light touch sensation): 우측 T5 분절 이질통·감각 과민(+), 그 외 정상
+    니콜스키 징후 (Nikolsky sign): (-)
+    구강 점막 시진 (Oral mucosa inspection): 병변(-)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 충혈(-/-), 황달(-/-)
+    겨드랑이 림프절 촉진 (Axillary lymph node palpation): 우측 압통성 작은 림프절(+), 좌측(-)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    흉벽 압통 촉진 (Chest wall tenderness): 병변 부위 피부 통각 과민(+), 늑골 압통(-)
+    척추 압통 촉진 (Spinal tenderness): 압통(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-)
+    머피 징후 (Murphy sign): (-)
+  key:
+    diagnosis: Herpes zoster (right T5 dermatome)
+    differential: ["Allergic contact dermatitis from the pain patch", "Zosteriform herpes simplex", "Bullous impetigo",
+                   "Acute coronary syndrome or acute cholecystitis (for the prodromal pain)"]
+    history: [onset, character, location, severity, prior, pmh, meds, fh,
+              {pain_first: "(먼저|기 전에|아프기 시작|통증이 먼저)", spread: "(퍼지|번지|늘어|다른 (곳|부위))", itch: "(가렵|가려)",
+               blisters: "(물집|수포|진물|딱지)", fever: "(열이|열은|열나|열 나|오한|으슬|체온)", eye_face: "(눈|얼굴|시력)",
+               new_exposure: "(새로|음식|화장품|파스|연고|바른)", immunosuppression: "(스테로이드|면역|암|항암)",
+               chickenpox: "(수두|어릴 때)", vaccine: "(예방주사|예방접종|백신)", contacts: "(손주|아기|아이|같이 사|임산부|주변)",
+               sleep: "(잠을|잠이|수면|밤에)"}]
+    exams: [피부 시진 (Skin inspection), 촉각 검사 (Light touch sensation), 겨드랑이 림프절 촉진 (Axillary lymph node palpation),
+            활력징후 측정 (Vital signs)]

@@ -28,7 +28,6 @@ from dxagent.nova.protocol import Action
 from dxagent.nova.soap import FIELDS, note_shape_ok
 
 
-
 class LocalClient:
     def __init__(self, case: dict[str, Any], cfg: Optional[NovaConfig] = None,
                  chat: Optional[Callable[..., Any]] = None, reply_style: str = "sdk", patient_llm: Any = None,

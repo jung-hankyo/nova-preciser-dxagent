@@ -3,8 +3,9 @@
     python -m dxagent.nova.package --out dist/submission.zip [--sdk path/to/nova_sdk.py] [--with-kb] [--no-fixtures]
 
 Root: run.py, requirements.txt (the repository's pinned file: PyPI name==version, prebuilt wheels only), nova_sdk.py
-(from the starter package; taken from --sdk or the repository root, and the build is marked NOT OK without it), the
-dxagent package (no tests, experiments, caches), NOTICE.md, and kb/ with --with-kb.
+when available (from the starter package, via --sdk or the repository root; the server provides its own copy, so a
+ZIP without it is valid and only warned about, but one with an SDK older than 1.0.1 is refused), the dxagent package
+(no tests, experiments, simulator, caches), NOTICE.md, and kb/ with --with-kb.
 
 Checks before upload, as the server rejects: ZIP > 50,000,000 bytes, > 500,000,000 bytes unpacked, > 5,000 files,
 symbolic links, absolute or parent-relative paths, duplicate paths; requirements lines that are not name==version.
@@ -104,9 +105,13 @@ def verify(path: Path) -> dict:
         problems.append(f"{len(names)} files > {MAX_FILES}")
     if len(set(names)) != len(names):
         problems.append("duplicate paths")
-    for need in ("run.py", "requirements.txt", "nova_sdk.py"):
+    warnings: list[str] = []
+    for need in ("run.py", "requirements.txt"):
         if need not in names:
-            problems.append(f"missing {need} at the root" + (" (copy it from the starter package)" if need == "nova_sdk.py" else ""))
+            problems.append(f"missing {need} at the root")
+    if "nova_sdk.py" not in names:
+        warnings.append("no nova_sdk.py at the root: the server provides its own; for local runs copy the starter "
+                        "package's next to run.py")
     problems += [f"requirements line not name==version: {b}" for b in check_requirements(req)]
     if "nova_sdk.py" in names:
         with zipfile.ZipFile(path) as z:
@@ -116,7 +121,7 @@ def verify(path: Path) -> dict:
                             f"{'.'.join(map(str, MIN_SDK))} (the server refuses older ones; copy the current "
                             "starter package's)")
     return {"path": str(path), "files": len(names), "bytes": size, "unpacked_bytes": unpacked,
-            "size_mb": round(size / 1e6, 2), "problems": problems, "ok": not problems}
+            "size_mb": round(size / 1e6, 2), "problems": problems, "warnings": warnings, "ok": not problems}
 
 
 MIN_SDK = (1, 0, 1)  # the oldest SDK the server accepts
@@ -152,6 +157,8 @@ def main(argv=None) -> int:
           f"({'OK' if info['ok'] else 'NOT OK'})")
     for p in info["problems"]:
         print(f"  - {p}")
+    for w in info.get("warnings", []):
+        print(f"  ! {w}")
     return 0 if info["ok"] else 1
 
 

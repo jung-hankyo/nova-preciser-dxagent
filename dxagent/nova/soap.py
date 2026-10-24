@@ -60,7 +60,6 @@ def note_shape_ok(note: object, fields: dict) -> bool:
             return False
     return True
 
-
 FIELD_KO = {("S", "cc"): "주호소", ("S", "hpi"): "현병력", ("S", "pmh"): "과거력·약물·알레르기", ("S", "fh"): "가족력",
             ("S", "sh"): "사회력", ("S", "ros"): "계통 문진", ("O", "exam"): "진찰 소견", ("O", "tests"): "검사 결과",
             ("A", "evidence"): "근거", ("A", "differential"): "감별진단",
@@ -138,7 +137,10 @@ _TEST_KIND = (("기타", re.compile(r"(stool|대변|분변|객담|sputum|swab|�
                                   r"ammonia|gas|ABG|lactate)", re.I)))
 _ONSET = re.compile(r"(?:(?:오늘|어제|그제|그저께|지난|며칠|몇)\s?\S{0,6}\s?부터|"
                     r"(?:\d+|한|두|세|석|네|넉|다섯|여섯|일곱|여덟|아홉|열|반|이|삼|사|오|육)\s?(?:시간|일|주|개월|달|년)\s?"
-                    r"(?:전\s?부터|전|째|동안|사이|부터))")
+                    r"(?:반\s?)?(?:전\s?부터|전|째|동안|사이|부터)|"
+                    r"(?:하루|이틀|사흘|나흘|닷새|엿새|이레|열흘|보름|일주일|한\s?주일)\s?(?:전\s?부터|전|째|동안|사이|부터))")
+_DAY_WORD = {"하루": "1일", "이틀": "2일", "사흘": "3일", "나흘": "4일", "닷새": "5일", "엿새": "6일", "이레": "7일",
+             "열흘": "10일", "보름": "15일", "일주일": "1주", "한주일": "1주", "한 주일": "1주"}
 
 _NUM_WORD = {"한": 1, "두": 2, "세": 3, "석": 3, "네": 4, "넉": 4, "다섯": 5, "여섯": 6, "일곱": 7, "여덟": 8, "아홉": 9,
              "열": 10, "이": 2, "삼": 3, "사": 4, "오": 5, "육": 6}
@@ -153,12 +155,15 @@ def onset_phrase(found: str) -> str:
         return day
     if re.match(r"반\s?년", s):
         return "6개월 전"
-    m = re.match(r"(\d+|다섯|여섯|일곱|여덟|아홉|한|두|세|석|네|넉|열|이|삼|사|오|육)\s?(시간|일|주|개월|달|년)\s?(.*)$", s)
+    word = next((v for k, v in _DAY_WORD.items() if s.startswith(k)), "")
+    if word:  # 이틀 전부터 -> 2일 전
+        return f"{word} 전"
+    m = re.match(r"(\d+|다섯|여섯|일곱|여덟|아홉|한|두|세|석|네|넉|열|이|삼|사|오|육)\s?(시간|일|주|개월|달|년)\s?(반)?\s?(.*)$", s)
     if not m:
         return s
     n = m.group(1) if m.group(1).isdigit() else str(_NUM_WORD[m.group(1)])
     unit = "개월" if m.group(2) == "달" else m.group(2)
-    return f"{n}{unit} 전"
+    return f"{n}{unit}{' 반' if m.group(3) else ''} 전"
 
 
 # ---------------------------------------------------------------------------
@@ -539,8 +544,8 @@ def chart_s_o(enc: "Encounter") -> dict[tuple[str, str], str]:
     """S and O written by the LLM in chart style, field by field checked against the ledger; raw where it fails."""
     raw = raw_s_o(enc)
     cfg = enc.cfg
-    if not cfg.notes_call or enc.budget.remaining() < cfg.final_margin_s * 1.5:
-        return raw
+    if not cfg.notes_call or enc.budget.remaining() < max(cfg.final_margin_s * 1.5, enc.budget.call_s + 30.0):
+        return raw  # the chart call is optional: never at the cost of the deadline
     fe = _field_entries(enc)
     opening = enc.ctx.get("opening", "")
     fields = {"S.cc + S.hpi": [_row(e) for e in fe.get(("S", "hpi"), [])],
@@ -759,6 +764,9 @@ def assessment_and_plan(enc: "Encounter") -> dict[tuple[str, str], str]:
             names += [d.name_en for d in a.differentials]
         linked = pb.tests_for(names)
         plan["tests"] = [pb.test_line(t) for t in (linked or list(pb.tests))[:8]]
+    if not plan.get("tests"):  # no model, no playbook: the baseline work-up any first visit can justify
+        plan["tests"] = ["혈액검사 : 일반혈액검사(CBC), 일반화학검사 : 전신 상태와 기저 질환 확인",
+                         "소변검사 : 일반소변검사 : 기저 질환 확인"]
     if not plan.get("treatment"):
         card = enc.store.get(slug(en)) or enc.store.get(en)
         if card is not None and card.harm.treatments:

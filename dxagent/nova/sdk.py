@@ -26,7 +26,9 @@ later SDK version changes them; tests/test_nova.py checks dict, object and strin
 
 from __future__ import annotations
 
+import hashlib
 import inspect
+import json
 import logging
 import re
 import time
@@ -38,6 +40,7 @@ from dxagent.nova.llm import HttpError
 from dxagent.nova.protocol import (MAX_DIAGNOSIS_BYTES, MODEL_LIMIT_CODES, REFUSAL_CODES, RETRY_NEW_CODES,
                                    RETRY_SAME_CODES, STOP_CODES, TURN_USING_CODES, Action, Observation, Opening,
                                    error_code)
+from dxagent.nova.watchdog import CallTimeout, bounded
 
 log = logging.getLogger(__name__)
 
@@ -185,12 +188,14 @@ class SdkEnv:
     """Pull-style environment over the SDK client: start / act / submit (see NovaAgent.run)."""
 
     def __init__(self, client: Any, state: Any = None, max_turns: int = 50, retries: int = 4,
-                 sleep=time.sleep, before_submit=None):
+                 sleep=None, before_submit=None, action_timeout: float = 200.0, time_limit_s: float = 1800.0):
         self.client = client
+        self.action_timeout = action_timeout  # the longest one SAY/EXAM may block (the watchdog)
+        self.t_end = time.monotonic() + time_limit_s  # replaced by the session deadline when the server gives one
         self.state = state
         self.max_turns = max_turns
         self.retries = retries
-        self.sleep = sleep
+        self.sleep = sleep or time.sleep
         self.before_submit = before_submit  # e.g. make sure the case has its required client.chat() call
         self.turns = 0
         self.session: Any = None
@@ -215,6 +220,8 @@ class SdkEnv:
                     break
         if self.session is not None:
             self.seconds_left = seconds_left(self.session)
+            if self.seconds_left is not None:
+                self.t_end = min(self.t_end, time.monotonic() + self.seconds_left - 5.0)
             left = _int(_get(self.session, "turns_remaining"))
             if left is not None:
                 self.turns = max(0, self.max_turns - left)
@@ -235,8 +242,16 @@ class SdkEnv:
             return Observation(accepted=False, code="ACTION_NOT_AVAILABLE")
         rid = str(uuid.uuid4())
         for attempt in range(self.retries):
+            limit = min(self.action_timeout, self.t_end - time.monotonic() - 45.0)
+            if limit < 5.0:  # no time for another answer: on to DIAGNOSE
+                return Observation(accepted=False, done=True, code="DEADLINE")
             try:
-                resp = _call(fn, action.text, rid)
+                resp = bounded(_call, limit, fn, action.text, rid)
+            except CallTimeout:
+                self.log.append({"action": action.kind, "text": action.text, "error": "no answer in time",
+                                 "code": "ACTION_TIMEOUT"})
+                return Observation(accepted=False, code="ACTION_TIMEOUT",
+                                   done=self.t_end - time.monotonic() < 300.0)
             except Exception as exc:
                 code = error_code(exc)
                 self.log.append({"action": action.kind, "text": action.text, "error": str(exc)[:200], "code": code})
@@ -274,20 +289,27 @@ class SdkEnv:
         rid = str(uuid.uuid4())
         fixed: set[str] = set()
         last: Optional[BaseException] = None
+
+        def send(n: dict, d: str, r: str) -> Any:
+            try:
+                return self.client.diagnose(note=n, diagnosis=d, request_id=r)
+            except TypeError as exc:
+                if "request_id" not in str(exc):
+                    raise
+                return self.client.diagnose(note=n, diagnosis=d)
+
         for attempt in range(self.retries + 3):
             try:
-                try:
-                    return self.client.diagnose(note=note, diagnosis=dx, request_id=rid)
-                except TypeError as exc:
-                    if "request_id" not in str(exc):
-                        raise
-                    return self.client.diagnose(note=note, diagnosis=dx)
+                # bounded by the deadline, but never below 20 s: DIAGNOSE is the one request that must go out
+                return bounded(send, max(20.0, self.t_end - time.monotonic()), note, dx, rid)
             except Exception as exc:
                 last = exc
                 code = error_code(exc)
                 self.log.append({"action": "DIAGNOSE", "error": str(exc)[:300], "code": code})
                 if code in STOP_CODES:
                     break
+                if isinstance(exc, CallTimeout) and attempt < self.retries:
+                    continue  # the same request_id: if the first one arrived, the server answers it once
                 if code in RETRY_SAME_CODES + RETRY_NEW_CODES and attempt < self.retries:
                     if code in RETRY_NEW_CODES:
                         rid = str(uuid.uuid4())
@@ -355,13 +377,14 @@ class SdkTransport:
     but not charged) -> 503 "empty", which NovaLLM answers with a larger budget; other service errors -> 503;
     a spent budget (MODEL_CALL_LIMIT, MODEL_TOKEN_BUDGET) -> 402, and every later call fails at once."""
 
-    PENDING_WAITS = (5.0, 10.0, 20.0, 30.0)  # seconds before each resend of a pending or unstarted request
+    PENDING_WAITS = (5.0, 10.0, 15.0, 20.0, 30.0)  # seconds before each resend of a still-running request (then 30)
 
     def __init__(self, client: Any):
         self.client = client
         self.dropped: set[str] = set()
         self.calls = 0  # client.chat() invocations (the preliminary round requires at least one per case)
         self.exhausted = ""
+        self.pending: dict[str, tuple[str, float]] = {}  # request digest -> (request_id, since): still running
         try:
             sig = inspect.signature(client.chat)
             self.accepts_any = any(p.kind == p.VAR_KEYWORD for p in sig.parameters.values())
@@ -373,41 +396,68 @@ class SdkTransport:
     def supports_reasoning_effort(self) -> bool:
         return (self.accepts_any or "reasoning_effort" in self.params) and "reasoning_effort" not in self.dropped
 
+    @staticmethod
+    def _digest(messages: list[dict[str, str]], kwargs: dict[str, Any]) -> str:
+        body = json.dumps([messages, {k: v for k, v in sorted(kwargs.items()) if k != "request_id"}],
+                          ensure_ascii=False, default=str)
+        return hashlib.sha256(body.encode("utf-8")).hexdigest()
+
     def chat(self, payload: dict[str, Any], timeout: float) -> dict[str, Any]:
+        """One model call, bounded by `timeout` seconds of wall clock in all: every client.chat() invocation runs
+        under the watchdog, a request the server is still running (PROVIDER_UNAVAILABLE, REQUEST_PENDING) is polled
+        with the SAME request_id until it finishes, and past the deadline the call fails with HttpError(504) (no
+        retry: the time is spent) while the request stays remembered, so an identical later call collects it."""
         if self.exhausted:
             raise HttpError(402, self.exhausted)
+        t_end = time.monotonic() + max(10.0, float(timeout))  # room for at least one resend
         kwargs = {k: v for k, v in payload.items() if k not in ("model", "messages") and k not in self.dropped}
         if "max_completion_tokens" in kwargs and "max_tokens" not in kwargs:
             kwargs["max_tokens"] = kwargs.pop("max_completion_tokens")
         if not self.accepts_any and self.params:
             kwargs = {k: v for k, v in kwargs.items() if k in self.params}
-        if "request_id" in self.params or self.accepts_any:
-            kwargs["request_id"] = str(uuid.uuid4())
         messages = [{"role": m["role"], "content": m["content"]} for m in payload["messages"]
                     if isinstance(m.get("content"), str) and m["content"].strip()]
-        waited, pending = 0.0, 0
-        for attempt in range(12):
+        with_rid = "request_id" in self.params or self.accepts_any
+        key = self._digest(messages, kwargs)
+        if with_rid:
+            old = self.pending.get(key)
+            kwargs["request_id"] = old[0] if old and time.monotonic() - old[1] < 1800 else str(uuid.uuid4())
+        pending, net = 0, 0
+        for attempt in range(60):
+            left = t_end - time.monotonic()
+            if attempt and left <= 1.0:
+                break
             self.calls += 1
             try:
-                return _normalize(self.client.chat(messages, **kwargs))
+                resp = bounded(self.client.chat, max(left, 5.0), messages, **kwargs)
+                self.pending.pop(key, None)
+                return _normalize(resp)
+            except CallTimeout:
+                break  # the request may still finish on the server: remembered below
             except TypeError as exc:
                 m = re.search(r"unexpected keyword argument '([^']+)'", str(exc))
                 if m and m.group(1) in kwargs:
                     self.dropped.add(m.group(1))
                     kwargs.pop(m.group(1))
+                    with_rid = with_rid and "request_id" in kwargs
                     continue
                 raise HttpError(400, str(exc)) from None
             except Exception as exc:
                 code = error_code(exc)
-                if code in ("PROVIDER_UNAVAILABLE", "REQUEST_PENDING") and pending < len(self.PENDING_WAITS) \
-                        and waited + self.PENDING_WAITS[pending] <= max(timeout, 30.0):
-                    time.sleep(self.PENDING_WAITS[pending])  # the same request_id: the server finishes the one call
-                    waited += self.PENDING_WAITS[pending]
+                if code in ("PROVIDER_UNAVAILABLE", "REQUEST_PENDING"):
+                    if with_rid:
+                        self.pending.setdefault(key, (kwargs["request_id"], time.monotonic()))
+                    wait = self.PENDING_WAITS[min(pending, len(self.PENDING_WAITS) - 1)]
                     pending += 1
+                    if time.monotonic() + wait >= t_end - 1.0:
+                        break
+                    time.sleep(wait)  # the same request_id: the server finishes the one call
                     continue
-                if code in RETRY_SAME_CODES and code not in ("PROVIDER_UNAVAILABLE", "REQUEST_PENDING") and attempt < 2:
-                    time.sleep(1.0 + attempt)  # network: the same request again (no double charge)
+                if code in RETRY_SAME_CODES and net < 3:
+                    net += 1
+                    time.sleep(1.0 + net)  # network: the same request again (no double charge)
                     continue
+                self.pending.pop(key, None)
                 if code in MODEL_LIMIT_CODES:
                     self.exhausted = code
                     raise HttpError(402, code) from None
@@ -417,7 +467,8 @@ class SdkTransport:
                         raise HttpError(400, code) from None
                     self.dropped.add(opt)  # without it from now on (the effort then rides in the system message)
                     kwargs.pop(opt)
-                    if "request_id" in kwargs:  # a changed request is a new request
+                    key = self._digest(messages, kwargs)
+                    if with_rid:  # a changed request is a new request
                         kwargs["request_id"] = str(uuid.uuid4())
                     continue
                 if code == "PROVIDER_RESPONSE_INVALID":
@@ -429,7 +480,9 @@ class SdkTransport:
                 if code == "INVALID_MESSAGES" or isinstance(exc, ValueError):
                     raise HttpError(400, f"{code or 'ValueError'}: {exc}") from None
                 raise
-        raise HttpError(400, "too many unsupported arguments")
+        if with_rid and "request_id" in kwargs:
+            self.pending.setdefault(key, (kwargs["request_id"], time.monotonic()))
+        raise HttpError(504, f"CALL_DEADLINE: no answer within {timeout:.0f} s")
 
 
 def ensure_chat_call(transport: Optional["SdkTransport"]) -> bool:

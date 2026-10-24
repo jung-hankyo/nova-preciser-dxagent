@@ -18,10 +18,11 @@ guideline library (`./guidelines`, git-ignored) the assessment gets no guideline
 ## Fast checks (no key)
 
 ```bash
-pytest -q tests/test_nova.py tests/test_playbooks.py tests/test_visit.py tests/test_review.py   # 206 passed
-python -m dxagent.nova.playbooks                            # 58 playbooks valid
-python -m dxagent.nova.package --out dist/submission.zip    # ends with (OK)
+python -m sim.presubmit       # ends with GO; builds dist/submission.zip
 ```
+
+It runs the runtime and simulator tests, the playbooks, the simulated cases, the scenario matrix and the isolated ZIP
+check (`docs/SUBMISSION.md`).
 
 If a check fails, stop there.
 

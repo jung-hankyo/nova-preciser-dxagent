@@ -1,4 +1,4 @@
-# The contest runtime (v0.8.1)
+# The contest runtime (v0.9.0-pre)
 
 `run.py` and `dxagent/nova/` play one contest case at a time, as a doctor would run an outpatient visit:
 
@@ -9,9 +9,12 @@
 - a positive answer is followed up (how much, how long, getting worse) by the playbook's own follow-up questions;
 - it talks to the patient by name, acknowledges pain and worry, asks what they worry about and answers it at the end;
 - it writes the S/O/A/P note from a **ledger of what was actually asked**, in a CPX chart layout;
-- it quotes a guideline library when the environment provides one, and it never fails a case.
+- it quotes a guideline library when the environment provides one, and it never fails a case: time is planned from the
+  pace observed in the case, and every blocking SDK call is bounded by a watchdog.
 
 The research core (`docs/CORE.md`) is off by default (`NOVA_CORE=0`, decision 80). Decisions: `docs/decisions/v0.5-simple-approach.md`.
+What this version adds to `first-simple-approach` is a simulated contest (`sim/`), a presubmit gate and the hardening they found
+("Model calls and failure behavior", "The simulated contest" below).
 
 ## What the code assumes about the contest
 
@@ -22,7 +25,7 @@ competition's rules, scoring or cases. What the code relies on:
 - **Entry point.** `run.py` ends with the SDK's `run_agent(prepare, consult)`. `prepare()` loads what the visit needs
   without case access; `consult(client, state)` plays the case through the client and returns the server's answer to
   DIAGNOSE. The submission ZIP holds `run.py`, `requirements.txt` (pinned wheels), `NOTICE.md` and `dxagent/`; the SDK
-  is not redistributed (`dxagent/nova/package.py` checks the layout).
+  is not redistributed (`dxagent/nova/package.py` checks the layout; a ZIP without it is valid, the server has its own).
 - **Actions.** One SAY (a question or an explanation) or EXAM (one maneuver) per turn, each at most 30 characters after
   NFC normalization, then DIAGNOSE with the S/O/A/P note (`soap.FIELDS`) and one primary diagnosis on one line.
   `protocol.check_say`, `check_exam` and `single_topic` stop what the server would refuse before it costs a turn.
@@ -75,8 +78,12 @@ follow-ups and the time-out leave unused go back, after the time-out, to priorit
 
 Gathering ends at turn 44 at most (50 - 5 closing lines - 1 spare). The usual length the focus call is told (44) is an
 aim, not a cut: nothing the plan needs is dropped only to reach it, and there are no filler questions, so a visit ends
-when its plan does. Without a playbook, the older complaint groups (chest pain, dyspnea, cough, abdominal, headache,
-fever, dizziness, back pain, weight, sleep, growth, fatigue, palpitation; otherwise general) give the plan.
+when its plan does. When the observed pace leaves too little time (`Encounter._time_short`), a priority-2 history item
+yields to every planned maneuver and the end of the visit, priority-1 history and priority-2 maneuvers to the priority-1
+maneuvers and the end of the visit, and a priority-1 maneuver only to the end of the visit (event `time_cut`).
+
+Without a playbook, the older complaint groups (chest pain, dyspnea, cough, abdominal, headache, fever, dizziness, back
+pain, weight, sleep, growth, fatigue, palpitation; otherwise general) give the plan.
 
 **Talking**, inside the 30-character limit (each a prefix only when it fits, one per utterance):
 the first question opens with a greeting and the form of address (the patient's name, or "mother"/"father" for a
@@ -186,7 +193,18 @@ output that must be repaired); the core mode about 13. Failure handling:
 - **Budget.** A call over a cap is refused and the visit continues on templates; the assessment and the note keep a
   reserve (30,000 output tokens, 3 calls).
 - **Breaker.** After 4 consecutive failures only the assessment and the note still try.
-- **Deadline.** Gathering stops 4 minutes before the deadline and model calls stop 75 s before it.
+- **Time.** The budget follows the case's observed pace: running means of the seconds per patient answer (`turn_s`) and
+  per model call (`call_s`) size the end of the visit (`Budget.close_s`: the closing lines, the assessment call and
+  DIAGNOSE), when gathering stops, and how long each call may take (what is left minus what the rest of the visit needs).
+  A call too short to answer is not made, the chart call is skipped when time is short, and model calls stop 75 s before
+  the deadline.
+- **Watchdog** (`dxagent/nova/watchdog.py`). Every `client.chat`, SAY/EXAM and DIAGNOSE call runs in a daemon thread and
+  stops being waited for at its limit (SAY/EXAM 200 s; DIAGNOSE until the deadline, at least 20 s, resent under the same
+  `request_id`), because the SDK itself waits up to 240 s and a case that runs past 30 minutes is lost. A request that is
+  still running is polled under the same `request_id` until the call's time is spent, never opened again.
+- **Diagnosis without a model.** The leading diagnoses, else the playbook's first diagnosis, else the complaint itself,
+  never "undetermined"; an "undetermined" assessment counts as none; a guess of last resort is never announced to the
+  patient; baseline tests when no plan exists.
 - **Exceptions.** Any exception moves the visit to closing, and DIAGNOSE is always sent. If even the start fails,
   `run.consult` sends an emergency note.
 
@@ -203,7 +221,9 @@ written; `NOVA_EFFORT` and `NOVA_EFFORT_<ROLE>` set the reasoning level, `NOVA_M
 | `NOVA_OFFLINE` | 0 | no model (tests); consult still makes the one required `client.chat()` call |
 | `NOVA_GUIDELINES_DIR` | server path, else `./guidelines` | the guideline library (git-ignored locally) |
 | `NOVA_MAX_CALLS`, `NOVA_MAX_INPUT_TOKENS`, `NOVA_MAX_OUTPUT_TOKENS` | 60, 300k, 90k | per-case model budget, under the server's limits |
-| `NOVA_TIME_LIMIT`, `NOVA_WRAP_MARGIN`, `NOVA_FINAL_MARGIN`, `NOVA_CALL_TIMEOUT` | 1800, 240, 75, 240 s | consult limit (capped by the session deadline); stop gathering; stop calling the model; one call over HTTP |
+| `NOVA_TIME_LIMIT`, `NOVA_WRAP_MARGIN`, `NOVA_FINAL_MARGIN`, `NOVA_CALL_TIMEOUT` | 1800, 120, 75, 480 s | consult limit (capped by the session deadline); stop gathering when less than this, or the end of the visit at the observed pace, remains; stop calling the model; the longest one model call may take (less when the rest of the visit needs the time) |
+| `NOVA_PACE_TURN_S`, `NOVA_PACE_CALL_S`, `NOVA_ACTION_TIMEOUT` | 8, 90, 200 s | assumed seconds per patient answer and per model call until the case shows its own pace; the longest one SAY/EXAM may block |
+| `NOVA_SETTINGS_FILE` | `dxagent/nova/settings.json` | a JSON file of `NovaConfig` defaults that travels inside the ZIP (`docs/SUBMISSION.md`); the `NOVA_*` variables still win |
 | `NOVA_TURN_TARGET`, `NOVA_SOFT_TURN_CAP`, `NOVA_CLOSING_LINES` | 44, 38, 5 | usual length (an aim); priority-2 items past the cap are cut; explanation lines |
 | `NOVA_PLAYBOOKS`, `NOVA_FOCUS_CALL`, `NOVA_REVIEW_CALL`, `NOVA_NOTES_CALL`, `NOVA_TOPIC_PLAN` | 1 | switches for the playbooks, the focus call, the time-out, the chart call and the turn-0 topic plan |
 | `NOVA_PLAYBOOK_EXAM_MAX`, `NOVA_PLAYBOOK_EXAM_RESERVE`, `NOVA_FOLLOWUP_MAX` | 8, 6, 4 | maneuvers per visit; turns kept for them; playbook follow-ups per visit (safety follow-ups are never capped) |
@@ -212,13 +232,34 @@ written; `NOVA_EFFORT` and `NOVA_EFFORT_<ROLE>` set the reasoning level, `NOVA_M
 | `NOVA_CORE` | 0 | 1: the Bayesian core around the visit (about 13 calls per case) |
 | `NOVA_LOG_DIR` | - | per-case JSON log (development only: the server's file system is read-only) |
 
+## The simulated contest
+
+`sim/` plays the agent's real entry point (`run.py`: `prepare()`, then `consult(client, state)`) against a simulated
+contest server under a virtual clock, so a full matrix runs in about a minute:
+
+- **The server** (`sim/server.py`): sessions with a deadline, actions and their refusals, turn costs, the Doctor model
+  route with its field check, per-case limits, a hold before `PROVIDER_UNAVAILABLE` and the answer collected later under
+  the same `request_id`, the readiness gate. It is written independently of the agent's own checks.
+- **Clients** (`sim/client.py`): an SDK-faithful client, or the real `nova_sdk.Client` with only its socket layer
+  simulated; lost requests and lost responses.
+- **Actors** (`sim/actors.py`): a scripted patient (terse, verbose, strict about compound questions, injecting
+  instructions, partly English) and examiner; **Doctor stand-ins** (`sim/doctor.py`): an oracle in seven output styles,
+  a faulty one in eleven modes (cut, wrapped, garbage, slow, injecting, ...), and record/replay for a model in the loop.
+- **65 cases** (`experiments/data/nova_cpx/`: the 18 original, 37 more, 10 special situations such as a minor, a guardian
+  answering, high suicide risk) under **36 scenarios**: 2,340 visits, each checked against the server's own log (DIAGNOSE
+  accepted once and before the deadline, the model called, nothing refused for length, a clean note).
+- **Presubmit** (`python -m sim.presubmit`): tests, playbooks, cases, the matrix, and `sim/zipcheck.py`, which unpacks the
+  ZIP into an empty folder and runs it in an isolated interpreter with every file write and network connection recorded.
+  `.github/workflows/presubmit.yml` runs it on every push and keeps the ZIP's contents as an artifact.
+
 ## Testing
 
 | Tier | What | Cost |
 |---|---|---|
-| 0 | `pytest -q` (308 tests; the runtime's 206 need only the pinned wheels) | seconds |
+| 0 | `pytest -q` (350 tests; the runtime's and simulator's 248 need only the pinned wheels) | seconds |
+| 0b | `python -m sim.presubmit`: those tests, the 58 playbooks, the 65 cases, the scenario matrix and the isolated ZIP check | about 2 minutes; CI runs it on every push |
 | 1 | `experiments/nova_devkit_check.py` on the development kit's sample cases (its simulator, a scripted patient, `--audit`) | seconds |
-| 1b | `experiments/nova_cpx_check.py` on the 18 local CPX-style cases with our own answer keys (history and key-exam coverage, the offline floor) | about 1 min |
+| 1b | `experiments/nova_cpx_check.py` on the 65 local CPX-style cases with our own answer keys (history and key-exam coverage, the offline floor) | seconds |
 | 2 | the kit's own local-model runner; `run.py --bench --sim-llm --judge` on Korean CPX-style cases | about 1 h per version |
 | 3 | a sample run with a development key and `experiments/nova_live_report.py` (`docs/LIVE_RUNS.md`); then sample validation | model calls cost money |
 | 4 | the official evaluation (a few cases, rationed) | one attempt |
@@ -228,7 +269,7 @@ An official evaluation scores only a few cases: a difference under about 10 poin
 ## Still open
 
 - The official run scores the whole visit, not its parts: the focus call's and the time-out's choices, the assessment's
-  quality, JSON reliability and latency per call are unmeasured separately.
+  quality, JSON reliability and latency per call are unmeasured separately. This version scored 66.174.
 - Whether compound questions ("do you have high blood pressure or diabetes?") draw the bundled-question reply on the
   server; the fallback handles either case at the cost of a turn.
 - Final round: the team's own model from `NOVA_MODEL_DIR`, loaded in `prepare()`, with no `client.chat()`. `NovaLLM`

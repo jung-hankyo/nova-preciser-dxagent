@@ -77,7 +77,8 @@ class NovaConfig:
     json_mode: str = "none"  # none | json_object | json_schema. The contest's chat endpoint takes only messages,
     # max_tokens, reasoning_effort and temperature (response_format: 400 INVALID_COMPLETION_FIELDS); JSON is parsed
     # leniently from the text. json_object or json_schema for a local server that supports them (auto-downgraded)
-    call_timeout: float = 240.0  # the SDK's own wait (1.0.1); the server gives up on a call earlier
+    call_timeout: float = 480.0  # the longest one model call may take (the server holds a request for a while, then the
+    # same request_id is polled until it finishes); less when the rest of the visit needs the time (Budget)
     retries: int = 2
     effort: dict = field(default_factory=dict)  # role -> low | medium | high ("" = do not send)
     max_tokens: dict = field(default_factory=dict)  # role -> max output tokens (reasoning tokens included)
@@ -85,14 +86,18 @@ class NovaConfig:
     # Contest limits.
     max_turns: int = 50
     time_limit_s: float = 1800.0  # consult() per case (the session deadline is used when the server gives one)
-    wrap_margin_s: float = 240.0  # stop gathering when less than this remains
+    wrap_margin_s: float = 120.0  # stop gathering when less than this remains, or less than the end of the visit
+    # needs at the observed pace (Budget.close_s), whichever is more
     final_margin_s: float = 75.0  # below this, the SOAP note is written without the LLM
+    pace_turn_s: float = 8.0  # the assumed seconds per patient answer until the case shows its own pace
+    pace_call_s: float = 90.0  # the assumed seconds per model call until the case shows its own pace
+    action_timeout: float = 200.0  # the longest one SAY/EXAM may take before the visit moves on to DIAGNOSE
     say_max_chars: int = 30
 
     # Per-case LLM budget, with a reserve kept for the assessment and the note.
     max_calls: int = 60
     max_input_tokens: int = 300_000
-    max_output_tokens: int = 90_000  # the contest's 100,000 less a margin: a call never asks past it (Budget.output_room)
+    max_output_tokens: int = 90_000  # the contest's per-case output budget less a margin: a call never asks past it (Budget.output_room)
     reserve_calls: int = 3
     reserve_input_tokens: int = 24_000
     reserve_output_tokens: int = 30_000  # room for the assessment and the chart
@@ -184,6 +189,29 @@ class NovaConfig:
     def max_tokens_for(self, role: str) -> int:
         return int(self.max_tokens.get(role, DEFAULT_MAX_TOKENS.get(role, 1500)))
 
+    def _apply_settings_file(self) -> None:
+        """dxagent/nova/settings.json, when present: defaults changed without editing code, e.g. between two live runs
+        {"effort": {"assess": "high"}, "closing_lines": 4}. Unknown keys or values of the wrong type are ignored
+        (logged), never fatal; the NOVA_* environment variables still win."""
+        path = Path(os.getenv("NOVA_SETTINGS_FILE") or Path(__file__).resolve().parent / "settings.json")
+        if not path.exists():
+            return
+        import json
+        import logging
+
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logging.getLogger(__name__).warning("settings.json ignored: %s", exc)
+            return
+        for k, v in (data.items() if isinstance(data, dict) else ()):
+            cur = getattr(self, k, None)
+            if k.startswith("_") or cur is None or callable(cur) or (
+                    type(cur) is not type(v) and not (isinstance(cur, float) and isinstance(v, int))):
+                logging.getLogger(__name__).warning("settings.json: %r ignored (unknown or wrong type)", k)
+                continue
+            setattr(self, k, {**cur, **v} if isinstance(cur, dict) else (float(v) if isinstance(cur, float) else v))
+
     def gather_end(self) -> int:
         """The last turn of history and examination: the closing explanations and one spare turn follow."""
         end = self.max_turns - self.closing_lines - 1
@@ -196,6 +224,7 @@ class NovaConfig:
         c.profile = _env("NOVA_PROFILE", c.profile).lower()
         for k, v in PROFILES.get(c.profile, {}).items():
             setattr(c, k, v)
+        c._apply_settings_file()
         c.transport = _env("NOVA_TRANSPORT", c.transport).lower()
         c.offline = _envb("NOVA_OFFLINE", c.offline)
         c.api_base = _env("NOVA_API_BASE", _env("OPENAI_BASE_URL", ""))
@@ -219,6 +248,9 @@ class NovaConfig:
         c.time_limit_s = _envf("NOVA_TIME_LIMIT", c.time_limit_s)
         c.wrap_margin_s = _envf("NOVA_WRAP_MARGIN", c.wrap_margin_s)
         c.final_margin_s = _envf("NOVA_FINAL_MARGIN", c.final_margin_s)
+        c.pace_turn_s = _envf("NOVA_PACE_TURN_S", c.pace_turn_s)
+        c.pace_call_s = _envf("NOVA_PACE_CALL_S", c.pace_call_s)
+        c.action_timeout = _envf("NOVA_ACTION_TIMEOUT", c.action_timeout)
         c.say_max_chars = _envi("NOVA_SAY_MAX_CHARS", c.say_max_chars)
         c.max_calls = _envi("NOVA_MAX_CALLS", c.max_calls)
         c.max_input_tokens = _envi("NOVA_MAX_INPUT_TOKENS", c.max_input_tokens)

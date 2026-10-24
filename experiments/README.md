@@ -38,17 +38,21 @@ python experiments/v04_analyze.py BASE V04 OUT.json
 
 ## Contest runtime: local CPX-style cases
 
-`data/nova_cpx/*.yaml` holds 18 practice cases written for this project in the development kit's case format (opening,
+`data/nova_cpx/*.yaml` holds 65 practice cases written for this project in the development kit's case format (opening,
 vital signs, patient script, exam table), each with our own answer key: history items, matched by regex against the
-doctor's SAY lines, and the exam rows that matter. `nova_cpx_check.py` writes them as `case.json` folders and plays them
-through the development kit's simulator with the scripted patient and examiner of `nova_devkit_check.py`. The agent runs
-offline, so the scores are the visit's deterministic floor (the focus call and the time-out add nothing). Cases L01-L11
-fall within the old complaint groups, L12-L18 do not (urination, joints, mood, memory, amenorrhea, edema, rectal
-bleeding). The cases and the playbooks have the same author, so the gains partly measure agreement with that author's
-idea of each checklist.
+doctor's SAY lines, and the exam rows that matter. L01-L18 (`cases_a`, `cases_b`) are the original set, M01-M37 (`cases_c`
+to `cases_f`) cover the other presentations (56 of the 58 playbooks are exercised; `short_stature` and `weight_loss` by
+the kit's sample cases), and S01-S10 (`cases_g`) are special situations: uncovered complaints, a counselling request, a
+minor, a guardian answering, high suicide risk, an emergency or a red flag behind a common complaint. Each case names
+the playbook its opening must route to; `case_check.py` validates the files. The same cases drive the simulated contest
+in `sim/` (`docs/SUBMISSION.md`). `nova_cpx_check.py` writes them as `case.json` folders and plays them through the
+development kit's simulator with the scripted patient and examiner of `nova_devkit_check.py`. The agent runs offline, so
+the scores are the visit's deterministic floor (the focus call and the time-out add nothing). The cases and the playbooks
+have the same author, so the gains partly measure agreement with that author's idea of each checklist.
 
 ```bash
-NOVA_OFFLINE=1 python -B experiments/nova_cpx_check.py --devkit <dev kit> --label mylabel
+NOVA_OFFLINE=1 python -B experiments/nova_cpx_check.py --devkit <dev kit> --label mylabel   # all 65 cases
+python experiments/case_check.py experiments/data/nova_cpx/cases_c.yaml                          # validate case files
 NOVA_OFFLINE=1 python -B experiments/nova_devkit_check.py --devkit <dev kit> --samples <sample cases> --audit
 python -B experiments/nova_live_report.py runs/live/<version>      # per-case reports from live-run logs (docs/LIVE_RUNS.md)
 ```
@@ -61,6 +65,8 @@ python -B experiments/nova_live_report.py runs/live/<version>      # per-case re
 | 0.7.1, 40 an aim, cap 46 | 0.85 | 0.89 | 15 | 0 | 42.2 (34-49) |
 | 0.7.2, one-action maneuvers | 0.85 | 0.86 | 18 | 0 | 42.2 |
 | 0.8.0, evidence review (and 0.8.1) | 0.84 | 0.83 | 23 | 0 | 42.5 (35-48) |
+| 0.9.0-pre, the same 18 cases | 0.84 | 0.83 | 23 | 0 | 42.5 (35-48) |
+| 0.9.0-pre, all 65 cases (L 0.84 / 0.83; M 0.79 / 0.74; S 0.54 / 0.38) | 0.76 | 0.71 | 55 | 0 | 42.2 (max 48) |
 
 "Unlisted" is a maneuver answered from outside the case's table. The fixture cards did not improve history coverage on
 unseen cases, and exam coverage collapsed outside the old complaint groups (about 0.1 against 0.5), which motivated the

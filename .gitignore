@@ -26,6 +26,7 @@ dxagent_live_summary.json
 
 # v0.5 submission builds
 dist/
+build/
 
 # contest material kept local: the starter package's SDK and the guideline library (licence: no redistribution)
 nova_sdk.py

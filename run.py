@@ -89,7 +89,8 @@ def consult(client: Any, state: Any = None, *args: Any, **kwargs: Any) -> None:
         if cfg.round == "prelim" and sdk_transport is not None:
             ensure_chat_call(sdk_transport)
 
-    env = SdkEnv(client, state, max_turns=cfg.max_turns, before_submit=before_submit)
+    env = SdkEnv(client, state, max_turns=cfg.max_turns, before_submit=before_submit,
+                 action_timeout=cfg.action_timeout, time_limit_s=cfg.time_limit_s)
     try:
         rec = agent.run(env)
     except Exception as exc:  # agent.run always reaches DIAGNOSE; this guards only start-up failures

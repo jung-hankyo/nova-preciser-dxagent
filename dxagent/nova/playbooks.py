@@ -339,10 +339,11 @@ _BODY = ("목", "배", "눈", "귀", "코", "손", "발", "등", "입", "혀", "
 
 def _find(text: str, word: str) -> int:
     """First position of `word` in `text`; a word that starts with a one-syllable noun from _BODY must start a word
-    itself ("목이 붓고" is not found inside "발목이 붓고", nor "침에 피" inside "아침에 피")."""
+    itself ("목이 붓고" is not found inside "발목이 붓고", nor "침에 피" inside "아침에 피"), and a word for stool never
+    inside "소변" (urine)."""
     i = text.find(word)
-    while i > 0 and word[:1] in _BODY and "가" <= text[i - 1] <= "힣":
-        i = text.find(word, i + 1)
+    while i > 0 and ((word[:1] in _BODY and "가" <= text[i - 1] <= "힣") or (word[:1] == "변" and text[i - 1] == "소")):
+        i = text.find(word, i + 1)  # ... and a stool word ("변에 피") is never found inside "소변에 피" (urine)
     return i
 
 

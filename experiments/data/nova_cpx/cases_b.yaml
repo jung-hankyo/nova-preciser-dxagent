@@ -1,6 +1,7 @@
 # Local CPX-style practice cases, part 2 (format and key: see cases_a.yaml).
 
 - case_id: L10
+  playbook: polyuria
   opening: 이름은 최영수이고, 나는 쉰두 살 남자이다. 두 달 전부터 목이 자주 마르고 살이 빠져서 병원에 왔다.
   vital_signs: "혈압 : 138/86 mmHg\n맥박 : 84 회/분\n호흡 : 16 회/분\n체온 : 36.7°C"
   script: |
@@ -30,6 +31,7 @@
             흑색가시세포증 시진 (Acanthosis nigricans), 안저 검사 (Fundoscopy)]
 
 - case_id: L11
+  playbook: ped_fever
   opening: 이름은 김하은이고, 세 살 여자아이이다. 엄마 박소영, 서른세 살이 보호자로 함께 왔다. 엄마는 하은이가 이틀 전부터 열이 나고 귀를 자꾸 만져서 병원에 데려왔다.
   vital_signs: "혈압 : 측정 안 함\n맥박 : 128 회/분\n호흡 : 26 회/분\n체온 : 38.8°C"
   script: |
@@ -57,6 +59,7 @@
     exams: [이경 검사 (Otoscopy), 인두 시진 (Pharynx inspection), 경부 강직 (Neck stiffness), 폐 청진 (Lung auscultation)]
 
 - case_id: L12
+  playbook: dysuria
   opening: 이름은 송유나이고, 나는 스물여섯 살 여자이다. 이틀 전부터 소변볼 때 아파서 병원에 왔다.
   vital_signs: "혈압 : 112/70 mmHg\n맥박 : 82 회/분\n호흡 : 16 회/분\n체온 : 36.9°C"
   script: |
@@ -80,6 +83,7 @@
     exams: [늑골척추각 압통 (Costovertebral angle tenderness), 복부 촉진 (Abdominal palpation), 활력징후 측정 (Vital signs)]
 
 - case_id: L13
+  playbook: joint_pain
   opening: 이름은 임정숙이고, 나는 쉰한 살 여자이다. 석 달 전부터 손가락 마디가 붓고 아파서 병원에 왔다.
   vital_signs: "혈압 : 124/78 mmHg\n맥박 : 80 회/분\n호흡 : 16 회/분\n체온 : 37.2°C"
   script: |
@@ -107,6 +111,7 @@
     exams: [손 관절 진찰 (Hand joint examination), 손목 관절 진찰 (Wrist examination), 피부 시진 (Skin inspection)]
 
 - case_id: L14
+  playbook: depressed_mood
   opening: 이름은 배준호이고, 나는 서른한 살 남자이다. 두 달 전부터 기분이 계속 가라앉아서 병원에 왔다.
   vital_signs: "혈압 : 122/76 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
   script: |
@@ -131,6 +136,7 @@
     exams: [기분·정동 평가 (Mood and affect), 의식·지남력 평가 (Mental status), 갑상선 촉진 (Thyroid palpation)]
 
 - case_id: L15
+  playbook: memory_loss
   opening: 이름은 조병철이고, 일흔여섯 살 남자이다. 딸 조은정, 마흔여덟 살이 보호자로 함께 왔다. 딸은 아버지가 일 년 전부터 자꾸 깜빡하셔서 모시고 왔다.
   vital_signs: "혈압 : 142/84 mmHg\n맥박 : 70 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
   script: |
@@ -160,6 +166,7 @@
             떨림·서동 관찰 (Resting tremor and bradykinesia)]
 
 - case_id: L16
+  playbook: menstrual_irregularity
   opening: 이름은 정다은이고, 나는 스물네 살 여자이다. 넉 달째 생리를 하지 않아서 병원에 왔다.
   vital_signs: "혈압 : 122/80 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
   script: |
@@ -188,6 +195,7 @@
             갑상선 촉진 (Thyroid palpation)]
 
 - case_id: L17
+  playbook: edema
   opening: 이름은 유시우이고, 일곱 살 남자아이이다. 엄마 김나래, 서른여덟 살이 보호자로 함께 왔다. 엄마는 시우의 얼굴이 일주일 전부터 부어서 병원에 데려왔다.
   vital_signs: "혈압 : 102/64 mmHg\n맥박 : 92 회/분\n호흡 : 20 회/분\n체온 : 36.6°C"
   script: |
@@ -218,6 +226,7 @@
             활력징후 측정 (Vital signs)]
 
 - case_id: L18
+  playbook: hematochezia
   opening: 이름은 신동욱이고, 나는 예순일곱 살 남자이다. 두 달 전부터 대변에 피가 섞여 나와서 병원에 왔다.
   vital_signs: "혈압 : 126/74 mmHg\n맥박 : 92 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
   script: |

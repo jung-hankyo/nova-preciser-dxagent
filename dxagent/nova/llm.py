@@ -129,6 +129,14 @@ def extract_json(text: str) -> Any:
     raise LLMOutputError(f"no JSON object in answer: {text[:200]!r}")
 
 
+def _parses(text: str) -> bool:
+    try:
+        extract_json(text)
+        return True
+    except Exception:
+        return False
+
+
 def schema_hint(model: type[BaseModel]) -> str:
     """A compact JSON skeleton of a Pydantic model: field names, types, enums and short descriptions."""
     js = model.model_json_schema()
@@ -172,6 +180,13 @@ def schema_hint(model: type[BaseModel]) -> str:
 
 
 def validate(schema: type[T], obj: Any) -> T:
+    if isinstance(obj, dict) and len(obj) == 1:  # {"FocusPlan": {...}}: a wrapper, not a field of the schema
+        (k, inner), = obj.items()
+        if isinstance(inner, dict) and k not in schema.model_fields:
+            try:
+                return schema.model_validate(inner)
+            except ValidationError:
+                pass
     try:
         return schema.model_validate(obj)
     except ValidationError:
@@ -236,6 +251,7 @@ class NovaLLM:
         self.tokens_key = "max_tokens"
         self.failures = 0  # consecutive failed calls; past `breaker`, only the closing roles still try (once each)
         self.breaker = 4
+        self.cut = False  # the last answer was cut by max_tokens even after the retry with more room
         self.trace: list[dict[str, Any]] = []  # one row per call (role, ok, tokens, seconds, error)
 
     # -- LLMLike --------------------------------------------------------------
@@ -249,6 +265,8 @@ class NovaLLM:
         try:
             return validate(schema, extract_json(content))
         except (LLMOutputError, ValidationError) as exc:
+            if self.cut:  # cut by max_tokens even with twice the room: a repair call would be cut too
+                raise LLMOutputError(f"{role}: answer cut by the token limit ({str(exc)[:160]})") from None
             log.info("%s output invalid (%s); one repair call", role, str(exc)[:160])
             repair = messages + [{"role": "assistant", "content": content[:6000]},
                                  {"role": "user", "content": f"That answer was not valid: {str(exc)[:600]}\n"
@@ -299,9 +317,11 @@ class NovaLLM:
             payload = self._payload(messages, role, schema, max_tokens)
             t0 = time.time()
             try:
-                resp = self.transport.chat(payload, timeout=self.budget.call_timeout())
+                resp = self.transport.chat(payload, timeout=self.budget.call_timeout(role))
             except HttpError as e:
                 self._charge(role, 0, 0, False, time.time() - t0, str(e))
+                if e.status == 504:  # the call's time is spent (the transport waited for it): no retry
+                    raise
                 if e.status in (400, 404, 422) and self._adapt(e.body, payload):
                     continue  # the server rejected a request option: retry without it
                 if e.status == 503 and "empty answer" in e.body and not grew:
@@ -324,6 +344,10 @@ class NovaLLM:
                 raise
             content, finish, tin, tout = self._parse(resp, messages)
             self._charge(role, tin, tout, bool(content), time.time() - t0, "" if content else f"empty ({finish})")
+            if content and finish == "length" and schema is not None and not grew and not _parses(content):
+                grew, max_tokens = True, roomy(max_tokens * 2)  # the JSON was cut by the limit: once more with room
+                continue
+            self.cut = bool(content) and finish == "length" and grew
             if content:
                 return content
             if finish == "length" and not grew:  # reasoning used the whole budget: once more with room

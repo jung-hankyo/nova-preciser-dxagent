@@ -44,8 +44,8 @@ from dxagent.nova import checklist as CL
 from dxagent.nova import playbooks as PB
 from dxagent.nova.budget import Budget, BudgetExhausted
 from dxagent.nova.config import NovaConfig
-from dxagent.nova.korean import (acknowledgment, address, detect_groups, empathy_line, exam_label, is_pain,
-                                 is_pediatric, one_diagnosis, onset_known, parse_demographics, parse_vitals,
+from dxagent.nova.korean import (acknowledgment, address, complaint_phrase, detect_groups, empathy_line, exam_label,
+                                 is_pain, is_pediatric, one_diagnosis, onset_known, parse_demographics, parse_vitals,
                                  positive_answer, yes_no)
 from dxagent.nova.ledger import Entry, Ledger
 from dxagent.nova.llm import NovaLLM
@@ -74,6 +74,9 @@ def make_store(cfg: NovaConfig) -> CardStore:
     kb = cfg.kb_dir if cfg.kb_dir and Path(cfg.kb_dir).exists() else None
     return CardStore(s.registry_dir, None, 1.0, 0, card_dirs=dirs, kb_dir=kb,
                      inherit_depth=s.inherit_depth, inherit_decay=s.inherit_decay)
+
+
+_UNDETERMINED = re.compile(r"^\s*$|(undetermined|unknown|not determined|uncertain|미정|미상|불명|알\s*수\s*없)", re.I)
 
 
 def _prefix(prefix: str, text: str, limit: int) -> str:
@@ -109,10 +112,10 @@ def _smoked_without_years(reply: str) -> bool:
 
 class NovaAgent:
     def __init__(self, cfg: Optional[NovaConfig] = None, store: Optional[CardStore] = None, offline: bool = False,
-                 llm_factory: Optional[Callable[[Budget], Any]] = None, clock: Callable[[], float] = time.monotonic):
+                 llm_factory: Optional[Callable[[Budget], Any]] = None, clock: Optional[Callable[[], float]] = None):
         self.cfg = cfg or NovaConfig.from_env()
         self.offline = offline
-        self.clock = clock
+        self.clock = clock or time.monotonic  # resolved now, not at import (the simulator's virtual clock)
         self.store = store or make_store(self.cfg)
         self.llm_factory = llm_factory
         self.guidelines: Any = None  # GuidelineLibrary, loaded by prepare() (or on first use)
@@ -237,6 +240,7 @@ class Encounter:
         self.store = agent.store
         self.opening = opening
         self.budget = Budget(self.cfg, clock=agent.clock, time_limit_s=time_limit_s)
+        self.budget.turns_left = lambda: max(0, self.cfg.gather_end() - self.turns)
         self.llm = agent.new_llm(self.budget)
         self.settings = self.cfg.core_settings()
         self.nodes: Optional[Nodes] = None  # the Bayesian core, only in the core mode
@@ -583,6 +587,12 @@ class Encounter:
                     if slot.kind == "SAY" and phase != "backfill":
                         self.cut.append(slot)
                 continue
+            if self._time_short(slot, phase):
+                if slot.id not in self.dropped:
+                    self.dropped.append(slot.id)
+                    self._event("time_cut", item=slot.ask, phase=phase, remaining=round(self.budget.remaining()),
+                                turn_s=round(self.budget.turn_s, 1), call_s=round(self.budget.call_s, 1))
+                continue
             if slot.kind == "EXAM" and self._sexual_exam(slot) and not self._sexual_ok():
                 self._event("exam_skipped", text=slot.ask, why="pelvic or speculum exam: not sexually active or a minor")
                 continue
@@ -591,6 +601,18 @@ class Encounter:
                 if all(c in known for c in slot.codes):
                     continue
             yield from self._slot(slot, self._compose(slot, phase))
+
+    def _time_short(self, slot: CL.Slot, phase: str) -> bool:
+        """At the observed pace, asking this item would leave too little time for what matters more: priority-2
+        history yields to every planned maneuver and the end of the visit, priority-1 history and priority-2 maneuvers
+        to the priority-1 maneuvers and the end of the visit; a priority-1 maneuver only to the end of the visit."""
+        b = self.budget
+        exams = [s for s in self.plan.exams if s.ask not in self.performed and s is not slot]
+        if phase == "exam" or slot.kind == "EXAM":
+            keep = [s for s in exams if s.tier <= 1] if slot.tier >= 2 else []
+        else:
+            keep = exams if slot.tier >= 2 else [s for s in exams if s.tier <= 1]
+        return b.remaining() - b.turn_s < len(keep) * b.turn_s + max(self.cfg.wrap_margin_s, b.close_s())
 
     def _compose(self, slot: CL.Slot, phase: str) -> str:
         """The utterance for a slot: the question, with at most one prefix that fits in 30 characters: the greeting
@@ -868,7 +890,9 @@ class Encounter:
             return None
         item = item or CL.ITEM_BY_ASK.get(text, "")
         self.performed.add(text)
+        t_sent = self.budget.clock()
         obs = yield Action(kind=kind, text=text, meta={"section": section, "codes": codes, "source": source})
+        self.budget.note_action(self.budget.clock() - t_sent)
         if obs is None:
             obs = Observation(accepted=False)
         elif isinstance(obs, dict):
@@ -1296,6 +1320,11 @@ class Encounter:
         if a is not None:
             a.primary_diagnosis_en = one_diagnosis(a.primary_diagnosis_en)
             a.primary_diagnosis_ko = one_diagnosis(a.primary_diagnosis_ko)
+            # "undetermined" is no diagnosis: the fallbacks below do better (a symptom scores above nothing)
+            if _UNDETERMINED.search(a.primary_diagnosis_en):
+                a.primary_diagnosis_en = ""
+            if _UNDETERMINED.search(a.primary_diagnosis_ko):
+                a.primary_diagnosis_ko = ""
             if not a.names_cause:
                 self._event("syndrome_diagnosis", diagnosis=a.primary_diagnosis_en)
         self.assessment = a
@@ -1304,17 +1333,23 @@ class Encounter:
         proposed = [h for h in st.get("hypotheses") or [] if not str(h.get("prior_source", "")).startswith("reverse_index")]
         ids = {h["disease_id"] for h in proposed}
         fallback = next((d["name"] for d in diff if d["disease_id"] in ids), proposed[0]["name"] if proposed else "")
+        fallback_ko = ""
         if not fallback and self.leading:
-            fallback = self.leading[0]["en"]
+            fallback, fallback_ko = self.leading[0]["en"], self.leading[0].get("ko", "")
+        if not fallback and self.playbook is not None and self.playbook.differential:
+            top = self.playbook.differential[0]  # the presentation's most likely (or most dangerous) cause
+            fallback, fallback_ko = top["en"], top.get("ko", "")
+        if not fallback:
+            fallback_ko = self._complaint_dx()
         if fixed:
             en, source = fixed, "core"
-        elif a is not None and a.primary_diagnosis_en.strip():
+        elif a is not None and (a.primary_diagnosis_en.strip() or a.primary_diagnosis_ko.strip()):
             en, source = a.primary_diagnosis_en.strip(), "llm"
         else:
-            en, source = fallback or "진단 미정", "fallback"
-        ko = a.primary_diagnosis_ko.strip() if a is not None else ""
-        if not ko and source == "fallback" and self.leading and self.leading[0]["en"] == en:
-            ko = self.leading[0]["ko"]
+            en, source = fallback, "fallback"
+        ko = a.primary_diagnosis_ko.strip() if a is not None and source != "fallback" else fallback_ko
+        if not en and not ko:
+            ko = "진단 미정"
         self.final = {"en": en, "ko": ko, "source": source, "core_leader": leader["name"] if leader else "",
                       "core_prob": round(leader["prob"], 3) if leader else 0.0}
         card = self.store.get(slug(en)) or self.store.get(en)
@@ -1323,6 +1358,15 @@ class Encounter:
                           if not (card is not None and d["disease_id"] == card.id) and d["name"].lower() not in names]
         self.confirm_test = self._confirm_test(card.id) if card is not None else None
         self._event("assess", **self.final)
+
+    def _complaint_dx(self) -> str:
+        """The presenting problem as a diagnosis of last resort: the topic plan's or focus call's phrase, else the
+        complaint words of the opening ("코골이", "탈모")."""
+        for phrase in (getattr(self.focus, "topic_ko", "") if self.focus else "",
+                       getattr(self.topic, "topic_ko", "") if self.topic else ""):
+            if phrase and phrase.strip():
+                return re.sub(r"^\d+\s*(일|주|개월|달|년)(간|째)?\s*", "", phrase.strip())[:60]
+        return complaint_phrase(self.ctx.get("opening", ""))
 
     def _workup(self) -> list[str]:
         """The playbook's tests as '<test> : <purpose> (for: <diagnoses>)' lines, for the assessment."""
@@ -1429,6 +1473,9 @@ class Encounter:
                     lines.append(ln)
         lines = lint_lines(lines, self._section_text("allergy"))
         ko = (self.final.get("ko") or "").split("(")[0].strip()
+        if not re.search(r"[가-힣]", ko) or re.search(r"(미정|미상|undetermined|unknown)", ko, re.I) or \
+                self.final.get("source") == "fallback":
+            ko = ""  # a guess of last resort is never announced to the patient
         fallback = [f"{ko} 가능성이 높아요." if ko else "검사로 원인을 확인할게요."]
         fallback += list(self.playbook.education) if self.playbook is not None else []
         flags = (self.playbook.plan.get("red_flags") or []) if self.playbook is not None else []

@@ -3,6 +3,24 @@
 Newest first. Decision numbers refer to `docs/decisions/`; test counts are the full suite at release (the runtime's share
 in parentheses where given). Each branch's changelog stops at its own version.
 
+## 0.9.0-pre (2026-10-20, `second-clean-approach`)
+
+A simulated contest, a presubmit gate and the hardening they found. Official run: **66.174**. The package version string
+stays 0.8.1.
+
+- **`sim/`:** a simulated contest server, an SDK-faithful client (or the real client over a simulated socket), a scripted
+  patient and examiner, Doctor stand-ins (oracle, faulty, record/replay), a virtual clock, 36 scenarios, 65 cases
+  (`experiments/data/nova_cpx/`: 18 original, 37 more, 10 special situations). 2,340 visits pass.
+- **Presubmit:** `python -m sim.presubmit` (tests, playbooks, cases, the matrix, a ZIP check in an isolated interpreter
+  with every file write and network connection recorded); `.github/workflows/presubmit.yml` runs it on every push and
+  keeps the ZIP's contents as an artifact.
+- **Hardening found by the matrix:** a still-running request is polled under the same `request_id` instead of being
+  reopened (a slow model used to yield nothing); every model call, SAY/EXAM and DIAGNOSE runs under a watchdog; the time
+  budget follows the case's observed pace; a diagnosis exists even when no model call succeeded; JSON wrapped in its
+  schema name is unwrapped; a cut answer is retried once; routing and onset fixes.
+- **Packaging:** the SDK file is optional in the ZIP; `dxagent/nova/settings.json` changes defaults without code.
+- 350 tests (248).
+
 ## 0.8.1 (2026-10-17, `first-simple-approach`)
 
 A new Doctor model. Decision 104. Official run: **63.131**. The model ID is sent on the HTTP route only; temperature is

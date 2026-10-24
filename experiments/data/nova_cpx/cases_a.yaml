@@ -5,6 +5,7 @@
 # case-specific items, matched against the doctor's SAY lines; `exams` are result-table rows that matter.
 
 - case_id: L01
+  playbook: chest_pain
   opening: 이름은 정민호이고, 나는 쉰여덟 살 남자이다. 두 달 전부터 계단을 오르면 가슴이 답답해서 병원에 왔다.
   vital_signs: "혈압 : 148/92 mmHg\n맥박 : 78 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
   script: |
@@ -35,6 +36,7 @@
             하지 말초 진찰 (Peripheral pulse and edema)]
 
 - case_id: L02
+  playbook: dyspnea
   opening: 이름은 한순자이고, 나는 일흔두 살 여자이다. 한 달 전부터 숨이 차서 병원에 왔다.
   vital_signs: "혈압 : 152/88 mmHg\n맥박 : 96 회/분\n호흡 : 22 회/분\n체온 : 36.5°C"
   script: |
@@ -64,6 +66,7 @@
             하지 말초 진찰 (Peripheral pulse and edema)]
 
 - case_id: L03
+  playbook: cough
   opening: 이름은 오준석이고, 나는 마흔다섯 살 남자이다. 나흘 전부터 기침이 나고 열이 나서 병원에 왔다.
   vital_signs: "혈압 : 124/78 mmHg\n맥박 : 108 회/분\n호흡 : 24 회/분\n체온 : 38.9°C"
   script: |
@@ -93,6 +96,7 @@
             활력징후 측정 (Vital signs)]
 
 - case_id: L04
+  playbook: abdominal_pain
   opening: 이름은 윤서연이고, 나는 스물두 살 여자이다. 어제 저녁부터 배가 아파서 병원에 왔다.
   vital_signs: "혈압 : 118/72 mmHg\n맥박 : 96 회/분\n호흡 : 18 회/분\n체온 : 37.9°C"
   script: |
@@ -124,6 +128,7 @@
             요근 징후 (Psoas sign), 늑골척추각 압통 (Costovertebral angle tenderness)]
 
 - case_id: L05
+  playbook: headache
   opening: 이름은 이수진이고, 나는 서른네 살 여자이다. 머리가 자주 아파서 병원에 왔다.
   vital_signs: "혈압 : 116/74 mmHg\n맥박 : 72 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
   script: |
@@ -153,6 +158,7 @@
             사지 근력 검사 (Limb muscle power)]
 
 - case_id: L06
+  playbook: dizziness
   opening: 이름은 장미경이고, 나는 예순세 살 여자이다. 사흘 전부터 어지러워서 병원에 왔다.
   vital_signs: "혈압 : 136/82 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
   script: |
@@ -184,6 +190,7 @@
             롬베르그 검사 (Romberg test)]
 
 - case_id: L07
+  playbook: back_pain
   opening: 이름은 박성훈이고, 나는 마흔두 살 남자이다. 일주일 전부터 허리가 아프고 왼쪽 다리가 저려서 병원에 왔다.
   vital_signs: "혈압 : 128/80 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
   script: |
@@ -213,6 +220,7 @@
             심부건반사 (Deep tendon reflex)]
 
 - case_id: L08
+  playbook: palpitation
   opening: 이름은 강동원이고, 나는 예순여섯 살 남자이다. 이 주 전부터 가슴이 자주 두근거려서 병원에 왔다.
   vital_signs: "혈압 : 142/86 mmHg\n맥박 : 112 회/분 불규칙\n호흡 : 18 회/분\n체온 : 36.6°C"
   script: |
@@ -240,6 +248,7 @@
     exams: [요골동맥 맥박 촉진 (Radial pulse palpation), 심음 청진 (Heart auscultation), 갑상선 촉진 (Thyroid palpation)]
 
 - case_id: L09
+  playbook: fatigue
   opening: 이름은 문지혜이고, 나는 마흔여섯 살 여자이다. 반년 전부터 너무 피곤해서 병원에 왔다.
   vital_signs: "혈압 : 128/86 mmHg\n맥박 : 56 회/분\n호흡 : 16 회/분\n체온 : 36.1°C"
   script: |

@@ -48,13 +48,13 @@ PATIENT_SYSTEM_KO = """당신은 진료실에 온 환자를 연기합니다. 아
 
 class LocalSimEnv:
     def __init__(self, case: dict[str, Any], cfg: Optional[NovaConfig] = None, patient_llm: Any = None,
-                 clock: Callable[[], float] = time.monotonic, round_name: Optional[str] = None):
+                 clock: Optional[Callable[[], float]] = None, round_name: Optional[str] = None):
         self.case = case
         self.cfg = cfg or NovaConfig()
         self.round = round_name or self.cfg.round  # the case file's "round" is informational
         self.patient_llm = patient_llm
-        self.clock = clock
-        self.t0 = clock()
+        self.clock = clock or time.monotonic
+        self.t0 = self.clock()
         self.turns = 0
         self.done = False
         self.history: list[dict[str, str]] = []

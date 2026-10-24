@@ -1,0 +1,421 @@
+# Simulated CPX cases M11-M21 (set d): digestive and urinary presentations, written for this project in the public
+# samples' format (see cases_a.yaml). The text is original. `key` is our own answer key for offline measurement:
+# `history` names generic items or gives {id: regex} matched against the doctor's questions; `exams` are table rows
+# that matter.
+
+- case_id: M11
+  playbook: abdominal_distension
+  opening: 이름은 배상철이고, 나는 쉰일곱 살 남자이다. 한 달 전부터 배가 점점 불러 와서 병원에 왔다.
+  vital_signs: "혈압 : 108/66 mmHg\n맥박 : 88 회/분\n호흡 : 18 회/분\n체온 : 36.7°C"
+  script: |
+    한 달 전부터 배가 점점 불러 왔다. 처음에는 살이 찐 줄 알았다. 바지 허리가 안 맞아서 두 치수 큰 바지를 입는다. 한 달 사이에 몸무게가 사 키로그람 늘었다. 그런데 팔다리는 오히려 가늘어졌다.
+    배가 아프지는 않고 빵빵하고 묵직한 느낌이다. 밥을 조금만 먹어도 배가 부르다. 입맛이 없다. 쉽게 피곤하다. 이 주 전부터 저녁이 되면 다리가 붓는다.
+    아내가 요즘 내 눈이 약간 노랗다고 했다. 소변 색이 조금 진해졌다. 요즘 팔에 멍이 잘 든다. 열은 없다. 숨이 차지는 않는다. 누워 있어도 숨이 답답하지 않다. 가슴이 아프거나 두근거리지는 않는다.
+    피를 토한 적은 없다. 검은 변을 본 적은 없다. 설사나 변비는 없다. 토하지는 않았다. 방귀는 잘 나온다. 얼굴이 붓지는 않는다. 소변에 거품이 많지는 않다. 가족들이 내가 헛소리를 하거나 이상하게 행동한다고 한 적은 없다. 밤에 잠은 잘 잔다.
+    약국에서 소화제를 사 먹었지만 그대로다. 전에 이런 적은 없었다. 오 년 전 건강검진에서 지방간이 있고 간 수치가 높다고 들었다. 그 뒤로 병원에 다니지는 않았다. B형간염이나 C형간염은 없다고 들었다. 앓고 있는 지병은 없다. 고혈압이나 당뇨도 없다. 먹는 약은 없다. 한약이나 건강식품은 먹지 않는다. 수술이나 입원을 한 적은 없다. 수혈을 받은 적은 없다. 약 알레르기는 없다.
+    술은 삼십 년 넘게 거의 매일 소주 두 병씩 마셨다. 한 달 전부터는 몸이 안 좋아서 하루 한 병으로 줄였다. 어제 저녁에도 소주 한 병을 마셨다. 담배는 하루 반 갑씩 삼십오 년째 피운다. 택시 기사로 일하고 있다. 아내와 둘이 산다. 가족 중에 간 질환을 앓은 사람은 없다. 혹시 간암 같은 큰 병이 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 만성 병색(+), 팔다리 근육 위축(+), 여성형 유방(+)
+    활력징후 측정 (Vital signs): 108/66mmHg, 88회/분, 18회/분, 36.7°C
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 공막 황달 경도(+/+)
+    피부 시진 (Skin inspection): 앞가슴 거미혈관종(+), 손바닥 홍반(+), 팔 멍(+)
+    경정맥압 측정 (Jugular venous pressure): 경정맥 확장(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, S3(-), 심잡음(-)
+    복부 시진 (Abdominal inspection): 전반적 팽만(+), 배꼽 돌출(+), 복벽 정맥 확장(+)
+    복부 타진 (Abdominal percussion): 양측 옆구리 둔탁음(+), 배꼽 주위 고창음
+    복수 이동탁음 확인 (Shifting dullness (ascites)): 양성(+)
+    복부 촉진 (Abdominal palpation): 압통(-), 반발압통(-), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간 촉지 어려움(복수), 비장 끝 촉지(+)
+    퍼덕떨림 확인 (Asterixis): 음성(-)
+    하지 함요부종 확인 (Pitting edema of the legs): 양측 발목 함요부종(1+/1+)
+  key:
+    diagnosis: "Alcoholic liver cirrhosis with ascites (decompensated)"
+    differential: ["Hepatocellular carcinoma", "Heart failure", "Peritoneal carcinomatosis or tuberculous peritonitis",
+                   "Nephrotic syndrome"]
+    history: [onset, character, timing, pmh, meds, fh, smoking, alcohol, job,
+              {weight: "(체중|몸무게|살이)", edema: "(붓|부종|부어)", jaundice: "(노랗|누렇|황달)",
+               gi_bleeding: "(검은|까만|짜장|피를 토|토혈|혈변)", fever: "(열이|열은|열 나|열나|체온|오한)",
+               confusion: "(헛소리|정신|졸리|혼동|의식|깜빡|이상한 행동)", dyspnea: "숨",
+               abd_pain: "(배가 아프|복통|통증|배는 아프)", liver_hx: "(간염|간 수치|간이 나쁘|간 질환|지방간|간 검사|간 기능)",
+               appetite: "(식욕|입맛)", bruising: "(멍|출혈|잇몸)", transfusion: "(수혈|문신)"}]
+    exams: [복수 이동탁음 확인 (Shifting dullness (ascites)), 간·비장 촉진 (Liver and spleen palpation), 피부 시진 (Skin inspection),
+            결막·공막 시진 (Conjunctiva and sclera inspection), 퍼덕떨림 확인 (Asterixis)]
+
+- case_id: M12
+  playbook: constipation
+  opening: 이름은 옥지수이고, 나는 스물세 살 여자이다. 석 달 전부터 변비가 심해져서 병원에 왔다.
+  vital_signs: "혈압 : 108/68 mmHg\n맥박 : 70 회/분\n호흡 : 14 회/분\n체온 : 36.4°C"
+  script: |
+    일 년 전에 회사에 들어가고 나서 변비가 생겼다. 석 달 전부터 더 심해졌다. 대변은 요즘 사흘이나 나흘에 한 번 본다. 변 모양은 토끼똥처럼 작고 딱딱하다. 변을 볼 때 한참 힘을 줘야 나온다. 화장실에 삼십 분씩 앉아 있을 때도 있다. 변을 보고 나서도 덜 본 것처럼 남은 느낌이 든다.
+    배가 더부룩하고 가스가 자주 찬다. 배가 아픈 적은 거의 없다. 열은 없다. 변에 피가 묻어 나온 적은 없다. 검은 변을 본 적은 없다. 변이 가늘어지지는 않았다. 설사와 변비가 번갈아 생기지는 않는다. 변을 볼 때 항문이 찢어지듯 아프지는 않다. 항문에 무언가 튀어나오지는 않는다.
+    석 달 전부터 다이어트를 해서 몸무게가 이 키로그람 빠졌다. 다이어트 때문에 아침은 거르고 점심과 저녁도 조금만 먹는다. 채소나 과일은 잘 먹지 않는다. 물은 하루에 두 컵 정도 마신다. 커피는 하루 두 잔 마신다. 회사에서 하루 종일 앉아서 일한다. 운동은 거의 하지 않는다. 회사에서는 대변이 마려워도 참는 편이다. 입사하고 나서 스트레스가 많다.
+    약국에서 산 둘코락스를 일주일에 한두 번 먹는다. 변비약을 먹으면 다음 날 변을 본다. 특별히 피곤하지는 않다. 추위를 더 타지는 않는다. 얼굴이나 다리가 붓지는 않는다.
+    앓고 있는 지병은 없다. 변비약 말고 먹는 약은 없다. 철분제는 먹지 않는다. 약 알레르기는 없다. 수술이나 입원을 한 적은 없다. 생리는 한 달에 한 번 규칙적이다. 마지막 생리는 이 주 전에 시작했다. 성관계는 하지 않는다. 임신 가능성은 없다.
+    어머니도 변비가 있다. 가족 중에 대장암을 앓은 사람은 없다. 담배는 피우지 않는다. 술은 한 달에 한두 번 맥주 한 캔 정도 마신다. 회사에서 사무직으로 일하고 있다. 혼자 원룸에서 산다. 변비약을 계속 먹어도 괜찮은지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 마른 체형
+    활력징후 측정 (Vital signs): 108/68mmHg, 70회/분, 14회/분, 36.4°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    피부 시진 (Skin inspection): 건조(-)
+    복부 시진 (Abdominal inspection): 팽만(-), 수술 흉터(-)
+    장음 청진 (Bowel sound auscultation): 정상
+    복부 타진 (Abdominal percussion): 경도 고창음
+    복부 촉진 (Abdominal palpation): 좌하복부에 눌리는 변 덩어리 촉지(+), 압통(-), 종괴(-)
+    항문 시진 (Anal inspection): 치핵(-), 열창(-)
+    직장수지검사 (Digital rectal examination): 직장 내 단단한 변(+), 혈액(-), 종괴(-), 괄약근 긴장도 정상, 힘주기 시 이완 정상
+    심부건반사 (Deep tendon reflex): 정상, 이완 지연(-)
+  key:
+    diagnosis: "Functional constipation"
+    differential: ["Constipation-predominant irritable bowel syndrome", "Hypothyroidism", "Dyssynergic defecation",
+                   "Colorectal cancer"]
+    history: [onset, timing, pmh, meds, fh, alcohol, lmp, pregnancy, job,
+              {frequency: "(며칠|일주일|횟수|얼마나 자주|몇 번)", stool_form: "(딱딱|단단|모양|굳|토끼|어떤 변)",
+               straining: "(힘을|힘주|오래 앉|힘드)", blood: "(피가|피는|혈변|검은|까만)", weight_loss: "(체중|몸무게|살이)",
+               abd_pain: "(배가 아프|복통|통증|배는 아프)", diet: "(식사|음식|채소|과일|섬유|식습관|끼니)",
+               water: "(물을|물은|수분)", laxative: "(변비약|약국|관장|둘코)", thyroid: "(추위|피곤|갑상선|붓)",
+               alternating: "설사"}]
+    exams: [복부 촉진 (Abdominal palpation), 직장수지검사 (Digital rectal examination), 항문 시진 (Anal inspection),
+            갑상선 촉진 (Thyroid palpation)]
+
+- case_id: M13
+  playbook: diarrhea
+  opening: 이름은 문준혁이고, 나는 서른한 살 남자이다. 어제부터 설사를 계속해서 병원에 왔다.
+  vital_signs: "혈압 : 118/74 mmHg\n맥박 : 98 회/분\n호흡 : 18 회/분\n체온 : 37.6°C"
+  script: |
+    그저께 저녁에 회사 회식에서 생굴을 먹었다. 어제 낮에 갑자기 속이 메스꺼워졌다. 그 뒤로 세 번 토했다. 어제 오후부터 물 같은 설사가 시작됐다. 어제부터 하루에 열 번 정도 설사를 했다. 변은 물처럼 묽고 누런색이다. 변에 피나 코 같은 곱이 섞이지는 않았다.
+    배꼽 주위가 꼬이듯이 쥐어짜며 아프다. 아픈 정도는 열 중에 사 정도이다. 설사를 하고 나면 배 아픈 게 조금 나아진다. 오른쪽 아랫배만 따로 아프지는 않다. 열은 어젯밤에 재 보니 삼십칠 도 팔 부였다. 몸이 으슬으슬 춥고 온몸이 쑤신다.
+    오늘 아침부터는 토하지 않았다. 물은 조금씩 마시면 넘어간다. 소변은 어제부터 두 번밖에 안 봤다. 소변 색이 진하다. 일어설 때 조금 어지럽다.
+    같이 굴을 먹은 동료 세 명도 비슷하게 토하고 설사를 한다. 아내는 아프지 않다. 최근에 해외여행을 다녀온 적은 없다. 최근에 항생제를 먹은 적은 없다. 약국에서 지사제를 사서 어제 한 번 먹었다. 평소에는 대변을 하루 한 번 보통으로 본다. 전에도 이렇게 심하게 설사한 적은 없다.
+    앓고 있는 지병은 없다. 먹는 약은 없다. 약 알레르기는 없다. 수술이나 입원을 한 적은 없다. 가족 중에 장 질환을 앓은 사람은 없다. 담배는 하루 반 갑씩 십 년째 피운다. 술은 일주일에 한두 번 맥주 두세 병을 마신다. 회사에서 영업직으로 일하고 있다. 아내와 둘이 산다.
+    내일 중요한 미팅이 있어서 빨리 낫고 싶다. 수액을 맞을 수 있는지 궁금하다.
+  exams:
+    전반적 외관 시진 (General appearance): 경도 병색(+), 기운 없어 보임
+    활력징후 측정 (Vital signs): 118/74mmHg, 98회/분, 18회/분, 37.6°C
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 118/74mmHg·96회/분 → 선 자세 112/72mmHg·110회/분, 기립성 저혈압(-), 경도 어지러움(+)
+    구강 점막 시진 (Oral mucosa inspection): 약간 건조(+)
+    피부 긴장도 확인 (Skin turgor): 약간 감소
+    모세혈관 재충전 시간 (Capillary refill time): 2초 미만
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 경도 빈맥, 심잡음(-)
+    복부 시진 (Abdominal inspection): 팽만(-)
+    장음 청진 (Bowel sound auscultation): 항진(+)
+    복부 촉진 (Abdominal palpation): 배꼽 주위 경도 압통(+), 근육 강직(-), 종괴(-)
+    반발압통 (Rebound tenderness): 음성(-)
+    맥버니점 압통 (McBurney point tenderness): 압통(-)
+  key:
+    diagnosis: "Acute infectious gastroenteritis (foodborne, likely norovirus from raw oysters) with mild dehydration"
+    differential: ["Bacterial enteritis (Vibrio parahaemolyticus, Salmonella, Campylobacter)",
+                   "Staphylococcus aureus food poisoning (preformed toxin)", "Acute appendicitis",
+                   "Inflammatory bowel disease"]
+    history: [onset, character, location, severity, timing, pmh, meds,
+              {frequency: "(몇 번|횟수|하루에|자주)", stool_character: "(묽|물 같|색|모양|어떤 변|형태)",
+               blood_mucus: "(피가|피는|곱|점액|혈변)", fever: "(열이|열은|열 나|열나|체온|오한)", vomiting: "(토|구토|메스|구역)",
+               food: "(음식|먹은 것|드신 것|식사|회식|날것|생굴|굴을|회를|외식)", contacts: "(주변|같이|동료|비슷한|비슷하게|다른 사람)",
+               travel: "(여행|해외)", antibiotics: "항생제", dehydration: "(소변|어지러|목마|목이 마|갈증|물은|물을)"}]
+    exams: [복부 촉진 (Abdominal palpation), 장음 청진 (Bowel sound auscultation), 구강 점막 시진 (Oral mucosa inspection),
+            피부 긴장도 확인 (Skin turgor), 반발압통 (Rebound tenderness)]
+
+- case_id: M14
+  playbook: dyspepsia
+  opening: 이름은 고은숙이고, 나는 마흔일곱 살 여자이다. 반년 전부터 소화가 잘 안 돼서 병원에 왔다.
+  vital_signs: "혈압 : 122/76 mmHg\n맥박 : 74 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    반년 전부터 밥을 먹고 나면 윗배가 더부룩하다. 조금만 먹어도 금방 배가 부르다. 명치 부위가 답답하고 체한 느낌이 든다. 트림이 자주 나온다. 가끔 속이 메스껍다. 토한 적은 없다. 열은 없다. 불편한 정도는 열 중에 사 정도이다.
+    밥을 먹고 한두 시간 동안 가장 심하다. 많이 먹거나 밀가루 음식을 먹으면 더 심하다. 스트레스를 받으면 더 심해진다. 약국에서 소화제를 사 먹으면 잠깐 괜찮아진다. 전에도 가끔 체한 적은 있지만 이렇게 오래간 적은 없다.
+    배가 고플 때 속이 쓰리지는 않다. 밤에 배가 아파서 깬 적은 없다. 가슴이 타는 듯이 쓰린 증상은 없다. 신물이 넘어오지는 않는다. 음식을 삼키기 어렵지는 않다. 몸무게는 변화가 없다. 검은 변을 본 적은 없다. 피를 토한 적은 없다. 오른쪽 윗배가 갑자기 심하게 아픈 적은 없다. 걷거나 계단을 오를 때 가슴이 아프지는 않다. 대변은 하루 한 번 보통으로 본다.
+    작년 국가건강검진에서 위내시경을 했는데 가벼운 위염이 있다고만 들었다. 헬리코박터 검사는 받아 본 적이 없다. 앓고 있는 지병은 없다. 소화제 말고 먹는 약은 없다. 진통제나 아스피린은 먹지 않는다. 약 알레르기는 없다. 입원이나 수술은 십오 년 전 제왕절개 때 한 번 했다.
+    가족 중에는 아버지가 예순 살에 위암 수술을 받으셨다. 담배는 피우지 않는다. 술은 거의 마시지 않는다. 커피는 하루 세 잔 마신다. 작은 식당을 운영하면서 직접 일하고 있다. 식사 시간이 불규칙하다. 요즘 가게 일과 아들 입시 때문에 스트레스가 많다. 잠을 깊이 못 잔다.
+    생리는 아직 규칙적으로 한다. 마지막 생리는 삼 주 전에 시작했다. 남편이 정관수술을 해서 임신 가능성은 없다. 남편과 고등학생 아들과 함께 산다. 아버지처럼 위암일까 봐 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-), 영양 상태 양호
+    활력징후 측정 (Vital signs): 122/76mmHg, 74회/분, 16회/분, 36.6°C
+    체중 측정 (Body weight): 58kg, 키 160cm (BMI 22.7), 반년 전과 같음
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    쇄골상 림프절 촉진 (Supraclavicular lymph node palpation): 촉지(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 시진 (Abdominal inspection): 팽만(-)
+    장음 청진 (Bowel sound auscultation): 정상
+    복부 촉진 (Abdominal palpation): 명치 경도 압통(+), 종괴(-)
+    반발압통 (Rebound tenderness): 음성(-)
+    머피 징후 (Murphy sign): 음성(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    직장수지검사 (Digital rectal examination): 흑색변(-), 종괴(-)
+  key:
+    diagnosis: "Functional dyspepsia (postprandial distress syndrome)"
+    differential: ["Peptic ulcer disease", "Gastric cancer", "Gastroesophageal reflux disease",
+                   "Gallstone disease (biliary colic)"]
+    history: [onset, character, location, severity, timing, aggravating, relieving, meds, fh, smoking, alcohol,
+              {early_satiety: "(배가 부르|포만|조금만 먹|금방 배)", weight_loss: "(체중|몸무게|살이)",
+               gi_bleeding: "(검은|까만|짜장|피를 토|토혈)", dysphagia: "(삼키|넘기)", vomiting: "(토하|토한|구토)",
+               reflux: "(쓰리|신물|타는|역류)", nsaid: "(진통제|소염제|아스피린|관절약)", endoscopy: "(내시경|검진)",
+               stress: "(스트레스|잠은|잠을|수면|불면)", night_pain: "(밤에|자다가|새벽)", diet: "(음식|식사|커피|밀가루|기름)"}]
+    exams: [복부 촉진 (Abdominal palpation), 결막·공막 시진 (Conjunctiva and sclera inspection),
+            쇄골상 림프절 촉진 (Supraclavicular lymph node palpation), 체중 측정 (Body weight)]
+
+- case_id: M15
+  playbook: dysphagia
+  opening: 이름은 장만복이고, 나는 예순일곱 살 남자이다. 석 달 전부터 음식을 삼키기가 힘들어서 병원에 왔다.
+  vital_signs: "혈압 : 132/80 mmHg\n맥박 : 84 회/분\n호흡 : 16 회/분\n체온 : 36.6°C"
+  script: |
+    석 달 전부터 밥을 먹으면 가슴 한가운데에 음식이 걸리는 느낌이 들었다. 처음에는 고기나 밥 같은 딱딱한 음식만 걸렸다. 한 달 전부터는 죽 같은 부드러운 음식도 걸릴 때가 있다. 물은 아직 잘 넘어간다. 걸리는 곳은 명치 바로 위 가슴뼈 뒤쪽이다. 점점 심해지고 있다.
+    음식이 걸리면 물을 마셔서 내려보낸다. 가끔 걸린 음식을 도로 토해 낸다. 삼킬 때 가슴이 조금 아프다. 아픈 정도는 열 중에 삼 정도이다. 물을 마실 때 사레가 들리지는 않는다. 음식이 코로 넘어오지는 않는다. 밥을 먹고 나서 기침이 나지는 않는다. 목소리가 변하지는 않았다.
+    석 달 동안 몸무게가 칠 키로그람 빠졌다. 입맛은 있는데 먹기가 힘들어서 덜 먹게 된다. 밥을 제대로 못 먹어서 기운이 없다. 평소에 속쓰림은 거의 없었다. 신물이 넘어오는 일도 거의 없었다. 열은 없다. 검은 변을 본 적은 없다. 피를 토한 적은 없다. 목에 덩어리가 만져지지는 않는다. 말이 어눌해진 적은 없다. 팔다리에 힘이 빠진 적은 없다.
+    전에는 이런 적이 없었다. 아직 병원에 가 본 적은 없다. 앓고 있는 병은 고혈압뿐이다. 십 년 전부터 고혈압약을 먹고 있다. 혈압약 말고 먹는 약은 없다. 당뇨는 없다. 위내시경은 육 년 전에 한 번 받았다. 수술이나 입원을 한 적은 없다. 약 알레르기는 없다. 가족 중에 암을 앓은 사람은 없다.
+    담배는 하루 한 갑씩 사십오 년째 피우고 있다. 술은 거의 매일 소주 한 병 이상 마신다. 술을 마시면 얼굴이 금방 빨개진다. 뜨거운 국물을 좋아한다. 건설 현장에서 일하다가 이 년 전에 그만두었다. 아내와 둘이 산다. 혹시 큰 병이 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 마른 체형, 만성 병색(+)
+    활력징후 측정 (Vital signs): 132/80mmHg, 84회/분, 16회/분, 36.6°C
+    체중 측정 (Body weight): 56kg (석 달 전 63kg), 키 170cm, BMI 19.4
+    결막·공막 시진 (Conjunctiva and sclera inspection): 경도 창백(+/+), 황달(-/-)
+    구강 점막 시진 (Oral mucosa inspection): 궤양(-), 종괴(-)
+    인두 시진 (Pharynx inspection): 발적(-), 종괴(-)
+    혀 운동 검사 (Tongue movement (CN XII)): 정상, 위축(-)
+    구역 반사 (Gag reflex): 정상(+/+)
+    경부 림프절 촉진 (Cervical lymph node palpation): 촉지(-/-)
+    쇄골상 림프절 촉진 (Supraclavicular lymph node palpation): 촉지(-/-)
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+  key:
+    diagnosis: "Esophageal cancer (squamous cell carcinoma)"
+    differential: ["Achalasia", "Peptic esophageal stricture", "Gastric cardia adenocarcinoma",
+                   "Oropharyngeal dysphagia (stroke or neuromuscular disease)"]
+    history: [onset, character, location, severity, pmh, meds, fh, smoking, alcohol,
+              {food_type: "(밥|고기|딱딱|물은|물도|액체|죽|어떤 음식)", progression: "(점점|심해|진행|나빠|변화)",
+               weight_loss: "(체중|몸무게|살이)", odynophagia: "(삼킬 때 아프|삼키면 아프|넘길 때 아프|통증)",
+               regurgitation: "(토|올라오|역류|도로|다시 나)", aspiration: "(사레|기침|코로)", reflux: "(속쓰림|신물|쓰리)",
+               voice: "(목소리|쉰)", gi_bleeding: "(검은|까만|피를 토|토혈)", neck_mass: "(목에|덩어리|멍울|혹이|혹 같은)",
+               diet: "(뜨거운|음식 습관|식습관|짠)"}]
+    exams: [체중 측정 (Body weight), 쇄골상 림프절 촉진 (Supraclavicular lymph node palpation),
+            경부 림프절 촉진 (Cervical lymph node palpation), 구역 반사 (Gag reflex)]
+
+- case_id: M16
+  playbook: jaundice
+  opening: 이름은 엄다은이고, 나는 서른네 살 여자이다. 이틀 전부터 눈이 노랗게 변해서 병원에 왔다.
+  vital_signs: "혈압 : 112/70 mmHg\n맥박 : 82 회/분\n호흡 : 16 회/분\n체온 : 37.2°C"
+  script: |
+    일주일 전에 몸살처럼 열이 나고 온몸이 쑤시기 시작했다. 열은 삼십팔 도 오 부까지 올랐다. 그때부터 입맛이 없다. 속이 계속 메스껍다. 두 번 토했다. 오른쪽 윗배가 묵직하게 불편하다. 아픈 정도는 열 중에 삼 정도이다.
+    사흘 전부터 소변 색이 콜라처럼 진해졌다. 이틀 전에 남편이 내 눈이 노랗다고 했다. 눈이 노래진 뒤로 열은 내렸다. 대변 색이 조금 연해진 것 같다. 몸이 가렵지는 않다. 몹시 피곤하고 기운이 없다. 배가 불러 오지는 않는다. 다리가 붓지는 않는다. 정신이 흐리거나 졸리지는 않다. 멍이 잘 들지는 않는다. 잇몸에서 피가 나지는 않는다. 전에도 눈이 노래진 적은 없다.
+    한 달쯤 전에 식당에서 조개젓을 먹었다. 최근에 해외여행을 다녀온 적은 없다. 가족이나 회사 동료 중에 비슷하게 아픈 사람은 없다. 앓고 있는 지병은 없다. 간 질환을 진단받은 적도 없다. B형간염 예방접종은 어릴 때 맞았다. A형간염 예방접종은 맞은 적이 없다.
+    열이 날 때 타이레놀을 이틀 동안 하루 두 알씩 먹었다. 그 밖에 먹는 약은 없다. 한약이나 건강식품은 먹지 않았다. 약 알레르기는 없다. 수술이나 입원을 한 적은 없다. 수혈을 받은 적은 없다. 문신은 없다. 성관계는 남편과만 한다. 피임은 남편이 콘돔을 쓴다. 마지막 생리는 열흘 전에 시작했다. 임신 가능성은 없다.
+    술은 한 달에 한두 번 맥주 한 잔 정도 마신다. 담배는 피우지 않는다. 회사에서 사무직으로 일하고 있다. 남편과 세 살 아들과 함께 산다. 아들은 예방접종을 나이에 맞게 모두 맞혔다. 가족 중에 간 질환을 앓은 사람은 없다. 간이 크게 나빠진 건 아닌지 걱정된다. 아들에게 옮을까 봐 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 피로해 보임, 경도 급성 병색(+)
+    활력징후 측정 (Vital signs): 112/70mmHg, 82회/분, 16회/분, 37.2°C
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 공막 황달(+/+)
+    피부 시진 (Skin inspection): 피부 황달(+), 거미혈관종(-), 긁은 자국(-)
+    복부 시진 (Abdominal inspection): 팽만(-), 복벽 정맥 확장(-)
+    복부 촉진 (Abdominal palpation): 우상복부 경도 압통(+), 반발압통(-), 종괴(-)
+    간·비장 촉진 (Liver and spleen palpation): 간 우측 늑골 아래 2cm 촉지, 표면 매끈, 압통(+), 비장 촉지(-)
+    머피 징후 (Murphy sign): 음성(-)
+    담낭 촉진 (Gallbladder palpation): 촉지(-)
+    복수 이동탁음 확인 (Shifting dullness (ascites)): 음성(-)
+    퍼덕떨림 확인 (Asterixis): 음성(-)
+    하지 함요부종 확인 (Pitting edema of the legs): 부종(-/-)
+  key:
+    diagnosis: "Acute hepatitis A"
+    differential: ["Acute hepatitis B, C or E", "Drug-induced liver injury (including herbal medicine)",
+                   "Choledocholithiasis with obstructive jaundice", "Autoimmune hepatitis"]
+    history: [onset, pmh, meds, fh, alcohol, lmp, pregnancy,
+              {urine_color: "(소변|오줌)", stool_color: "(대변|변 색|변은|변이)", fever: "(열이|열은|열 나|열나|체온|오한)",
+               gi_symptoms: "(입맛|식욕|메스|토|구역)", itching: "가려", abd_pain: "(배가 아프|복통|통증|윗배)",
+               exposure: "(음식|조개|날것|회를|생굴|젓갈|외식|여행|해외)", herbal: "(한약|건강식품|보약|영양제)",
+               parenteral: "(수혈|문신|주사|성관계)", hepatitis_hx: "(간염|간 질환|간이 나쁘|보균)", vaccine: "(예방접종|백신)",
+               contacts: "(주변|동료|비슷한|비슷하게|같이 사는|집에)"}]
+    exams: [결막·공막 시진 (Conjunctiva and sclera inspection), 간·비장 촉진 (Liver and spleen palpation),
+            머피 징후 (Murphy sign), 퍼덕떨림 확인 (Asterixis), 의식·지남력 평가 (Mental status)]
+
+- case_id: M17
+  playbook: upper_gi_bleeding
+  opening: 이름은 변재훈이고, 나는 마흔여섯 살 남자이다. 어제부터 까만 변을 보고 오늘 아침에 피를 토해서 병원에 왔다.
+  vital_signs: "혈압 : 98/62 mmHg\n맥박 : 112 회/분\n호흡 : 20 회/분\n체온 : 36.4°C\n산소포화도 : 98%"
+  script: |
+    한 달 전부터 배가 고프면 명치가 쓰리고 아팠다. 밥을 먹으면 쓰린 게 조금 나아졌다. 새벽에 속이 쓰려서 깬 적이 몇 번 있다. 속쓰림 때문에 약국에서 겔포스를 사 먹었다.
+    이 주 전에 허리를 삐끗해서 약국에서 부루펜이라는 진통제를 샀다. 부루펜을 하루 세 번씩 열흘 동안 먹었다. 어제 아침부터 검은 변을 세 번 봤다. 변 색깔은 짜장면처럼 까맣다. 변이 끈적하고 지독한 냄새가 났다. 오늘 아침에 한 번 토했다. 토한 것은 커피 찌꺼기처럼 검붉은 색이었다. 토한 양은 종이컵 반 컵 정도였다. 피를 토하기 전에 심하게 헛구역질을 하지는 않았다.
+    일어나면 어지럽고 눈앞이 캄캄해진다. 오늘 아침 화장실에서 쓰러질 뻔했다. 식은땀이 나고 기운이 없다. 지금 명치 통증은 열 중에 사 정도이다. 배 전체가 심하게 아프지는 않다. 열은 없다. 몸무게는 변화가 없다. 음식을 삼키기 어렵지는 않다. 이런 적은 처음이다.
+    삼 년 전 건강검진 위내시경에서 위염이 있다고 들었다. 간이 나쁘다는 말은 들은 적이 없다. 앓고 있는 지병은 없다. 아스피린이나 피를 묽게 하는 약은 먹지 않는다. 부루펜 말고 먹는 약은 없다. 약 알레르기는 없다. 수술이나 입원을 한 적은 없다. 가족 중에 위암이나 간 질환을 앓은 사람은 없다.
+    담배는 하루 한 갑씩 이십오 년째 피운다. 술은 일주일에 세 번 소주 한 병씩 마신다. 물류 창고에서 지게차 기사로 일하고 있다. 아내와 두 아이와 함께 산다. 피를 토해서 너무 놀랐다. 큰 병이 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 창백(+), 식은땀(+), 불안해 보임
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    활력징후 측정 (Vital signs): 98/62mmHg, 112회/분, 20회/분, 36.4°C, SpO2 98%
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 98/62mmHg·112회/분 → 앉은 자세 84/56mmHg·130회/분, 어지러움(+)
+    피부 온도·발한 촉진 (Skin temperature and diaphoresis): 차고 축축함(+)
+    모세혈관 재충전 시간 (Capillary refill time): 3초 (지연)
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(+/+), 황달(-/-)
+    피부 시진 (Skin inspection): 거미혈관종(-), 손바닥 홍반(-), 점상출혈(-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적 빈맥, 심잡음(-)
+    장음 청진 (Bowel sound auscultation): 항진(+)
+    복부 촉진 (Abdominal palpation): 명치 경도 압통(+), 근육 강직(-), 종괴(-)
+    반발압통 (Rebound tenderness): 음성(-)
+    간·비장 촉진 (Liver and spleen palpation): 간비종대(-)
+    복수 이동탁음 확인 (Shifting dullness (ascites)): 음성(-)
+    직장수지검사 (Digital rectal examination): 흑색변(+), 선혈(-), 종괴(-)
+  key:
+    diagnosis: "Bleeding peptic ulcer (NSAID-associated, likely duodenal) with hypovolemia"
+    differential: ["Esophageal variceal bleeding", "Mallory-Weiss tear", "Bleeding gastric cancer",
+                   "Erosive hemorrhagic gastritis"]
+    history: [onset, character, location, severity, prior, pmh, meds, fh, smoking, alcohol,
+              {melena: "(검은|까만|짜장|변 색|대변)", hematemesis: "(토한|토하|피를)",
+               amount: "(얼마나 많|양은|양이|몇 번|얼마나 토)", syncope: "(어지러|쓰러|실신|눈앞|정신을 잃)",
+               nsaid: "(진통제|소염제|아스피린|부루펜|관절약|허리)", anticoagulant: "(피를 묽게|항응고|혈전|와파린)",
+               liver: "(간이 나쁘|간염|간경화|간 질환|간 수치|간 기능)", retching: "(헛구역|구역질|토하기 전)",
+               ulcer_pain: "(속쓰림|쓰리|명치|배가 아프|공복|배가 고프)", weight_loss: "(체중|몸무게|살이)", endoscopy: "내시경"}]
+    exams: [활력징후 측정 (Vital signs), 기립성 혈압 측정 (Orthostatic BP), 직장수지검사 (Digital rectal examination),
+            결막·공막 시진 (Conjunctiva and sclera inspection), 복부 촉진 (Abdominal palpation)]
+
+- case_id: M18
+  playbook: vomiting
+  opening: 이름은 신예린이고, 나는 스물여덟 살 여자이다. 열흘 전부터 속이 메스껍고 토해서 병원에 왔다.
+  vital_signs: "혈압 : 112/70 mmHg\n맥박 : 88 회/분\n호흡 : 16 회/분\n체온 : 36.8°C"
+  script: |
+    열흘 전부터 속이 메스껍다. 아침에 일어나면 메스꺼움이 특히 심하다. 하루에 두세 번 토한다. 토한 것은 먹은 음식이나 맑은 물이다. 토한 것에 피가 섞이지는 않았다. 밥 짓는 냄새나 고기 냄새를 맡으면 더 메스껍다. 크래커 같은 담백한 음식은 조금 먹을 수 있다. 물은 조금씩 마시면 넘어간다. 몸무게는 일 키로그람 정도 빠졌다.
+    배가 아프지는 않다. 설사는 없다. 열은 없다. 머리는 아프지 않다. 어지럽지는 않다. 요즘 소변을 자주 본다. 소변볼 때 아프지는 않다. 요즘 가슴이 커진 것 같고 만지면 아프다. 요즘 많이 피곤하고 졸리다. 가슴이 두근거리지는 않는다. 손이 떨리지는 않는다.
+    마지막 생리는 칠 주 전에 시작했다. 생리는 원래 이십팔 일 주기로 규칙적이었다. 생리가 아닌데 피가 비친 적은 없다. 남자친구와 성관계를 한다. 피임은 콘돔을 쓰는데 가끔 안 쓸 때가 있다. 임신 테스트는 해 보지 않았다. 임신이나 출산을 한 적은 없다.
+    같이 밥을 먹은 사람 중에 아픈 사람은 없다. 상한 음식을 먹은 기억은 없다. 약국에서 위장약을 사 먹었는데 나아지지 않았다. 전에도 이렇게 토한 적은 없다. 앓고 있는 지병은 없다. 갑상선 질환을 진단받은 적은 없다. 그 밖에 먹는 약은 없다. 약 알레르기는 없다. 수술이나 입원을 한 적은 없다. 가족 중에 특별한 병은 없다.
+    담배는 피우지 않는다. 술은 한 달에 두세 번 맥주를 마셨다. 요즘은 메스꺼워서 술을 마시지 않았다. 은행 창구에서 일하고 있다. 부모님과 함께 산다. 위염이 심해진 건 아닌지 걱정된다. 회사에 계속 나가기가 힘들다.
+  exams:
+    전반적 외관 시진 (General appearance): 약간 피곤해 보임, 급성 병색(-)
+    활력징후 측정 (Vital signs): 112/70mmHg, 88회/분, 16회/분, 36.8°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    구강 점막 시진 (Oral mucosa inspection): 약간 건조(+)
+    피부 긴장도 확인 (Skin turgor): 정상
+    갑상선 촉진 (Thyroid palpation): 비대(-), 결절(-)
+    경부 강직 (Neck stiffness): 강직(-)
+    안저 검사 (Fundoscopy): 유두부종(-/-)
+    복부 시진 (Abdominal inspection): 팽만(-)
+    장음 청진 (Bowel sound auscultation): 정상
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    반발압통 (Rebound tenderness): 음성(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    질경 검사 (Speculum examination): 자궁경부 청색조(+), 질 출혈(-), 분비물 정상
+    양손 골반 내진 (Bimanual pelvic examination): 자궁 약간 커지고 부드러움(+), 자궁경부 운동 압통(-), 부속기 압통(-/-), 종괴(-/-)
+  key:
+    diagnosis: "Nausea and vomiting of early pregnancy (about 7 weeks)"
+    differential: ["Hyperemesis gravidarum", "Acute gastroenteritis", "Molar pregnancy", "Hyperthyroidism"]
+    history: [onset, timing, aggravating, pmh, meds, lmp, pregnancy, alcohol,
+              {vomit_content: "(토한 것|토사물|무엇을 토|어떤 것을 토|색깔)", frequency: "(몇 번|하루에|자주)",
+               abd_pain: "(배가 아프|복통|통증|아랫배)", diarrhea: "설사", fever: "(열이|열은|열 나|열나|체온)",
+               headache: "(머리|두통)", cycle: "(주기|규칙|생리는)", contraception: "(피임|콘돔|임신 테스트|임신 검사)",
+               urine: "소변", food: "(음식|상한|같이 드신|먹은)", vaginal_bleeding: "(피가 비|출혈|하혈)",
+               intake_weight: "(체중|몸무게|살이|물은|물을|드실 수|먹을 수|식사)"}]
+    exams: [양손 골반 내진 (Bimanual pelvic examination), 복부 촉진 (Abdominal palpation), 구강 점막 시진 (Oral mucosa inspection),
+            갑상선 촉진 (Thyroid palpation)]
+
+- case_id: M19
+  playbook: hematuria
+  opening: 이름은 도기철이고, 나는 예순세 살 남자이다. 일주일 전부터 소변이 빨갛게 나와서 병원에 왔다.
+  vital_signs: "혈압 : 138/84 mmHg\n맥박 : 76 회/분\n호흡 : 16 회/분\n체온 : 36.5°C"
+  script: |
+    일주일 전에 소변이 핏물처럼 빨갛게 나왔다. 소변을 처음부터 끝까지 빨갛게 봤다. 그날 작은 핏덩어리가 한 번 섞여 나왔다. 사흘 동안 빨갛다가 그 뒤로 맑아졌다. 어제 다시 소변이 빨갛게 나왔다. 전에는 이런 적이 없었다.
+    소변볼 때 아프지는 않다. 옆구리는 아프지 않다. 배도 아프지 않다. 열은 없다. 소변 줄기는 괜찮다. 밤에 소변 때문에 한 번 깬다. 소변에 거품이 많지는 않다. 몸이 붓지는 않는다. 몸무게는 변화가 없다. 멍이 잘 들지는 않는다. 잇몸에서 피가 나지는 않는다.
+    최근에 넘어지거나 다친 적은 없다. 최근에 심하게 운동한 적은 없다. 최근에 감기를 앓거나 목이 아픈 적은 없다. 아직 병원에 가 보지 않았다.
+    앓고 있는 병은 고혈압뿐이다. 오 년 전부터 고혈압약을 먹고 있다. 아스피린이나 피를 묽게 하는 약은 먹지 않는다. 당뇨는 없다. 결석을 앓은 적은 없다. 수술이나 입원을 한 적은 없다. 약 알레르기는 없다. 가족 중에 콩팥병이나 암을 앓은 사람은 없다.
+    담배는 하루 한 갑씩 사십 년째 피운다. 술은 일주일에 두 번 소주 반 병 정도 마신다. 삼십 년 동안 염색 공장에서 일하다가 그만두었다. 지금은 아파트 경비원으로 일하고 있다. 아내와 둘이 산다. 피가 멈춰서 괜찮은 줄 알았다. 혹시 암이 아닐까 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 138/84mmHg, 76회/분, 16회/분, 36.5°C
+    결막·공막 시진 (Conjunctiva and sclera inspection): 창백(-/-), 황달(-/-)
+    안검 부종 시진 (Eyelid edema): 부종(-/-)
+    점상출혈 확인 (Petechiae and purpura): 점상출혈(-), 자반(-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적, 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    방광 촉진 (Bladder palpation): 팽만(-), 압통(-)
+    전립선 촉진 (Prostate palpation): 경도 비대, 표면 매끈, 결절(-), 압통(-)
+    고환 촉진 (Testicular palpation): 정상, 정계정맥류(-/-)
+    서혜부 림프절 촉진 (Inguinal lymph node palpation): 촉지(-/-)
+    하지 함요부종 확인 (Pitting edema of the legs): 부종(-/-)
+  key:
+    diagnosis: "Bladder cancer (urothelial carcinoma)"
+    differential: ["Renal cell carcinoma", "Urolithiasis", "Prostate cancer or benign prostatic hyperplasia",
+                   "IgA nephropathy (glomerular hematuria)"]
+    history: [onset, timing, prior, pmh, meds, fh, smoking, alcohol, job,
+              {stream_timing: "(처음부터|끝까지|마지막에|시작할 때|전체가)", clots: "(덩어리|핏덩)", dysuria: "(볼 때 아프|배뇨통|따갑|화끈|찌릿)",
+               flank_pain: "(옆구리|허리)", fever: "(열이|열은|열 나|열나|체온|오한)", voiding: "(줄기|자주|밤에|잔뇨|시원)",
+               trauma_exercise: "(다치|넘어|외상|운동)", anticoagulant: "(아스피린|피를 묽게|항응고|와파린)",
+               weight_loss: "(체중|몸무게|살이)", stone: "결석", glomerular: "(거품|붓|부종|감기|목이)",
+               bleeding_tendency: "(멍|잇몸|코피)"}]
+    exams: [늑골척추각 압통 (Costovertebral angle tenderness), 복부 촉진 (Abdominal palpation), 방광 촉진 (Bladder palpation),
+            전립선 촉진 (Prostate palpation)]
+
+- case_id: M20
+  playbook: oliguria
+  opening: 이름은 채순자이고, 나는 일흔여섯 살 여자이다. 어제부터 소변 양이 줄어서 병원에 왔다.
+  vital_signs: "혈압 : 96/58 mmHg\n맥박 : 106 회/분\n호흡 : 18 회/분\n체온 : 36.9°C"
+  script: |
+    닷새 전부터 설사와 구토가 있었다. 처음 사흘은 하루 대여섯 번씩 물처럼 설사했다. 처음 이틀은 하루 두세 번씩 토했다. 이틀 전부터 설사는 하루 한두 번으로 줄었다. 그동안 음식은 거의 못 먹었다. 물도 잘 못 마셨다. 남편도 하루 설사를 했다가 나았다.
+    어제부터 소변 양이 확 줄었다. 소변은 어제 하루에 두 번밖에 안 봤다. 한 번에 나오는 양도 아주 적었다. 오늘은 아침에 한 번 조금 봤다. 소변 색이 진한 노란색이다. 전에도 소변이 이렇게 준 적은 없다. 소변이 마려운데 안 나오는 느낌은 없다. 아랫배가 불러 오지는 않는다. 소변볼 때 아프지는 않다. 소변에 피가 섞이지는 않는다. 소변에 거품이 많지는 않다.
+    입이 바싹 마르고 목이 자주 마르다. 일어서면 어지러워서 벽을 짚는다. 기운이 없어서 누워만 있다. 열은 없다. 숨이 차지는 않는다. 얼굴이나 다리가 붓지는 않는다. 몸에 발진이 생기지는 않았다. 근육이 아프지는 않다. 넘어진 적은 없다. 최근에 시티 같은 조영제 검사를 받은 적은 없다.
+    앓고 있는 병은 고혈압과 무릎 관절염이다. 십오 년 전에 고혈압을 진단받았다. 혈압약은 매일 아침 한 알씩 계속 먹었다. 혈압약에 이뇨제가 들어 있다고 들었다. 무릎 관절염이 있어서 정형외과에서 받은 진통제를 하루 두 번 먹는다. 당뇨는 없다. 작년 건강검진에서 콩팥 기능은 괜찮다고 들었다. 입원이나 수술은 십 년 전에 백내장 수술을 한 것이 전부이다. 약 알레르기는 없다. 폐경은 쉰 살쯤에 되었다.
+    가족 중에 콩팥병을 앓은 사람은 없다. 담배는 피운 적이 없다. 술은 마시지 않는다. 평생 농사를 지으며 일하다가 지금은 쉬고 있다. 남편과 둘이 시골에서 산다. 콩팥이 망가진 건 아닌지 걱정된다.
+  exams:
+    전반적 외관 시진 (General appearance): 기운 없음, 탈수 소견(+)
+    의식·지남력 평가 (Mental status): 명료, 지남력 정상
+    활력징후 측정 (Vital signs): 96/58mmHg, 106회/분, 18회/분, 36.9°C
+    기립성 혈압 측정 (Orthostatic BP): 누운 자세 100/60mmHg·102회/분 → 선 자세 80/50mmHg·124회/분, 어지러움(+)
+    구강 점막 시진 (Oral mucosa inspection): 건조(+), 혀 건조(+)
+    피부 긴장도 확인 (Skin turgor): 감소(+)
+    모세혈관 재충전 시간 (Capillary refill time): 3초 (지연)
+    경정맥압 측정 (Jugular venous pressure): 누운 자세에서 경정맥 보이지 않음(납작함)
+    폐 청진 (Lung auscultation): 폐포음, 수포음(-/-)
+    심음 청진 (Heart auscultation): S1·S2 규칙적 빈맥, 심잡음(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    방광 촉진 (Bladder palpation): 팽만(-), 압통(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    하지 함요부종 확인 (Pitting edema of the legs): 부종(-/-)
+    피부 시진 (Skin inspection): 발진(-)
+  key:
+    diagnosis: "Prerenal acute kidney injury (volume depletion from gastroenteritis, aggravated by diuretic-containing antihypertensive and NSAID use)"
+    differential: ["Acute tubular necrosis", "Postrenal obstruction (urinary retention)",
+                   "Drug-induced acute interstitial nephritis", "Rapidly progressive glomerulonephritis"]
+    history: [onset, timing, pmh, meds, fh, alcohol,
+              {urine_amount: "(소변 양|양이|양은|몇 번|횟수|얼마나 보)", urine_color: "(색|진하)",
+               intake: "(식사|음식|물은|물을|물이나|수분|잘 드시|잘 먹|못 드|못 먹)", gi_loss: "(설사|토|구토)", volume_symptoms: "(어지러|쓰러|목마|목이 마|갈증|입이 마)",
+               nsaid: "(진통제|소염제|관절약|무릎)", bp_meds: "(혈압약|이뇨제)",
+               retention: "(아랫배|마려|줄기|안 나오)", glomerular: "(붓|부종|거품|피가|혈뇨)",
+               rash: "(발진|두드러기|가려)", contrast: "(조영제|시티|CT)", kidney_hx: "(콩팥|신장)"}]
+    exams: [기립성 혈압 측정 (Orthostatic BP), 방광 촉진 (Bladder palpation), 구강 점막 시진 (Oral mucosa inspection),
+            피부 긴장도 확인 (Skin turgor), 경정맥압 측정 (Jugular venous pressure)]
+
+- case_id: M21
+  playbook: voiding_difficulty
+  opening: 이름은 진병국이고, 나는 일흔 살 남자이다. 일 년 전부터 소변보기가 힘들어서 병원에 왔다.
+  vital_signs: "혈압 : 136/82 mmHg\n맥박 : 72 회/분\n호흡 : 16 회/분\n체온 : 36.4°C"
+  script: |
+    일 년 전부터 소변 줄기가 점점 약해졌다. 소변을 보려고 하면 한참 기다려야 나온다. 배에 힘을 줘야 소변이 나온다. 소변이 나오다가 끊겼다가 다시 나온다. 소변을 보고 나도 시원하지 않고 남은 느낌이 든다. 소변을 보고 나서 몇 방울씩 흘러 속옷이 젖는다.
+    낮에도 두 시간에 한 번씩 소변을 본다. 밤에 소변 때문에 세 번 깬다. 소변이 급하게 마려워서 참기 힘들 때가 있다. 불편한 정도는 열 중에 육 정도이다. 지난달에 감기약을 먹었을 때 소변보기가 더 힘들었다. 소변이 아예 안 나온 적은 없다.
+    소변볼 때 아프지는 않다. 소변에 피가 섞인 적은 없다. 열은 없다. 허리는 아프지 않다. 다리에 힘이 빠지거나 저리지는 않다. 대변은 하루 한 번 잘 본다. 몸무게는 변화가 없다. 뼈가 아픈 곳은 없다. 저녁에는 물을 많이 마시지 않는다. 커피는 아침에 한 잔만 마신다.
+    약국에서 쏘팔메토를 사서 석 달째 먹고 있다. 별로 좋아지지는 않았다. 앓고 있는 병은 고혈압뿐이다. 십 년 전에 고혈압을 진단받아 혈압약을 먹고 있다. 그 밖에 먹는 약은 없다. 당뇨는 없다. 전립선 검사를 받아 본 적은 없다. 입원이나 수술을 한 적은 없다. 요도에 관을 넣은 적도 없다. 성병을 앓은 적은 없다. 약 알레르기는 없다. 가족 중에 전립선 질환을 앓은 사람은 없다.
+    담배는 십 년 전에 끊었다. 그전에는 하루 반 갑씩 삼십 년 피웠다. 술은 일주일에 한 번 막걸리 한 병 정도 마신다. 초등학교 교사로 일하다가 은퇴했다. 아내와 둘이 산다. 밤에 자주 깨서 낮에 피곤하다. 외출할 때 화장실이 걱정된다. 수술을 해야 하는지 궁금하다.
+  exams:
+    전반적 외관 시진 (General appearance): 급성 병색(-)
+    활력징후 측정 (Vital signs): 136/82mmHg, 72회/분, 16회/분, 36.4°C
+    복부 시진 (Abdominal inspection): 팽만(-)
+    복부 촉진 (Abdominal palpation): 압통(-), 종괴(-)
+    방광 촉진 (Bladder palpation): 치골 위 팽만(-), 압통(-)
+    늑골척추각 압통 (Costovertebral angle tenderness): 압통(-/-)
+    직장수지검사 (Digital rectal examination): 직장 종괴(-), 혈변(-)
+    전립선 촉진 (Prostate palpation): 대칭성 비대(약 40g), 고무 같은 탄력, 표면 매끈, 결절(-), 압통(-)
+    항문 괄약근 긴장도 확인 (Anal sphincter tone): 정상
+    회음부 감각 검사 (Perineal (saddle) sensation): 정상
+    심부건반사 (Deep tendon reflex): 정상, 대칭
+    사지 근력 검사 (Limb muscle power): 정상(5/5)
+    하지 함요부종 확인 (Pitting edema of the legs): 부종(-/-)
+  key:
+    diagnosis: "Benign prostatic hyperplasia with lower urinary tract symptoms"
+    differential: ["Prostate cancer", "Urethral stricture", "Neurogenic bladder (diabetic or spinal)",
+                   "Drug-induced urinary retention (anticholinergic or decongestant)"]
+    history: [onset, severity, pmh, meds, surgery, fh, smoking, alcohol,
+              {weak_stream: "(줄기|약해|가늘)", hesitancy: "(기다려|바로 안 나|한참|시작하기|나오기까지)", straining: "(힘을|힘주)",
+               incomplete: "(남은|남아|시원|잔뇨)", frequency: "(자주|몇 번|빈뇨|간격)", nocturia: "(밤에|자다가|야간)",
+               urgency: "(급하|참기|못 참)", hematuria: "(피가|혈뇨|빨간)", uti_symptoms: "(볼 때 아프|배뇨통|따갑|화끈|열이|열은|열 나|열나|체온)",
+               retention: "(전혀 안 나|아예 안|소변이 안 나|막혀|요폐)", cold_medicine: "(감기약|콧물약|코감기)",
+               neuro: "(허리|다리|힘이 빠|저리|대변)"}]
+    exams: [전립선 촉진 (Prostate palpation), 방광 촉진 (Bladder palpation), 항문 괄약근 긴장도 확인 (Anal sphincter tone),
+            회음부 감각 검사 (Perineal (saddle) sensation)]

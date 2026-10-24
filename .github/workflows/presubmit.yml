@@ -1,0 +1,44 @@
+# Go / no-go for the contest submission on every push, and the ZIP to upload.
+#
+# The artifact "submission" downloads as submission.zip with run.py, requirements.txt and dxagent/ at its root, the
+# layout the contest server requires. It has no nova_sdk.py (the starter package's SDK is not redistributed; the
+# server provides its own copy): add yours with `zip submission.zip nova_sdk.py` if you want it bundled.
+name: presubmit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  presubmit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the pinned runtime wheels and pytest
+        run: python -m pip install -r requirements.txt pytest
+      - name: Presubmit (tests, playbooks, cases, scenario matrix, isolated ZIP check)
+        run: python -m sim.presubmit --workers 2
+      - name: Stage the ZIP's contents for the artifact
+        run: |
+          rm -rf build/submission && mkdir -p build/submission
+          python -c "import zipfile; zipfile.ZipFile('dist/submission.zip').extractall('build/submission')"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: submission
+          path: build/submission/
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: simulation-results
+          path: runs/sim/presubmit/
+          if-no-files-found: ignore

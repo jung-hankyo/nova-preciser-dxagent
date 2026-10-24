@@ -2,8 +2,8 @@
 
 A diagnostic-interview agent, built in two layers: a **research core** (`main`) and a **contest runtime** around it (the
 three `*-approach` branches), developed against the N.O.V.A competition's starter package and development kit. This
-branch, `first-simple-approach`, is the first contest version. Research prototype; not a medical device, not medical advice.
-No license is granted with this repository.
+branch, `second-clean-approach`, adds a simulated contest and a presubmit gate to the first contest version. Research prototype;
+not a medical device, not medical advice. No license is granted with this repository.
 
 ## Branches
 
@@ -50,19 +50,25 @@ flowchart LR
 - **The note is written from a ledger** of what was asked and answered, in a CPX chart layout; items not confirmed stay
   `( )`; a number the visit never produced is dropped. Deterministic safety checks run on the plan.
 - **It never fails a case.** A per-case budget keeps a valid DIAGNOSE and the one required model call, whatever the
-  model or the network does.
+  model or the network does. Time is planned from the pace observed in the case (seconds per patient answer and per
+  model call), and every blocking SDK call runs under a watchdog, so a slow server shortens the visit instead of
+  pushing DIAGNOSE past the deadline.
+- **It is tested without the server.** `sim/` plays 65 simulated cases under 36 server, network, model and patient
+  scenarios (2,340 visits) against a simulated contest server; `python -m sim.presubmit` is the go/no-go before a ZIP is
+  uploaded, and a CI workflow runs it on every push and keeps the ZIP as an artifact (`docs/SUBMISSION.md`).
 - The research core (LangGraph, Bayesian belief update, knowledge cards) is still in the package but off by default
   (`docs/CORE.md`).
 
-Offline, on 18 local practice cases with a scripted patient: history coverage 0.84, key-exam coverage 0.83, 42.5 turns,
-no refused action; the kit's three sample cases complete from the built ZIP in 38-45 turns. These numbers compare
-versions; they do not predict the score.
+Offline, on the 65 local practice cases with a scripted patient: history coverage 0.76, key-exam coverage 0.71, 42.2
+turns, no refused action (the original 18 cases: 0.84 / 0.83 / 42.5); the kit's three sample cases complete from the
+built ZIP in 38-45 turns. These numbers compare versions; they do not predict the score.
 
 Official run, in points (the total is out of 100):
 
 | Branch | Total | Gathering /25 | Reasoning /15 | Tests /10 | Safety /15 | Communication /15 | Efficiency /20 |
 |---|---|---|---|---|---|---|---|
 | `first-simple-approach` | 63.131 | 14.07 | 11.33 | 6.29 | 15.00 | 5.20 | 11.24 |
+| `second-clean-approach` | 66.174 | 14.70 | 13.00 | 6.46 | 15.00 | 5.60 | 11.41 |
 
 ## Quick start
 
@@ -70,14 +76,15 @@ Official run, in points (the total is out of 100):
 python3.12 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt pytest                             # the runtime's 6 wheels
 python run.py --case dxagent/nova/cases/sample_pe.json --offline   # a full visit through consult(), no model
-pytest -q tests/test_nova.py tests/test_playbooks.py tests/test_visit.py tests/test_review.py   # 206 tests, seconds
+python -m sim.presubmit                                            # go/no-go in about 2 minutes; builds dist/submission.zip
+python -m sim --ids L04,M05 --scenarios oracle,model_slow -v       # chosen cases under chosen scenarios (python -m sim --help)
 python -m dxagent.nova.playbooks                                   # validate the 58 playbooks
-python -m dxagent.nova.package --out dist/submission.zip           # the submission ZIP; needs the SDK's nova_sdk.py in the root
-pip install -r requirements-dev.txt && pytest -q                   # all 308 tests (graph, bench, compiler)
+pip install -r requirements-dev.txt && pytest -q                   # all 350 tests (graph, bench, compiler)
 ```
 
-`nova_sdk.py`, the sample runner and the guideline library come from the contest's starter package; they are git-ignored
-and not included here. Live runs with a development key: `docs/LIVE_RUNS.md`. Never put a key in a file or a commit.
+`nova_sdk.py` (optional in the ZIP), the sample runner and the guideline library come from the contest's starter package;
+they are git-ignored and not included here. Live runs with a development key: `docs/LIVE_RUNS.md`. Never put a key in a
+file or a commit.
 
 **Contest material.** The contest runtime was developed against the organizers' starter package and development kit.
 None of their files are in this repository, and the documents here do not restate the competition's rules, scoring or
@@ -91,16 +98,19 @@ dxagent/nova/       the runtime: agent (the visit), playbooks + playbooks/*.yaml
                     prompts, safety, korean, protocol, sdk (client adapter), llm, budget, guidelines, config,
                     env + devclient + offline + judge + bench (development), package (the submission ZIP)
 dxagent/            the research core: graph/, reasoning/, knowledge/, env/, bench/, session, priors, llm, cli
-tests/              runtime tests (test_nova, test_playbooks, test_visit, test_review) and core tests; 308 in all
-experiments/        simulation studies, the 18 local CPX cases (data/nova_cpx) and their checks, live-run report
+tests/              runtime and simulator tests and core tests; 350 in all
+experiments/        simulation studies, the 65 local CPX cases (data/nova_cpx) and their checks, live-run report
+sim/                the simulated contest: server, clients, actors, Doctor stand-ins, scenarios, presubmit, ZIP check
 docs/               guides and decision records
+.github/workflows/  presubmit.yml: the gate on every push, the ZIP as an artifact
 ```
 
 ## Documentation
 
 | File | What it holds |
 |---|---|
-| `docs/AGENT.md` | The runtime guide: the visit, playbooks, the note, failure handling, configuration, testing |
+| `docs/AGENT.md` | The runtime guide: the visit, playbooks, the note, time and failure handling, the simulator, configuration |
+| `docs/SUBMISSION.md` | Building the ZIP, the presubmit gate, reading a sample validation, settings without code |
 | `docs/decisions/v0.5-simple-approach.md` | Decisions 38-104 (the runtime), with the evidence |
 | `docs/PLAYBOOK_REVIEW.md` | The AI review log and the doubts for a clinician |
 | `docs/LIVE_RUNS.md` | Step-by-step live runs with a development key |
