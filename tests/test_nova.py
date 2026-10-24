@@ -571,7 +571,8 @@ def test_topic_plan_questions_and_exams(store):
     case["exam"] += [{"keys": ["잡음"], "result": "갑상선 잡음(+/+)"}]
     rec, env = _play(case, _cfg(playbooks=False), store, llm_factory=lambda b: Planner(store, b))
     asked = [a["text"] for a in env.actions]
-    assert {"더위를 많이 타지는 않으세요?", "손이 떨리지는 않으세요?", "가족 중 갑상선 질환이 있나요?"} <= set(asked)
+    said = " ".join(asked)  # a question may follow an acknowledgment ("그러셨군요. 손이 떨리지는 않으세요?")
+    assert all(q in said for q in ("더위를 많이 타지는 않으세요?", "손이 떨리지는 않으세요?", "가족 중 갑상선 질환이 있나요?"))
     assert asked.count("언제부터 그러셨어요?") == 1 and "신체검진 다 해 주세요" not in asked
     assert not any("두근거리고" in t for t in asked)
     assert asked.count("갑상선을 촉진하겠습니다.") == 1 and "갑상선 잡음을 청진하겠습니다." in asked

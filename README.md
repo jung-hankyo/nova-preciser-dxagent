@@ -2,8 +2,9 @@
 
 A diagnostic-interview agent, built in two layers: a **research core** (`main`) and a **contest runtime** around it (the
 three `*-approach` branches), developed against the N.O.V.A competition's starter package and development kit. This
-branch, `second-clean-approach`, adds a simulated contest and a presubmit gate to the first contest version. Research prototype;
-not a medical device, not medical advice. No license is granted with this repository.
+branch, `third-friendly-approach`, is the newest: it keeps `second-clean-approach`'s visit and changes how the doctor talks and what the
+note records. Its official score is lower than `second-clean-approach`'s (see below). Research prototype; not a medical device,
+not medical advice. No license is granted with this repository.
 
 ## Branches
 
@@ -44,11 +45,16 @@ flowchart LR
 - **Four model calls.** A focus call after the complaint's history (skips or adds items for this patient), a diagnostic
   time-out before the exam, the assessment and plan, and the chart. Positive answers are followed up by the playbook's
   own questions (how much, how long, getting worse).
-- **Friendly and explicit.** The doctor greets by name, acknowledges pain and worry, asks what worries the patient, and
-  ends with five spoken explanations (cause, tests, treatment, warning signs, the answer to the worry). Gathering ends
-  by turn 44 of 50.
-- **The note is written from a ledger** of what was asked and answered, in a CPX chart layout; items not confirmed stay
-  `( )`; a number the visit never produced is dropped. Deterministic safety checks run on the plan.
+- **Friendly and explicit.** The doctor greets by name, acknowledges pain and worry (plain acknowledgments after real
+  answers, a promise to explain when the patient asks something), announces the exam in one sentence, asks what worries
+  the patient, and ends with six spoken explanations (cause, the answer to the worry, tests, treatment, warning signs,
+  when to come back). Gathering ends by turn 44 of 50.
+- **No question twice.** A symptom or background question an earlier reply already answered is recorded from that reply
+  (as a volunteered fact), not asked; questions repeated in other words and maneuvers planned under another name are
+  dropped. Deterministic; no model call.
+- **The note is written from a ledger** of what was asked, told and said, with turns, in a CPX chart layout; items not
+  confirmed stay `( )`; a number the visit never produced is dropped; P.education and P.follow_up record what the patient
+  was actually told. Deterministic safety checks run on the plan.
 - **It never fails a case.** A per-case budget keeps a valid DIAGNOSE and the one required model call, whatever the
   model or the network does. Time is planned from the pace observed in the case (seconds per patient answer and per
   model call), and every blocking SDK call runs under a watchdog, so a slow server shortens the visit instead of
@@ -59,9 +65,17 @@ flowchart LR
 - The research core (LangGraph, Bayesian belief update, knowledge cards) is still in the package but off by default
   (`docs/CORE.md`).
 
-Offline, on the 65 local practice cases with a scripted patient: history coverage 0.76, key-exam coverage 0.71, 42.2
-turns, no refused action (the original 18 cases: 0.84 / 0.83 / 42.5); the kit's three sample cases complete from the
-built ZIP in 38-45 turns. These numbers compare versions; they do not predict the score.
+Offline, on the 65 local practice cases with a scripted patient (history counts questions asked, so a question skipped
+because a reply answered it counts as missed): history coverage 0.76, key-exam coverage 0.70, 43.7 turns, against 0.76 /
+0.71 / 42.2 for `second-clean-approach`. With an oracle Doctor in the simulator, turns went from 42.05 to 43.4 and key
+history and exams were unchanged. These numbers compare versions; they do not predict the score.
+
+**Why the live score fell** (details: `docs/decisions/v0.9-friendly-approach.md`). Communication rose 0.20 and efficiency
+fell 0.56, while safety, reasoning and tests lost 4.92 points the changes were not meant to touch. One cause is verified
+in code: a closing line over 30 characters is split into sentences, and the new six-line order puts the warning signs
+where the cut falls, so they can go unspoken (and `closing_lines: 5`, the obvious revert, makes it worse). The other
+suspects (a longer assessment prompt, a log-like note, skipped red-flag questions) cannot be separated from noise in five
+cases. `second-clean-approach` stays the best version.
 
 Official run, in points (the total is out of 100):
 
@@ -69,6 +83,7 @@ Official run, in points (the total is out of 100):
 |---|---|---|---|---|---|---|---|
 | `first-simple-approach` | 63.131 | 14.07 | 11.33 | 6.29 | 15.00 | 5.20 | 11.24 |
 | `second-clean-approach` | 66.174 | 14.70 | 13.00 | 6.46 | 15.00 | 5.60 | 11.41 |
+| `third-friendly-approach` | 60.737 | 14.54 | 11.33 | 5.46 | 12.75 | 5.80 | 10.85 |
 
 ## Quick start
 
@@ -79,7 +94,7 @@ python run.py --case dxagent/nova/cases/sample_pe.json --offline   # a full visi
 python -m sim.presubmit                                            # go/no-go in about 2 minutes; builds dist/submission.zip
 python -m sim --ids L04,M05 --scenarios oracle,model_slow -v       # chosen cases under chosen scenarios (python -m sim --help)
 python -m dxagent.nova.playbooks                                   # validate the 58 playbooks
-pip install -r requirements-dev.txt && pytest -q                   # all 350 tests (graph, bench, compiler)
+pip install -r requirements-dev.txt && pytest -q                   # all 372 tests (graph, bench, compiler)
 ```
 
 `nova_sdk.py` (optional in the ZIP), the sample runner and the guideline library come from the contest's starter package;
@@ -98,7 +113,7 @@ dxagent/nova/       the runtime: agent (the visit), playbooks + playbooks/*.yaml
                     prompts, safety, korean, protocol, sdk (client adapter), llm, budget, guidelines, config,
                     env + devclient + offline + judge + bench (development), package (the submission ZIP)
 dxagent/            the research core: graph/, reasoning/, knowledge/, env/, bench/, session, priors, llm, cli
-tests/              runtime and simulator tests and core tests; 350 in all
+tests/              runtime, simulator and friendly-talk tests and core tests; 372 in all
 experiments/        simulation studies, the 65 local CPX cases (data/nova_cpx) and their checks, live-run report
 sim/                the simulated contest: server, clients, actors, Doctor stand-ins, scenarios, presubmit, ZIP check
 docs/               guides and decision records
@@ -112,6 +127,7 @@ docs/               guides and decision records
 | `docs/AGENT.md` | The runtime guide: the visit, playbooks, the note, time and failure handling, the simulator, configuration |
 | `docs/SUBMISSION.md` | Building the ZIP, the presubmit gate, reading a sample validation, settings without code |
 | `docs/decisions/v0.5-simple-approach.md` | Decisions 38-104 (the runtime), with the evidence |
+| `docs/decisions/v0.9-friendly-approach.md` | Decisions 105-112 and the analysis of the live result |
 | `docs/PLAYBOOK_REVIEW.md` | The AI review log and the doubts for a clinician |
 | `docs/LIVE_RUNS.md` | Step-by-step live runs with a development key |
 | `docs/CORE.md` | The research core: design, knowledge, planner, benchmark |

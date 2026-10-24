@@ -106,9 +106,10 @@ class NovaConfig:
     turn_target: int = 44  # the usual length of a visit, closing explanations included: the focus call is told it and
     # trims optional items toward it (efficiency is 20 of 100 points), but nothing is cut only to reach it
     soft_turn_cap: int = 38  # the selection cuts priority-2 items that would plan the visit past this turn, leaving
-    # room for the follow-ups and the time-out's items; gathering itself ends at max_turns - closing_lines - 1 (44)
-    closing_lines: int = 5  # explanations at the end: likely cause, tests, treatment, warning signs, the worry
-    gather_max: int = 0  # the last gathering turn (0: max_turns - closing_lines - 1, i.e. 44)
+    # room for the follow-ups and the time-out's items; gathering itself ends at max_turns - closing_lines - 1 (43)
+    closing_lines: int = 6  # explanations at the end: likely cause, the finding behind it (or the answer to the
+    # patient's worry or question), tests, treatment, warning signs, the follow-up visit
+    gather_max: int = 0  # the last gathering turn (0: max_turns - closing_lines - 1, i.e. 43)
     # Presentation playbooks (dxagent/nova/playbooks/*.yaml): the complaint's history, exams, differential and plan.
     playbooks: bool = True
     playbook_exam_max: int = 8  # playbook maneuvers (priority order)
@@ -139,7 +140,11 @@ class NovaConfig:
     empathy: bool = True  # one acknowledgment early in the history, worded from the opening (pain, worry, a child)
     address_by_name: bool = True  # "안녕하세요, 이수진 님." / "안녕하세요, 어머님." when it fits in 30 characters
     cue_empathy_max: int = 2  # acknowledgments of worry, distress or severe pain voiced in a reply
-    signposts: bool = True  # "이제 지난 병력을 여쭤볼게요." before the background, when it fits
+    signposts: bool = True  # "이제 평소 건강 상태를 여쭤볼게요." before the background, when it fits
+    light_acks_max: int = 4  # "그러셨군요." before a question after a substantive answer, at most every third turn
+    exam_intro: bool = True  # one sentence before the first maneuver: what will be examined (1 turn)
+    skip_answered: bool = True  # a presence question about symptoms a reply already reported or denied, or a specific
+    # background question whose topic the general one's answer named, is not asked again (recorded from that reply)
     concern_question: bool = True  # "가장 걱정되는 점이 무엇인가요?" at the end of the history
     ask_alcohol: bool = True
     ask_job: bool = False
@@ -213,8 +218,11 @@ class NovaConfig:
             setattr(self, k, {**cur, **v} if isinstance(cur, dict) else (float(v) if isinstance(cur, float) else v))
 
     def gather_end(self) -> int:
-        """The last turn of history and examination: the closing explanations and one spare turn follow."""
-        end = self.max_turns - self.closing_lines - 1
+        """The last turn of history and examination (the sentence announcing the examination included): the closing
+        explanations follow, then one spare turn, except when the examination is announced (exam_intro): then the
+        spare turn is given to gathering, so that the announcement and a sixth closing line together cost the history
+        and the examination one turn, not two (44 + 6 = 50)."""
+        end = self.max_turns - self.closing_lines - (0 if self.exam_intro else 1)
         return min(end, self.gather_max) if self.gather_max > 0 else end
 
     @classmethod
@@ -259,9 +267,11 @@ class NovaConfig:
                   "closing_lines", "hypothesize_every", "hypothesize_max", "bank_max_calls", "guideline_docs",
                   "guideline_chars", "topic_questions_max", "topic_exams_max", "playbook_exam_max",
                   "playbook_exam_reserve", "focus_questions_max", "focus_exams_max", "cue_empathy_max",
-                  "review_questions_max", "review_exams_max", "review_reserve", "followup_max", "gather_max"):
+                  "review_questions_max", "review_exams_max", "review_reserve", "followup_max", "gather_max",
+                  "light_acks_max"):
             setattr(c, k, _envi(f"NOVA_{k.upper()}", getattr(c, k)))
-        for k in ("empathy", "address_by_name", "signposts", "concern_question", "ask_alcohol", "ask_job", "ask_tbc_hep",
+        for k in ("empathy", "address_by_name", "signposts", "exam_intro", "skip_answered", "concern_question",
+                  "ask_alcohol", "ask_job", "ask_tbc_hep",
                   "ask_prior_care", "smoking_followup", "topic_plan", "focus_call", "review_call", "core", "reverse_index",
                   "playbooks",
                   "use_guidelines", "use_fixtures", "critic", "notes_call", "yes_no_fast_path", "prior_context"):

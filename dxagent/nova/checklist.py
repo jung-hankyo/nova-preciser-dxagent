@@ -30,6 +30,18 @@ from typing import Any, Optional
 
 GREETING = "안녕하세요."  # prefixed to the first question when it fits in 30 characters (with the name if it fits)
 EMPATHY = "많이 불편하셨겠어요."  # prefixed to one early question when it fits (korean.empathy_line picks the wording)
+# Before the background and the review: the first of these that fits before one of the block's first 3 questions.
+SIGNPOSTS = {"background": ("이제 평소 건강 상태를 여쭤볼게요.", "평소 건강도 여쭤볼게요."),
+             "ros": ("몇 가지 증상만 더 여쭤볼게요.", "몇 가지만 더 여쭤볼게요.")}
+# A plain acknowledgment of a substantive answer, in turn (config light_acks_max per visit, at most every third turn).
+LIGHT_ACKS = ("그러셨군요.", "네, 알겠습니다.", "아, 그러셨군요.", "네, 그렇군요.")
+# The patient asked something mid-history: promised an answer, given in the closing explanation.
+ASKED_BACK = ("그 부분은 진찰 후에 자세히 설명드릴게요.", "끝나고 자세히 설명드릴게요.", "곧 설명드릴게요.")
+# Before the first maneuver (config exam_intro) when the time-out gives no wording of its own.
+EXAM_INTRO = "이제 진찰할게요. 불편하시면 말씀해 주세요."
+EXAM_INTRO_CHILD = "이제 아이를 진찰할게요. 금방 끝나요."
+# The closing explanation's follow-up line when the assessment gives none.
+FOLLOW_UP_LINE = "결과가 나오면 다시 뵙고 설명드릴게요."
 
 
 @dataclass(frozen=True)

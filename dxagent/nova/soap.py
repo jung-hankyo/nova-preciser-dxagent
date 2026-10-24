@@ -77,7 +77,7 @@ ITEM_KEYWORDS: dict[str, tuple[str, ...]] = {
     "v": ("구토", "토"), "diarrhea": ("설사",), "constipation": ("변비", "대변"), "dysuria": ("소변",),
     "hematuria": ("소변", "피"), "abdominal pain": ("배", "복통"), "palpitation": ("두근",), "syncope": ("정신", "기절", "실신"),
     "diaphoresis": ("땀",), "orthopnea": ("누우", "누워"), "pnd": ("자다", "밤에"), "weight loss": ("살", "체중"),
-    "appetite": ("입맛", "식욕"), "anorexia": ("입맛", "식욕"), "rash": ("발진",), "vertigo": ("빙빙", "어지"),
+    "appetite": ("입맛", "식욕", "안 먹", "못 먹", "먹지"), "anorexia": ("입맛", "식욕", "안 먹", "못 먹", "먹지"), "rash": ("발진",), "vertigo": ("빙빙", "어지"),
     "dizziness": ("어지",), "hearing loss": ("귀", "청력", "들리"), "diplopia": ("겹쳐", "두 개"), "weakness": ("힘",),
     "numbness": ("저리", "감각"), "leg swelling": ("다리", "붓", "부어"), "edema": ("붓", "부종", "부어"),
     "hemoptysis": ("피",), "sore throat": ("목", "인후"), "myalgia": ("근육", "몸살"), "fatigue": ("피곤", "피로", "기운"),
@@ -361,8 +361,19 @@ def _field_entries(enc: "Encounter") -> dict[tuple[str, str], list]:
     return out
 
 
+def _q(e) -> str:
+    """The question or maneuver as recorded: without the greeting or acknowledgment said before it."""
+    return getattr(e, "ask", "") or e.text
+
+
+def _told(e) -> bool:
+    return getattr(e, "source", "") == "volunteered"
+
+
 def _row(e) -> str:
-    return f"[{e.id}] ({_TURN_WORD} {e.turn}) Q: {e.text} / A: {_clip(e.reply, 300)}"
+    if _told(e):  # not asked: the patient said it while answering another question
+        return f"[{e.id}] ({_TURN_WORD} {e.turn}, 자발 진술) 항목: {e.item or e.label} / A: {_clip(e.reply, 300)}"
+    return f"[{e.id}] ({_TURN_WORD} {e.turn}) Q: {_q(e)} / A: {_clip(e.reply, 300)}"
 
 
 # Items named after a function, signed as the symptom when the question asks about its loss ("입맛이 없으세요?" ->
@@ -372,20 +383,23 @@ _SIGN_NAME = {"appetite": "Anorexia", "sleep": "Insomnia", "weight": "Weight cha
 
 def _item_line(e) -> str:
     """One raw S line: a chart sign when the answer is a plain yes/no to a named item, else 'item : answer' (the
-    answer clipped: the raw fallback is a chart, not a transcript)."""
-    yn = yes_no(e.reply, e.text)
+    answer clipped: the raw fallback is a chart, not a transcript). A fact the patient told before being asked carries
+    its own chart line."""
+    if _told(e) and e.note:
+        return e.note
+    yn = yes_no(e.reply, _q(e))
     if e.item and yn is not None:
         n = len(e.item.split("/"))
         name = e.item
-        if e.item.strip().lower() in _SIGN_NAME and re.search(r"(없|떨어|줄었|못\s|안\s)", e.text or ""):
+        if e.item.strip().lower() in _SIGN_NAME and re.search(r"(없|떨어|줄었|못\s|안\s)", _q(e)):
             name = _SIGN_NAME[e.item.strip().lower()]  # the question asks about the loss: sign the symptom
         if not yn[0]:
             return f"{name} ({'/'.join(['-'] * n)})"
         if n == 1:
             return f"{name} (+)"
     head = e.item or e.label
-    if not head or head == e.text:
-        return f"{e.text} → {_clip(e.reply, 60)}"
+    if not head or head == _q(e):
+        return f"{_q(e)} → {_clip(e.reply, 60)}"
     return f"{head} : {_clip(e.reply, 60)}"
 
 
@@ -431,7 +445,10 @@ def _finding(e) -> str:
 
 
 def _sign(e) -> str:
-    yn = yes_no(e.reply, e.text)
+    if _told(e):
+        m = re.search(r"\(([+\-])[^)]*\)\s*$", e.note or "")
+        return m.group(1) if m else ""
+    yn = yes_no(e.reply, _q(e))
     return "" if yn is None else ("+" if yn[0] else "-")
 
 
@@ -448,7 +465,7 @@ def ros_block(entries: list) -> str:
         elif e.item:
             others.append(f"{e.item} ({sign})" if sign else f"{e.item} : {_clip(e.reply, 60)}")
         else:
-            others.append(f"{e.text} → {_clip(e.reply, 60)}")
+            others.append(f"{_q(e)} → {_clip(e.reply, 60)}")
     lines = []
     for group in ROS_BLOCK:
         parts = []
@@ -492,6 +509,7 @@ def _with_template(key: str, rows: list) -> list[str]:
         else:
             n = len(item.split("/"))
             out.append(f"{item} ({'/'.join([' '] * n)})")
+    others = list(dict.fromkeys(others))  # a fact told once and recorded under two questions is written once
     if key == "fh":
         return out + ([f"Others : {'; '.join(others)}"] if others else [])
     return out + others
@@ -532,6 +550,59 @@ def raw_s_o(enc: "Encounter") -> dict[tuple[str, str], str]:
     out[("O", "tests")] = "\n".join(f"{e.item or exam_label(e.text)} : {_clip(e.reply)} ({_TURN_WORD} {e.turn})"
                                     for e in fe.get(("O", "tests"), []))
     return out
+
+
+_SEEN_IN = {"hpi": ("cc", "hpi", "ros"), "ros": ("ros", "hpi"), "pmh": ("pmh",), "fh": ("fh",), "sh": ("sh",)}
+
+
+def _probes(e) -> list[str]:
+    """Words whose presence in a chart field shows that the entry was recorded there: its item names, its label, the
+    item's keywords and the question itself (a raw "question → answer" line)."""
+    item = (e.item or "").strip()
+    names = [x.strip() for x in re.split(r"\s*/\s*", item) if x.strip()]
+    kws = list(ITEM_KEYWORDS.get(item.lower(), ())) + [k for n in names for k in ITEM_KEYWORDS.get(n.lower(), ())]
+    labels = [x.strip() for x in re.split(r"[·/]", e.label or "") if x.strip()]  # "구역·구토" -> 구역, 구토
+    return [p for p in dict.fromkeys(names + labels + kws + [_q(e)]) if len(p) >= 2]
+
+
+def complete_signs(res: dict[tuple[str, str], str], fe: dict[tuple[str, str], list]) -> list[str]:
+    """A symptom asked with a yes/no presence question (one of the agent's symptom table) and answered yes or no, or
+    a fact the patient told before being asked, is in the note: one the chart left out of its field (and of the
+    related fields) is added back as its chart line ("Diaphoresis (+)"; in S.ros under "Others"). Other questions are
+    left to the chart: an open question ("어떤 느낌으로 아프세요?") has no sign to add, and the chart may have
+    reconciled an answer that contradicts the rest. Returns the lines added."""
+    from dxagent.nova.agent import _SYMPTOM_WORDS, _TOPIC_WORDS, symptom_keys
+
+    added: list[str] = []
+    for key, where in _SEEN_IN.items():
+        for e in fe.get(("S", key), []):
+            if not e.item or e.section == "bundled":
+                continue
+            told, keys = _told(e), symptom_keys(_q(e))
+            if not keys and not told:
+                continue
+            if _sign(e) not in ("+", "-") and not (told and e.note):
+                continue
+            text = " ".join(res.get(("S", k), "") for k in where).lower()
+            if any(p.lower() in text for p in _probes(e)) or any(re.search(_SYMPTOM_WORDS[k][2], text, re.I) for k in keys):
+                continue
+            if told and not keys and any(re.search(a_rx, e.reply or "") and re.search(a_rx, text) for _, a_rx in _TOPIC_WORDS):
+                continue  # the named topic ("심근경색") is in the field already
+            line = _item_line(e)
+            cur = res.get(("S", key), "")
+            if key == "ros":
+                rows = cur.splitlines()
+                i = next((j for j, r in enumerate(rows) if r.startswith("Others")), None)
+                if i is None:
+                    rows.append(f"Others : {line}")
+                else:
+                    head = re.sub(r"\s*:\s*없음\s*$", " :", rows[i]).rstrip(" ,")
+                    rows[i] = head + ("" if head.endswith(":") else ",") + f" {line}"
+                res[("S", key)] = "\n".join(rows)
+            else:
+                res[("S", key)] = (cur + "\n" if cur else "") + line
+            added.append(line)
+    return added
 
 
 def _known_numbers(enc: "Encounter") -> str:
@@ -580,6 +651,9 @@ def chart_s_o(enc: "Encounter") -> dict[tuple[str, str], str]:
         if reset:
             enc._event("chart_signs_reset", field=key, items=reset)
         res[("S", key)] = text
+    added = complete_signs(res, fe)
+    if added:
+        enc._event("chart_items_added", items=added)
     for okey in ("exam", "tests"):
         entries = {e.id: e for e in fe.get(("O", okey), [])}
         by_id = {x.id: (x.text or "").strip() for x in getattr(out, okey)}
@@ -671,6 +745,31 @@ def _fallback_evidence(enc: "Encounter") -> list[str]:
     return parts or ["문진과 진찰 소견을 종합한 판단"]
 
 
+DEFAULT_REVISIT = "1~2주 후 재진 : 검사 결과 확인, 치료 반응 평가 후 치료 계획 결정"
+_INTERVAL = re.compile(r"(\d+\s*(~\s*\d+\s*)?(일|주|개월|달|시간)|내일|다음\s?주|응급|입원|즉시|당일|재진|추적)")
+# A closing line that told the patient the follow-up or when to come at once (recorded under P.follow_up too).
+_TOLD_PLAN = re.compile(r"(다시|재진|다음|뒤에?|후에?|응급실|입원|바로|즉시|당장|예약)")
+_TAG_GROUP = re.compile(r"\s*\((T\d+(?:\s*[,·/]\s*T\d+)*)\)")
+
+
+def _ro(word: str) -> str:
+    """The particle after a word: "으로" after a Hangul syllable ending in a consonant other than ㄹ (트로포닌으로,
+    흉부 X선으로), else "로" (심전도로, CT로)."""
+    last = (word or "").strip()[-1:]
+    if "가" <= last <= "힣":
+        final = (ord(last) - 0xAC00) % 28
+        return "으로" if final not in (0, 8) else "로"
+    return "로"
+
+
+def _turn_tags(bullet: str, last_turn: int) -> str:
+    """The bullet's "(T5, T21)" tag kept only when every turn it names happened (T0 is the opening)."""
+    def fix(m: re.Match) -> str:
+        turns = [int(x) for x in re.findall(r"T(\d+)", m.group(1))]
+        return m.group(0) if all(0 <= t <= last_turn for t in turns) else ""
+    return _TAG_GROUP.sub(fix, bullet).strip()
+
+
 def group_tests(lines: list[str]) -> list[str]:
     """P.tests one line per purpose, ordered by kind as in the reference chart: "- 혈액검사 : CBC, CRP : 염증 확인". A
     line that names its kind ("영상검사 : 복부 초음파 : 담석 확인") keeps it; others are classified by the test's name
@@ -704,7 +803,7 @@ def assessment_and_plan(enc: "Encounter") -> dict[tuple[str, str], str]:
     kept = [x for x in evidence if injection_free(x) and numbers_grounded(x, source)]
     if len(kept) < len(evidence):
         enc._event("evidence_rejected", items=[_clip(x, 80) for x in evidence if x not in kept])
-    evidence = kept
+    evidence = [_turn_tags(x, enc.turns) for x in kept]
     if not evidence:
         evidence = _fallback_evidence(enc)
     out: dict[tuple[str, str], str] = {("A", "diagnosis"): primary,
@@ -723,7 +822,7 @@ def assessment_and_plan(enc: "Encounter") -> dict[tuple[str, str], str]:
         name = f"{name_ko} ({name_en})" if name_ko and name_en and name_en != name_ko else (name_ko or name_en)
         reason = reason.strip().rstrip(".") or "이 증상에서 감별이 필요한 질환"
         test = test.strip()
-        return f"r/o {name} : {reason}." + (f" {test}로 감별" if test else "")
+        return f"r/o {name} : {reason}." + (f" {test}{_ro(test)} 감별" if test else "")
 
     diffs: list[str] = []
     if a is not None:
@@ -776,10 +875,14 @@ def assessment_and_plan(enc: "Encounter") -> dict[tuple[str, str], str]:
     if not plan.get("disposition") and plan_ref.get("disposition"):
         plan["disposition"] = str(plan_ref["disposition"])
     if not plan.get("follow_up"):
-        plan["follow_up"] = list(plan_ref.get("follow_up") or ["1~2주 후 재진 : 검사 결과 확인 후 치료 계획 결정"])
+        plan["follow_up"] = list(plan_ref.get("follow_up") or [DEFAULT_REVISIT])
+    elif not any(_INTERVAL.search(x) for x in plan["follow_up"]):  # when to come back is always in the plan
+        first = next((x for x in plan_ref.get("follow_up") or [] if _INTERVAL.search(x)), DEFAULT_REVISIT)
+        plan["follow_up"] = [first] + list(plan["follow_up"])
     flags = [f for f in plan_ref.get("red_flags") or [] if f]
     if flags and not any("즉시" in x or "바로" in x for x in plan["follow_up"]):
-        plan["follow_up"].append(f"{'·'.join(flags)} 시 예정일 전이라도 즉시 내원")
+        urgent = re.search(r"(응급|입원|전원)", str(plan.get("disposition") or ""))
+        plan["follow_up"].append(f"{'·'.join(flags)} 시 " + ("즉시 의료진 호출" if urgent else "예정일 전이라도 즉시 내원"))
     if not plan.get("education"):
         plan["education"] = list(pb.education) if pb is not None else []
     card = enc.store.get(slug(en)) or enc.store.get(en)
@@ -792,11 +895,20 @@ def assessment_and_plan(enc: "Encounter") -> dict[tuple[str, str], str]:
     out[("P", "tests")] = "\n".join(group_tests(plan["tests"]))
     out[("P", "treatment")] = "\n".join(f"- {t}" for t in plan["treatment"] + [f"주의: {n}" for n in safety_notes if "알레르기" in n])
     out[("P", "disposition")] = plan["disposition"]
-    out[("P", "follow_up")] = "\n".join(f"- {t}" for t in plan["follow_up"])
-    edu = [f"- {t}" for t in plan["education"]]
+    told = [(line, turn) for line, turn in enc.closing_said if _TOLD_PLAN.search(line)]
+    out[("P", "follow_up")] = "\n".join([f"- {t}" for t in plan["follow_up"]] + (
+        ["- 환자에게 안내함 : " + ", ".join(f"\"{line}\" ({_TURN_WORD} {turn})" for line, turn in told)] if told else []))
+    # what was said, with its turn, first; then what is still to teach (not claimed as said)
+    edu = []
+    intro = [f"\"{line}\" ({_TURN_WORD} {turn})" for line, turn in getattr(enc, "exam_intro_said", [])]
+    if intro:
+        edu.append("- 진찰 전 설명함 : " + ", ".join(intro))
     said = [f"\"{line}\" ({_TURN_WORD} {turn})" for line, turn in enc.closing_said]
     if said:
-        edu.append("- 진료 중 설명함: " + ", ".join(said))
+        edu.append("- 진료 끝에 설명함 : " + ", ".join(said))
+    todo = [t for t in plan["education"] if t and not any(t.strip() == line for line, _ in enc.closing_said)]
+    if todo:
+        edu.append(("- 추가 교육 내용 :" if said else "- 교육 내용 :") + "".join(f"\n  · {t}" for t in todo))
     out[("P", "education")] = "\n".join(edu)
     return out
 
@@ -827,7 +939,7 @@ def emergency_soap(enc: "Encounter", diagnosis: str) -> dict[str, Any]:
     note = empty_note(getattr(enc, "note_template", None) or sdk_empty_record())
     put(note, "S", "cc", f"C.C : {complaint_sentence(enc.ctx.get('opening', ''), 160)}")
     for kind, sec, key in (("SAY", "S", "hpi"), ("EXAM", "O", "exam")):
-        rows = [f"{e.text} → {_clip(e.reply)} ({_TURN_WORD} {e.turn})" for e in enc.ledger.accepted()
+        rows = [f"{_q(e)} → {_clip(e.reply)} ({_TURN_WORD} {e.turn})" for e in enc.ledger.accepted()
                 if e.kind == kind and e.section not in ("education", "bundled")]
         put(note, sec, key, "\n".join(rows))
     put(note, "A", "diagnosis", diagnosis)

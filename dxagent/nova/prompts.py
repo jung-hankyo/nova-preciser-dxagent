@@ -116,6 +116,8 @@ class ReviewPlan(BaseModel):
                                                                     "discriminating first.")
     skip_exams: list[str] = Field(default_factory=list, description="ids of OPTIONAL planned maneuvers whose result "
                                                                     "would not change the assessment.")
+    exam_intro_ko: str = Field(default="", description="One Korean sentence to the patient before the examination, at "
+                                                       "most 30 characters: what will be examined first.")
 
 
 class ChartLine(BaseModel):
@@ -266,25 +268,34 @@ diagnostic error: re-read the whole transcript before deciding.
 - questions: at most {n_q} questions that would most change the ranking: quantify or characterise a positive answer
   that was not followed up (how much, how often, since when, getting worse, tried to stop, what happens without it),
   check a can't-miss cause, or separate the first two diagnoses. Korean, ONE question in plain lay language, at most 30
-  characters including spaces, one question mark, not leading, no diagnosis names, never one already asked. {guardian}
+  characters including spaces, one question mark, not leading, no diagnosis names, never one already asked or listed
+  as still to be asked, nor one whose answer the transcript already gives. {guardian}
 - exam_order: the ids of the PLANNED maneuvers, the most discriminating for the leading and can't-miss diagnoses first.
 - skip_exams: ids of OPTIONAL planned maneuvers whose result would not change the assessment for this patient.
 - exams: at most {n_e} maneuvers not planned that would separate the leading diagnoses: a short sentence asking for ONE
   maneuver named with its method or site ("슬개건 반사", "폐 청진"), never a symptom ("손 떨림 확인"), a whole region
   ("무릎 진찰"), two parts ("목·어깨") or anything that is not a bedside examination; the examiner refuses those and the
   turn is lost. Name them as the examiner's table does when one fits: {exam_names}.
+- exam_intro_ko: ONE Korean sentence the doctor says to the patient just before the examination, AT MOST 30
+  CHARACTERS including spaces, a statement (no question), plain words: the body parts that will be examined (not one
+  maneuver: the order may change) and to say if anything hurts, e.g. "이제 배와 가슴을 진찰할게요. 아프면
+  말씀하세요." {guardian}
 Use the ids exactly as listed. Leave a list empty rather than fill it: every question and maneuver costs a turn."""
 
 
 def review_user(opening: str, vitals: str, age: Any, sex: Any, presentation: str, transcript: str,
-                leading: str, planned: list[tuple[str, str, int]], turns: tuple[int, int]) -> str:
-    """`planned`: (id, maneuver, priority) of the maneuvers still to do; `turns`: (used, last turn for gathering)."""
+                leading: str, planned: list[tuple[str, str, int]], turns: tuple[int, int],
+                queued: list[str] = ()) -> str:
+    """`planned`: (id, maneuver, priority) of the maneuvers still to do; `turns`: (used, last turn for gathering);
+    `queued`: history questions still to be asked after the time-out's own, if turns allow."""
     used, end = turns
     return (f"Opening statement: {opening}\nVital signs: {vitals or 'not given'}\nAge: {age}  Sex: {sex}\n"
             + (f"Presentation reference (not patient facts): {presentation}\n" if presentation else "")
             + f"Leading diagnoses at the focus call (a hint): {leading or 'none'}\n"
             + f"\nTranscript so far:\n{transcript}\n\nPLANNED maneuvers (priority 1 always done, 2 OPTIONAL):\n"
             + ("\n".join(f"[{i}] {t} (p{p})" for i, t, p in planned) or "(none)")
+            + ("\n\nHistory questions still to be asked after yours if turns allow (do not repeat them):\n"
+               + "\n".join(f"- {q}" for q in queued) if queued else "")
             + f"\n\nTurns: {used} used; the history and the examination must end by turn {end}.")
 
 
@@ -305,9 +316,11 @@ the presentation reference are background knowledge, never facts about this pati
 
 - Primary diagnosis: {dx_rule}
 - names_cause: true if the primary diagnosis names a disease or its cause; false if it names only a symptom or syndrome.
-- evidence_ko: 3-5 bullets "<facts, with the patient's own numbers> : <interpretation>", at least one from the history,
-  one from the examination and one decisive negative or family history (e.g. "발열 38.5도, 식후 우상복부 통증 : 담낭
-  염증 시사"; "머피 징후(+), 반발압통(-) : 국소 담낭 자극, 범발성 복막염 소견 없음"). Never invent findings or values.
+- evidence_ko: 3-5 bullets "<facts, with the patient's own numbers> : <interpretation> (<turns>)", at least one from
+  the history, one from the examination and one decisive negative or family history, each ending with the turns its
+  facts come from as the transcript numbers them (T0 is the opening and the vital signs) (e.g. "발열 38.5도, 식후
+  우상복부 통증 : 담낭 염증 시사 (T0, T3)"; "머피 징후(+), 반발압통(-) : 국소 담낭 자극, 범발성 복막염 소견 없음
+  (T31, T32)"). Never invent findings, values or turns.
 - differentials: 3-5 alternatives, including every dangerous cause of this presentation that the visit did not exclude:
   reason_ko "<supporting findings>, <opposing findings>" from this patient; test_ko the test that settles it.
 - plan.tests: one line per purpose, "<분류> : <검사들> : <목적>", 분류 one of 혈액검사, 소변검사, 영상검사, 심전도, 내시경,
@@ -322,16 +335,22 @@ the presentation reference are background knowledge, never facts about this pati
   standard adult dose you are certain of.
 - plan.disposition: "<외래 추적 / 전문과 의뢰 / 응급 처치·입원>. 근거 : <활력징후 안정 여부, 위험 징후 유무>", with the
   department when a referral is needed. Unstable vital signs or a dangerous diagnosis not excluded mean emergency care.
-- plan.follow_up: three lines: "<기간> 후 재진 : <목적>"; the monitoring ("<치료> 시작 후 <간격> <항목> 확인"); "<2-4 named
-  warning signs of this disease> 시 예정일 전이라도 즉시 내원".
+- plan.follow_up: three lines: "<기간> 후 재진 : <목적: 검사 결과 확인, 치료 반응 평가 등>"; the monitoring ("<치료>
+  시작 후 <간격> <항목> 확인"); "<2-4 named warning signs of this disease> 시 예정일 전이라도 즉시 내원". With emergency
+  care, the first line is what happens next ("응급실 : <처치·검사>, <전문과> 협진") and the last "<warning signs> 시 즉시
+  의료진 호출".
 - plan.education: 4-6 items: the likely cause in plain words, why the tests, the treatment and self-care, the warning
   signs, and the direct answer to the patient's stated worry or request.
-- closing_lines: exactly {n_closing} short Korean sentences the doctor now says, EACH AT MOST 30 CHARACTERS including
-  spaces, warm, plain lay words, polite (-요/-ㅂ니다), no jargon, no certainty the tests have not given, statements only,
-  in this order as far as the number allows: (1) the likely cause of the patient's own main symptom ("~ 때문일 가능성이
-  높아요"), (2) the tests that will confirm it, (3) the treatment or what to do now, (4) the warning signs that need an
-  immediate visit, (5) the answer to the patient's stated worry or request (else when to come back). Use the form of
-  address given, at most once. A child's guardian hears about "아이".
+- closing_lines: exactly {n_closing} short Korean sentences the doctor now says to the patient, EACH AT MOST 30
+  CHARACTERS including spaces (one sentence per item), warm, plain lay words, polite (-요/-ㅂ니다), no jargon, no
+  certainty the tests have not given, statements only (no question), in this order as far as the number allows:
+  (1) the likely cause of the patient's own main symptom ("~ 때문일 가능성이 높아요");
+  (2) the direct answer to the patient's stated worry or question when there is one, else the history or examination
+      finding behind the likely cause in plain words ("진찰에서 오른쪽 아랫배가 아프셨어요");
+  (3) the tests and what they will show; (4) the treatment or what to do now; (5) the named warning signs that need an
+  immediate visit; (6) the follow-up: when to come back and what happens then ("일주일 뒤 결과 보며 치료를 정해요"),
+  or with emergency care what happens next ("지금 응급실에서 검사를 시작할게요").
+  Use the form of address given, at most once. A child's guardian hears about "아이".
 - chief_complaint_ko: the chief complaint as a short clinical phrase with its duration.
 Write Korean, using standard Korean medical terms (English in parentheses where usual)."""
 
@@ -393,11 +412,14 @@ never "(-)".
 - fh: "DM / HTN ( / )" ((+) when any relative has it), "Stroke ( )", "Others : <who has which illness, as the patient
   named it; parents' heights for a child>".
 - sh: "Smoking (-)" or "Smoking (+) <amount> p/d <years>", "Alcohol (+) <frequency>" or "Alcohol (-)",
-  "Others : <occupation, caffeine, exercise, diet, stress>".
+  "Others : <occupation, caffeine, exercise, diet, stress>"; for a child: "Others : <daycare or school, diet, the
+  household as the guardian told it>", no smoking or alcohol items.
 - ros: these lines, (+) for symptoms reported anywhere in the encounter, (-) ONLY for symptoms asked and denied:
   "General weakness ( )  Fatigue ( )" / "Headache ( )  Dizziness ( )" / "Chest pain ( )  Palpitation ( )" /
   "Fever/Chill/Cough/Sputum/Rhinorrhea ( / / / / )" / "Abdominal pain ( )  Melena ( )  Hematochezia ( )  Hematemesis ( )" /
   "Anorexia/Nausea/Vomiting/Diarrhea/Constipation ( / / / / )" / "Others : <every other symptom asked, (+) or (-)>".
+- Rows marked "자발 진술" were not asked: the patient said it while answering another question. Record the fact under
+  its item like an answer (e.g. "식은땀 (+)").
 - exam / tests: one line per entry id, "<부위> : <maneuver> <결과 exactly as reported>", the part one of V/S, Growth
   (a child's measurements), General, Skin, H/E/E/N/T, Neck, Chest, Abdomen, Back, GU, Extremities / Neuro, Others
   (e.g. "Abdomen : 복부 촉진 우상복부 압통(+), 반발압통(-)"). Keep every reported detail; do not add the turn number (the runtime adds it and groups the

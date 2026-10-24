@@ -1,5 +1,8 @@
 # Building and checking a submission
 
+The official run of this branch (60.737) is below `second-clean-approach`'s (66.174), so `second-clean-approach` is the version to
+submit; the steps below are the same on every branch.
+
 The submission is a ZIP with `run.py`, `requirements.txt`, `NOTICE.md` and `dxagent/` at its root. It has no
 `nova_sdk.py`: the SDK is not redistributed and the server provides its own copy (to bundle one anyway:
 `zip submission.zip nova_sdk.py`).
@@ -26,7 +29,7 @@ python -m sim.presubmit             # must end with "GO"; the ZIP is dist/submis
 
 | Check | What it proves |
 |---|---|
-| tests | the runtime and simulator tests pass (248) |
+| tests | the runtime, simulator and friendly-talk tests pass (270) |
 | playbooks | the 58 playbooks are valid and within their turn budgets |
 | cases | the 65 simulated cases are well-formed and route to their playbooks |
 | matrix | every case under every scenario: DIAGNOSE accepted once and before the deadline, the model called, nothing refused for length, nothing sent twice, a clean note (no instruction to a grader, no raw model output), a determined one-line diagnosis |
@@ -48,6 +51,8 @@ reasoning, tests, safety, communication, efficiency). How to read it:
 | Reasoning or diagnosis weak | the model's assessment | `"effort": {"assess": "high"}` |
 | Tests low | the P.tests lines | the assessment prompt's test rules |
 | Communication low | the explanations | `closing_lines`, the empathy lines |
+| Efficiency lower than second-clean-approach's and communication not higher | the two added spoken lines cost more than they earn | `{"exam_intro": false}`; not `closing_lines: 5`, which on this branch drops the spoken warning-sign line |
+| Gathering lower than second-clean-approach's | facts recorded as told are not credited as asked | `{"skip_answered": false}` (ask every planned question again) |
 
 ## 3. Settings without code
 
@@ -55,10 +60,19 @@ reasoning, tests, safety, communication, efficiency). How to read it:
 travels inside the ZIP:
 
 ```json
-{"effort": {"assess": "high"}, "closing_lines": 5}
+{"effort": {"assess": "high"}, "light_acks_max": 0}
 ```
 
 Keys are the `NovaConfig` field names; unknown keys and values of the wrong type are ignored and logged, never fatal.
+The switches added in 0.9.1:
+
+| Key | Default | Off means |
+|---|---|---|
+| `exam_intro` | `true` | no sentence before the first maneuver (one turn less; gathering ends at 43) |
+| `closing_lines` | `6` | `5`: no separate follow-up line; the fixed follow-up line then takes the last slot, which is the warning signs' (do not use) |
+| `skip_answered` | `true` | a question already answered by an earlier reply is asked again |
+| `light_acks_max` | `4` | `0`: no plain acknowledgments |
+| `signposts` | `true` | no signpost before the background and the review |
 Commit the file and push (the workflow builds the new ZIP), or rebuild locally with `python -m sim.presubmit`.
 
 ## 4. The official evaluation

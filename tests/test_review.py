@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -212,7 +213,7 @@ def test_time_out_asks_reorders_and_skips(store):
 
     rec, env = _play(_case("머리가 아파서 왔어요.", [("성관계", "아니요.")]), store, _pb(), llm_factory=factory)
     acts = _texts(env)
-    i_q = acts.index("두통이 갑자기 시작됐나요?")
+    i_q = next(i for i, t in enumerate(acts) if t.endswith("두통이 갑자기 시작됐나요?"))
     exams = _texts(env, "EXAM")
     assert all(acts.index(e) > i_q for e in exams)  # the time-out's question before the exam
     assert "대면 시야 검사하겠습니다." in exams
@@ -221,10 +222,11 @@ def test_time_out_asks_reorders_and_skips(store):
     assert "Subarachnoid hemorrhage" in json.dumps(rec["events"], ensure_ascii=False)
 
 
-def test_visit_ends_with_five_explanations_within_the_cap(store):
+def test_visit_ends_with_six_explanations_within_the_cap(store):
     rec, env = _play(_case("머리가 아파서 왔어요.", [("진통제", "네, 거의 매일 먹어요.")]), store, _pb())
     assert rec["turns"] <= 49 and env.violations == []
-    assert len(rec["closing_said"]) == 5
+    assert len(rec["closing_said"]) == 6
+    assert any(re.search(r"다시 (뵙|뵐)|재진|뒤에", line) for line, _ in rec["closing_said"])  # the follow-up is said
 
 
 def test_plan_names_linked_tests_and_warning_signs(store):

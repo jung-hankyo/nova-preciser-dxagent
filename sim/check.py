@@ -57,7 +57,7 @@ def key_items(key: dict) -> dict[str, str]:
 
 
 def _words(text: str) -> set[str]:
-    t = re.sub(r"\([^)]*\)", " ", (text or "").lower())
+    t = re.sub(r"[()]", " ", (text or "").lower())  # "급성 충수염 (Acute appendicitis)": the English in parentheses counts
     return {w for w in re.findall(r"[a-z]{3,}", t)} - {"acute", "chronic", "with", "due", "the", "and", "disease",
                                                          "disorder", "syndrome", "type", "left", "right", "primary"}
 

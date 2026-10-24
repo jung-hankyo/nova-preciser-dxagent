@@ -3,6 +3,25 @@
 Newest first. Decision numbers refer to `docs/decisions/`; test counts are the full suite at release (the runtime's share
 in parentheses where given). Each branch's changelog stops at its own version.
 
+## 0.9.1 (2026-10-22, `third-friendly-approach`)
+
+Friendlier talk, an exam announcement, a spoken follow-up, no repeated questions. Decisions 105-112. Official run:
+**60.737**, below 0.9.0-pre.
+
+- **No repeats, no model call.** A symptom or background question that an earlier reply already answered is recorded
+  from that reply (as a volunteered fact) and not asked; questions repeated in other words, maneuvers planned under
+  another name and answered follow-ups are dropped. Suicide, sexual-activity and pregnancy questions are always asked.
+- **Same turns, friendlier.** Plain acknowledgments after real answers (at most 4), a promise to explain when the
+  patient asks something, one sentence announcing the exam (worded by the time-out call), six closing lines ending with
+  the follow-up. The spare turn goes to gathering, which still ends at turn 44.
+- **Records of what was done.** The note marks told-before-asked facts, cites turns in the evidence, lists what the patient
+  was told in P.education and quotes it in P.follow_up.
+- **Settings** to read the next live run: `exam_intro`, `skip_answered`, `light_acks_max`, `closing_lines`, `signposts`.
+- **Why the score fell** (66.174 to 60.737: communication +0.20, safety -2.25, reasoning -1.67, tests -1.00,
+  efficiency -0.56): one cause is verified in code (a split closing line, or `closing_lines: 5`, pushes the spoken warning
+  signs out); the rest cannot be separated from noise in five cases. `second-clean-approach` stays the best version.
+- 372 tests (270); presubmit GO.
+
 ## 0.9.0-pre (2026-10-20, `second-clean-approach`)
 
 A simulated contest, a presubmit gate and the hardening they found. Official run: **66.174**. The package version string

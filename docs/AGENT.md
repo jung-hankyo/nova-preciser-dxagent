@@ -1,4 +1,4 @@
-# The contest runtime (v0.9.0-pre)
+# The contest runtime (v0.9.1)
 
 `run.py` and `dxagent/nova/` play one contest case at a time, as a doctor would run an outpatient visit:
 
@@ -7,14 +7,17 @@
   plan; a *focus call* adapts it to the patient and a *diagnostic time-out* before the exam re-reads the history and
   orders the exam;
 - a positive answer is followed up (how much, how long, getting worse) by the playbook's own follow-up questions;
-- it talks to the patient by name, acknowledges pain and worry, asks what they worry about and answers it at the end;
-- it writes the S/O/A/P note from a **ledger of what was actually asked**, in a CPX chart layout;
+- it talks to the patient by name, acknowledges pain and worry, announces the examination, asks what they worry about
+  and answers it at the end, with the follow-up always said;
+- it does not ask the same thing twice: what a reply already told is recorded from that reply, not asked again;
+- it writes the S/O/A/P note from a **ledger of what was actually asked, told and said**, in a CPX chart layout;
 - it quotes a guideline library when the environment provides one, and it never fails a case: time is planned from the
   pace observed in the case, and every blocking SDK call is bounded by a watchdog.
 
 The research core (`docs/CORE.md`) is off by default (`NOVA_CORE=0`, decision 80). Decisions: `docs/decisions/v0.5-simple-approach.md`.
-What this version adds to `first-simple-approach` is a simulated contest (`sim/`), a presubmit gate and the hardening they found
-("Model calls and failure behavior", "The simulated contest" below).
+`second-clean-approach` added a simulated contest (`sim/`), a presubmit gate and the hardening they found ("Model calls and
+failure behavior", "The simulated contest" below). This version adds friendlier talk, an exam announcement, a spoken
+follow-up, a note that records what was done, and no repeated questions, without a new model call (decisions 105-112).
 
 ## What the code assumes about the contest
 
@@ -64,19 +67,23 @@ ROS      the selected review items
 time-out [1 call] the 3 leading diagnoses with findings for and against; can't-miss causes not excluded; whether the
          leader names a cause; <= 3 questions that would most change the ranking (asked now); the planned maneuvers
          ranked by what they separate, optional ones that would not change the assessment dropped, <= 2 new ones
-exam     the ranked maneuvers (<= 8); a speculum or bimanual exam only for a sexually active patient**
-close    guideline excerpts; [assessment and plan, 1 call]; 5 explanation lines (SAY): likely cause, tests,
-         treatment, warning signs, the answer to the patient's worry
+exam     one sentence announcing it (the time-out's wording, else a fixed line), then the ranked maneuvers (<= 8);
+         a speculum or bimanual exam only for a sexually active patient**
+close    guideline excerpts; [assessment and plan, 1 call]; 6 explanation lines (SAY): likely cause, the answer to
+         the patient's worry or question (else the finding behind the cause), tests, treatment, warning signs, the
+         follow-up visit (or, with emergency care, what happens next)
 DIAGNOSE [chart, 1 call: S and O in chart style] + A and P + one diagnosis (0 turns)
 ```
 \* women aged 12-55. \*\* never a child; an adolescent (13-17) only after a "yes" to the sexual-activity question; an
 adult unless she denied it.
 
 Turns are reserved while the history is taken: up to 6 for the planned maneuvers and 4 for the time-out's items. A
-priority-2 history item yields when it would use them; nothing uses the 5 closing turns or the spare turn. Turns the
+priority-2 history item yields when it would use them; nothing uses the 6 closing turns. Turns the
 follow-ups and the time-out leave unused go back, after the time-out, to priority-2 items cut only for turns.
 
-Gathering ends at turn 44 at most (50 - 5 closing lines - 1 spare). The usual length the focus call is told (44) is an
+Gathering ends at turn 44 at most (50 - 6 closing lines; with `exam_intro` off, 43, one spare turn kept). The sentence
+announcing the exam costs a turn, and the turn that used to be spare goes to gathering, so with the sixth closing line
+the history and the exam lose at most one action. The usual length the focus call is told (44) is an
 aim, not a cut: nothing the plan needs is dropped only to reach it, and there are no filler questions, so a visit ends
 when its plan does. When the observed pace leaves too little time (`Encounter._time_short`), a priority-2 history item
 yields to every planned maneuver and the end of the visit, priority-1 history and priority-2 maneuvers to the priority-1
@@ -85,13 +92,31 @@ maneuvers and the end of the visit, and a priority-1 maneuver only to the end of
 Without a playbook, the older complaint groups (chest pain, dyspnea, cough, abdominal, headache, fever, dizziness, back
 pain, weight, sleep, growth, fatigue, palpitation; otherwise general) give the plan.
 
+**No question twice** (decisions 106-107; deterministic, no model call, `skip_answered`):
+
+- A presence question about a symptom is not asked when an earlier reply or the opening already reported or denied it;
+  any words before the symptom in the question (a time, a place, a trigger) must be in that reply, and a question that
+  is more than presence ("did it start suddenly?") is still asked. A specific background question ("heart disease in the
+  family?") is not asked when the general one's answer named the topic (a worry such as "I fear it is my heart" does not
+  count). The reply is written into the ledger at its own turn as a volunteered fact: the note records it, the transcript
+  sent to the model does not show it as a question. A reported symptom still gets its playbook follow-ups. Suicide,
+  sexual-activity and pregnancy questions are always asked.
+- Questions with the same content stems and question words count as one, whether planned, added by the focus call or the
+  time-out, or brought back by the backfill. The time-out sees the history questions still queued. A model-added maneuver
+  is matched to the planned and done ones by its name. Follow-ups are skipped when any reply since their parent already
+  gives the answer.
+
 **Talking**, inside the 30-character limit (each a prefix only when it fits, one per utterance):
 the first question opens with a greeting and the form of address (the patient's name, or "mother"/"father" for a
 child's guardian); an early question opens with one acknowledgment worded from the opening (pain, worry, a child); when
 the patient voices worry, distress or severe pain, the next question opens with a short acknowledgment (at most twice,
-3 turns apart); signposts introduce the background and the review of systems; "what worries you most?" ends the history;
-the closing lines name the likely cause of the patient's own symptom, what happens next, and answer that worry (the
-first line addresses the patient by name).
+3 turns apart); a plain acknowledgment follows a substantive yes (at most 4 per visit, 3 turns apart); when the patient
+asks something mid-history, the next question opens with a promise to explain and the closing lines answer it;
+signposts introduce the background and the review of systems; "what worries you most?" ends the history; one sentence
+announces the examination by body part ("now I will examine your abdomen and chest; tell me if it hurts"); the closing
+lines name the likely cause of the patient's own symptom, answer that worry (else give the finding behind the cause),
+give the tests, the treatment, the warning signs and when to come back; the first line addresses the patient by name. A
+line too long is split into its sentences; when no line names the follow-up, a fixed one replaces the last generic line.
 
 ## Presentation playbooks
 
@@ -163,7 +188,15 @@ python -m dxagent.nova.playbooks --sheet docs/PLAYBOOKS.md   # a readable review
   test, including every can't-miss cause the visit did not exclude.
 - **P.tests:** one line per purpose, ordered by kind, at least one for the primary diagnosis and one per differential,
   plus safety tests the treatment needs. **P.follow_up:** interval and purpose, monitoring, named warning signs.
-  **P.education:** 4-6 items, then the lines actually said, with turns.
+  **P.education:** the lines actually said first, each with its turn (the exam announcement, the closing lines), then
+  what is still to teach, not claimed as said.
+- **Records of what was done** (decision 111). S rows carry the bare question (no greeting or acknowledgment said before
+  it); a fact told before being asked is a row marked as volunteered, with its turn. After the chart call, a symptom
+  asked with a presence question (or told) and answered yes or no that the chart left out of its field is added back as
+  its chart line; open questions are left to the chart. A.evidence bullets end with the turns of their facts ("(T5,
+  T21)"; a tag naming a turn that did not happen is removed). P.follow_up always says when to come back (the
+  playbook's, else "1-2 weeks") and quotes the closing lines that told the patient; with emergency care the warning-sign
+  line says to call staff at once.
 - **Without the model** the note is still complete in the same layout: raw answers one item per line (clipped), evidence
   from the ledger, the playbook's can't-miss causes as `r/o` lines with their linked test, and its treatment, follow-up,
   warning signs and closing lines.
@@ -182,8 +215,8 @@ to the competition: nothing derived from them is stored, compiled into `kb/` or 
 |---|---|
 | plan (topic) | once at turn 0, only when no playbook matched the opening |
 | focus | once, after the priority-1 history of the complaint |
-| review (`ReviewPlan`) | once, the diagnostic time-out after the history and the review of systems |
-| assess | once: diagnosis, evidence, differential with separating tests, plan, 5 closing lines |
+| review (`ReviewPlan`) | once, the diagnostic time-out after the history and the review of systems; it also words the exam announcement |
+| assess | once: diagnosis, evidence, differential with separating tests, plan, 6 closing lines |
 | notes (`ChartOutput`) | once: S and O in chart style, checked by the guards |
 | core mode only: perceive, hypothesize, critic, bank, phrase | extraction after each block, hypotheses every 4 turns, critic before closing, questions when the planner has none |
 
@@ -224,7 +257,8 @@ written; `NOVA_EFFORT` and `NOVA_EFFORT_<ROLE>` set the reasoning level, `NOVA_M
 | `NOVA_TIME_LIMIT`, `NOVA_WRAP_MARGIN`, `NOVA_FINAL_MARGIN`, `NOVA_CALL_TIMEOUT` | 1800, 120, 75, 480 s | consult limit (capped by the session deadline); stop gathering when less than this, or the end of the visit at the observed pace, remains; stop calling the model; the longest one model call may take (less when the rest of the visit needs the time) |
 | `NOVA_PACE_TURN_S`, `NOVA_PACE_CALL_S`, `NOVA_ACTION_TIMEOUT` | 8, 90, 200 s | assumed seconds per patient answer and per model call until the case shows its own pace; the longest one SAY/EXAM may block |
 | `NOVA_SETTINGS_FILE` | `dxagent/nova/settings.json` | a JSON file of `NovaConfig` defaults that travels inside the ZIP (`docs/SUBMISSION.md`); the `NOVA_*` variables still win |
-| `NOVA_TURN_TARGET`, `NOVA_SOFT_TURN_CAP`, `NOVA_CLOSING_LINES` | 44, 38, 5 | usual length (an aim); priority-2 items past the cap are cut; explanation lines |
+| `NOVA_TURN_TARGET`, `NOVA_SOFT_TURN_CAP`, `NOVA_CLOSING_LINES` | 44, 38, 6 | usual length (an aim); priority-2 items past the cap are cut; explanation lines (gathering ends at 50 - lines, minus one more when `exam_intro` is off) |
+| `NOVA_EXAM_INTRO`, `NOVA_SKIP_ANSWERED`, `NOVA_LIGHT_ACKS_MAX` | 1, 1, 4 | the sentence before the first maneuver (one turn); a question a reply already answered is recorded, not asked; plain acknowledgments per visit (0: none) |
 | `NOVA_PLAYBOOKS`, `NOVA_FOCUS_CALL`, `NOVA_REVIEW_CALL`, `NOVA_NOTES_CALL`, `NOVA_TOPIC_PLAN` | 1 | switches for the playbooks, the focus call, the time-out, the chart call and the turn-0 topic plan |
 | `NOVA_PLAYBOOK_EXAM_MAX`, `NOVA_PLAYBOOK_EXAM_RESERVE`, `NOVA_FOLLOWUP_MAX` | 8, 6, 4 | maneuvers per visit; turns kept for them; playbook follow-ups per visit (safety follow-ups are never capped) |
 | `NOVA_EMPATHY`, `NOVA_ADDRESS_BY_NAME`, `NOVA_CUE_EMPATHY_MAX`, `NOVA_SIGNPOSTS`, `NOVA_CONCERN_QUESTION` | 1, 1, 2, 1, 1 | communication |
@@ -256,7 +290,7 @@ contest server under a virtual clock, so a full matrix runs in about a minute:
 
 | Tier | What | Cost |
 |---|---|---|
-| 0 | `pytest -q` (350 tests; the runtime's and simulator's 248 need only the pinned wheels) | seconds |
+| 0 | `pytest -q` (372 tests; the runtime's, simulator's and friendly-talk 270 need only the pinned wheels) | seconds |
 | 0b | `python -m sim.presubmit`: those tests, the 58 playbooks, the 65 cases, the scenario matrix and the isolated ZIP check | about 2 minutes; CI runs it on every push |
 | 1 | `experiments/nova_devkit_check.py` on the development kit's sample cases (its simulator, a scripted patient, `--audit`) | seconds |
 | 1b | `experiments/nova_cpx_check.py` on the 65 local CPX-style cases with our own answer keys (history and key-exam coverage, the offline floor) | seconds |
@@ -269,7 +303,8 @@ An official evaluation scores only a few cases: a difference under about 10 poin
 ## Still open
 
 - The official run scores the whole visit, not its parts: the focus call's and the time-out's choices, the assessment's
-  quality, JSON reliability and latency per call are unmeasured separately. This version scored 66.174.
+  quality, JSON reliability and latency per call are unmeasured separately. `second-clean-approach` scored 66.174, this version
+  60.737 (`docs/decisions/v0.9-friendly-approach.md`).
 - Whether compound questions ("do you have high blood pressure or diabetes?") draw the bundled-question reply on the
   server; the fallback handles either case at the cost of a turn.
 - Final round: the team's own model from `NOVA_MODEL_DIR`, loaded in `prepare()`, with no `client.chat()`. `NovaLLM`

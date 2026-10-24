@@ -8,4 +8,4 @@ bench) or inside the N.O.V.A competition runtime (dxagent.nova, run.py), which
 needs only pydantic and pyyaml.
 """
 
-__version__ = "0.8.1"
+__version__ = "0.9.1"

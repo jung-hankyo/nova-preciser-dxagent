@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TESTS = ["tests/test_nova.py", "tests/test_playbooks.py", "tests/test_visit.py", "tests/test_review.py",
-         "tests/test_robust.py", "tests/test_sim.py"]
+         "tests/test_robust.py", "tests/test_sim.py", "tests/test_friendly.py"]
 
 
 def _run(name: str, cmd: list[str], timeout: int = 3600) -> tuple[bool, str, float]:

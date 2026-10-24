@@ -20,6 +20,7 @@ import io
 import json
 import logging
 import os
+import re
 import sys
 import time
 import traceback
@@ -31,6 +32,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 from sim import cases as C  # noqa: E402
 from sim.check import evaluate  # noqa: E402
+from sim.check import key_items as C_key_items  # noqa: E402
 from sim.client import MirrorClient, real_sdk_available, real_sdk_client  # noqa: E402
 from sim.doctor import PendingCall, ReplayDoctor  # noqa: E402
 from sim.scenarios import QUICK, SCENARIOS, Scenario  # noqa: E402
@@ -106,6 +108,7 @@ def run_case(case: dict, scenario: Scenario, agent: Any = None, replay_dir: Opti
         return {"case": case["case_id"], "scenario": scenario.name, "pending": str(pending.path), "index": pending.index,
                 "role": pending.role, "turn": server.turns, "real_s": real_s}
     res = evaluate(case, server, outcome, scenario.expect_submission)
+    _obtained(case, res, rec)
     res.update(scenario=scenario.name, real_s=real_s, playbook=rec.get("playbook", ""),
                errors=[e.get("where") for e in rec.get("errors", [])],
                events=sorted({e["kind"] for e in rec.get("events", [])}),
@@ -115,6 +118,19 @@ def run_case(case: dict, scenario: Scenario, agent: Any = None, replay_dir: Opti
         res["submission"] = server.submission
         res["record"] = {k: rec.get(k) for k in ("events", "errors", "llm_trace", "final", "dropped", "closing_said")}
     return res
+
+
+def _obtained(case: dict, res: dict, rec: dict) -> None:
+    """metrics.obtained: the key history items asked, or told by the patient before being asked (the agent recorded
+    the answer and did not ask again: ledger entries with source "volunteered")."""
+    m = res.get("metrics")
+    items = C_key_items(case.get("key") or {})
+    if not m or not items:
+        return
+    told = [e.get("ask") or e.get("text") or "" for e in rec.get("ledger") or [] if e.get("source") == "volunteered"]
+    got = {i for i in m.get("missed", []) if any(re.search(items[i], t) for t in told)}
+    m["told"] = sorted(got)
+    m["obtained"] = round((len(items) - len(m.get("missed", [])) + len(got)) / len(items), 3)
 
 
 # -- the matrix ----------------------------------------------------------------------------------------------------
@@ -154,7 +170,7 @@ def summarize(rows: list[dict[str, Any]]) -> str:
     for r in rows:
         by.setdefault(r["scenario"], []).append(r)
     out = ["| scenario | visits | ok | failures | turns | refused | model calls | out tokens | minutes | history | "
-           "key exams | dx match |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+           "obtained | key exams | dx match |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
 
     def mean(xs):
         xs = [x for x in xs if isinstance(x, (int, float)) and not isinstance(x, bool)]
@@ -174,7 +190,8 @@ def summarize(rows: list[dict[str, Any]]) -> str:
                    f"{mean([x.get('turn_refusals') for x in m])} | {mean([x.get('chat_calls') for x in m])} | "
                    f"{mean([x.get('out_tokens') for x in m])} | "
                    f"{mean([(x.get('seconds') or 0) / 60 for x in m if x.get('seconds')])} | "
-                   f"{mean([x.get('history') for x in m])} | {mean([x.get('key_exams') for x in m])} | "
+                   f"{mean([x.get('history') for x in m])} | {mean([x.get('obtained') for x in m])} | "
+                   f"{mean([x.get('key_exams') for x in m])} | "
                    f"{round(sum(dxm) / len(dxm), 2) if dxm else '-'} |")
     bad = [r for r in rows if not r.get("ok") and not r.get("skipped")]
     if bad:

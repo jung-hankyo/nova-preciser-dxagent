@@ -54,7 +54,7 @@ from dxagent.nova.prompts import (ASSESS_SYSTEM, BANK_SYSTEM, DX_RULE_CHOOSE, DX
                                   TOPIC_SYSTEM, Assessment, FocusPlan, PhraseOutput, QuestionBank, ReviewPlan, TopicPlan,
                                   assess_user, bank_user, focus_user, phrase_user, review_user, topic_user)
 from dxagent.nova.protocol import (BUNDLE_REPLY, REFUSAL_CODES, Action, Observation, Opening, check_exam, check_say,
-                                   check_test, single_topic)
+                                   check_test, injection_free, single_topic)
 from dxagent.nova.safety import lint_lines
 from dxagent.reasoning import planner as PL
 from dxagent.reasoning.belief import apply_vital_rules, merge_findings
@@ -103,11 +103,199 @@ def _smoker_without_amount(reply: str) -> bool:
 
 
 def _smoked_without_years(reply: str) -> bool:
-    """A current or former smoker whose answer gives no duration: one "how many years" question (pack-years)."""
+    """A current or former smoker whose answer gives no duration: one "how many years" question (pack-years).
+    Years in digits, native words (스무 년) or Sino-Korean words (삼십 년째) count as given."""
     t = reply or ""
     if re.search(r"(안\s*피|피우지\s*않|피운\s*적\s*(이\s*)?없|안 해요|없어요|^아니)", t):
         return False
-    return not re.search(r"(\d+|[한두세네다여일아열스서마쉰예]\S{0,3})\s*년", t)
+    return not re.search(r"(\d+|[한두세네다여일아열스서마쉰예]\S{0,3}|[일이삼사오육칠팔구십]+)\s*년", t)
+
+
+# A presence question ("식은땀이 나셨나요?") whose symptom an earlier reply or the opening already reported or denied
+# ("가슴이 답답할 때 숨이 차고 식은땀이 날 때도 있어요.") is not asked again: the reply is recorded for the note instead.
+# (question, reply, chart) patterns per symptom. The question pattern names the symptom with a presence predicate, so
+# "두통이 갑자기 시작됐나요?" (an attribute of the symptom) or "누우면 숨이 더 차세요?" is not a presence question. Every
+# symptom a question names must have been answered; a question asking how often, how long or which, or one whose
+# words before the symptom (a time, a place, a trigger: "밤에 식은땀이 ...", "계단 오를 때 ...") the earlier reply does
+# not contain, is still asked.
+_SYMPTOM_WORDS = (  # (question, earlier reply, chart) patterns per symptom
+    (r"식은땀이?\s?(나|났|흘|있)", r"식은땀", r"(식은땀|발한|diaphoresis)"),
+    (r"두근(거리|거림이 ?있|거린)", r"두근", r"(두근|심계항진|palpitation)"),
+    (r"(메스꺼우|메스껍|메슥거리|구역질?이? ?(나|있|하))", r"(메스꺼|메스껍|메슥|구역질)", r"(구역|오심|nausea)"),
+    (r"(토하(세|셨|시|신|나)|토한 적|구토(가|를)? ?(하|있|나))", r"(토하|토했|토를|구토|토할|토한)", r"(구토|vomiting)"),
+    (r"설사(를|가)? ?(하|있|나)", r"(설사|묽은 변|물똥)", r"(설사|diarrhea)"),
+    (r"변비(가)? ?(있|생기)", r"변비", r"(변비|constipation)"),
+    (r"기침(을|이)? ?(하|나|있)", r"기침", r"(기침|cough)"), (r"가래(가|는)? ?(나|있|끓)", r"가래", r"(가래|객담|sputum)"),
+    (r"콧물(이)? ?(나|흐르|있)", r"콧물", r"(콧물|비루|rhinorrhea)"),
+    (r"(오한이 ?(있|나|들)|으슬으슬)", r"(오한|으슬)", r"(오한|chill)"),
+    (r"열이\s?(나|있|났)", r"(열이 (나|났|있|올라|오르)|열은 |열도 |발열|고열|미열)", r"(발열|fever)"),
+    (r"숨이 (차|가빠)", r"(숨이 (약간 |좀 |많이 |조금 )?(차|찬|가빠)|숨찬|숨이 막|호흡곤란)", r"(호흡곤란|숨참|dyspnea)"),
+    (r"(정신을 잃|기절하|실신하)", r"(정신을 잃|기절|실신|쓰러)", r"(실신|의식 소실|syncope)"),
+    (r"어지러(우|워|운|움이 ?있)", r"(어지러|어지럼|빙빙)", r"(어지럼|dizziness|vertigo)"),
+    (r"(두통이 ?(있|나|생기)|머리가 아프|머리도 아프)", r"(두통|머리가 아프|머리가 아파|머리도 아)", r"(두통|headache)"),
+    (r"입맛(이|은)? ?(없|떨어|있)", r"(입맛|식욕)", r"(식욕|입맛|anorexia|appetite)"),
+    (r"(저리|저려)", r"(저리|저려)", r"(저림|저리|감각 저하|numbness)"),
+    (r"(다른 (곳|데)(으)?로|어디로).{0,6}(퍼지|뻗치|번지)", r"(퍼져|퍼지|뻗쳐|뻗치|번져|번지)", r"(방사|퍼짐|radiation)"),
+    (r"^쉬면 (좋아|나아|괜찮|덜)", r"쉬(면|니까|고 나면)[^.,]{0,20}(좋아|나아|괜찮|덜|없어|가라앉)", r"(휴식|안정 시|쉬면)"),
+    (r"(피가 섞|피를 토|객혈)", r"(피가 섞|피를 토|객혈|각혈)", r"(객혈|혈담|hemoptysis)"),
+    (r"(검은 변|검은색 변|흑변)", r"(검은 변|검은색 변|흑변|짜장)", r"(흑색변|흑변|melena)"),
+    (r"(살이 빠지|살이 빠졌|체중이 줄)", r"(살이 (많이 |좀 |조금 )?빠|체중이 (줄|감소)|몸무게가 줄)", r"(체중 감소|weight loss)"),
+    (r"갑자기\s?(심하게\s?)?(아프기|생기|시작)", r"갑자기", r"(갑자기|급성|sudden|abrupt)"),
+)
+_PRESENCE = re.compile(r"(나요|있나요|있으세요|세요|하나요|하시나요|었나요|았나요|적 있나요|드시나요|습니까)\?\s*$")
+_QUALIFIER = re.compile(r"(얼마나|언제|몇|어떤|어디서|어떻게|자주|오래|무슨|왜|무엇|뭐|처음|점점|더 )")
+_DENIED_AFTER = re.compile(r"^[^.?!,]{0,10}(없|않|아니|안 )")
+_NEVER_SKIP = re.compile(r"(죽고|자살|해치|극단|성관계|임신)")  # safety and the pelvic-exam gate are always asked
+_CONDITION_FREE = {"아플", "아프실", "아프면", "그럴", "증상이", "그때", "통증이", "혹시", "요즘", "평소", "지금", "다른",
+                   "곳으로", "데로", "아픈", "어디로"}  # "아플 때 식은땀이 ...": the complaint itself
+
+
+def symptom_keys(question: str) -> list[int]:
+    """The symptoms (indexes of _SYMPTOM_WORDS) a presence question asks about; [] for any other question."""
+    q = question or ""
+    if not _PRESENCE.search(q) or _QUALIFIER.search(q) or _NEVER_SKIP.search(q):
+        return []
+    return [i for i, (q_rx, _, _) in enumerate(_SYMPTOM_WORDS) if re.search(q_rx, q)]
+
+
+def _condition_words(question: str, key: int) -> list[str]:
+    """The stems of the words before the symptom ("계단 오를 때 숨이 차세요?" -> 계단, 오를; "밤에 식은땀이 ..." -> 밤에),
+    one of which the earlier reply must contain; [] when the question starts with the symptom."""
+    m = re.search(_SYMPTOM_WORDS[key][0], question)
+    head = question[:m.start()] if m else ""
+    return [w[:2] if len(w) <= 3 else w[:3] for w in re.findall(r"[가-힣]{2,}", head) if w not in _CONDITION_FREE]
+
+
+def reported_symptom(question: str, entries: list) -> Optional[tuple[int, str, list[bool]]]:
+    """(turn, reply, [reported per symptom]) when earlier replies (or the opening, turn 0) already mentioned every
+    symptom the presence question asks about, reported or denied, and any condition it names; None otherwise. The
+    turn and reply are those of the last reply needed."""
+    keys = symptom_keys(question)
+    if not keys:
+        return None
+    found: list[tuple[int, str, bool]] = []
+    for i in keys:
+        a_rx = _SYMPTOM_WORDS[i][1]
+        cond = _condition_words(question, i)
+        hit = None
+        for e in entries:
+            if e.kind not in ("SAY", "opening") or e.source == "volunteered" or e.turn is None \
+                    or e.section == "bundled" or not e.accepted:
+                continue
+            r = e.reply or ""
+            m = re.search(a_rx, r)
+            if m and (not cond or any(w in r for w in cond)):  # "계단 오를 때": 계단 or 오르 in the reply
+                hit = (e.turn, r, not _DENIED_AFTER.search(r[m.end():]))
+                break
+        if hit is None:
+            return None
+        found.append(hit)
+    turn, reply, _ = max(found, key=lambda x: x[0])
+    return turn, reply, [x[2] for x in found]
+
+
+# A specific background question whose topic an earlier answer in the same block already named ("가족 중에 앓는 병이
+# 있으세요?" -> "아버지가 심근경색으로 돌아가셨어요." makes "가족 중 심장병 있는 분 있나요?" a repeat). A general "no"
+# does not answer a specific question: only a named topic does.
+_TOPIC_WORDS = (
+    (r"심장", r"(심장|심근경색|협심증|부정맥|심부전|스텐트)"), (r"(뇌졸중|중풍)", r"(뇌졸중|중풍|뇌경색|뇌출혈)"),
+    (r"당뇨", r"당뇨"), (r"고혈압", r"고혈압"), (r"(콜레스테롤|고지혈)", r"(콜레스테롤|고지혈|이상지질)"),
+    (r"암(?=[이을은에으과와도 치,.]|$)", r"암(?=[이을은에으과와도 ,.]|$)"),  # 위암으로, 암 치료; not 암로디핀
+    (r"결핵", r"결핵"), (r"간염", r"간염"), (r"천식", r"천식"), (r"갑상선", r"갑상선"), (r"치매", r"치매"),
+    (r"(콩팥|신장)", r"(콩팥|신장|투석)"), (r"(우울|정신)", r"(우울|정신|조현|조울|공황)"),
+    (r"(갑자기 사망|돌연사|갑자기 돌아)", r"(갑자기 (사망|돌아)|돌연사|급사)"),
+)
+_TOPIC_BLOCK = {"fhx": ("fhx",), "pmh": ("pmh",), "meds": ("meds", "pmh")}
+_WORRY = re.compile(r"(걱정|아닌지|아닐까|혹시|무서|겁나|불안)")
+
+
+def reported_topic(question: str, section: str, entries: list) -> Optional[tuple[int, str]]:
+    """(turn, reply) of an earlier answer in the same block (family history, past history, medications) that names
+    the topic the question asks about and does not deny it; None otherwise."""
+    block = _TOPIC_BLOCK.get(section)
+    if not block or _NEVER_SKIP.search(question or ""):
+        return None
+    hits: list[tuple[int, str]] = []
+    for q_rx, a_rx in _TOPIC_WORDS:
+        if not re.search(q_rx, question or ""):
+            continue
+        hit = None
+        for e in entries:
+            r = e.reply or ""
+            m = re.search(a_rx, r)
+            if (e.kind == "SAY" and e.accepted and e.section in block and e.source != "volunteered" and e.turn and m
+                    and not re.search(r"^[^.?!]{0,12}(없|않|아니)", r[m.end():]) and not re.match(r"^\s*(아니요|아뇨)", r)
+                    and not _WORRY.search(r)):  # "심장에 문제가 있는 건 아닌지 걱정돼요": a worry, not a history
+                hit = (e.turn, r)
+                break
+        if hit is None:
+            return None  # "고혈압이나 당뇨가 있으세요?": both topics must have been named
+        hits.append(hit)
+    return max(hits) if hits else None
+
+
+# Two questions worded differently that ask the same thing ("최근 성관계를 하셨나요?" / "성관계를 하신 적 있나요?",
+# "소변 보실 때 불편하세요?" / "소변볼 때 아프세요?"): the same content stems (first two syllables of each word, without
+# time words, auxiliaries and endings; 불편/통증 read as 아프). Equal sets only, so "누우면 숨이 더 차세요?" stays apart
+# from "숨이 차세요?" and "가슴이 두근거리나요?" from "가슴이 아프세요?".
+_STEM_STOP = {"최근", "요즘", "혹시", "지금", "평소", "하셨", "하신", "하세", "하시", "있나", "있으", "있었", "있어", "드시",
+              "드세", "보실", "보신", "보셨", "볼때", "적이", "그런", "어떠", "되세", "되나", "나요", "세요", "많이", "자주",
+              "조금", "계속", "주로", "아이", "아이가"}
+_STEM_SAME = {"불편": "아프", "통증": "아프", "아파": "아프", "아픈": "아프", "아플": "아프", "소변": "소변", "피가": "피"}
+
+
+def question_stems(question: str) -> frozenset:
+    words = re.findall(r"[가-힣]{2,}", question or "")
+    stems = {_STEM_SAME.get(w[:2], w[:2]) for w in words}
+    return frozenset(x for x in stems if x not in _STEM_STOP)
+
+
+def same_question(a: str, b: str) -> bool:
+    """Same content stems and the same question words (몇, 얼마나, 언제, ...): "담배를 피우세요?" is not "담배는 몇 년
+    피우셨어요?"."""
+    sa, sb = question_stems(a), question_stems(b)
+    return bool(sa) and sa == sb and set(_QUALIFIER.findall(a or "")) == set(_QUALIFIER.findall(b or ""))
+
+
+# One maneuver under two wordings ("심장 청진" / "심음 청진하겠습니다.") is one exam: model-added maneuvers are matched
+# to the planned and done ones by this key (the whole label, anchored, so "우상복부 촉진" is not "복부 촉진").
+_EXAM_SAME = ((r"^(심장|심음|심장음|심장 소리)\s?(을\s?|를\s?)?청진", "심음 청진"),
+              (r"^(폐|양측 폐|폐음|호흡음|숨소리)\s?(을\s?|를\s?)?청진", "폐 청진"),
+              (r"^(배|복부|복부를|배를)\s?(촉진|눌러)", "복부 촉진"), (r"^(장음|장음을|장 소리)\s?(청진)?", "장음 청진"),
+              (r"^(목\s?정맥|경정맥)", "경정맥"), (r"^(목|경부)\s?림프절", "경부 림프절 촉진"),
+              (r"^(무릎\s?반사|슬개건\s?반사)", "슬개건 반사"), (r"^(목|경부)\s?(경직|강직)", "경부 강직"),
+              (r"^갑상(선|샘)\s?(을\s?|를\s?)?촉진", "갑상선 촉진"), (r"^(하지|다리)\s?(말초|부종|함요)", "하지 말초 진찰"),
+              (r"^(복부\s?)?반발\s?압통", "반발 압통"), (r"^(늑골척추각|CVA)", "늑골척추각 압통"))
+
+
+def exam_key(text: str) -> str:
+    t = exam_label(text or "").strip()
+    for rx, key in _EXAM_SAME:
+        if re.search(rx, t):
+            return key
+    return re.sub(r"[\s·,.]", "", t)
+
+
+# A question in the patient's reply ("이거 심각한 건가요?"): acknowledged in the next question, answered at the end.
+_PATIENT_QUESTION = re.compile(r"(\?|？|(건가요|인가요|될까요|되나요|해야 하나요|할까요|맞나요|괜찮을까요|괜찮은가요|"
+                               r"있을까요|없을까요|어떡하죠|어떻게 해요)\s*[.!~]*\s*$)")
+
+
+def patient_question(reply: str) -> bool:
+    r = (reply or "").strip()
+    return len(r) >= 6 and bool(_PATIENT_QUESTION.search(r))
+
+
+# A closing line that tells the patient the follow-up: when to come back, or what happens next.
+_FOLLOW_UP = re.compile(r"(다시 (뵙|봬|뵐|오|와|볼|만나|설명)|재진|다음 (주|번|달|진료|외래)|(뒤|후)에?\s?(다시|오|와|뵙|봬|뵐|결과|외래)|"
+                        r"응급실|입원|결과(가|를|는)?\s?(나오|보|확인|나오면)|예약)")
+
+
+def split_line(line: str, limit: int) -> list[str]:
+    """An explanation too long for one utterance, as its sentences that fit ("A해요. B해요." -> two lines); a sentence
+    that still does not fit is dropped."""
+    parts = [x.strip() for x in re.split(r"(?<=[.!])\s+", (line or "").strip()) if x.strip()]
+    return [x for x in parts if len(x) >= 6 and check_say(x, limit)[0] and "?" not in x] if len(parts) > 1 else []
 
 
 class NovaAgent:
@@ -303,6 +491,14 @@ class Encounter:
         self.acks = 0
         self.last_ack_turn = -99
         self.signposted: set[str] = set()
+        self.signpost_tries: dict[str, int] = {}
+        self.light_pending = False  # a plain acknowledgment ("그러셨군요.") before the next question, when it fits
+        self.light_acks = 0
+        self.asked_back = False  # the patient asked something: "끝에 자세히 설명드릴게요." before the next question
+        self.patient_asks: list[tuple[int, str]] = []  # (turn, reply) where the patient asked a question
+        self.exam_announced = False
+        self.exam_intro_said: list[tuple[str, int]] = []
+        self.skipped: list[dict[str, Any]] = []  # questions not asked because a reply had already answered them
 
     # -- bookkeeping ----------------------------------------------------------
 
@@ -347,9 +543,15 @@ class Encounter:
         return self.cfg.test_max
 
     def _exam_reserve(self) -> int:
-        """Turns kept for the planned maneuvers (and final-round tests) while the history is taken."""
+        """Turns kept for the planned maneuvers, the sentence that announces them, and final-round tests while the
+        history is taken."""
         left = sum(1 for s in self.plan.exams if s.ask not in self.performed)
-        return min(self.cfg.playbook_exam_reserve, left) + self._test_reserve()
+        return min(self.cfg.playbook_exam_reserve, left) + self._intro_turns() + self._test_reserve()
+
+    def _intro_turns(self) -> int:
+        """1 while the examination is still to be announced to the patient (config exam_intro), else 0."""
+        pending = any(s.ask not in self.performed for s in self.plan.exams)
+        return 1 if self.cfg.exam_intro and not self.exam_announced and pending else 0
 
     def _review_reserve(self) -> int:
         """Turns kept for the diagnostic time-out's questions and maneuvers until it has run."""
@@ -450,8 +652,12 @@ class Encounter:
         """Model-written questions and maneuvers as slots: validated (30 characters, one topic, no adult-only question
         to a child's guardian), deduplicated against the plan and what was done. The first `first_n` questions get
         `first_tier`, the rest tier 2."""
-        planned = [s.ask for s in self.plan.hpi + self.plan.background + self.plan.ros + self.plan.exams]
+        planned = [s.ask for s in self.plan.hpi + self.plan.background + self.plan.ros + self.plan.exams + self.cut]
         seen = {_norm(x) for x in planned + sorted(self.performed)}
+        # the same symptom or question asked twice in other words, or one maneuver under another name, is a repeat
+        sym_seen = {k for x in planned + sorted(self.performed) for k in symptom_keys(x)}
+        exam_seen = {exam_key(s.ask) for s in self.plan.exams} | {exam_key(e.text) for e in self.ledger.entries
+                                                                  if e.kind == "EXAM"}
         limit = self.cfg.say_max_chars
         qs: list[CL.Slot] = []
         es: list[CL.Slot] = []
@@ -460,7 +666,13 @@ class Encounter:
             if (len(qs) >= n_q or not check_say(t, limit)[0] or _norm(t) in seen or not single_topic(t)
                     or (self.ctx.get("pediatric") and _ADULT_ONLY.search(t))):
                 continue
+            keys = symptom_keys(t)
+            if (keys and (set(keys) <= sym_seen or reported_symptom(t, self.ledger.entries) is not None)) or \
+                    any(same_question(t, x) for x in planned + sorted(self.performed) + [q.ask for q in qs]):
+                self._event("repeat_dropped", text=t, why="the question is planned, asked or already told")
+                continue
             seen.add(_norm(t))
+            sym_seen |= set(keys)
             sec = it.section if it.section in CL.SECTION_ORDER else "hpi"
             tier = first_tier if len(qs) < first_n else 2
             qs.append(CL.Slot(f"{prefix}_q{i}", sec, it.target or t, t, (), "SAY", item=it.item, tier=tier))
@@ -468,7 +680,11 @@ class Encounter:
             t = (it.text_ko or "").strip()
             if len(es) >= n_e or not check_exam(t, limit)[0] or not PB.specific_exam(t) or _norm(t) in seen:
                 continue
+            if exam_key(t) in exam_seen:
+                self._event("repeat_dropped", text=t, why="the same maneuver is planned or done")
+                continue
             seen.add(_norm(t))
+            exam_seen.add(exam_key(t))
             es.append(CL.Slot(f"{prefix}_e{i}", "exam", it.target or exam_label(t), t, (), "EXAM",
                               item=it.item or exam_label(t), tier=2))
         return qs, es
@@ -580,6 +796,15 @@ class Encounter:
                 break
             if slot.ask in self.performed:
                 continue
+            if slot.kind == "SAY" and self._repeat(slot.ask):
+                self.performed.add(slot.ask)
+                self._event("repeat_dropped", text=slot.ask, why="asked before in other words")
+                continue
+            told = self._already_told(slot) if slot.kind == "SAY" else None  # recorded even when turns run short
+            if told is not None:
+                if told[1]:  # reported: the playbook's follow-ups (how much, how long) are still asked
+                    yield from self._follow_up(slot, told[0], positive=True)
+                continue
             reserve = 0 if phase == "exam" else self._exam_reserve() + (self._review_reserve() if phase != "review" else 0)
             if reserve and self._stop(reserve) and slot.tier >= 2:
                 if slot.id not in self.dropped:
@@ -600,6 +825,10 @@ class Encounter:
                 known = set(self.state.get("asked_codes", [])) | {f["code"] for f in self.state.get("findings", [])}
                 if all(c in known for c in slot.codes):
                     continue
+            if slot.kind == "EXAM" and self.cfg.exam_intro and not self.exam_announced:
+                yield from self._exam_intro()
+                if self._stop(self._test_reserve()):
+                    break
             yield from self._slot(slot, self._compose(slot, phase))
 
     def _time_short(self, slot: CL.Slot, phase: str) -> bool:
@@ -615,9 +844,11 @@ class Encounter:
         return b.remaining() - b.turn_s < len(keep) * b.turn_s + max(self.cfg.wrap_margin_s, b.close_s())
 
     def _compose(self, slot: CL.Slot, phase: str) -> str:
-        """The utterance for a slot: the question, with at most one prefix that fits in 30 characters: the greeting
-        (by name or guardian title) on the first question, one acknowledgment early in the history, an
-        acknowledgment of worry or distress the patient just voiced, or a signpost at the start of a new block."""
+        """The utterance for a slot: the question, with at most one prefix that fits in 30 characters, in this order:
+        the greeting (by name or guardian title) on the first question; a promise to explain when the patient just
+        asked something; an acknowledgment of worry or distress the patient just voiced; one acknowledgment early in
+        the history; a signpost at the start of the background or the review (tried on the block's first 3
+        questions); a plain acknowledgment of a substantive answer, at most every third turn."""
         text = slot.ask
         if slot.kind != "SAY":
             return text
@@ -626,6 +857,7 @@ class Encounter:
         def fits(prefix: str) -> bool:
             return bool(prefix) and check_say(f"{prefix} {text}", limit)[0]
 
+        light, self.light_pending = self.light_pending, False
         if not self.greeted:
             self.greeted = True
             name = self.ctx.get("address", "")
@@ -633,6 +865,12 @@ class Encounter:
                 if fits(g):
                     return f"{g} {text}"
             return text
+        if self.asked_back:
+            self.asked_back = False
+            for line in CL.ASKED_BACK:
+                if fits(line):
+                    self.last_ack_turn = self.turns
+                    return f"{line} {text}"
         if self.ack_pending:
             ack, self.ack_pending = self.ack_pending, ""
             if fits(ack):
@@ -645,12 +883,22 @@ class Encounter:
                                 bool(self.ctx.get("pain")))
             if fits(line):
                 self.empathy_done = True
+                self.last_ack_turn = self.turns
                 return f"{line} {text}"
-        if cfg.signposts and phase in ("background", "ros") and phase not in self.signposted:
-            self.signposted.add(phase)
-            sign = {"background": "이제 병력을 여쭤볼게요.", "ros": "몇 가지만 더 여쭤볼게요."}[phase]
-            if fits(sign):
-                return f"{sign} {text}"
+        if cfg.signposts and phase in CL.SIGNPOSTS and phase not in self.signposted:
+            tries = self.signpost_tries[phase] = self.signpost_tries.get(phase, 0) + 1
+            for sign in CL.SIGNPOSTS[phase]:
+                if fits(sign):
+                    self.signposted.add(phase)
+                    return f"{sign} {text}"
+            if tries >= 3:
+                self.signposted.add(phase)
+        if light and self.light_acks < cfg.light_acks_max and self.turns - self.last_ack_turn >= 3:
+            line = CL.LIGHT_ACKS[self.light_acks % len(CL.LIGHT_ACKS)]
+            if fits(line):
+                self.light_acks += 1
+                self.last_ack_turn = self.turns
+                return f"{line} {text}"
         return text
 
     _PELVIC = re.compile(r"(질경|골반\s?내진|자궁경부\s?운동)")
@@ -676,18 +924,22 @@ class Encounter:
         age = self.ctx.get("age")
         return age is None or age >= 18
 
-    def _follow_up(self, slot: CL.Slot, entry: Entry) -> Generator[Action, Observation, None]:
+    def _follow_up(self, slot: CL.Slot, entry: Entry, positive: Optional[bool] = None) -> Generator[Action, Observation, None]:
         """The playbook's follow-ups (`then`) right after a positive answer: how much, how long, escalating, tried to
-        stop. A follow-up whose `known` pattern is already in the answer is skipped."""
+        stop. A follow-up whose `known` pattern is already in the answer, or in a reply since, is skipped."""
         pb = self.playbook
         kids = pb.followups_for(slot) if pb is not None else None
-        if not kids or not positive_answer(entry.reply, entry.text):
+        if not kids or not (positive if positive is not None else positive_answer(entry.reply, entry.text)):
             return
         asked = []
         for child, known, safety in kids:
             if self._stop() or (not safety and self.followups >= self.cfg.followup_max):
                 continue
-            if child.ask in self.performed or (known and re.search(known, entry.reply or "")):
+            since = " ".join(e.reply or "" for e in self.ledger.accepted()
+                             if e.kind == "SAY" and e.turn is not None and entry.turn is not None and e.turn >= entry.turn)
+            if child.ask in self.performed or (known and re.search(known, f"{entry.reply or ''} {since}")):
+                continue
+            if not safety and self._already_told(child) is not None:
                 continue
             self.followups += 0 if safety else 1  # a safety follow-up (suicide, ...) is never capped
             asked.append(child.ask)
@@ -695,13 +947,71 @@ class Encounter:
         if asked:
             self._event("follow_up", parent=slot.id, asked=asked)
 
+    def _repeat(self, question: str) -> bool:
+        """The question was already asked in other words (an accepted question with the same content stems)."""
+        return any(same_question(question, e.ask or e.text) for e in self.ledger.entries
+                   if e.kind == "SAY" and e.accepted and e.source not in ("volunteered", "closing", "frame"))
+
+    def _already_told(self, slot: CL.Slot) -> Optional[tuple[Entry, bool]]:
+        """A question that a reply (or the opening) has already answered is not asked again: a presence question about
+        symptoms already reported or denied, or a specific background question whose topic the general one's answer
+        named. The reply is recorded under the question's chart item (source "volunteered", at that reply's turn) and
+        the question counts as done. Returns (entry, reported) or None."""
+        if not self.cfg.skip_answered or slot.ask in self.performed:
+            return None
+        entries = self.ledger.entries
+        sym = reported_symptom(slot.ask, entries)
+        topic = None if sym is not None else reported_topic(slot.ask, slot.section, entries)
+        if sym is None and topic is None:
+            return None
+        turn, reply = (sym[0], sym[1]) if sym is not None else topic
+        signs = sym[2] if sym is not None else [True]
+        n = len(slot.item.split("/")) if slot.item else 0
+        if sym is not None and slot.item and len(set(signs)) == 1 and n in (1, len(signs)):
+            note = f"{slot.item} ({'/'.join(['+' if signs[0] else '-'] * n)})"
+        else:
+            said = re.sub(r"\s+", " ", reply.strip())[:80]
+            note = f"{slot.item or slot.label} : {said}"
+        self.performed.add(slot.ask)
+        e = self.ledger.add(turn=turn, kind="SAY", section=slot.section, label=slot.label, text=slot.ask, reply=reply,
+                            source="volunteered", item=slot.item, note=note, ask=slot.ask)
+        self.skipped.append({"ask": slot.ask, "turn": turn, "note": note})
+        self._event("already_told", text=slot.ask, turn=turn, note=note)
+        return e, any(signs)
+
+    def _exam_intro(self) -> Generator[Action, Observation, None]:
+        """One sentence before the first maneuver: what will be examined, and to say if it hurts (the time-out's
+        wording when it gave a valid one, else a fixed line)."""
+        self.exam_announced = True
+        text = self._exam_intro_text()
+        res = yield from self._do("SAY", text, "education", "진찰 설명", [], "frame", ask=text)
+        if res and res[0].accepted:
+            self.exam_intro_said.append((text, self.turns))
+
+    def _exam_intro_text(self) -> str:
+        limit = self.cfg.say_max_chars
+        cand = (getattr(self.review, "exam_intro_ko", "") or "").strip() if self.review is not None else ""
+        if cand and check_say(cand, limit)[0] and "?" not in cand and re.search(r"[가-힣]", cand) \
+                and not (self.ctx.get("pediatric") and _ADULT_ONLY.search(cand)) and injection_free(cand):
+            return cand
+        return CL.EXAM_INTRO_CHILD if self.ctx.get("pediatric") else CL.EXAM_INTRO
+
     def _listen(self, kind: str, entry: Entry) -> None:
-        """After a reply: queue an acknowledgment when the patient voices worry, distress or severe pain."""
-        if kind != "SAY" or not entry.accepted or entry.section in ("bundled", "education"):
+        """After a reply: queue an acknowledgment when the patient voices worry, distress or severe pain, a plain one
+        ("그러셨군요.") now and then after a substantive answer, and a promise to explain when the patient asks
+        something (the question is answered in the closing explanation)."""
+        if kind != "SAY" or not entry.accepted or entry.section in ("bundled",):
+            return
+        if patient_question(entry.reply):
+            self.asked_back = True
+            self.patient_asks.append((self.turns, (entry.reply or "").strip()))
+        if entry.section == "education":
             return
         ack = acknowledgment(entry.reply)
         if ack and self.acks < self.cfg.cue_empathy_max and self.turns - self.last_ack_turn >= 3:
             self.ack_pending = ack
+        elif len((entry.reply or "").strip()) >= 12 and positive_answer(entry.reply, entry.text):
+            self.light_pending = True
 
     # -- the focus call and the selection -------------------------------------------
 
@@ -724,7 +1034,8 @@ class Encounter:
                 focus_user(self.ctx.get("opening", ""), self.ctx.get("vitals_line", ""), self.ctx.get("age"),
                            self.ctx.get("sex"), self._presentation_ref(), self.ledger.transcript(5000), planned,
                            [(i, s.ask) for i, s in optional.items()], [(i, s.ask) for i, s in extra.items()],
-                           turns=(self.turns, self.turns + len(planned) + len(optional) + cfg.closing_lines,
+                           turns=(self.turns, self.turns + len(planned) + len(optional) + cfg.closing_lines
+                                  + self._intro_turns(),
                                   cfg.turn_target, cfg.max_turns)))
         except Exception as exc:
             self._event("focus_failed", error=str(exc)[:160])
@@ -790,7 +1101,7 @@ class Encounter:
         todo = [s for s in self.plan.exams if s.ask not in self.performed]
         ids = {f"m{i}": s for i, s in enumerate(todo)}
         end = cfg.gather_end()
-        must = sum(1 for s in todo if s.tier <= 1)
+        must = sum(1 for s in todo if s.tier <= 1)  # an upper bound: unused offers leave room for the announcement
         n_q = max(0, min(cfg.review_questions_max, end - self.turns - must))
         n_e = max(0, min(cfg.review_exams_max, end - self.turns - must - n_q))
         hint = "; ".join(d["en"] for d in self.leading)
@@ -801,7 +1112,9 @@ class Encounter:
                                      exam_names=EXAM_NAMES),
                 review_user(self.ctx.get("opening", ""), self.ctx.get("vitals_line", ""), self.ctx.get("age"),
                             self.ctx.get("sex"), self._presentation_ref(), self.ledger.transcript(6000), hint,
-                            [(i, s.ask, s.tier) for i, s in ids.items()], (self.turns, end)))
+                            [(i, s.ask, s.tier) for i, s in ids.items()], (self.turns, end),
+                            [s.ask for s in dict.fromkeys(self.cut)
+                             if s.ask not in self.performed and s.id not in self.focus_skip]))
         except Exception as exc:
             self._event("review_failed", error=str(exc)[:160])
             return
@@ -837,7 +1150,7 @@ class Encounter:
             return []
         end = self.cfg.gather_end()
         exams = sum(1 for s in self.plan.exams if s.ask not in self.performed)
-        room = end - self.turns - exams - self._test_reserve()
+        room = end - self.turns - exams - self._intro_turns() - self._test_reserve()
         out = [s for s in dict.fromkeys(self.cut) if s.ask not in self.performed and s.id not in self.focus_skip]
         out = out[:max(0, room)]
         if out:
@@ -872,7 +1185,8 @@ class Encounter:
 
     # -- one action -----------------------------------------------------------
 
-    def _do(self, kind: str, text: str, section: str, label: str, codes: list[str], source: str, item: str = ""):
+    def _do(self, kind: str, text: str, section: str, label: str, codes: list[str], source: str, item: str = "",
+            ask: str = ""):
         """Validate, send, record. Returns (observation, entry) or None if the action was not sent.
 
         A refusal (error code, or accepted=False) is recorded as not accepted; it costs a turn only when the environment
@@ -911,7 +1225,7 @@ class Encounter:
                 self.tests_blocked = True  # the server takes no tests in this round: stop trying
         entry = self.ledger.add(turn=self.turns if obs.accepted else None, kind=kind, section=section, label=label,
                                 text=text, reply=obs.text, accepted=obs.accepted, codes=list(codes), source=source,
-                                item=item)
+                                item=item, ask=ask or text)
         if obs.accepted and kind == "SAY" and BUNDLE_REPLY.search(obs.text or ""):
             entry.section = "bundled"  # "한 번에 하나씩 물어봐 주세요.": not an answer, never written into the note
             self._event("bundled", text=text)
@@ -936,7 +1250,7 @@ class Encounter:
         if text in self.performed or slot.ask in self.performed:
             return
         codes = [c for c in slot.codes if self.store.finding_def(c) is not None]
-        res = yield from self._do(slot.kind, text, slot.section, slot.label, codes, "slot", item=slot.item)
+        res = yield from self._do(slot.kind, text, slot.section, slot.label, codes, "slot", item=slot.item, ask=slot.ask)
         if res is None:
             return
         self.performed.add(slot.ask)  # the question itself, whatever prefix it was asked with
@@ -1286,6 +1600,10 @@ class Encounter:
         concern = self._concern()
         if concern:
             parts.append(f"stated worry: \"{concern[:120]}\"")
+        asks = [r for _, r in self.patient_asks if r != concern][-2:]
+        if asks:
+            parts.append("the patient asked (answer it in the closing lines): "
+                         + " / ".join(f"\"{r[:120]}\"" for r in asks))
         return "; ".join(parts)
 
     def _assess(self) -> None:
@@ -1471,7 +1789,10 @@ class Encounter:
                 ln = (ln or "").strip()
                 if ln and check_say(ln, limit)[0] and "?" not in ln:
                     lines.append(ln)
-        lines = lint_lines(lines, self._section_text("allergy"))
+                elif ln:
+                    lines += split_line(ln, limit)  # "A해요. B해요." too long for one turn: its sentences that fit
+        lines = list(dict.fromkeys(lint_lines(lines, self._section_text("allergy"))))
+        model_lines = len(lines)
         ko = (self.final.get("ko") or "").split("(")[0].strip()
         if not re.search(r"[가-힣]", ko) or re.search(r"(미정|미상|undetermined|unknown)", ko, re.I) or \
                 self.final.get("source") == "fallback":
@@ -1487,6 +1808,11 @@ class Encounter:
             if check_say(f, limit)[0] and f not in lines:
                 lines.append(f)
         lines = [ln for ln in lines if ln not in self.performed][:n]
+        if n >= 2 and lines and not any(_FOLLOW_UP.search(ln) for ln in lines):
+            # the follow-up visit is always said: in place of a generic line, else of the last one
+            k = len(lines) if len(lines) < n else min(model_lines, n - 1) if model_lines else n - 1
+            lines = lines[:k] + [CL.FOLLOW_UP_LINE] + lines[k:]
+            lines = lines[:n]
         name = self.ctx.get("address", "")
         if lines and name and not any(name.split()[0] in ln for ln in lines):
             first = f"{name}, {lines[0]}"

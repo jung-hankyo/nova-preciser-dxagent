@@ -157,8 +157,10 @@ def test_soft_cap_cuts_priority_two_but_never_priority_one(store):
     pb = PB.load_all()["dyspnea"]
     must = [s.ask for s in pb.history if s.tier == 1 and pb._keep(s.id, "male", False)]
     asked = " ".join(_says(env))
-    assert all(q in asked for q in must if q != "언제부터 숨이 차셨어요?")  # every priority-1 item
-    assert rec["dropped"] and rec["turns"] < _play(_case("sample_pe"), _cfg(), store)[0]["turns"]
+    told = {e["ask"] for e in rec["ledger"] if e["source"] == "volunteered"}  # answered before it was asked
+    assert all(q in asked or q in told for q in must if q != "언제부터 숨이 차셨어요?")  # every priority-1 item
+    # the cut items may come back through the backfill when turns are left, never past the uncapped visit
+    assert rec["dropped"] and rec["turns"] <= _play(_case("sample_pe"), _cfg(), store)[0]["turns"]
 
 
 def test_visit_ends_when_the_plan_is_done(store):
@@ -205,7 +207,7 @@ def test_visit_talks_to_the_patient(store):
     assert CL.CONCERN.ask in " ".join(says)
     i = next(k for k, t in enumerate(says) if CL.CONCERN.ask in t)
     assert says[i + 1].startswith("걱정되셨겠어요.")  # the voiced worry acknowledged on the next question
-    assert any(t.startswith("이제 병력을 여쭤볼게요.") for t in says)  # signpost before the background
+    assert any(t.startswith(CL.SIGNPOSTS["background"]) for t in says)  # signpost before the background
     closing = ([a["text"] for a in env.actions if a.get("meta", {}).get("source") == "closing"]
                or says[-_cfg().closing_lines:])
     assert closing[0].startswith("박정호 님,")
@@ -270,7 +272,7 @@ def test_note_follows_the_guide(store):
             assert f"(턴 {e['turn']})" in o["exam"]
     assert a["evidence"].startswith("#1. ") and "\n- 근거 : " in a["evidence"]
     assert all(ln.startswith("- ") for ln in p["tests"].splitlines())
-    assert p["disposition"] and "진료 중 설명함" in p["education"]
+    assert p["disposition"] and "진료 끝에 설명함" in p["education"] and "진찰 전 설명함" in p["education"]
 
 
 def test_model_written_chart_is_grouped_and_guarded(store):

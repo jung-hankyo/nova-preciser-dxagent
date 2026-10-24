@@ -67,6 +67,15 @@ python -B experiments/nova_live_report.py runs/live/<version>      # per-case re
 | 0.8.0, evidence review (and 0.8.1) | 0.84 | 0.83 | 23 | 0 | 42.5 (35-48) |
 | 0.9.0-pre, the same 18 cases | 0.84 | 0.83 | 23 | 0 | 42.5 (35-48) |
 | 0.9.0-pre, all 65 cases (L 0.84 / 0.83; M 0.79 / 0.74; S 0.54 / 0.38) | 0.76 | 0.71 | 55 | 0 | 42.2 (max 48) |
+| 0.9.1, all 65 cases (L 0.84 / 0.83; M 0.78 / 0.72; S 0.54 / 0.38) | 0.76 | 0.70 | 55 | 0 | 43.7 (max 49) |
+
+In 0.9.1 six cases lose one history item or more and one gains one. Four ask a question fewer because a reply had already
+answered it: it is recorded from that reply, but this check counts questions asked (with `NOVA_SKIP_ANSWERED=0` they match
+0.9.0-pre). Two are artifacts of the scripted patient, whose bigram match changes when an acknowledgment prefix is part of
+the question: it answers "no" to "I see. Do you snore?" (so the apnea follow-up is not asked) and to "I see. Have you been
+sexually active?" (so the sexual-activity gate closes: the partner questions and three pelvic exams are skipped); a model
+patient answers the question, not its prefix, so this should not carry over (unmeasured). The mean visit is 1.5 turns
+longer (the exam announcement and the sixth closing line).
 
 "Unlisted" is a maneuver answered from outside the case's table. The fixture cards did not improve history coverage on
 unseen cases, and exam coverage collapsed outside the old complaint groups (about 0.1 against 0.5), which motivated the

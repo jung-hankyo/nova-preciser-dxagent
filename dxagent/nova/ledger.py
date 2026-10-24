@@ -17,13 +17,14 @@ class Entry:
     kind: str  # opening | vitals | SAY | EXAM | TEST | closing
     section: str  # cc | vitals | hpi | pmh | meds | allergy | fhx | shx | ob | ros | exam | test | education
     label: str  # Korean label (slot label or what the question was meant to learn)
-    text: str  # what the doctor said or requested
+    text: str  # what the doctor said or requested (with any greeting or acknowledgment before the question)
     reply: str  # what came back
     accepted: bool = True
     codes: list[str] = field(default_factory=list)
     source: str = ""  # slot | core | bank | critic | closing | opening
     item: str = ""  # chart item name the entry fills in the note ("Allergy", "Fever/Chill", "Chest")
     note: str = ""  # chart line written for the note
+    ask: str = ""  # the question or maneuver itself, without the greeting or acknowledgment (the note's records)
 
 
 class Ledger:
@@ -48,7 +49,7 @@ class Ledger:
         """T<turn> [kind] doctor -> reply, oldest first (trimmed from the start if too long)."""
         lines = []
         for e in self.entries:
-            if not e.accepted:
+            if not e.accepted or e.source == "volunteered":  # a fact told earlier, not a question asked
                 continue
             if e.kind == "opening":
                 lines.append(f"T0 [opening] patient: {e.reply}")
